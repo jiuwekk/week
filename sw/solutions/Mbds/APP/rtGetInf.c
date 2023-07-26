@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'APP_FluxWeak_GEAR2'.
  *
- * Model version                  : 1.9
+ * Model version                  : 2.6
  * Simulink Coder version         : 8.13 (R2017b) 24-Jul-2017
- * C/C++ source code generated on : Fri Sep 16 17:18:08 2022
+ * C/C++ source code generated on : Tue Jul 25 15:05:30 2023
  */
 
 /*

@@ -29,7 +29,7 @@ extern "C" {
 #define HAL_LSPCLK_FREQ_MHz                 (90.0L/4.0L)
 
 //! \brief 主循环周期，单位us
-#define HAL_MAINLOOP_PRD_us                 (1000.0)//(2000.0)
+#define HAL_MAINLOOP_PRD_us                 (2000.0)
 #define HAL_MAINLOOP_PRD_ms                 (HAL_MAINLOOP_PRD_us/1000)
 
 //! \breif 低优先级任务循环周期，单位us

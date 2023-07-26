@@ -3,9 +3,9 @@
  *
  * Code generation for model "APP_FluxWeak_GEAR2".
  *
- * Model version              : 2.02
+ * Model version              : 2.6
  * Simulink Coder version : 8.13 (R2017b) 24-Jul-2017
- * C source code generated on : Wed Sep 21 18:10:39 2022
+ * C source code generated on : Tue Jul 25 15:05:30 2023
  */
 #include "rtwtypes.h"
 #include "PMSM_IO_bus.h"
@@ -37,18 +37,6 @@ const real32_T rtCP_pooled_ByObWmDYvzKh[129] = { 1.0F, 1.00657153F, 1.0121218F,
 
 extern const real32_T rtCP_pooled_DfIv42sDr8HV[3];
 const real32_T rtCP_pooled_DfIv42sDr8HV[3] = { 0.9F, 0.92F, 0.96F } ;
-
-extern const real32_T rtCP_pooled_EtRMrS24oClL[50];
-const real32_T rtCP_pooled_EtRMrS24oClL[50] = { 135.528656F, 156.702637F,
-  178.429733F, 200.732635F, 223.629654F, 247.135254F, 271.260834F, 296.014832F,
-  321.403442F, 347.430756F, 374.099365F, 401.410309F, 429.363617F, 457.958588F,
-  487.194061F, 517.068848F, 547.581787F, 578.732544F, 610.521423F, 642.950134F,
-  676.021912F, 709.741638F, 744.116516F, 779.156128F, 814.87262F, 851.281616F,
-  888.402893F, 926.26239F, 964.896851F, 1004.36279F, 1044.75757F, 1086.27112F,
-  1129.3429F, 1174.10889F, 1217.32544F, 1258.58752F, 1297.83716F, 1334.97F,
-  1369.8252F, 1402.16772F, 1431.6604F, 1457.81775F, 1479.927F, 1496.91516F,
-  1507.12402F, 1508.98193F, 1508.98193F, 1508.98193F, 1508.98193F, 1508.98193F }
-;
 
 extern const real32_T rtCP_pooled_YD7f4mcWNFMg[8];
 const real32_T rtCP_pooled_YD7f4mcWNFMg[8] = { 0.68F, 0.8F, 0.85F, 0.85F, 0.88F,

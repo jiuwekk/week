@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'APP_FluxWeak_GEAR2'.
  *
- * Model version                  : 2.02
+ * Model version                  : 2.6
  * Simulink Coder version         : 8.13 (R2017b) 24-Jul-2017
- * C/C++ source code generated on : Tue Mar 14 15:14:39 2023
+ * C/C++ source code generated on : Tue Jul 25 15:05:30 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Texas Instruments->C2000
@@ -296,54 +296,54 @@ static void APP_Flux_exit_internal_sys_mode(const real32_T
 
 /*
  * System initialize for atomic system:
- *    '<S48>/lpf'
- *    '<S49>/lpf'
- *    '<S132>/lpf'
- *    '<S117>/lpf'
- *    '<S116>/lpf'
- *    '<S135>/lpf'
- *    '<S136>/lpf'
+ *    '<S50>/lpf'
+ *    '<S51>/lpf'
+ *    '<S134>/lpf'
+ *    '<S119>/lpf'
+ *    '<S118>/lpf'
  *    '<S137>/lpf'
+ *    '<S138>/lpf'
+ *    '<S139>/lpf'
  *    '<S179>/lpf'
  *    '<S182>/lpf'
  *    ...
  */
 void LPF_App_Init(DW_LPF_App_T *localDW)
 {
-  /* InitializeConditions for DiscreteIntegrator: '<S50>/Discrete-Time Integrator1' */
+  /* InitializeConditions for DiscreteIntegrator: '<S52>/Discrete-Time Integrator1' */
   localDW->LPF_STATE = 0.0F;
 }
 
 /*
  * System reset for atomic system:
- *    '<S48>/lpf'
- *    '<S49>/lpf'
- *    '<S132>/lpf'
- *    '<S117>/lpf'
- *    '<S116>/lpf'
- *    '<S135>/lpf'
- *    '<S136>/lpf'
+ *    '<S50>/lpf'
+ *    '<S51>/lpf'
+ *    '<S134>/lpf'
+ *    '<S119>/lpf'
+ *    '<S118>/lpf'
  *    '<S137>/lpf'
+ *    '<S138>/lpf'
+ *    '<S139>/lpf'
  *    '<S179>/lpf'
  *    '<S182>/lpf'
  *    ...
  */
 void LPF_App_Reset(DW_LPF_App_T *localDW)
 {
-  /* InitializeConditions for DiscreteIntegrator: '<S50>/Discrete-Time Integrator1' */
+  /* InitializeConditions for DiscreteIntegrator: '<S52>/Discrete-Time Integrator1' */
   localDW->LPF_STATE = 0.0F;
 }
 
 /*
  * Output and update for atomic system:
- *    '<S48>/lpf'
- *    '<S49>/lpf'
- *    '<S132>/lpf'
- *    '<S117>/lpf'
- *    '<S116>/lpf'
- *    '<S135>/lpf'
- *    '<S136>/lpf'
+ *    '<S50>/lpf'
+ *    '<S51>/lpf'
+ *    '<S134>/lpf'
+ *    '<S119>/lpf'
+ *    '<S118>/lpf'
  *    '<S137>/lpf'
+ *    '<S138>/lpf'
+ *    '<S139>/lpf'
  *    '<S179>/lpf'
  *    '<S182>/lpf'
  *    ...
@@ -351,13 +351,13 @@ void LPF_App_Reset(DW_LPF_App_T *localDW)
 void LPF_App(real32_T rtu_u, real32_T rtu_Ts, real32_T rtu_N, real32_T *rty_Out1,
              DW_LPF_App_T *localDW)
 {
-  /* DiscreteIntegrator: '<S50>/Discrete-Time Integrator1' */
+  /* DiscreteIntegrator: '<S52>/Discrete-Time Integrator1' */
   *rty_Out1 = localDW->LPF_STATE;
 
-  /* Update for DiscreteIntegrator: '<S50>/Discrete-Time Integrator1' incorporates:
-   *  Product: '<S50>/Product'
-   *  Product: '<S50>/Product1'
-   *  Sum: '<S50>/Sum'
+  /* Update for DiscreteIntegrator: '<S52>/Discrete-Time Integrator1' incorporates:
+   *  Product: '<S52>/Product'
+   *  Product: '<S52>/Product1'
+   *  Sum: '<S52>/Sum'
    */
   localDW->LPF_STATE += (rtu_u - *rty_Out1) * rtu_N * rtu_Ts;
 }
@@ -368,134 +368,134 @@ void APP_FluxWeak_GEAR2_Lim_coef(real32_T rtu_u, real32_T rtu_up_p, real32_T
 {
   real32_T rtb_uk;
 
-  /* Sum: '<S26>/Subtract' incorporates:
-   *  SignalConversion: '<S26>/TmpSignal ConversionAtdown_pOutport1'
-   *  SignalConversion: '<S26>/TmpSignal ConversionAtup_pOutport1'
+  /* Sum: '<S28>/Subtract' incorporates:
+   *  SignalConversion: '<S28>/TmpSignal ConversionAtdown_pOutport1'
+   *  SignalConversion: '<S28>/TmpSignal ConversionAtup_pOutport1'
    */
   rtb_uk = rtu_up_p - rtu_down_p;
 
-  /* Sum: '<S26>/Add' incorporates:
-   *  Gain: '<S26>/Gain'
-   *  Product: '<S26>/Divide'
-   *  Product: '<S26>/Divide1'
-   *  SignalConversion: '<S26>/TmpSignal ConversionAtdown_pOutport1'
-   *  SignalConversion: '<S26>/TmpSignal ConversionAtuOutport1'
+  /* Sum: '<S28>/Add' incorporates:
+   *  Gain: '<S28>/Gain'
+   *  Product: '<S28>/Divide'
+   *  Product: '<S28>/Divide1'
+   *  SignalConversion: '<S28>/TmpSignal ConversionAtdown_pOutport1'
+   *  SignalConversion: '<S28>/TmpSignal ConversionAtuOutport1'
    */
   rtb_uk = rtu_u / rtb_uk + rtu_down_p / -rtb_uk;
 
-  /* Saturate: '<S26>/Saturation' */
+  /* Saturate: '<S28>/Saturation' */
   if (rtb_uk > 1.0F) {
-    /* SignalConversion: '<S26>/TmpSignal ConversionAtcoefInport1' */
+    /* SignalConversion: '<S28>/TmpSignal ConversionAtcoefInport1' */
     *rty_coef = 1.0F;
   } else if (rtb_uk < 0.0F) {
-    /* SignalConversion: '<S26>/TmpSignal ConversionAtcoefInport1' */
+    /* SignalConversion: '<S28>/TmpSignal ConversionAtcoefInport1' */
     *rty_coef = 0.0F;
   } else {
-    /* SignalConversion: '<S26>/TmpSignal ConversionAtcoefInport1' */
+    /* SignalConversion: '<S28>/TmpSignal ConversionAtcoefInport1' */
     *rty_coef = rtb_uk;
   }
 
-  /* End of Saturate: '<S26>/Saturation' */
+  /* End of Saturate: '<S28>/Saturation' */
 }
 
-/* Output and update for function-call system: '<S54>/Initial' */
+/* Output and update for function-call system: '<S56>/Initial' */
 void APP_FluxWeak_GEAR2_Initial(void)
 {
-  /* StateWriter: '<S66>/State Writer' incorporates:
-   *  Constant: '<S66>/Constant'
+  /* StateWriter: '<S68>/State Writer' incorporates:
+   *  Constant: '<S68>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state = 0.0F;
 
-  /* StateWriter: '<S66>/State Writer1' incorporates:
-   *  Constant: '<S66>/Constant'
+  /* StateWriter: '<S68>/State Writer1' incorporates:
+   *  Constant: '<S68>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Slope.lpf_a.LPF_STATE = 0.0F;
 
-  /* StateWriter: '<S66>/State Writer2' incorporates:
-   *  Constant: '<S66>/Constant'
+  /* StateWriter: '<S68>/State Writer2' incorporates:
+   *  Constant: '<S68>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state = 0.0F;
 
-  /* StateWriter: '<S66>/State Writer3' incorporates:
-   *  Constant: '<S66>/Constant'
+  /* StateWriter: '<S68>/State Writer3' incorporates:
+   *  Constant: '<S68>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Sync.PI.I_state = 0.0F;
 
-  /* StateWriter: '<S66>/State Writer4' incorporates:
-   *  Constant: '<S66>/Constant'
+  /* StateWriter: '<S68>/State Writer4' incorporates:
+   *  Constant: '<S68>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Starter.PI.I_state = 0.0F;
 
-  /* StateWriter: '<S66>/State Writer5' incorporates:
-   *  Constant: '<S66>/Constant'
+  /* StateWriter: '<S68>/State Writer5' incorporates:
+   *  Constant: '<S68>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE = 0.0F;
 
-  /* StateWriter: '<S66>/State Writer6' incorporates:
-   *  Constant: '<S66>/Constant'
+  /* StateWriter: '<S68>/State Writer6' incorporates:
+   *  Constant: '<S68>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Spd_g.Spd_D_Int = 0.0F;
 
-  /* StateWriter: '<S66>/State Writer7' incorporates:
-   *  Constant: '<S66>/Constant'
+  /* StateWriter: '<S68>/State Writer7' incorporates:
+   *  Constant: '<S68>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = 0.0F;
 }
 
-/* Output and update for function-call system: '<S54>/Update' */
+/* Output and update for function-call system: '<S56>/Update' */
 void APP_FluxWeak_GEAR2_Update(const real32_T *rtu_Ctrl, real32_T rtu_Data,
   real32_T rtu_Data_d)
 {
   real32_T rtb_Subtract_g;
 
-  /* Sum: '<S76>/Subtract' */
+  /* Sum: '<S78>/Subtract' */
   rtb_Subtract_g = rtu_Data - rtu_Data_d;
 
-  /* StateWriter: '<S76>/State Writer' incorporates:
-   *  Gain: '<S76>/P'
-   *  Sum: '<S76>/Subtract1'
+  /* StateWriter: '<S78>/State Writer' incorporates:
+   *  Gain: '<S78>/P'
+   *  Sum: '<S78>/Subtract1'
    */
   APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state = *rtu_Ctrl - PMSM_Param.GenKp *
     rtb_Subtract_g;
 
-  /* StateWriter: '<S76>/State Writer1' incorporates:
-   *  Gain: '<S76>/P1'
-   *  Sum: '<S76>/Subtract2'
+  /* StateWriter: '<S78>/State Writer1' incorporates:
+   *  Gain: '<S78>/P1'
+   *  Sum: '<S78>/Subtract2'
    */
   APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = *rtu_Ctrl - PMSM_Param.SlopeKp *
     rtb_Subtract_g;
 
-  /* StateWriter: '<S76>/State Writer2' */
+  /* StateWriter: '<S78>/State Writer2' */
   APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state = *rtu_Ctrl;
 
-  /* Sum: '<S76>/Subtract4' incorporates:
-   *  Gain: '<S76>/P3'
-   *  Sum: '<S76>/Subtract5'
+  /* Sum: '<S78>/Subtract4' incorporates:
+   *  Gain: '<S78>/P3'
+   *  Sum: '<S78>/Subtract5'
    */
   APP_FluxWeak_GEAR2_DW.Sync.PI.I_state = *rtu_Ctrl - PMSM_Param.SyncKp *
     rtb_Subtract_g;
 
-  /* StateWriter: '<S76>/State Writer4' */
+  /* StateWriter: '<S78>/State Writer4' */
   APP_FluxWeak_GEAR2_DW.Starter.PI.I_state =
     APP_FluxWeak_GEAR2_DW.Sync.PI.I_state;
 
-  /* StateWriter: '<S76>/State Writer5' */
+  /* StateWriter: '<S78>/State Writer5' */
   APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE = *rtu_Ctrl;
 
-  /* StateWriter: '<S76>/State Writer6' */
+  /* StateWriter: '<S78>/State Writer6' */
   APP_FluxWeak_GEAR2_DW.Slope.lpf_a.LPF_STATE = *rtu_Ctrl;
 }
 
-/* System initialize for function-call system: '<S54>/Torque' */
+/* System initialize for function-call system: '<S56>/Torque' */
 void APP_FluxWeak_GEAR2_Torque_Init(DW_Torque_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* SystemInitialize for Atomic SubSystem: '<S132>/lpf' */
+  /* SystemInitialize for Atomic SubSystem: '<S134>/lpf' */
   LPF_App_Init(&localDW->lpf);
 
-  /* End of SystemInitialize for SubSystem: '<S132>/lpf' */
+  /* End of SystemInitialize for SubSystem: '<S134>/lpf' */
 }
 
-/* Output and update for function-call system: '<S54>/Torque' */
+/* Output and update for function-call system: '<S56>/Torque' */
 void APP_FluxWeak_GEAR2_Torque(real32_T rtu_data, uint16_T *rty_Out1, real32_T
   *rty_Out1_l, real32_T *rty_Out1_i, real32_T *rty_Out1_g, uint16_T *rty_Out1_c,
   uint16_T *rty_Out1_p, real32_T *rty_Out1_l2, real32_T *rty_Out1_gi, real32_T
@@ -503,44 +503,44 @@ void APP_FluxWeak_GEAR2_Torque(real32_T rtu_data, uint16_T *rty_Out1, real32_T
 {
   real32_T rtb_DiscreteTimeIntegrator1_g;
 
-  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S76>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S76>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_l = 0.0F;
 
-  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S76>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_i = 0.0F;
 
-  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S76>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_g = 0.0F;
 
-  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S76>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_c = 0U;
 
-  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S76>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_p = 0U;
 
-  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S76>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_l2 = 0.0F;
 
-  /* Outputs for Atomic SubSystem: '<S132>/lpf' */
+  /* Outputs for Atomic SubSystem: '<S134>/lpf' */
 
-  /* Constant: '<S132>/Constant' incorporates:
-   *  Constant: '<S132>/Constant1'
+  /* Constant: '<S134>/Constant' incorporates:
+   *  Constant: '<S134>/Constant1'
    */
   LPF_App(rtu_data, 0.002F, 10.0F, &rtb_DiscreteTimeIntegrator1_g, &localDW->lpf);
 
-  /* End of Outputs for SubSystem: '<S132>/lpf' */
+  /* End of Outputs for SubSystem: '<S134>/lpf' */
 
-  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S76>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_gi = rtb_DiscreteTimeIntegrator1_g;
 
-  /* SignalConversion: '<S74>/OutportBufferForTor' */
+  /* SignalConversion: '<S76>/OutportBufferForTor' */
   *rty_Tor = rtb_DiscreteTimeIntegrator1_g;
 }
 
-/* Output and update for function-call system: '<S54>/Spd' */
+/* Output and update for function-call system: '<S56>/Spd' */
 void APP_FluxWeak_GEAR2_Spd(real32_T rtu_Data, real32_T rtu_Data_o, uint16_T
   *rty_Out1, real32_T *rty_Out1_o, real32_T *rty_Out1_p, real32_T *rty_Out1_c,
   uint16_T *rty_Out1_h, uint16_T *rty_Out1_ox, real32_T *rty_Out1_m, real32_T
@@ -550,47 +550,47 @@ void APP_FluxWeak_GEAR2_Spd(real32_T rtu_Data, real32_T rtu_Data_o, uint16_T
   real32_T rtb_UnitDelay_b;
   real32_T rtb_Saturation_c;
 
-  /* Gain: '<S127>/Gain' incorporates:
-   *  DiscreteIntegrator: '<S127>/Discrete-Time Integrator1'
-   *  Sum: '<S127>/Sum'
+  /* Gain: '<S129>/Gain' incorporates:
+   *  DiscreteIntegrator: '<S129>/Discrete-Time Integrator1'
+   *  Sum: '<S129>/Sum'
    */
   rtb_Gain_aw = (0.0F - localDW->Spd_D_Int) * 0.25F;
 
-  /* DataStoreWrite: '<S127>/Data Store Write' */
+  /* DataStoreWrite: '<S129>/Data Store Write' */
   AppFun.LimTP_T = rtb_Gain_aw;
 
-  /* DataStoreWrite: '<S127>/Data Store Write1' incorporates:
-   *  DiscreteIntegrator: '<S127>/Discrete-Time Integrator'
+  /* DataStoreWrite: '<S129>/Data Store Write1' incorporates:
+   *  DiscreteIntegrator: '<S129>/Discrete-Time Integrator'
    */
   AppFun.LimTN_T = localDW->Spd_state;
 
-  /* Gain: '<S71>/Norm' incorporates:
-   *  Sum: '<S71>/Subtract1'
+  /* Gain: '<S73>/Norm' incorporates:
+   *  Sum: '<S73>/Subtract1'
    */
   rtb_UnitDelay_b = (rtu_Data - rtu_Data_o) * 0.0001F;
 
-  /* Gain: '<S127>/P' */
+  /* Gain: '<S129>/P' */
   rtb_Saturation_c = PMSM_Param.SpdKp * rtb_UnitDelay_b;
 
-  /* DataStoreWrite: '<S127>/Data Store Write2' */
+  /* DataStoreWrite: '<S129>/Data Store Write2' */
   AppFun.LimTP_Spd = rtb_Saturation_c;
 
-  /* Switch: '<S127>/Switch' incorporates:
-   *  Abs: '<S127>/Abs'
-   *  Constant: '<S127>/Constant1'
+  /* Switch: '<S129>/Switch' incorporates:
+   *  Abs: '<S129>/Abs'
+   *  Constant: '<S129>/Constant1'
    */
   if (!(fabsf(rtu_Data) > 10.0F)) {
     rtb_UnitDelay_b = 0.0F;
   }
 
-  /* End of Switch: '<S127>/Switch' */
+  /* End of Switch: '<S129>/Switch' */
 
-  /* Sum: '<S127>/Sum3' incorporates:
-   *  DiscreteIntegrator: '<S127>/Discrete-Time Integrator'
+  /* Sum: '<S129>/Sum3' incorporates:
+   *  DiscreteIntegrator: '<S129>/Discrete-Time Integrator'
    */
   rtb_Saturation_c = (rtb_Saturation_c + localDW->Spd_state) + rtb_Gain_aw;
 
-  /* Saturate: '<S127>/Saturation' */
+  /* Saturate: '<S129>/Saturation' */
   if (rtb_Saturation_c > 1.0F) {
     rtb_Saturation_c = 1.0F;
   } else {
@@ -599,72 +599,72 @@ void APP_FluxWeak_GEAR2_Spd(real32_T rtu_Data, real32_T rtu_Data_o, uint16_T
     }
   }
 
-  /* End of Saturate: '<S127>/Saturation' */
+  /* End of Saturate: '<S129>/Saturation' */
 
-  /* SignalConversion: '<S71>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S71>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_o = 0.0F;
 
-  /* SignalConversion: '<S71>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_p = 0.0F;
 
-  /* SignalConversion: '<S71>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_c = 0.0F;
 
-  /* SignalConversion: '<S71>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_h = 0U;
 
-  /* SignalConversion: '<S71>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_ox = 0U;
 
-  /* SignalConversion: '<S71>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_m = 0.0F;
 
-  /* SignalConversion: '<S71>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_mw = rtb_Saturation_c;
 
-  /* SignalConversion: '<S71>/OutportBufferForTor' */
+  /* SignalConversion: '<S73>/OutportBufferForTor' */
   *rty_Tor = rtb_Saturation_c;
 
-  /* Update for DiscreteIntegrator: '<S127>/Discrete-Time Integrator1' */
+  /* Update for DiscreteIntegrator: '<S129>/Discrete-Time Integrator1' */
   localDW->Spd_D_Int += 0.001F * rtb_Gain_aw;
 
-  /* Update for DiscreteIntegrator: '<S127>/Discrete-Time Integrator' incorporates:
-   *  Gain: '<S127>/I'
+  /* Update for DiscreteIntegrator: '<S129>/Discrete-Time Integrator' incorporates:
+   *  Gain: '<S129>/I'
    */
   localDW->Spd_state += PMSM_Param.SpdKi / 1000.0F * rtb_UnitDelay_b;
 }
 
 /*
  * Output and update for atomic system:
- *    '<S99>/PI'
- *    '<S128>/PI'
- *    '<S113>/PI'
+ *    '<S101>/PI'
  *    '<S130>/PI'
- *    '<S152>/PI'
- *    '<S158>/PI'
+ *    '<S115>/PI'
+ *    '<S132>/PI'
+ *    '<S154>/PI'
+ *    '<S160>/PI'
  */
 void PI_App(real32_T rtu_Err, real32_T rtu_Kp, real32_T rtu_KI, real32_T rtu_T,
             real32_T *rty_PIOut, real32_T *rty_I_State, DW_PI_App_T *localDW)
 {
-  /* DiscreteIntegrator: '<S100>/Discrete-Time Integrator1' */
+  /* DiscreteIntegrator: '<S102>/Discrete-Time Integrator1' */
   *rty_I_State = localDW->I_state;
 
-  /* Sum: '<S100>/Add' incorporates:
-   *  Product: '<S100>/Product'
+  /* Sum: '<S102>/Add' incorporates:
+   *  Product: '<S102>/Product'
    */
   *rty_PIOut = rtu_Kp * rtu_Err + *rty_I_State;
 
-  /* Update for DiscreteIntegrator: '<S100>/Discrete-Time Integrator1' incorporates:
-   *  Product: '<S100>/Product1'
-   *  Product: '<S100>/Product2'
+  /* Update for DiscreteIntegrator: '<S102>/Discrete-Time Integrator1' incorporates:
+   *  Product: '<S102>/Product1'
+   *  Product: '<S102>/Product2'
    */
   localDW->I_state += rtu_Err * rtu_KI * rtu_T;
 }
 
-/* Output and update for function-call system: '<S54>/Genrate' */
+/* Output and update for function-call system: '<S56>/Genrate' */
 void APP_FluxWeak_GEAR2_Genrate(real32_T rtu_Data, real32_T rtu_Data_d, uint16_T
   *rty_Out1, real32_T *rty_Out1_d, real32_T *rty_Out1_n, real32_T *rty_Out1_ni,
   uint16_T *rty_Out1_g, uint16_T *rty_Out1_h, real32_T *rty_Out1_k, real32_T
@@ -673,41 +673,41 @@ void APP_FluxWeak_GEAR2_Genrate(real32_T rtu_Data, real32_T rtu_Data_d, uint16_T
   real32_T rtb_Add_ct;
   real32_T rtb_DiscreteTimeIntegrator1_j;
 
-  /* SignalConversion: '<S65>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S65>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_d = 0.0F;
 
-  /* SignalConversion: '<S65>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_n = 0.0F;
 
-  /* SignalConversion: '<S65>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_ni = 0.0F;
 
-  /* SignalConversion: '<S65>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_g = 0U;
 
-  /* SignalConversion: '<S65>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_h = 0U;
 
-  /* SignalConversion: '<S65>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_k = 0.0F;
 
-  /* Outputs for Atomic SubSystem: '<S99>/PI' */
+  /* Outputs for Atomic SubSystem: '<S101>/PI' */
 
-  /* Gain: '<S65>/Norm' incorporates:
-   *  Constant: '<S99>/Constant'
-   *  Constant: '<S99>/Constant1'
-   *  Constant: '<S99>/Constant2'
-   *  Sum: '<S65>/Subtract'
+  /* Gain: '<S67>/Norm' incorporates:
+   *  Constant: '<S101>/Constant'
+   *  Constant: '<S101>/Constant1'
+   *  Constant: '<S101>/Constant2'
+   *  Sum: '<S67>/Subtract'
    */
   PI_App(0.0001F * (rtu_Data - rtu_Data_d), PMSM_Param.GenKp, PMSM_Param.GenKi,
          0.002F, &rtb_Add_ct, &rtb_DiscreteTimeIntegrator1_j, &localDW->PI);
 
-  /* End of Outputs for SubSystem: '<S99>/PI' */
+  /* End of Outputs for SubSystem: '<S101>/PI' */
 
-  /* Saturate: '<S99>/Saturation' */
+  /* Saturate: '<S101>/Saturation' */
   if (rtb_Add_ct > 0.0F) {
     rtb_Add_ct = 0.0F;
   } else {
@@ -716,16 +716,16 @@ void APP_FluxWeak_GEAR2_Genrate(real32_T rtu_Data, real32_T rtu_Data_d, uint16_T
     }
   }
 
-  /* End of Saturate: '<S99>/Saturation' */
+  /* End of Saturate: '<S101>/Saturation' */
 
-  /* SignalConversion: '<S65>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_d4 = rtb_Add_ct;
 
-  /* SignalConversion: '<S65>/OutportBufferForTor' */
+  /* SignalConversion: '<S67>/OutportBufferForTor' */
   *rty_Tor = rtb_Add_ct;
 }
 
-/* Output and update for function-call system: '<S54>/Starter' */
+/* Output and update for function-call system: '<S56>/Starter' */
 void APP_FluxWeak_GEAR2_Starter(real32_T rtu_Data, real32_T rtu_Data_c, uint16_T
   *rty_Out1, real32_T *rty_Out1_c, real32_T *rty_Out1_b, real32_T *rty_Out1_bt,
   uint16_T *rty_Out1_i, uint16_T *rty_Out1_cm, real32_T *rty_Out1_p, real32_T
@@ -734,41 +734,41 @@ void APP_FluxWeak_GEAR2_Starter(real32_T rtu_Data, real32_T rtu_Data_c, uint16_T
   real32_T rtb_Add_hz;
   real32_T rtb_DiscreteTimeIntegrator1_g;
 
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_c = 0.0F;
 
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_b = 0.0F;
 
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_bt = 0.0F;
 
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_i = 0U;
 
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_cm = 0U;
 
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_p = 0.0F;
 
-  /* Outputs for Atomic SubSystem: '<S128>/PI' */
+  /* Outputs for Atomic SubSystem: '<S130>/PI' */
 
-  /* Gain: '<S72>/Norm' incorporates:
-   *  Constant: '<S128>/Constant'
-   *  Constant: '<S128>/Constant1'
-   *  Constant: '<S128>/Constant2'
-   *  Sum: '<S72>/Subtract'
+  /* Gain: '<S74>/Norm' incorporates:
+   *  Constant: '<S130>/Constant'
+   *  Constant: '<S130>/Constant1'
+   *  Constant: '<S130>/Constant2'
+   *  Sum: '<S74>/Subtract'
    */
   PI_App(0.0001F * (rtu_Data - rtu_Data_c), PMSM_Param.StarKp, PMSM_Param.StarKi,
          0.002F, &rtb_Add_hz, &rtb_DiscreteTimeIntegrator1_g, &localDW->PI);
 
-  /* End of Outputs for SubSystem: '<S128>/PI' */
+  /* End of Outputs for SubSystem: '<S130>/PI' */
 
-  /* Saturate: '<S128>/Saturation' */
+  /* Saturate: '<S130>/Saturation' */
   if (rtb_Add_hz > 1.0F) {
     rtb_Add_hz = 1.0F;
   } else {
@@ -777,47 +777,47 @@ void APP_FluxWeak_GEAR2_Starter(real32_T rtu_Data, real32_T rtu_Data_c, uint16_T
     }
   }
 
-  /* End of Saturate: '<S128>/Saturation' */
+  /* End of Saturate: '<S130>/Saturation' */
 
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_e = rtb_Add_hz;
 
-  /* SignalConversion: '<S72>/OutportBufferForTor' */
+  /* SignalConversion: '<S74>/OutportBufferForTor' */
   *rty_Tor = rtb_Add_hz;
 }
 
-/* System initialize for function-call system: '<S110>/Function-Call Subsystem' */
+/* System initialize for function-call system: '<S112>/Function-Call Subsystem' */
 void APP__FunctionCallSubsystem_Init(DW_FunctionCallSubsystem_APP__T *localDW)
 {
-  /* InitializeConditions for DiscreteIntegrator: '<S114>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S116>/Discrete-Time Integrator' */
   localDW->Slope_state = 0.0F;
 }
 
-/* System reset for function-call system: '<S110>/Function-Call Subsystem' */
+/* System reset for function-call system: '<S112>/Function-Call Subsystem' */
 void APP_FunctionCallSubsystem_Reset(DW_FunctionCallSubsystem_APP__T *localDW)
 {
-  /* InitializeConditions for DiscreteIntegrator: '<S114>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S116>/Discrete-Time Integrator' */
   localDW->Slope_state = 0.0F;
 }
 
-/* Disable for function-call system: '<S110>/Function-Call Subsystem' */
+/* Disable for function-call system: '<S112>/Function-Call Subsystem' */
 void A_FunctionCallSubsystem_Disable(real32_T *rty_SlopeTime)
 {
-  /* Disable for Outport: '<S114>/SlopeTime' */
+  /* Disable for Outport: '<S116>/SlopeTime' */
   *rty_SlopeTime = 0.0F;
 }
 
-/* Output and update for function-call system: '<S110>/Function-Call Subsystem' */
+/* Output and update for function-call system: '<S112>/Function-Call Subsystem' */
 void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
   rtu_Gear, real32_T *rty_SlopeTime, DW_FunctionCallSubsystem_APP__T *localDW)
 {
   real32_T rtb_MultiportSwitch_n;
 
-  /* DiscreteIntegrator: '<S114>/Discrete-Time Integrator' */
+  /* DiscreteIntegrator: '<S116>/Discrete-Time Integrator' */
   *rty_SlopeTime = localDW->Slope_state;
 
-  /* MultiPortSwitch: '<S114>/Multiport Switch' incorporates:
-   *  Constant: '<S114>/Constant'
+  /* MultiPortSwitch: '<S116>/Multiport Switch' incorporates:
+   *  Constant: '<S116>/Constant'
    */
   switch (rtu_Gear) {
    case 0:
@@ -825,7 +825,7 @@ void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
     break;
 
    case 1:
-    /* DeadZone: '<S114>/Dead Zone' */
+    /* DeadZone: '<S116>/Dead Zone' */
     if (rtu_SlopeLoopOut > 0.3F) {
       rtb_MultiportSwitch_n = rtu_SlopeLoopOut - 0.3F;
     } else if (rtu_SlopeLoopOut >= -0.3F) {
@@ -834,7 +834,7 @@ void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
       rtb_MultiportSwitch_n = rtu_SlopeLoopOut - -0.3F;
     }
 
-    /* Signum: '<S114>/Sign' */
+    /* Signum: '<S116>/Sign' */
     if (rtb_MultiportSwitch_n < 0.0F) {
       rtb_MultiportSwitch_n = -1.0F;
     } else if (rtb_MultiportSwitch_n > 0.0F) {
@@ -847,7 +847,7 @@ void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
     break;
 
    default:
-    /* DeadZone: '<S114>/Dead Zone' */
+    /* DeadZone: '<S116>/Dead Zone' */
     if (rtu_SlopeLoopOut > 0.3F) {
       rtb_MultiportSwitch_n = rtu_SlopeLoopOut - 0.3F;
     } else if (rtu_SlopeLoopOut >= -0.3F) {
@@ -856,8 +856,8 @@ void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
       rtb_MultiportSwitch_n = rtu_SlopeLoopOut - -0.3F;
     }
 
-    /* Signum: '<S114>/Sign' incorporates:
-     *  Gain: '<S114>/Gain'
+    /* Signum: '<S116>/Sign' incorporates:
+     *  Gain: '<S116>/Gain'
      */
     if (rtb_MultiportSwitch_n < 0.0F) {
       rtb_MultiportSwitch_n = 1.0F;
@@ -871,9 +871,9 @@ void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
     break;
   }
 
-  /* End of MultiPortSwitch: '<S114>/Multiport Switch' */
+  /* End of MultiPortSwitch: '<S116>/Multiport Switch' */
 
-  /* Update for DiscreteIntegrator: '<S114>/Discrete-Time Integrator' */
+  /* Update for DiscreteIntegrator: '<S116>/Discrete-Time Integrator' */
   localDW->Slope_state += 0.001F * rtb_MultiportSwitch_n;
   if (localDW->Slope_state >= 100.0F) {
     localDW->Slope_state = 100.0F;
@@ -883,16 +883,16 @@ void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
     }
   }
 
-  /* End of Update for DiscreteIntegrator: '<S114>/Discrete-Time Integrator' */
+  /* End of Update for DiscreteIntegrator: '<S116>/Discrete-Time Integrator' */
 }
 
-/* Output and update for function-call system: '<S112>/Function-Call Subsystem' */
+/* Output and update for function-call system: '<S114>/Function-Call Subsystem' */
 void APP_Flu_FunctionCallSubsystem_o(real32_T rtu_TorReq, real32_T rtu_Spd_loop,
   real32_T *rty_Out1)
 {
   real32_T rtu_TorReq_0;
 
-  /* Saturate: '<S121>/Saturation' */
+  /* Saturate: '<S123>/Saturation' */
   if (rtu_TorReq > 0.0F) {
     rtu_TorReq_0 = 0.0F;
   } else if (rtu_TorReq < -1.0F) {
@@ -901,73 +901,73 @@ void APP_Flu_FunctionCallSubsystem_o(real32_T rtu_TorReq, real32_T rtu_Spd_loop,
     rtu_TorReq_0 = rtu_TorReq;
   }
 
-  /* End of Saturate: '<S121>/Saturation' */
+  /* End of Saturate: '<S123>/Saturation' */
 
-  /* MinMax: '<S121>/MinMax' incorporates:
-   *  Sum: '<S121>/Add'
+  /* MinMax: '<S123>/MinMax' incorporates:
+   *  Sum: '<S123>/Add'
    */
   *rty_Out1 = fmaxf(rtu_TorReq, rtu_Spd_loop + rtu_TorReq_0);
 }
 
-/* Output and update for function-call system: '<S112>/Function-Call Subsystem2' */
+/* Output and update for function-call system: '<S114>/Function-Call Subsystem2' */
 void APP_Flux_FunctionCallSubsystem2(real32_T rtu_TorReq, real32_T *rty_Out1,
   DW_FunctionCallSubsystem2_APP_T *localDW)
 {
-  real32_T rtb_UkYk1;
+  real32_T rtb_UkYk1_i;
 
-  /* Sum: '<S123>/Difference Inputs1' incorporates:
-   *  UnitDelay: '<S123>/Delay Input2'
+  /* Sum: '<S125>/Difference Inputs1' incorporates:
+   *  UnitDelay: '<S125>/Delay Input2'
    *
-   * Block description for '<S123>/Difference Inputs1':
+   * Block description for '<S125>/Difference Inputs1':
    *
    *  Add in CPU
    *
-   * Block description for '<S123>/Delay Input2':
+   * Block description for '<S125>/Delay Input2':
    *
    *  Store in Global RAM
    */
-  rtb_UkYk1 = rtu_TorReq - localDW->N_state;
+  rtb_UkYk1_i = rtu_TorReq - localDW->N_state;
 
-  /* Switch: '<S125>/Switch2' incorporates:
-   *  RelationalOperator: '<S125>/LowerRelop1'
-   *  RelationalOperator: '<S125>/UpperRelop'
-   *  Switch: '<S125>/Switch'
+  /* Switch: '<S127>/Switch2' incorporates:
+   *  RelationalOperator: '<S127>/LowerRelop1'
+   *  RelationalOperator: '<S127>/UpperRelop'
+   *  Switch: '<S127>/Switch'
    */
-  if (rtb_UkYk1 > 0.001F) {
-    rtb_UkYk1 = 0.001F;
+  if (rtb_UkYk1_i > 0.001F) {
+    rtb_UkYk1_i = 0.001F;
   } else {
-    if (rtb_UkYk1 < -0.001F) {
-      /* Switch: '<S125>/Switch' */
-      rtb_UkYk1 = -0.001F;
+    if (rtb_UkYk1_i < -0.001F) {
+      /* Switch: '<S127>/Switch' */
+      rtb_UkYk1_i = -0.001F;
     }
   }
 
-  /* End of Switch: '<S125>/Switch2' */
+  /* End of Switch: '<S127>/Switch2' */
 
-  /* Sum: '<S123>/Difference Inputs2' incorporates:
-   *  UnitDelay: '<S123>/Delay Input2'
+  /* Sum: '<S125>/Difference Inputs2' incorporates:
+   *  UnitDelay: '<S125>/Delay Input2'
    *
-   * Block description for '<S123>/Difference Inputs2':
+   * Block description for '<S125>/Difference Inputs2':
    *
    *  Add in CPU
    *
-   * Block description for '<S123>/Delay Input2':
+   * Block description for '<S125>/Delay Input2':
    *
    *  Store in Global RAM
    */
-  localDW->N_state += rtb_UkYk1;
+  localDW->N_state += rtb_UkYk1_i;
 
-  /* SignalConversion: '<S123>/OutportBufferForOut1' */
+  /* SignalConversion: '<S125>/OutportBufferForOut1' */
   *rty_Out1 = localDW->N_state;
 }
 
-/* Output and update for function-call system: '<S112>/Function-Call Subsystem1' */
+/* Output and update for function-call system: '<S114>/Function-Call Subsystem1' */
 void APP_Flux_FunctionCallSubsystem1(real32_T rtu_TorReq, real32_T rtu_Spd_loop,
   real32_T *rty_Out1)
 {
   real32_T rtu_TorReq_0;
 
-  /* Saturate: '<S122>/Saturation' */
+  /* Saturate: '<S124>/Saturation' */
   if (rtu_TorReq > 1.0F) {
     rtu_TorReq_0 = 1.0F;
   } else if (rtu_TorReq < 0.0F) {
@@ -976,33 +976,33 @@ void APP_Flux_FunctionCallSubsystem1(real32_T rtu_TorReq, real32_T rtu_Spd_loop,
     rtu_TorReq_0 = rtu_TorReq;
   }
 
-  /* End of Saturate: '<S122>/Saturation' */
+  /* End of Saturate: '<S124>/Saturation' */
 
-  /* MinMax: '<S122>/MinMax1' incorporates:
-   *  Sum: '<S122>/Add'
+  /* MinMax: '<S124>/MinMax1' incorporates:
+   *  Sum: '<S124>/Add'
    */
   *rty_Out1 = fminf(rtu_TorReq, rtu_TorReq_0 + rtu_Spd_loop);
 }
 
-/* Output and update for function-call system: '<S112>/Initial' */
+/* Output and update for function-call system: '<S114>/Initial' */
 void APP_FluxWeak_GEAR2_Initial_e(const real32_T *rtu_out)
 {
-  /* StateWriter: '<S124>/State Writer' */
+  /* StateWriter: '<S126>/State Writer' */
   APP_FluxWeak_GEAR2_DW.Slope.FunctionCallSubsystem2.N_state = *rtu_out;
 }
 
-/* System initialize for function-call system: '<S54>/Slope' */
+/* System initialize for function-call system: '<S56>/Slope' */
 void APP_FluxWeak_GEAR2_Slope_Init(DW_Slope_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* SystemInitialize for Atomic SubSystem: '<S117>/lpf' */
+  /* SystemInitialize for Atomic SubSystem: '<S119>/lpf' */
   LPF_App_Init(&localDW->lpf);
 
-  /* End of SystemInitialize for SubSystem: '<S117>/lpf' */
+  /* End of SystemInitialize for SubSystem: '<S119>/lpf' */
 
-  /* SystemInitialize for Atomic SubSystem: '<S116>/lpf' */
+  /* SystemInitialize for Atomic SubSystem: '<S118>/lpf' */
   LPF_App_Init(&localDW->lpf_a);
 
-  /* End of SystemInitialize for SubSystem: '<S116>/lpf' */
+  /* End of SystemInitialize for SubSystem: '<S118>/lpf' */
   localDW->is_move = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
   localDW->is_D = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
   localDW->is_R = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
@@ -1011,50 +1011,50 @@ void APP_FluxWeak_GEAR2_Slope_Init(DW_Slope_APP_FluxWeak_GEAR2_T *localDW)
   localDW->is_c4_APP_FluxWeak_GEAR2 = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
   localDW->SpdReqPu_out = 0.0F;
 
-  /* SystemInitialize for Chart: '<S70>/Chart' incorporates:
-   *  SubSystem: '<S110>/Function-Call Subsystem'
+  /* SystemInitialize for Chart: '<S72>/Chart' incorporates:
+   *  SubSystem: '<S112>/Function-Call Subsystem'
    */
   APP__FunctionCallSubsystem_Init(&localDW->FunctionCallSubsystem);
 
-  /* SystemInitialize for Chart: '<S112>/Chart' */
+  /* SystemInitialize for Chart: '<S114>/Chart' */
   localDW->is_Gear = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
   localDW->is_active_c19_APP_FluxWeak_GEAR = 0U;
 
-  /* SystemInitialize for Merge: '<S112>/Merge' */
+  /* SystemInitialize for Merge: '<S114>/Merge' */
   localDW->Merge = 0.0F;
 }
 
-/* Enable for function-call system: '<S54>/Slope' */
+/* Enable for function-call system: '<S56>/Slope' */
 void APP_FluxWeak_GEAR2_Slope_Enable(DW_Slope_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* Enable for Chart: '<S70>/Chart' */
+  /* Enable for Chart: '<S72>/Chart' */
   if ((int16_T)localDW->is_c4_APP_FluxWeak_GEAR2 == (int16_T)
       APP_FluxWeak_GEAR2_IN_slope) {
-    /* SystemReset for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+    /* SystemReset for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
     APP_FunctionCallSubsystem_Reset(&localDW->FunctionCallSubsystem);
 
-    /* End of SystemReset for SubSystem: '<S110>/Function-Call Subsystem' */
+    /* End of SystemReset for SubSystem: '<S112>/Function-Call Subsystem' */
   }
 
-  /* End of Enable for Chart: '<S70>/Chart' */
+  /* End of Enable for Chart: '<S72>/Chart' */
 }
 
-/* Disable for function-call system: '<S54>/Slope' */
+/* Disable for function-call system: '<S56>/Slope' */
 void APP_FluxWeak_GEAR_Slope_Disable(DW_Slope_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* Disable for Chart: '<S70>/Chart' */
+  /* Disable for Chart: '<S72>/Chart' */
   if ((int16_T)localDW->is_c4_APP_FluxWeak_GEAR2 == (int16_T)
       APP_FluxWeak_GEAR2_IN_slope) {
-    /* Disable for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+    /* Disable for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
     A_FunctionCallSubsystem_Disable(&localDW->DiscreteTimeIntegrator);
 
-    /* End of Disable for SubSystem: '<S110>/Function-Call Subsystem' */
+    /* End of Disable for SubSystem: '<S112>/Function-Call Subsystem' */
   }
 
-  /* End of Disable for Chart: '<S70>/Chart' */
+  /* End of Disable for Chart: '<S72>/Chart' */
 }
 
-/* Output and update for function-call system: '<S54>/Slope' */
+/* Output and update for function-call system: '<S56>/Slope' */
 void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
   rtu_Data_j, uint16_T rtu_Data_g, real32_T rtu_Data_l, real32_T rtu_Data_i,
   uint16_T *rty_Out1, real32_T *rty_Out1_a, real32_T *rty_Out1_j, real32_T
@@ -1066,57 +1066,57 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
   real32_T rtb_Gain_g;
   uint16_T GearState_prev;
 
-  /* SignalConversion: '<S70>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S70>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_a = 0.0F;
 
-  /* SignalConversion: '<S70>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_j = 0.0F;
 
-  /* SignalConversion: '<S70>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_g = 0.0F;
 
-  /* SignalConversion: '<S70>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_l = 0U;
 
-  /* SignalConversion: '<S70>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_i = 0U;
 
-  /* SignalConversion: '<S70>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_c = 0.0F;
 
-  /* Outputs for Atomic SubSystem: '<S117>/lpf' */
+  /* Outputs for Atomic SubSystem: '<S119>/lpf' */
 
-  /* Constant: '<S117>/Constant' incorporates:
-   *  Constant: '<S117>/Constant1'
+  /* Constant: '<S119>/Constant' incorporates:
+   *  Constant: '<S119>/Constant1'
    */
   LPF_App(rtu_Data, 0.002F, 1000.0F / PMSM_Param.DamperTimer,
           &rtb_DiscreteTimeIntegrator1_f, &localDW->lpf);
 
-  /* End of Outputs for SubSystem: '<S117>/lpf' */
+  /* End of Outputs for SubSystem: '<S119>/lpf' */
 
-  /* Gain: '<S115>/Gain' incorporates:
-   *  Sum: '<S115>/Sum'
+  /* Gain: '<S117>/Gain' incorporates:
+   *  Sum: '<S117>/Sum'
    */
   rtb_Gain_g = (rtb_DiscreteTimeIntegrator1_f - rtu_Data) *
     PMSM_Param.DamperGain;
 
-  /* Outputs for Atomic SubSystem: '<S116>/lpf' */
+  /* Outputs for Atomic SubSystem: '<S118>/lpf' */
 
-  /* Constant: '<S116>/Constant' incorporates:
-   *  Constant: '<S116>/Constant1'
+  /* Constant: '<S118>/Constant' incorporates:
+   *  Constant: '<S118>/Constant1'
    */
   LPF_App(rtu_Data_i, 0.002F, 33.3333321F, &rtb_DiscreteTimeIntegrator1_f,
           &localDW->lpf_a);
 
-  /* End of Outputs for SubSystem: '<S116>/lpf' */
+  /* End of Outputs for SubSystem: '<S118>/lpf' */
 
-  /* Sum: '<S111>/Add' */
+  /* Sum: '<S113>/Add' */
   rtb_Gain_g += rtb_DiscreteTimeIntegrator1_f;
 
-  /* Saturate: '<S111>/Saturation' */
+  /* Saturate: '<S113>/Saturation' */
   if (rtb_Gain_g > 1.0F) {
     rtb_Gain_g = 1.0F;
   } else {
@@ -1125,10 +1125,10 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
     }
   }
 
-  /* End of Saturate: '<S111>/Saturation' */
+  /* End of Saturate: '<S113>/Saturation' */
 
-  /* Chart: '<S70>/Chart' incorporates:
-   *  UnitDelay: '<S70>/Unit Delay'
+  /* Chart: '<S72>/Chart' incorporates:
+   *  UnitDelay: '<S72>/Unit Delay'
    */
   /* Gateway: implement/method/All_loop/Slope/Chart */
   if (localDW->temporalCounter_i1 < 511U) {
@@ -1144,282 +1144,282 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
     localDW->is_active_c4_APP_FluxWeak_GEAR2 = 1U;
 
     /* Entry Internal: implement/method/All_loop/Slope/Chart */
-    /* Transition: '<S109>:4' */
+    /* Transition: '<S111>:4' */
     localDW->is_c4_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_slope;
 
-    /* SystemReset for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+    /* SystemReset for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-    /* Entry 'slope': '<S109>:3' */
+    /* Entry 'slope': '<S111>:3' */
     APP_FunctionCallSubsystem_Reset(&localDW->FunctionCallSubsystem);
 
-    /* End of SystemReset for SubSystem: '<S110>/Function-Call Subsystem' */
+    /* End of SystemReset for SubSystem: '<S112>/Function-Call Subsystem' */
 
-    /* '<S109>:3:1' SpdReqPu_out=SpdReqPu_in; */
+    /* '<S111>:3:1' SpdReqPu_out=SpdReqPu_in; */
     localDW->SpdReqPu_out = rtu_Data_l;
 
-    /* Outputs for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+    /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-    /* '<S109>:3:3' TimeCount; */
-    /* Event: '<S109>:38' */
+    /* '<S111>:3:3' TimeCount; */
+    /* Event: '<S111>:38' */
     APP_FluxW_FunctionCallSubsystem(localDW->UnitDelay_DSTATE, rtu_Data_j,
       &localDW->DiscreteTimeIntegrator, &localDW->FunctionCallSubsystem);
 
-    /* End of Outputs for SubSystem: '<S110>/Function-Call Subsystem' */
+    /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
   } else if (localDW->is_c4_APP_FluxWeak_GEAR2 == 1U) {
-    /* During 'move': '<S109>:6' */
-    /* '<S109>:29:1' sf_internal_predicateOutput = ... */
-    /* '<S109>:29:1' GearState==0; */
+    /* During 'move': '<S111>:6' */
+    /* '<S111>:29:1' sf_internal_predicateOutput = ... */
+    /* '<S111>:29:1' GearState==0; */
     if (rtu_Data_j == 0U) {
-      /* Transition: '<S109>:29' */
-      /* Exit Internal 'move': '<S109>:6' */
-      /* Exit Internal 'D': '<S109>:8' */
+      /* Transition: '<S111>:29' */
+      /* Exit Internal 'move': '<S111>:6' */
+      /* Exit Internal 'D': '<S111>:8' */
       localDW->is_D = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
       localDW->is_move = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
 
-      /* Exit Internal 'R': '<S109>:20' */
+      /* Exit Internal 'R': '<S111>:20' */
       localDW->is_R = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
       localDW->is_c4_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_slope;
 
-      /* SystemReset for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+      /* SystemReset for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-      /* Entry 'slope': '<S109>:3' */
+      /* Entry 'slope': '<S111>:3' */
       APP_FunctionCallSubsystem_Reset(&localDW->FunctionCallSubsystem);
 
-      /* End of SystemReset for SubSystem: '<S110>/Function-Call Subsystem' */
+      /* End of SystemReset for SubSystem: '<S112>/Function-Call Subsystem' */
 
-      /* '<S109>:3:1' SpdReqPu_out=SpdReqPu_in; */
+      /* '<S111>:3:1' SpdReqPu_out=SpdReqPu_in; */
       localDW->SpdReqPu_out = rtu_Data_l;
 
-      /* Outputs for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+      /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-      /* '<S109>:3:3' TimeCount; */
-      /* Event: '<S109>:38' */
+      /* '<S111>:3:3' TimeCount; */
+      /* Event: '<S111>:38' */
       APP_FluxW_FunctionCallSubsystem(localDW->UnitDelay_DSTATE, 0U,
         &localDW->DiscreteTimeIntegrator, &localDW->FunctionCallSubsystem);
 
-      /* End of Outputs for SubSystem: '<S110>/Function-Call Subsystem' */
+      /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
     } else if (localDW->is_move == 1U) {
-      /* During 'D': '<S109>:8' */
+      /* During 'D': '<S111>:8' */
       if (localDW->is_D == 1U) {
-        /* During 'Add': '<S109>:12' */
-        /* Transition: '<S109>:24' */
-        /* '<S109>:25:1' sf_internal_predicateOutput = ... */
-        /* '<S109>:25:1' after(500,tick); */
+        /* During 'Add': '<S111>:12' */
+        /* Transition: '<S111>:24' */
+        /* '<S111>:25:1' sf_internal_predicateOutput = ... */
+        /* '<S111>:25:1' after(500,tick); */
         if (localDW->temporalCounter_i1 >= 500U) {
-          /* Transition: '<S109>:25' */
+          /* Transition: '<S111>:25' */
           localDW->is_D = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           localDW->is_move = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           localDW->is_c4_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_slope;
 
-          /* SystemReset for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+          /* SystemReset for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-          /* Entry 'slope': '<S109>:3' */
+          /* Entry 'slope': '<S111>:3' */
           APP_FunctionCallSubsystem_Reset(&localDW->FunctionCallSubsystem);
 
-          /* End of SystemReset for SubSystem: '<S110>/Function-Call Subsystem' */
+          /* End of SystemReset for SubSystem: '<S112>/Function-Call Subsystem' */
 
-          /* '<S109>:3:1' SpdReqPu_out=SpdReqPu_in; */
+          /* '<S111>:3:1' SpdReqPu_out=SpdReqPu_in; */
           localDW->SpdReqPu_out = rtu_Data_l;
 
-          /* Outputs for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+          /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-          /* '<S109>:3:3' TimeCount; */
-          /* Event: '<S109>:38' */
+          /* '<S111>:3:3' TimeCount; */
+          /* Event: '<S111>:38' */
           APP_FluxW_FunctionCallSubsystem(localDW->UnitDelay_DSTATE, rtu_Data_j,
             &localDW->DiscreteTimeIntegrator, &localDW->FunctionCallSubsystem);
 
-          /* End of Outputs for SubSystem: '<S110>/Function-Call Subsystem' */
+          /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
         } else {
-          /* '<S109>:12:1' SpdReqPu_out=SpdReqPu_out+0.2; */
+          /* '<S111>:12:1' SpdReqPu_out=SpdReqPu_out+0.2; */
           localDW->SpdReqPu_out += 0.2F;
         }
       } else {
-        /* During 'Sub': '<S109>:10' */
-        /* '<S109>:14:1' sf_internal_predicateOutput = ... */
-        /* '<S109>:14:1' after(500,tick); */
+        /* During 'Sub': '<S111>:10' */
+        /* '<S111>:14:1' sf_internal_predicateOutput = ... */
+        /* '<S111>:14:1' after(500,tick); */
         if (localDW->temporalCounter_i1 >= 500U) {
-          /* Transition: '<S109>:14' */
+          /* Transition: '<S111>:14' */
           localDW->is_D = APP_FluxWeak_GEAR2_IN_Add;
           localDW->temporalCounter_i1 = 0U;
 
-          /* Entry 'Add': '<S109>:12' */
-          /* '<S109>:12:1' SpdReqPu_out=SpdReqPu_out+0.2; */
+          /* Entry 'Add': '<S111>:12' */
+          /* '<S111>:12:1' SpdReqPu_out=SpdReqPu_out+0.2; */
           localDW->SpdReqPu_out += 0.2F;
         } else {
-          /* '<S109>:10:1' SpdReqPu_out=SpdReqPu_out-0.2; */
+          /* '<S111>:10:1' SpdReqPu_out=SpdReqPu_out-0.2; */
           localDW->SpdReqPu_out -= 0.2F;
         }
       }
     } else {
-      /* During 'R': '<S109>:20' */
+      /* During 'R': '<S111>:20' */
       if (localDW->is_R == 1U) {
-        /* During 'Add': '<S109>:19' */
-        /* '<S109>:21:1' sf_internal_predicateOutput = ... */
-        /* '<S109>:21:1' after(500,tick); */
+        /* During 'Add': '<S111>:19' */
+        /* '<S111>:21:1' sf_internal_predicateOutput = ... */
+        /* '<S111>:21:1' after(500,tick); */
         if (localDW->temporalCounter_i1 >= 500U) {
-          /* Transition: '<S109>:21' */
+          /* Transition: '<S111>:21' */
           localDW->is_R = APP_FluxWeak_GEAR2_IN_Sub;
           localDW->temporalCounter_i1 = 0U;
 
-          /* Entry 'Sub': '<S109>:18' */
-          /* '<S109>:18:1' SpdReqPu_out=SpdReqPu_out-0.2; */
+          /* Entry 'Sub': '<S111>:18' */
+          /* '<S111>:18:1' SpdReqPu_out=SpdReqPu_out-0.2; */
           localDW->SpdReqPu_out -= 0.2F;
         } else {
-          /* '<S109>:19:1' SpdReqPu_out=SpdReqPu_out+0.2; */
+          /* '<S111>:19:1' SpdReqPu_out=SpdReqPu_out+0.2; */
           localDW->SpdReqPu_out += 0.2F;
         }
       } else {
-        /* During 'Sub': '<S109>:18' */
-        /* Transition: '<S109>:23' */
-        /* '<S109>:25:1' sf_internal_predicateOutput = ... */
-        /* '<S109>:25:1' after(500,tick); */
+        /* During 'Sub': '<S111>:18' */
+        /* Transition: '<S111>:23' */
+        /* '<S111>:25:1' sf_internal_predicateOutput = ... */
+        /* '<S111>:25:1' after(500,tick); */
         if (localDW->temporalCounter_i1 >= 500U) {
-          /* Transition: '<S109>:25' */
+          /* Transition: '<S111>:25' */
           localDW->is_R = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           localDW->is_move = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           localDW->is_c4_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_slope;
 
-          /* SystemReset for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+          /* SystemReset for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-          /* Entry 'slope': '<S109>:3' */
+          /* Entry 'slope': '<S111>:3' */
           APP_FunctionCallSubsystem_Reset(&localDW->FunctionCallSubsystem);
 
-          /* End of SystemReset for SubSystem: '<S110>/Function-Call Subsystem' */
+          /* End of SystemReset for SubSystem: '<S112>/Function-Call Subsystem' */
 
-          /* '<S109>:3:1' SpdReqPu_out=SpdReqPu_in; */
+          /* '<S111>:3:1' SpdReqPu_out=SpdReqPu_in; */
           localDW->SpdReqPu_out = rtu_Data_l;
 
-          /* Outputs for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+          /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-          /* '<S109>:3:3' TimeCount; */
-          /* Event: '<S109>:38' */
+          /* '<S111>:3:3' TimeCount; */
+          /* Event: '<S111>:38' */
           APP_FluxW_FunctionCallSubsystem(localDW->UnitDelay_DSTATE, rtu_Data_j,
             &localDW->DiscreteTimeIntegrator, &localDW->FunctionCallSubsystem);
 
-          /* End of Outputs for SubSystem: '<S110>/Function-Call Subsystem' */
+          /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
         } else {
-          /* '<S109>:18:1' SpdReqPu_out=SpdReqPu_out-0.2; */
+          /* '<S111>:18:1' SpdReqPu_out=SpdReqPu_out-0.2; */
           localDW->SpdReqPu_out -= 0.2F;
         }
       }
     }
   } else {
-    /* During 'slope': '<S109>:3' */
-    /* '<S109>:7:1' sf_internal_predicateOutput = ... */
-    /* '<S109>:7:1' SlopeTime>5; */
+    /* During 'slope': '<S111>:3' */
+    /* '<S111>:7:1' sf_internal_predicateOutput = ... */
+    /* '<S111>:7:1' SlopeTime>5; */
     if (localDW->DiscreteTimeIntegrator > 5.0F) {
-      /* Disable for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+      /* Disable for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-      /* Transition: '<S109>:7' */
-      /* Exit 'slope': '<S109>:3' */
+      /* Transition: '<S111>:7' */
+      /* Exit 'slope': '<S111>:3' */
       A_FunctionCallSubsystem_Disable(&localDW->DiscreteTimeIntegrator);
 
-      /* End of Disable for SubSystem: '<S110>/Function-Call Subsystem' */
+      /* End of Disable for SubSystem: '<S112>/Function-Call Subsystem' */
       localDW->is_c4_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_move;
 
-      /* Entry Internal 'move': '<S109>:6' */
-      /* Transition: '<S109>:9' */
-      /* '<S109>:27:1' sf_internal_predicateOutput = ... */
-      /* '<S109>:27:1' GearState==1; */
+      /* Entry Internal 'move': '<S111>:6' */
+      /* Transition: '<S111>:9' */
+      /* '<S111>:27:1' sf_internal_predicateOutput = ... */
+      /* '<S111>:27:1' GearState==1; */
       if (rtu_Data_j == 1U) {
-        /* Transition: '<S109>:27' */
+        /* Transition: '<S111>:27' */
         localDW->is_move = APP_FluxWeak_GEAR2_IN_D;
 
-        /* Entry 'D': '<S109>:8' */
+        /* Entry 'D': '<S111>:8' */
         /* 后溜 */
-        /* Entry Internal 'D': '<S109>:8' */
-        /* Transition: '<S109>:11' */
+        /* Entry Internal 'D': '<S111>:8' */
+        /* Transition: '<S111>:11' */
         localDW->is_D = APP_FluxWeak_GEAR2_IN_Sub;
         localDW->temporalCounter_i1 = 0U;
 
-        /* Entry 'Sub': '<S109>:10' */
-        /* '<S109>:10:1' SpdReqPu_out=SpdReqPu_out-0.2; */
+        /* Entry 'Sub': '<S111>:10' */
+        /* '<S111>:10:1' SpdReqPu_out=SpdReqPu_out-0.2; */
         localDW->SpdReqPu_out -= 0.2F;
       } else {
-        /* Transition: '<S109>:28' */
+        /* Transition: '<S111>:28' */
         localDW->is_move = APP_FluxWeak_GEAR2_IN_R;
 
-        /* Entry 'R': '<S109>:20' */
+        /* Entry 'R': '<S111>:20' */
         /* 后溜 */
-        /* Entry Internal 'R': '<S109>:20' */
-        /* Transition: '<S109>:17' */
+        /* Entry Internal 'R': '<S111>:20' */
+        /* Transition: '<S111>:17' */
         localDW->is_R = APP_FluxWeak_GEAR2_IN_Add;
         localDW->temporalCounter_i1 = 0U;
 
-        /* Entry 'Add': '<S109>:19' */
-        /* '<S109>:19:1' SpdReqPu_out=SpdReqPu_out+0.2; */
+        /* Entry 'Add': '<S111>:19' */
+        /* '<S111>:19:1' SpdReqPu_out=SpdReqPu_out+0.2; */
         localDW->SpdReqPu_out += 0.2F;
       }
     } else {
-      /* '<S109>:36:1' sf_internal_predicateOutput = ... */
-      /* '<S109>:36:1' hasChanged(GearState); */
+      /* '<S111>:36:1' sf_internal_predicateOutput = ... */
+      /* '<S111>:36:1' hasChanged(GearState); */
       if (GearState_prev != localDW->GearState_start) {
-        /* Disable for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+        /* Disable for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-        /* Transition: '<S109>:36' */
-        /* Exit 'slope': '<S109>:3' */
+        /* Transition: '<S111>:36' */
+        /* Exit 'slope': '<S111>:3' */
         A_FunctionCallSubsystem_Disable(&localDW->DiscreteTimeIntegrator);
 
-        /* End of Disable for SubSystem: '<S110>/Function-Call Subsystem' */
+        /* End of Disable for SubSystem: '<S112>/Function-Call Subsystem' */
         localDW->is_c4_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_slope;
 
-        /* SystemReset for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+        /* SystemReset for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-        /* Entry 'slope': '<S109>:3' */
+        /* Entry 'slope': '<S111>:3' */
         APP_FunctionCallSubsystem_Reset(&localDW->FunctionCallSubsystem);
 
-        /* End of SystemReset for SubSystem: '<S110>/Function-Call Subsystem' */
+        /* End of SystemReset for SubSystem: '<S112>/Function-Call Subsystem' */
 
-        /* '<S109>:3:1' SpdReqPu_out=SpdReqPu_in; */
+        /* '<S111>:3:1' SpdReqPu_out=SpdReqPu_in; */
         localDW->SpdReqPu_out = rtu_Data_l;
 
-        /* Outputs for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+        /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-        /* '<S109>:3:3' TimeCount; */
-        /* Event: '<S109>:38' */
+        /* '<S111>:3:3' TimeCount; */
+        /* Event: '<S111>:38' */
         APP_FluxW_FunctionCallSubsystem(localDW->UnitDelay_DSTATE, rtu_Data_j,
           &localDW->DiscreteTimeIntegrator, &localDW->FunctionCallSubsystem);
 
-        /* End of Outputs for SubSystem: '<S110>/Function-Call Subsystem' */
+        /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
       } else {
-        /* '<S109>:3:1' SpdReqPu_out=SpdReqPu_in; */
+        /* '<S111>:3:1' SpdReqPu_out=SpdReqPu_in; */
         localDW->SpdReqPu_out = rtu_Data_l;
 
-        /* Outputs for Function Call SubSystem: '<S110>/Function-Call Subsystem' */
+        /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
 
-        /* '<S109>:3:3' TimeCount; */
-        /* Event: '<S109>:38' */
+        /* '<S111>:3:3' TimeCount; */
+        /* Event: '<S111>:38' */
         APP_FluxW_FunctionCallSubsystem(localDW->UnitDelay_DSTATE, rtu_Data_j,
           &localDW->DiscreteTimeIntegrator, &localDW->FunctionCallSubsystem);
 
-        /* End of Outputs for SubSystem: '<S110>/Function-Call Subsystem' */
+        /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
       }
     }
   }
 
-  /* End of Chart: '<S70>/Chart' */
+  /* End of Chart: '<S72>/Chart' */
 
-  /* Outputs for Atomic SubSystem: '<S113>/PI' */
+  /* Outputs for Atomic SubSystem: '<S115>/PI' */
 
-  /* Gain: '<S70>/Norm' incorporates:
-   *  Constant: '<S113>/Constant'
-   *  Constant: '<S113>/Constant1'
-   *  Constant: '<S113>/Constant2'
-   *  Sum: '<S70>/Subtract'
+  /* Gain: '<S72>/Norm' incorporates:
+   *  Constant: '<S115>/Constant'
+   *  Constant: '<S115>/Constant1'
+   *  Constant: '<S115>/Constant2'
+   *  Sum: '<S72>/Subtract'
    */
   PI_App(0.0001F * (localDW->SpdReqPu_out - rtu_Data_a), PMSM_Param.SlopeKp,
          PMSM_Param.SlopeKi, 0.002F, &localDW->UnitDelay_DSTATE,
          &rtb_DiscreteTimeIntegrator1_f, &localDW->PI);
 
-  /* End of Outputs for SubSystem: '<S113>/PI' */
+  /* End of Outputs for SubSystem: '<S115>/PI' */
 
-  /* MultiPortSwitch: '<S113>/Multiport Switch' */
+  /* MultiPortSwitch: '<S115>/Multiport Switch' */
   switch (rtu_Data_j) {
    case 0:
     break;
 
    case 1:
-    /* Saturate: '<S113>/Saturation1' */
+    /* Saturate: '<S115>/Saturation1' */
     if (localDW->UnitDelay_DSTATE > PMSM_Param.SlopeMaxT) {
       localDW->UnitDelay_DSTATE = PMSM_Param.SlopeMaxT;
     } else {
@@ -1428,11 +1428,11 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
       }
     }
 
-    /* End of Saturate: '<S113>/Saturation1' */
+    /* End of Saturate: '<S115>/Saturation1' */
     break;
 
    default:
-    /* Saturate: '<S113>/Saturation2' */
+    /* Saturate: '<S115>/Saturation2' */
     if (localDW->UnitDelay_DSTATE > 1.0F) {
       localDW->UnitDelay_DSTATE = 1.0F;
     } else {
@@ -1441,13 +1441,13 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
       }
     }
 
-    /* End of Saturate: '<S113>/Saturation2' */
+    /* End of Saturate: '<S115>/Saturation2' */
     break;
   }
 
-  /* End of MultiPortSwitch: '<S113>/Multiport Switch' */
+  /* End of MultiPortSwitch: '<S115>/Multiport Switch' */
 
-  /* Chart: '<S112>/Chart' */
+  /* Chart: '<S114>/Chart' */
   /* Gateway: implement/method/All_loop/Slope/Tor_select/Chart */
   GearState_prev = localDW->Gear_start;
   localDW->Gear_start = rtu_Data_j;
@@ -1458,95 +1458,95 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
     localDW->is_active_c19_APP_FluxWeak_GEAR = 1U;
 
     /* Entry Internal: implement/method/All_loop/Slope/Tor_select/Chart */
-    /* Transition: '<S120>:3' */
-    /* Entry Internal 'Gear': '<S120>:2' */
-    /* Transition: '<S120>:4' */
-    /* '<S120>:7:1' sf_internal_predicateOutput = ... */
-    /* '<S120>:7:1' Gear==1; */
+    /* Transition: '<S122>:3' */
+    /* Entry Internal 'Gear': '<S122>:2' */
+    /* Transition: '<S122>:4' */
+    /* '<S122>:7:1' sf_internal_predicateOutput = ... */
+    /* '<S122>:7:1' Gear==1; */
     switch (rtu_Data_j) {
      case 1U:
-      /* Transition: '<S120>:7' */
+      /* Transition: '<S122>:7' */
       localDW->is_Gear = APP_FluxWeak_GEAR2_IN_D;
 
-      /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
+      /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem' */
 
-      /* Entry 'D': '<S120>:6' */
-      /* '<S120>:6:1' D_call; */
-      /* Event: '<S120>:17' */
+      /* Entry 'D': '<S122>:6' */
+      /* '<S122>:6:1' D_call; */
+      /* Event: '<S122>:17' */
       APP_Flu_FunctionCallSubsystem_o(rtb_Gain_g, localDW->UnitDelay_DSTATE,
         &localDW->Merge);
 
-      /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
+      /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem' */
       break;
 
      case 2U:
-      /* Transition: '<S120>:12' */
-      /* '<S120>:11:1' sf_internal_predicateOutput = ... */
-      /* '<S120>:11:1' Gear==2; */
-      /* Transition: '<S120>:11' */
+      /* Transition: '<S122>:12' */
+      /* '<S122>:11:1' sf_internal_predicateOutput = ... */
+      /* '<S122>:11:1' Gear==2; */
+      /* Transition: '<S122>:11' */
       localDW->is_Gear = APP_FluxWeak_GEAR2_IN_R_e;
 
-      /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem1' */
+      /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem1' */
 
-      /* Entry 'R': '<S120>:8' */
-      /* '<S120>:8:1' R_call; */
-      /* Event: '<S120>:21' */
+      /* Entry 'R': '<S122>:8' */
+      /* '<S122>:8:1' R_call; */
+      /* Event: '<S122>:21' */
       APP_Flux_FunctionCallSubsystem1(rtb_Gain_g, localDW->UnitDelay_DSTATE,
         &localDW->Merge);
 
-      /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem1' */
+      /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem1' */
       break;
 
      default:
-      /* Transition: '<S120>:14' */
-      /* Transition: '<S120>:15' */
+      /* Transition: '<S122>:14' */
+      /* Transition: '<S122>:15' */
       localDW->is_Gear = APP_FluxWeak_GEAR2_IN_N;
 
-      /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem2' */
+      /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem2' */
 
-      /* Entry 'N': '<S120>:9' */
-      /* '<S120>:9:1' N_call; */
-      /* Event: '<S120>:20' */
+      /* Entry 'N': '<S122>:9' */
+      /* '<S122>:9:1' N_call; */
+      /* Event: '<S122>:20' */
       APP_Flux_FunctionCallSubsystem2(rtb_Gain_g, &localDW->Merge,
         &localDW->FunctionCallSubsystem2);
 
-      /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem2' */
+      /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem2' */
       break;
     }
   } else {
-    /* During 'Gear': '<S120>:2' */
-    /* '<S120>:16:1' sf_internal_predicateOutput = ... */
-    /* '<S120>:16:1' hasChanged(Gear); */
+    /* During 'Gear': '<S122>:2' */
+    /* '<S122>:16:1' sf_internal_predicateOutput = ... */
+    /* '<S122>:16:1' hasChanged(Gear); */
     if (GearState_prev != localDW->Gear_start) {
-      /* Transition: '<S120>:16' */
-      /* '<S120>:7:1' sf_internal_predicateOutput = ... */
-      /* '<S120>:7:1' Gear==1; */
+      /* Transition: '<S122>:16' */
+      /* '<S122>:7:1' sf_internal_predicateOutput = ... */
+      /* '<S122>:7:1' Gear==1; */
       switch (rtu_Data_j) {
        case 1U:
-        /* Transition: '<S120>:7' */
-        /* Exit Internal 'Gear': '<S120>:2' */
+        /* Transition: '<S122>:7' */
+        /* Exit Internal 'Gear': '<S122>:2' */
         switch (localDW->is_Gear) {
          case APP_FluxWeak_GEAR2_IN_D:
-          /* Outputs for Function Call SubSystem: '<S112>/Initial' */
+          /* Outputs for Function Call SubSystem: '<S114>/Initial' */
 
-          /* Exit 'D': '<S120>:6' */
-          /* '<S120>:6:1' RST_N; */
-          /* Event: '<S120>:19' */
+          /* Exit 'D': '<S122>:6' */
+          /* '<S122>:6:1' RST_N; */
+          /* Event: '<S122>:19' */
           APP_FluxWeak_GEAR2_Initial_e(&localDW->Merge);
 
-          /* End of Outputs for SubSystem: '<S112>/Initial' */
+          /* End of Outputs for SubSystem: '<S114>/Initial' */
           localDW->is_Gear = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           break;
 
          case APP_FluxWeak_GEAR2_IN_R_e:
-          /* Outputs for Function Call SubSystem: '<S112>/Initial' */
+          /* Outputs for Function Call SubSystem: '<S114>/Initial' */
 
-          /* Exit 'R': '<S120>:8' */
-          /* '<S120>:8:1' RST_N; */
-          /* Event: '<S120>:19' */
+          /* Exit 'R': '<S122>:8' */
+          /* '<S122>:8:1' RST_N; */
+          /* Event: '<S122>:19' */
           APP_FluxWeak_GEAR2_Initial_e(&localDW->Merge);
 
-          /* End of Outputs for SubSystem: '<S112>/Initial' */
+          /* End of Outputs for SubSystem: '<S114>/Initial' */
           localDW->is_Gear = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           break;
 
@@ -1557,45 +1557,45 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
 
         localDW->is_Gear = APP_FluxWeak_GEAR2_IN_D;
 
-        /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
+        /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem' */
 
-        /* Entry 'D': '<S120>:6' */
-        /* '<S120>:6:1' D_call; */
-        /* Event: '<S120>:17' */
+        /* Entry 'D': '<S122>:6' */
+        /* '<S122>:6:1' D_call; */
+        /* Event: '<S122>:17' */
         APP_Flu_FunctionCallSubsystem_o(rtb_Gain_g, localDW->UnitDelay_DSTATE,
           &localDW->Merge);
 
-        /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
+        /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem' */
         break;
 
        case 2U:
-        /* Transition: '<S120>:12' */
-        /* '<S120>:11:1' sf_internal_predicateOutput = ... */
-        /* '<S120>:11:1' Gear==2; */
-        /* Transition: '<S120>:11' */
-        /* Exit Internal 'Gear': '<S120>:2' */
+        /* Transition: '<S122>:12' */
+        /* '<S122>:11:1' sf_internal_predicateOutput = ... */
+        /* '<S122>:11:1' Gear==2; */
+        /* Transition: '<S122>:11' */
+        /* Exit Internal 'Gear': '<S122>:2' */
         switch (localDW->is_Gear) {
          case APP_FluxWeak_GEAR2_IN_D:
-          /* Outputs for Function Call SubSystem: '<S112>/Initial' */
+          /* Outputs for Function Call SubSystem: '<S114>/Initial' */
 
-          /* Exit 'D': '<S120>:6' */
-          /* '<S120>:6:1' RST_N; */
-          /* Event: '<S120>:19' */
+          /* Exit 'D': '<S122>:6' */
+          /* '<S122>:6:1' RST_N; */
+          /* Event: '<S122>:19' */
           APP_FluxWeak_GEAR2_Initial_e(&localDW->Merge);
 
-          /* End of Outputs for SubSystem: '<S112>/Initial' */
+          /* End of Outputs for SubSystem: '<S114>/Initial' */
           localDW->is_Gear = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           break;
 
          case APP_FluxWeak_GEAR2_IN_R_e:
-          /* Outputs for Function Call SubSystem: '<S112>/Initial' */
+          /* Outputs for Function Call SubSystem: '<S114>/Initial' */
 
-          /* Exit 'R': '<S120>:8' */
-          /* '<S120>:8:1' RST_N; */
-          /* Event: '<S120>:19' */
+          /* Exit 'R': '<S122>:8' */
+          /* '<S122>:8:1' RST_N; */
+          /* Event: '<S122>:19' */
           APP_FluxWeak_GEAR2_Initial_e(&localDW->Merge);
 
-          /* End of Outputs for SubSystem: '<S112>/Initial' */
+          /* End of Outputs for SubSystem: '<S114>/Initial' */
           localDW->is_Gear = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           break;
 
@@ -1606,43 +1606,43 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
 
         localDW->is_Gear = APP_FluxWeak_GEAR2_IN_R_e;
 
-        /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem1' */
+        /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem1' */
 
-        /* Entry 'R': '<S120>:8' */
-        /* '<S120>:8:1' R_call; */
-        /* Event: '<S120>:21' */
+        /* Entry 'R': '<S122>:8' */
+        /* '<S122>:8:1' R_call; */
+        /* Event: '<S122>:21' */
         APP_Flux_FunctionCallSubsystem1(rtb_Gain_g, localDW->UnitDelay_DSTATE,
           &localDW->Merge);
 
-        /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem1' */
+        /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem1' */
         break;
 
        default:
-        /* Transition: '<S120>:14' */
-        /* Transition: '<S120>:15' */
-        /* Exit Internal 'Gear': '<S120>:2' */
+        /* Transition: '<S122>:14' */
+        /* Transition: '<S122>:15' */
+        /* Exit Internal 'Gear': '<S122>:2' */
         switch (localDW->is_Gear) {
          case APP_FluxWeak_GEAR2_IN_D:
-          /* Outputs for Function Call SubSystem: '<S112>/Initial' */
+          /* Outputs for Function Call SubSystem: '<S114>/Initial' */
 
-          /* Exit 'D': '<S120>:6' */
-          /* '<S120>:6:1' RST_N; */
-          /* Event: '<S120>:19' */
+          /* Exit 'D': '<S122>:6' */
+          /* '<S122>:6:1' RST_N; */
+          /* Event: '<S122>:19' */
           APP_FluxWeak_GEAR2_Initial_e(&localDW->Merge);
 
-          /* End of Outputs for SubSystem: '<S112>/Initial' */
+          /* End of Outputs for SubSystem: '<S114>/Initial' */
           localDW->is_Gear = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           break;
 
          case APP_FluxWeak_GEAR2_IN_R_e:
-          /* Outputs for Function Call SubSystem: '<S112>/Initial' */
+          /* Outputs for Function Call SubSystem: '<S114>/Initial' */
 
-          /* Exit 'R': '<S120>:8' */
-          /* '<S120>:8:1' RST_N; */
-          /* Event: '<S120>:19' */
+          /* Exit 'R': '<S122>:8' */
+          /* '<S122>:8:1' RST_N; */
+          /* Event: '<S122>:19' */
           APP_FluxWeak_GEAR2_Initial_e(&localDW->Merge);
 
-          /* End of Outputs for SubSystem: '<S112>/Initial' */
+          /* End of Outputs for SubSystem: '<S114>/Initial' */
           localDW->is_Gear = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
           break;
 
@@ -1653,62 +1653,62 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
 
         localDW->is_Gear = APP_FluxWeak_GEAR2_IN_N;
 
-        /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem2' */
+        /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem2' */
 
-        /* Entry 'N': '<S120>:9' */
-        /* '<S120>:9:1' N_call; */
-        /* Event: '<S120>:20' */
+        /* Entry 'N': '<S122>:9' */
+        /* '<S122>:9:1' N_call; */
+        /* Event: '<S122>:20' */
         APP_Flux_FunctionCallSubsystem2(rtb_Gain_g, &localDW->Merge,
           &localDW->FunctionCallSubsystem2);
 
-        /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem2' */
+        /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem2' */
         break;
       }
     } else {
       switch (localDW->is_Gear) {
        case APP_FluxWeak_GEAR2_IN_D:
-        /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem' */
+        /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem' */
 
-        /* During 'D': '<S120>:6' */
-        /* '<S120>:6:1' D_call; */
-        /* Event: '<S120>:17' */
+        /* During 'D': '<S122>:6' */
+        /* '<S122>:6:1' D_call; */
+        /* Event: '<S122>:17' */
         APP_Flu_FunctionCallSubsystem_o(rtb_Gain_g, localDW->UnitDelay_DSTATE,
           &localDW->Merge);
 
-        /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem' */
+        /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem' */
         break;
 
        case APP_FluxWeak_GEAR2_IN_N:
-        /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem2' */
+        /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem2' */
 
-        /* During 'N': '<S120>:9' */
-        /* '<S120>:9:1' N_call; */
-        /* Event: '<S120>:20' */
+        /* During 'N': '<S122>:9' */
+        /* '<S122>:9:1' N_call; */
+        /* Event: '<S122>:20' */
         APP_Flux_FunctionCallSubsystem2(rtb_Gain_g, &localDW->Merge,
           &localDW->FunctionCallSubsystem2);
 
-        /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem2' */
+        /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem2' */
         break;
 
        default:
-        /* Outputs for Function Call SubSystem: '<S112>/Function-Call Subsystem1' */
+        /* Outputs for Function Call SubSystem: '<S114>/Function-Call Subsystem1' */
 
-        /* During 'R': '<S120>:8' */
-        /* '<S120>:8:1' R_call; */
-        /* Event: '<S120>:21' */
+        /* During 'R': '<S122>:8' */
+        /* '<S122>:8:1' R_call; */
+        /* Event: '<S122>:21' */
         APP_Flux_FunctionCallSubsystem1(rtb_Gain_g, localDW->UnitDelay_DSTATE,
           &localDW->Merge);
 
-        /* End of Outputs for SubSystem: '<S112>/Function-Call Subsystem1' */
+        /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem1' */
         break;
       }
     }
   }
 
-  /* End of Chart: '<S112>/Chart' */
+  /* End of Chart: '<S114>/Chart' */
 
-  /* Switch: '<S70>/Switch' incorporates:
-   *  Constant: '<S70>/Constant8'
+  /* Switch: '<S72>/Switch' incorporates:
+   *  Constant: '<S72>/Constant8'
    */
   if (rtu_Data_g != 0U) {
     rtb_DiscreteTimeIntegrator1_f = localDW->Merge;
@@ -1716,16 +1716,16 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
     rtb_DiscreteTimeIntegrator1_f = 0.0F;
   }
 
-  /* End of Switch: '<S70>/Switch' */
+  /* End of Switch: '<S72>/Switch' */
 
-  /* SignalConversion: '<S70>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_o = rtb_DiscreteTimeIntegrator1_f;
 
-  /* SignalConversion: '<S70>/OutportBufferForTor' */
+  /* SignalConversion: '<S72>/OutportBufferForTor' */
   *rty_Tor = rtb_DiscreteTimeIntegrator1_f;
 }
 
-/* Output and update for function-call system: '<S54>/Sync' */
+/* Output and update for function-call system: '<S56>/Sync' */
 void APP_FluxWeak_GEAR2_Sync(real32_T rtu_Data, real32_T rtu_Data_e, uint16_T
   *rty_Out1, real32_T *rty_Out1_e, real32_T *rty_Out1_g, real32_T *rty_Out1_g5,
   uint16_T *rty_Out1_c, uint16_T *rty_Out1_i, real32_T *rty_Out1_k, real32_T
@@ -1734,41 +1734,41 @@ void APP_FluxWeak_GEAR2_Sync(real32_T rtu_Data, real32_T rtu_Data_e, uint16_T
   real32_T rtb_Add_j;
   real32_T rtb_DiscreteTimeIntegrator1_j;
 
-  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_e = 0.0F;
 
-  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_g = 0.0F;
 
-  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_g5 = 0.0F;
 
-  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_c = 0U;
 
-  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_i = 0U;
 
-  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_k = 0.0F;
 
-  /* Outputs for Atomic SubSystem: '<S130>/PI' */
+  /* Outputs for Atomic SubSystem: '<S132>/PI' */
 
-  /* Gain: '<S73>/Norm' incorporates:
-   *  Constant: '<S130>/Constant'
-   *  Constant: '<S130>/Constant1'
-   *  Constant: '<S130>/Constant2'
-   *  Sum: '<S73>/Subtract'
+  /* Gain: '<S75>/Norm' incorporates:
+   *  Constant: '<S132>/Constant'
+   *  Constant: '<S132>/Constant1'
+   *  Constant: '<S132>/Constant2'
+   *  Sum: '<S75>/Subtract'
    */
   PI_App(0.0001F * (rtu_Data - rtu_Data_e), PMSM_Param.SyncKp, PMSM_Param.SyncKi,
          0.002F, &rtb_Add_j, &rtb_DiscreteTimeIntegrator1_j, &localDW->PI);
 
-  /* End of Outputs for SubSystem: '<S130>/PI' */
+  /* End of Outputs for SubSystem: '<S132>/PI' */
 
-  /* Saturate: '<S130>/Saturation' */
+  /* Saturate: '<S132>/Saturation' */
   if (rtb_Add_j > 1.0F) {
     rtb_Add_j = 1.0F;
   } else {
@@ -1777,22 +1777,22 @@ void APP_FluxWeak_GEAR2_Sync(real32_T rtu_Data, real32_T rtu_Data_e, uint16_T
     }
   }
 
-  /* End of Saturate: '<S130>/Saturation' */
+  /* End of Saturate: '<S132>/Saturation' */
 
-  /* SignalConversion: '<S73>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_ed = rtb_Add_j;
 
-  /* SignalConversion: '<S73>/OutportBufferForTor' */
+  /* SignalConversion: '<S75>/OutportBufferForTor' */
   *rty_Tor = rtb_Add_j;
 }
 
-/* Output and update for function-call system: '<S54>/Dischg' */
+/* Output and update for function-call system: '<S56>/Dischg' */
 void APP_FluxWeak_GEAR2_Dischg(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
   *rty_Out1_d, real32_T *rty_Out1_j, real32_T *rty_Out1_b, uint16_T *rty_Out1_o,
   uint16_T *rty_Out1_k, real32_T *rty_Out1_c, real32_T *rty_Out1_l,
   DW_Dischg_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* Relay: '<S64>/Relay' */
+  /* Relay: '<S66>/Relay' */
   if (rtu_Data >= 50.0F) {
     localDW->Relay_Mode = true;
   } else {
@@ -1801,10 +1801,10 @@ void APP_FluxWeak_GEAR2_Dischg(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
     }
   }
 
-  /* Switch: '<S64>/Switch' incorporates:
-   *  Constant: '<S64>/Constant'
-   *  Constant: '<S64>/Constant9'
-   *  Relay: '<S64>/Relay'
+  /* Switch: '<S66>/Switch' incorporates:
+   *  Constant: '<S66>/Constant'
+   *  Constant: '<S66>/Constant9'
+   *  Relay: '<S66>/Relay'
    */
   if (localDW->Relay_Mode) {
     *rty_Out1_d = PMSM_Param.DischgId;
@@ -1812,94 +1812,94 @@ void APP_FluxWeak_GEAR2_Dischg(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
     *rty_Out1_d = 0.0F;
   }
 
-  /* End of Switch: '<S64>/Switch' */
+  /* End of Switch: '<S66>/Switch' */
 
-  /* SignalConversion: '<S64>/TmpBufferAtConstant1Outport1' incorporates:
-   *  Constant: '<S64>/Constant1'
+  /* SignalConversion: '<S66>/TmpBufferAtConstant1Outport1' incorporates:
+   *  Constant: '<S66>/Constant1'
    */
   *rty_Out1_j = 0.0F;
 
-  /* SignalConversion: '<S64>/TmpBufferAtConstant2Outport1' incorporates:
-   *  Constant: '<S64>/Constant2'
+  /* SignalConversion: '<S66>/TmpBufferAtConstant2Outport1' incorporates:
+   *  Constant: '<S66>/Constant2'
    */
   *rty_Out1_b = 0.0F;
 
-  /* SignalConversion: '<S64>/TmpBufferAtConstant3Outport1' incorporates:
-   *  Constant: '<S64>/Constant3'
+  /* SignalConversion: '<S66>/TmpBufferAtConstant3Outport1' incorporates:
+   *  Constant: '<S66>/Constant3'
    */
   *rty_Out1_o = 1U;
 
-  /* SignalConversion: '<S64>/TmpBufferAtConstant4Outport1' incorporates:
-   *  Constant: '<S64>/Constant4'
+  /* SignalConversion: '<S66>/TmpBufferAtConstant4Outport1' incorporates:
+   *  Constant: '<S66>/Constant4'
    */
   *rty_Out1_k = 0U;
 
-  /* SignalConversion: '<S64>/TmpBufferAtConstant5Outport1' incorporates:
-   *  Constant: '<S64>/Constant5'
+  /* SignalConversion: '<S66>/TmpBufferAtConstant5Outport1' incorporates:
+   *  Constant: '<S66>/Constant5'
    */
   *rty_Out1_l = 0.0F;
 
-  /* SignalConversion: '<S64>/TmpBufferAtConstant6Outport1' incorporates:
-   *  Constant: '<S64>/Constant6'
+  /* SignalConversion: '<S66>/TmpBufferAtConstant6Outport1' incorporates:
+   *  Constant: '<S66>/Constant6'
    */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S64>/TmpBufferAtConstant8Outport1' incorporates:
-   *  Constant: '<S64>/Constant8'
+  /* SignalConversion: '<S66>/TmpBufferAtConstant8Outport1' incorporates:
+   *  Constant: '<S66>/Constant8'
    */
   *rty_Out1_c = 0.0F;
 }
 
-/* Output and update for function-call system: '<S54>/ASC' */
+/* Output and update for function-call system: '<S56>/ASC' */
 void APP_FluxWeak_GEAR2_ASC(uint16_T *rty_Out1, real32_T *rty_Out1_e, real32_T
   *rty_Out1_l, real32_T *rty_Out1_i, uint16_T *rty_Out1_f, uint16_T *rty_Out1_g,
   real32_T *rty_Out1_gu, real32_T *rty_Out1_k)
 {
-  /* SignalConversion: '<S61>/TmpBufferAtConstant1Outport1' incorporates:
-   *  Constant: '<S61>/Constant1'
+  /* SignalConversion: '<S63>/TmpBufferAtConstant1Outport1' incorporates:
+   *  Constant: '<S63>/Constant1'
    */
   *rty_Out1_l = 0.0F;
 
-  /* SignalConversion: '<S61>/TmpBufferAtConstant2Outport1' incorporates:
-   *  Constant: '<S61>/Constant2'
+  /* SignalConversion: '<S63>/TmpBufferAtConstant2Outport1' incorporates:
+   *  Constant: '<S63>/Constant2'
    */
   *rty_Out1_i = 0.0F;
 
-  /* SignalConversion: '<S61>/TmpBufferAtConstant3Outport1' incorporates:
-   *  Constant: '<S61>/Constant3'
+  /* SignalConversion: '<S63>/TmpBufferAtConstant3Outport1' incorporates:
+   *  Constant: '<S63>/Constant3'
    */
   *rty_Out1_f = 0U;
 
-  /* SignalConversion: '<S61>/TmpBufferAtConstant4Outport1' incorporates:
-   *  Constant: '<S61>/Constant4'
+  /* SignalConversion: '<S63>/TmpBufferAtConstant4Outport1' incorporates:
+   *  Constant: '<S63>/Constant4'
    */
   *rty_Out1_g = 0U;
 
-  /* SignalConversion: '<S61>/TmpBufferAtConstant5Outport1' incorporates:
-   *  Constant: '<S61>/Constant5'
+  /* SignalConversion: '<S63>/TmpBufferAtConstant5Outport1' incorporates:
+   *  Constant: '<S63>/Constant5'
    */
   *rty_Out1_k = 0.0F;
 
-  /* SignalConversion: '<S61>/TmpBufferAtConstant6Outport1' incorporates:
-   *  Constant: '<S61>/Constant6'
+  /* SignalConversion: '<S63>/TmpBufferAtConstant6Outport1' incorporates:
+   *  Constant: '<S63>/Constant6'
    */
   *rty_Out1 = 1U;
 
-  /* SignalConversion: '<S61>/TmpBufferAtConstant8Outport1' incorporates:
-   *  Constant: '<S61>/Constant8'
+  /* SignalConversion: '<S63>/TmpBufferAtConstant8Outport1' incorporates:
+   *  Constant: '<S63>/Constant8'
    */
   *rty_Out1_gu = 0.0F;
 
-  /* SignalConversion: '<S61>/TmpBufferAtConstantOutport1' incorporates:
-   *  Constant: '<S61>/Constant'
+  /* SignalConversion: '<S63>/TmpBufferAtConstantOutport1' incorporates:
+   *  Constant: '<S63>/Constant'
    */
   *rty_Out1_e = 0.0F;
 }
 
-/* System initialize for function-call system: '<S62>/PhaseStudy' */
+/* System initialize for function-call system: '<S64>/PhaseStudy' */
 void APP_FluxWeak_GE_PhaseStudy_Init(DW_PhaseStudy_APP_FluxWeak_GE_T *localDW)
 {
-  /* SystemInitialize for Chart: '<S83>/Chart' */
+  /* SystemInitialize for Chart: '<S85>/Chart' */
   localDW->is_Study = APP_FluxWe_IN_NO_ACTIVE_CHILD_j;
   localDW->temporalCounter_i1 = 0U;
   localDW->is_active_c10_APP_FluxWeak_GEAR = 0U;
@@ -1912,7 +1912,7 @@ void APP_FluxWeak_GE_PhaseStudy_Init(DW_PhaseStudy_APP_FluxWeak_GE_T *localDW)
   localDW->StudyStep = 0U;
 }
 
-/* Output and update for function-call system: '<S62>/PhaseStudy' */
+/* Output and update for function-call system: '<S64>/PhaseStudy' */
 void APP_FluxWeak_GEAR2_PhaseStudy(real32_T rtu_Data, real32_T rtu_Data_g,
   uint16_T *rty_Out1, real32_T *rty_Out1_g, real32_T *rty_Out1_h, real32_T
   *rty_Out1_i, uint16_T *rty_Out1_a, uint16_T *rty_Out1_a3, real32_T
@@ -1922,7 +1922,7 @@ void APP_FluxWeak_GEAR2_PhaseStudy(real32_T rtu_Data, real32_T rtu_Data_g,
   real32_T tmp;
   boolean_T guard1 = false;
 
-  /* Chart: '<S83>/Chart' */
+  /* Chart: '<S85>/Chart' */
   /* Gateway: implement/method/All_loop/Calib/PhaseStudy/Chart */
   if (localDW->temporalCounter_i1 < 127U) {
     localDW->temporalCounter_i1 = ((int16_T)localDW->temporalCounter_i1 + 1) &
@@ -1935,150 +1935,150 @@ void APP_FluxWeak_GEAR2_PhaseStudy(real32_T rtu_Data, real32_T rtu_Data_g,
     localDW->is_active_c10_APP_FluxWeak_GEAR = 1U;
 
     /* Entry Internal: implement/method/All_loop/Calib/PhaseStudy/Chart */
-    /* Transition: '<S98>:7' */
+    /* Transition: '<S100>:7' */
     localDW->is_c10_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Init;
 
-    /* Entry 'Init': '<S98>:6' */
-    /* '<S98>:6:1' StudyResult = 8888; */
+    /* Entry 'Init': '<S100>:6' */
+    /* '<S100>:6:1' StudyResult = 8888; */
     localDW->StudyResult = 8888.0F;
 
-    /* '<S98>:6:1' StudyStep=10; */
+    /* '<S100>:6:1' StudyStep=10; */
     localDW->StudyStep = 10U;
   } else {
     guard1 = false;
     switch (localDW->is_c10_APP_FluxWeak_GEAR2) {
      case APP_FluxWeak_GEAR2_IN_Fault:
-      /* During 'Fault': '<S98>:10' */
+      /* During 'Fault': '<S100>:10' */
       break;
 
      case APP_FluxWeak_GEAR2_IN_Fin1:
-      /* During 'Fin1': '<S98>:185' */
+      /* During 'Fin1': '<S100>:185' */
       break;
 
      case APP_FluxWeak_GEAR2_IN_Init:
-      /* During 'Init': '<S98>:6' */
-      /* '<S98>:11:1' sf_internal_predicateOutput = ... */
-      /* '<S98>:11:1' TqReq > 0.001; */
+      /* During 'Init': '<S100>:6' */
+      /* '<S100>:11:1' sf_internal_predicateOutput = ... */
+      /* '<S100>:11:1' TqReq > 0.001; */
       if (rtu_Data_g > 0.001) {
-        /* Transition: '<S98>:11' */
+        /* Transition: '<S100>:11' */
         localDW->is_c10_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Study;
 
-        /* Entry 'Study': '<S98>:8' */
-        /* '<S98>:8:1' StudyStep=11; */
+        /* Entry 'Study': '<S100>:8' */
+        /* '<S100>:8:1' StudyStep=11; */
         localDW->StudyStep = 11U;
 
-        /* Entry Internal 'Study': '<S98>:8' */
-        /* Transition: '<S98>:74' */
+        /* Entry Internal 'Study': '<S100>:8' */
+        /* Transition: '<S100>:74' */
         localDW->is_Study = APP_FluxWeak_GEAR2_IN_AddId;
 
-        /* Entry 'AddId': '<S98>:72' */
+        /* Entry 'AddId': '<S100>:72' */
         /* 增加id */
-        /* '<S98>:72:1' IdRefSet = IdRefSet + 0.001; */
+        /* '<S100>:72:1' IdRefSet = IdRefSet + 0.001; */
         localDW->IdRefSet += 0.001F;
       }
       break;
 
      default:
-      /* During 'Study': '<S98>:8' */
+      /* During 'Study': '<S100>:8' */
       switch (localDW->is_Study) {
        case APP_FluxWeak_GEAR2_IN_AddId:
-        /* During 'AddId': '<S98>:72' */
-        /* '<S98>:69:1' sf_internal_predicateOutput = ... */
-        /* '<S98>:69:1' IdRefSet > 0.3; */
+        /* During 'AddId': '<S100>:72' */
+        /* '<S100>:69:1' sf_internal_predicateOutput = ... */
+        /* '<S100>:69:1' IdRefSet > 0.3; */
         if (localDW->IdRefSet > 0.3) {
-          /* Transition: '<S98>:69' */
+          /* Transition: '<S100>:69' */
           localDW->is_Study = APP_FluxWeak_GEAR2_IN_Wait1;
           localDW->temporalCounter_i1 = 0U;
 
-          /* Entry 'Wait1': '<S98>:70' */
+          /* Entry 'Wait1': '<S100>:70' */
           /* 等 */
-          /* '<S98>:70:1' IdRefSet = 0.3; */
+          /* '<S100>:70:1' IdRefSet = 0.3; */
           localDW->IdRefSet = 0.3F;
         } else {
-          /* '<S98>:72:1' IdRefSet = IdRefSet + 0.001; */
+          /* '<S100>:72:1' IdRefSet = IdRefSet + 0.001; */
           localDW->IdRefSet += 0.001F;
         }
         break;
 
        case APP_FluxWeak_GEAR2_IN_ChgAngle1:
-        /* During 'ChgAngle1': '<S98>:73' */
-        /* '<S98>:83:1' sf_internal_predicateOutput = ... */
-        /* '<S98>:83:1' AngleRefSet > 1.5708; */
+        /* During 'ChgAngle1': '<S100>:73' */
+        /* '<S100>:83:1' sf_internal_predicateOutput = ... */
+        /* '<S100>:83:1' AngleRefSet > 1.5708; */
         if (localDW->AngleRefSet > 1.5708) {
-          /* Transition: '<S98>:83' */
+          /* Transition: '<S100>:83' */
           localDW->is_Study = APP_FluxWeak_GEAR2_IN_Wait3;
           localDW->temporalCounter_i1 = 0U;
 
-          /* Entry 'Wait3': '<S98>:86' */
+          /* Entry 'Wait3': '<S100>:86' */
           /* 等 */
-          /* '<S98>:86:1' AngleRefSet = 1.5708; */
+          /* '<S100>:86:1' AngleRefSet = 1.5708; */
           localDW->AngleRefSet = 1.5708F;
         } else {
-          /* '<S98>:73:2' AngleRefSet = AngleRefSet + 0.001; */
+          /* '<S100>:73:2' AngleRefSet = AngleRefSet + 0.001; */
           localDW->AngleRefSet += 0.001F;
         }
         break;
 
        case APP_FluxWeak_GEAR2_IN_DecId:
-        /* During 'DecId': '<S98>:82' */
-        /* '<S98>:85:1' sf_internal_predicateOutput = ... */
-        /* '<S98>:85:1' IdRefSet < 0.002; */
+        /* During 'DecId': '<S100>:82' */
+        /* '<S100>:85:1' sf_internal_predicateOutput = ... */
+        /* '<S100>:85:1' IdRefSet < 0.002; */
         if (localDW->IdRefSet < 0.002) {
-          /* Transition: '<S98>:85' */
-          /* Transition: '<S98>:182' */
-          /* '<S98>:182:1' IdRefSet = 0; */
+          /* Transition: '<S100>:85' */
+          /* Transition: '<S100>:182' */
+          /* '<S100>:182:1' IdRefSet = 0; */
           localDW->IdRefSet = 0.0F;
 
-          /* '<S98>:98:1' sf_internal_predicateOutput = ... */
-          /* '<S98>:98:1' ThetaDelta < -2048; */
+          /* '<S100>:98:1' sf_internal_predicateOutput = ... */
+          /* '<S100>:98:1' ThetaDelta < -2048; */
           if (localDW->ThetaDelta < -2048.0F) {
-            /* Transition: '<S98>:98' */
-            /* Transition: '<S98>:94' */
-            /* '<S98>:94:1' ThetaDelta = ThetaDelta + 4096; */
+            /* Transition: '<S100>:98' */
+            /* Transition: '<S100>:94' */
+            /* '<S100>:94:1' ThetaDelta = ThetaDelta + 4096; */
             localDW->ThetaDelta += 4096.0F;
           } else {
-            /* '<S98>:95:1' sf_internal_predicateOutput = ... */
-            /* '<S98>:95:1' ThetaDelta > 2048; */
+            /* '<S100>:95:1' sf_internal_predicateOutput = ... */
+            /* '<S100>:95:1' ThetaDelta > 2048; */
             if (localDW->ThetaDelta > 2048.0F) {
-              /* Transition: '<S98>:95' */
-              /* Transition: '<S98>:96' */
-              /* '<S98>:96:1' ThetaDelta = ThetaDelta -4096; */
+              /* Transition: '<S100>:95' */
+              /* Transition: '<S100>:96' */
+              /* '<S100>:96:1' ThetaDelta = ThetaDelta -4096; */
               localDW->ThetaDelta -= 4096.0F;
             } else {
-              /* Transition: '<S98>:90' */
+              /* Transition: '<S100>:90' */
             }
           }
 
-          /* '<S98>:92:1' sf_internal_predicateOutput = ... */
-          /* '<S98>:92:1' abs(ThetaDelta) < (0.3*1024 / PMSM_Param.PoleRatio); */
+          /* '<S100>:92:1' sf_internal_predicateOutput = ... */
+          /* '<S100>:92:1' abs(ThetaDelta) < (0.3*1024 / PMSM_Param.PoleRatio); */
           if (fabsf(localDW->ThetaDelta) < 307.2F / PMSM_Param.PoleRatio) {
-            /* Transition: '<S98>:92' */
-            /* Transition: '<S98>:184' */
+            /* Transition: '<S100>:92' */
+            /* Transition: '<S100>:184' */
             localDW->is_Study = APP_FluxWe_IN_NO_ACTIVE_CHILD_j;
             localDW->is_c10_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Fault;
 
-            /* Entry 'Fault': '<S98>:10' */
+            /* Entry 'Fault': '<S100>:10' */
             /* 故障 */
-            /* '<S98>:10:1' StudyResult = 5555; */
+            /* '<S100>:10:1' StudyResult = 5555; */
             localDW->StudyResult = 5555.0F;
 
-            /* '<S98>:10:1' IdRefSet = 0; */
+            /* '<S100>:10:1' IdRefSet = 0; */
             localDW->IdRefSet = 0.0F;
 
-            /* '<S98>:10:3' StudyStep=14; */
+            /* '<S100>:10:3' StudyStep=14; */
             localDW->StudyStep = 14U;
           } else {
-            /* Transition: '<S98>:89' */
+            /* Transition: '<S100>:89' */
             localDW->is_Study = APP_FluxWe_IN_NO_ACTIVE_CHILD_j;
             localDW->is_c10_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Fin1;
 
-            /* Entry 'Fin1': '<S98>:185' */
+            /* Entry 'Fin1': '<S100>:185' */
             /* 完成(成功) */
-            /* Entry Internal 'Fin1': '<S98>:185' */
-            /* Transition: '<S98>:194' */
-            /* '<S98>:195:1' sf_internal_predicateOutput = ... */
-            /* '<S98>:195:1' ThetaDelta>1024 /PMSM_Param.PoleRatio*0.3 && ... */
-            /* '<S98>:195:1' ThetaDelta<1024 /PMSM_Param.PoleRatio*1.7; */
+            /* Entry Internal 'Fin1': '<S100>:185' */
+            /* Transition: '<S100>:194' */
+            /* '<S100>:195:1' sf_internal_predicateOutput = ... */
+            /* '<S100>:195:1' ThetaDelta>1024 /PMSM_Param.PoleRatio*0.3 && ... */
+            /* '<S100>:195:1' ThetaDelta<1024 /PMSM_Param.PoleRatio*1.7; */
             tmp = 1024.0F / PMSM_Param.PoleRatio;
             if (localDW->ThetaDelta > tmp * 0.3F) {
               sf_internal_predicateOutput = (localDW->ThetaDelta < tmp * 1.7F);
@@ -2087,77 +2087,77 @@ void APP_FluxWeak_GEAR2_PhaseStudy(real32_T rtu_Data, real32_T rtu_Data_g,
             }
 
             if (sf_internal_predicateOutput) {
-              /* Transition: '<S98>:195' */
+              /* Transition: '<S100>:195' */
               /* 角度变化量在pi/2附近 */
-              /* Transition: '<S98>:196' */
-              /* '<S98>:198:1' sf_internal_predicateOutput = ... */
-              /* '<S98>:198:1' PMSM_Param.ResolverDirChg == 1; */
+              /* Transition: '<S100>:196' */
+              /* '<S100>:198:1' sf_internal_predicateOutput = ... */
+              /* '<S100>:198:1' PMSM_Param.ResolverDirChg == 1; */
               if (PMSM_Param.ResolverDirChg == 1U) {
-                /* Transition: '<S98>:198' */
+                /* Transition: '<S100>:198' */
                 guard1 = true;
               } else {
-                /* Transition: '<S98>:200' */
-                /* '<S98>:200:1' StudyResult =0; */
+                /* Transition: '<S100>:200' */
+                /* '<S100>:200:1' StudyResult =0; */
                 localDW->StudyResult = 0.0F;
 
-                /* '<S98>:200:1' StudyStep=13; */
+                /* '<S100>:200:1' StudyStep=13; */
                 localDW->StudyStep = 13U;
               }
             } else {
-              /* Transition: '<S98>:197' */
-              /* '<S98>:199:1' sf_internal_predicateOutput = ... */
-              /* '<S98>:199:1' PMSM_Param.ResolverDirChg == 0; */
+              /* Transition: '<S100>:197' */
+              /* '<S100>:199:1' sf_internal_predicateOutput = ... */
+              /* '<S100>:199:1' PMSM_Param.ResolverDirChg == 0; */
               if (PMSM_Param.ResolverDirChg == 0U) {
-                /* Transition: '<S98>:199' */
+                /* Transition: '<S100>:199' */
                 guard1 = true;
               } else {
-                /* Transition: '<S98>:202' */
-                /* '<S98>:202:1' StudyResult =0; */
+                /* Transition: '<S100>:202' */
+                /* '<S100>:202:1' StudyResult =0; */
                 localDW->StudyResult = 0.0F;
 
-                /* '<S98>:202:1' StudyStep=13; */
+                /* '<S100>:202:1' StudyStep=13; */
                 localDW->StudyStep = 13U;
 
-                /* Transition: '<S98>:204' */
-                /* Transition: '<S98>:203' */
+                /* Transition: '<S100>:204' */
+                /* Transition: '<S100>:203' */
               }
             }
           }
         } else {
-          /* '<S98>:82:3' IdRefSet = IdRefSet - 0.001; */
+          /* '<S100>:82:3' IdRefSet = IdRefSet - 0.001; */
           localDW->IdRefSet -= 0.001F;
         }
         break;
 
        case APP_FluxWeak_GEAR2_IN_Wait1:
-        /* During 'Wait1': '<S98>:70' */
-        /* '<S98>:71:1' sf_internal_predicateOutput = ... */
-        /* '<S98>:71:1' after(100,tick); */
+        /* During 'Wait1': '<S100>:70' */
+        /* '<S100>:71:1' sf_internal_predicateOutput = ... */
+        /* '<S100>:71:1' after(100,tick); */
         if ((int16_T)localDW->temporalCounter_i1 >= 100) {
-          /* Transition: '<S98>:71' */
+          /* Transition: '<S100>:71' */
           localDW->is_Study = APP_FluxWeak_GEAR2_IN_ChgAngle1;
 
-          /* Entry 'ChgAngle1': '<S98>:73' */
+          /* Entry 'ChgAngle1': '<S100>:73' */
           /* 改变角度 */
-          /* '<S98>:73:1' ThetaRTHis = single(ThetaRT); */
+          /* '<S100>:73:1' ThetaRTHis = single(ThetaRT); */
           localDW->ThetaRTHis = rtu_Data;
         }
         break;
 
        default:
-        /* During 'Wait3': '<S98>:86' */
-        /* '<S98>:84:1' sf_internal_predicateOutput = ... */
-        /* '<S98>:84:1' after(100,tick); */
+        /* During 'Wait3': '<S100>:86' */
+        /* '<S100>:84:1' sf_internal_predicateOutput = ... */
+        /* '<S100>:84:1' after(100,tick); */
         if ((int16_T)localDW->temporalCounter_i1 >= 100) {
-          /* Transition: '<S98>:84' */
+          /* Transition: '<S100>:84' */
           localDW->is_Study = APP_FluxWeak_GEAR2_IN_DecId;
 
-          /* Entry 'DecId': '<S98>:82' */
+          /* Entry 'DecId': '<S100>:82' */
           /* 减id */
-          /* '<S98>:82:1' ThetaDelta = single(ThetaRT) - ThetaRTHis; */
+          /* '<S100>:82:1' ThetaDelta = single(ThetaRT) - ThetaRTHis; */
           localDW->ThetaDelta = rtu_Data - localDW->ThetaRTHis;
         } else {
-          /* '<S98>:86:1' AngleRefSet = 1.5708; */
+          /* '<S100>:86:1' AngleRefSet = 1.5708; */
           localDW->AngleRefSet = 1.5708F;
         }
         break;
@@ -2166,66 +2166,66 @@ void APP_FluxWeak_GEAR2_PhaseStudy(real32_T rtu_Data, real32_T rtu_Data_g,
     }
 
     if (guard1) {
-      /* Transition: '<S98>:201' */
-      /* '<S98>:201:1' StudyResult =1; */
+      /* Transition: '<S100>:201' */
+      /* '<S100>:201:1' StudyResult =1; */
       localDW->StudyResult = 1.0F;
 
-      /* '<S98>:201:1' StudyStep=12; */
+      /* '<S100>:201:1' StudyStep=12; */
       localDW->StudyStep = 12U;
 
-      /* Transition: '<S98>:203' */
+      /* Transition: '<S100>:203' */
     }
   }
 
-  /* End of Chart: '<S83>/Chart' */
+  /* End of Chart: '<S85>/Chart' */
 
-  /* DataStoreWrite: '<S83>/Data Store Write' */
+  /* DataStoreWrite: '<S85>/Data Store Write' */
   AppFun.StudyResult = localDW->StudyResult;
 
-  /* DataStoreWrite: '<S83>/Data Store Write1' */
+  /* DataStoreWrite: '<S85>/Data Store Write1' */
   AppFun.StudyStep = localDW->StudyStep;
 
-  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S85>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S85>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_g = localDW->IdRefSet;
 
-  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S85>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_h = 0.0F;
 
-  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S85>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_i = localDW->AngleRefSet;
 
-  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S85>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_a = 1U;
 
-  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S85>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_a3 = 1U;
 
-  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S85>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_at = 0.0F;
 
-  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S85>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_gs = 0.0F;
 }
 
-/* System initialize for function-call system: '<S62>/Hall' */
+/* System initialize for function-call system: '<S64>/Hall' */
 void APP_FluxWeak_GEAR2_Hall_Init(DW_Hall_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* InitializeConditions for DiscreteIntegrator: '<S94>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S96>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE = 0.0F;
 
-  /* InitializeConditions for UnitDelay: '<S80>/Unit Delay' */
+  /* InitializeConditions for UnitDelay: '<S82>/Unit Delay' */
   localDW->UnitDelay_DSTATE = 0.0F;
 
-  /* InitializeConditions for DiscreteIntegrator: '<S80>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S82>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE_i = 0.0F;
 
-  /* InitializeConditions for DiscreteIntegrator: '<S93>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S95>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE_h = 0.0F;
 
-  /* SystemInitialize for Chart: '<S80>/Chart' */
+  /* SystemInitialize for Chart: '<S82>/Chart' */
   localDW->is_Study = APP_FluxWe_IN_NO_ACTIVE_CHILD_k;
   localDW->temporalCounter_i1 = 0U;
   localDW->is_active_c27_APP_FluxWeak_GEAR = 0U;
@@ -2235,22 +2235,22 @@ void APP_FluxWeak_GEAR2_Hall_Init(DW_Hall_APP_FluxWeak_GEAR2_T *localDW)
   localDW->ExSpd = 0.0F;
 }
 
-/* System reset for function-call system: '<S62>/Hall' */
+/* System reset for function-call system: '<S64>/Hall' */
 void APP_FluxWeak_GEAR2_Hall_Reset(DW_Hall_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* InitializeConditions for DiscreteIntegrator: '<S94>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S96>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE = 0.0F;
 
-  /* InitializeConditions for UnitDelay: '<S80>/Unit Delay' */
+  /* InitializeConditions for UnitDelay: '<S82>/Unit Delay' */
   localDW->UnitDelay_DSTATE = 0.0F;
 
-  /* InitializeConditions for DiscreteIntegrator: '<S80>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S82>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE_i = 0.0F;
 
-  /* InitializeConditions for DiscreteIntegrator: '<S93>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S95>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE_h = 0.0F;
 
-  /* SystemReset for Chart: '<S80>/Chart' */
+  /* SystemReset for Chart: '<S82>/Chart' */
   localDW->is_Study = APP_FluxWe_IN_NO_ACTIVE_CHILD_k;
   localDW->temporalCounter_i1 = 0U;
   localDW->is_active_c27_APP_FluxWeak_GEAR = 0U;
@@ -2260,13 +2260,13 @@ void APP_FluxWeak_GEAR2_Hall_Reset(DW_Hall_APP_FluxWeak_GEAR2_T *localDW)
   localDW->ExSpd = 0.0F;
 }
 
-/* Output and update for function-call system: '<S62>/Hall' */
+/* Output and update for function-call system: '<S64>/Hall' */
 void APP_FluxWeak_GEAR2_Hall(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
   *rty_Out1_c, real32_T *rty_Out1_h, real32_T *rty_Out1_d, uint16_T *rty_Out1_n,
   uint16_T *rty_Out1_p, real32_T *rty_Out1_db, real32_T *rty_Out1_b,
   DW_Hall_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* Chart: '<S80>/Chart' */
+  /* Chart: '<S82>/Chart' */
   /* Gateway: implement/method/All_loop/Calib/Hall/Chart */
   if (localDW->temporalCounter_i1 < 1023U) {
     localDW->temporalCounter_i1++;
@@ -2278,32 +2278,32 @@ void APP_FluxWeak_GEAR2_Hall(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
     localDW->is_active_c27_APP_FluxWeak_GEAR = 1U;
 
     /* Entry Internal: implement/method/All_loop/Calib/Hall/Chart */
-    /* Transition: '<S91>:7' */
+    /* Transition: '<S93>:7' */
     localDW->is_c27_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Init_a;
 
-    /* Entry 'Init': '<S91>:6' */
-    /* '<S91>:6:1' StudyResult = 8888; */
+    /* Entry 'Init': '<S93>:6' */
+    /* '<S93>:6:1' StudyResult = 8888; */
     localDW->StudyResult = 8888.0F;
   } else {
     switch (localDW->is_c27_APP_FluxWeak_GEAR2) {
      case APP_FluxWeak_GEAR2_IN_Init_a:
       localDW->StudyResult = 8888.0F;
 
-      /* During 'Init': '<S91>:6' */
-      /* '<S91>:11:1' sf_internal_predicateOutput = ... */
-      /* '<S91>:11:1' TqReq > 0.01; */
+      /* During 'Init': '<S93>:6' */
+      /* '<S93>:11:1' sf_internal_predicateOutput = ... */
+      /* '<S93>:11:1' TqReq > 0.01; */
       if (rtu_Data > 0.01) {
-        /* Transition: '<S91>:11' */
+        /* Transition: '<S93>:11' */
         localDW->is_c27_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Study_m;
 
-        /* Entry Internal 'Study': '<S91>:8' */
-        /* Transition: '<S91>:212' */
+        /* Entry Internal 'Study': '<S93>:8' */
+        /* Transition: '<S93>:212' */
         localDW->is_Study = APP_FluxWeak_GEAR2_IN_Wait1_e;
         localDW->temporalCounter_i1 = 0U;
 
-        /* Entry 'Wait1': '<S91>:209' */
+        /* Entry 'Wait1': '<S93>:209' */
         /* 等 */
-        /* '<S91>:209:1' IdRefSet = 0.3; */
+        /* '<S93>:209:1' IdRefSet = 0.3; */
         localDW->IdRefSet = 0.3F;
       }
       break;
@@ -2312,43 +2312,43 @@ void APP_FluxWeak_GEAR2_Hall(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
       localDW->StudyResult = 7777.0F;
       localDW->IdRefSet = 0.0F;
 
-      /* During 'Stop': '<S91>:10' */
+      /* During 'Stop': '<S93>:10' */
       break;
 
      default:
-      /* During 'Study': '<S91>:8' */
-      /* '<S91>:213:1' sf_internal_predicateOutput = ... */
-      /* '<S91>:213:1' abs(TqReq) <0.01; */
+      /* During 'Study': '<S93>:8' */
+      /* '<S93>:213:1' sf_internal_predicateOutput = ... */
+      /* '<S93>:213:1' abs(TqReq) <0.01; */
       if (fabsf(rtu_Data) < 0.01) {
-        /* Transition: '<S91>:213' */
-        /* Exit Internal 'Study': '<S91>:8' */
+        /* Transition: '<S93>:213' */
+        /* Exit Internal 'Study': '<S93>:8' */
         localDW->is_Study = APP_FluxWe_IN_NO_ACTIVE_CHILD_k;
         localDW->is_c27_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Stop;
 
-        /* Entry 'Stop': '<S91>:10' */
+        /* Entry 'Stop': '<S93>:10' */
         /* 停止 */
-        /* '<S91>:10:1' StudyResult = 7777; */
+        /* '<S93>:10:1' StudyResult = 7777; */
         localDW->StudyResult = 7777.0F;
 
-        /* '<S91>:10:1' IdRefSet = 0; */
+        /* '<S93>:10:1' IdRefSet = 0; */
         localDW->IdRefSet = 0.0F;
       } else if (localDW->is_Study == 1U) {
-        /* During 'AddId1': '<S91>:205' */
-        /* '<S91>:205:1' ExSpd = 20; */
+        /* During 'AddId1': '<S93>:205' */
+        /* '<S93>:205:1' ExSpd = 20; */
         localDW->ExSpd = 20.0F;
       } else {
         localDW->IdRefSet = 0.3F;
 
-        /* During 'Wait1': '<S91>:209' */
-        /* '<S91>:206:1' sf_internal_predicateOutput = ... */
-        /* '<S91>:206:1' after(1000,tick); */
+        /* During 'Wait1': '<S93>:209' */
+        /* '<S93>:206:1' sf_internal_predicateOutput = ... */
+        /* '<S93>:206:1' after(1000,tick); */
         if (localDW->temporalCounter_i1 >= 1000U) {
-          /* Transition: '<S91>:206' */
+          /* Transition: '<S93>:206' */
           localDW->is_Study = APP_FluxWeak_GEAR2_IN_AddId1;
 
-          /* Entry 'AddId1': '<S91>:205' */
+          /* Entry 'AddId1': '<S93>:205' */
           /* 增加id */
-          /* '<S91>:205:1' ExSpd = 20; */
+          /* '<S93>:205:1' ExSpd = 20; */
           localDW->ExSpd = 20.0F;
         }
       }
@@ -2356,97 +2356,97 @@ void APP_FluxWeak_GEAR2_Hall(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
     }
   }
 
-  /* End of Chart: '<S80>/Chart' */
+  /* End of Chart: '<S82>/Chart' */
 
-  /* DataStoreWrite: '<S80>/Data Store Write' */
+  /* DataStoreWrite: '<S82>/Data Store Write' */
   AppFun.StudyResult = localDW->StudyResult;
 
-  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S82>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' incorporates:
-   *  DiscreteIntegrator: '<S94>/Discrete-Time Integrator'
+  /* SignalConversion: '<S82>/BusConversion_InsertedFor_Out1_at_inport_0' incorporates:
+   *  DiscreteIntegrator: '<S96>/Discrete-Time Integrator'
    */
   *rty_Out1_c = localDW->DiscreteTimeIntegrator_DSTATE;
 
-  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S82>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_h = 0.0F;
 
-  /* DiscreteIntegrator: '<S80>/Discrete-Time Integrator' incorporates:
-   *  Constant: '<S92>/Constant'
-   *  RelationalOperator: '<S92>/Compare'
-   *  UnitDelay: '<S80>/Unit Delay'
+  /* DiscreteIntegrator: '<S82>/Discrete-Time Integrator' incorporates:
+   *  Constant: '<S94>/Constant'
+   *  RelationalOperator: '<S94>/Compare'
+   *  UnitDelay: '<S82>/Unit Delay'
    */
   if (localDW->UnitDelay_DSTATE >= 6.28318548F) {
     localDW->DiscreteTimeIntegrator_DSTATE_i = 0.0F;
   }
 
-  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' incorporates:
-   *  DiscreteIntegrator: '<S80>/Discrete-Time Integrator'
+  /* SignalConversion: '<S82>/BusConversion_InsertedFor_Out1_at_inport_0' incorporates:
+   *  DiscreteIntegrator: '<S82>/Discrete-Time Integrator'
    */
   *rty_Out1_d = localDW->DiscreteTimeIntegrator_DSTATE_i;
 
-  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S82>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_n = 1U;
 
-  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S82>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_p = 1U;
 
-  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S82>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_db = 0.0F;
 
-  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S82>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_b = 0.0F;
 
-  /* Update for DiscreteIntegrator: '<S94>/Discrete-Time Integrator' incorporates:
-   *  Gain: '<S94>/Gain'
-   *  Sum: '<S94>/Sum'
+  /* Update for DiscreteIntegrator: '<S96>/Discrete-Time Integrator' incorporates:
+   *  Gain: '<S96>/Gain'
+   *  Sum: '<S96>/Sum'
    */
   localDW->DiscreteTimeIntegrator_DSTATE += (localDW->IdRefSet -
     localDW->DiscreteTimeIntegrator_DSTATE) * 10.0F * 0.002F;
 
-  /* Update for UnitDelay: '<S80>/Unit Delay' incorporates:
-   *  DiscreteIntegrator: '<S80>/Discrete-Time Integrator'
+  /* Update for UnitDelay: '<S82>/Unit Delay' incorporates:
+   *  DiscreteIntegrator: '<S82>/Discrete-Time Integrator'
    */
   localDW->UnitDelay_DSTATE = localDW->DiscreteTimeIntegrator_DSTATE_i;
 
-  /* Update for DiscreteIntegrator: '<S80>/Discrete-Time Integrator' incorporates:
-   *  DiscreteIntegrator: '<S93>/Discrete-Time Integrator'
+  /* Update for DiscreteIntegrator: '<S82>/Discrete-Time Integrator' incorporates:
+   *  DiscreteIntegrator: '<S95>/Discrete-Time Integrator'
    */
   localDW->DiscreteTimeIntegrator_DSTATE_i += 0.000209439517F *
     localDW->DiscreteTimeIntegrator_DSTATE_h;
 
-  /* Update for DiscreteIntegrator: '<S93>/Discrete-Time Integrator' incorporates:
-   *  Gain: '<S93>/Gain'
-   *  Sum: '<S93>/Sum'
+  /* Update for DiscreteIntegrator: '<S95>/Discrete-Time Integrator' incorporates:
+   *  Gain: '<S95>/Gain'
+   *  Sum: '<S95>/Sum'
    */
   localDW->DiscreteTimeIntegrator_DSTATE_h += (localDW->ExSpd -
     localDW->DiscreteTimeIntegrator_DSTATE_h) * 5.0F * 0.002F;
 }
 
 /*
- * Function for Chart: '<S78>/Chart'
+ * Function for Chart: '<S80>/Chart'
  * function y=Turn(x)
  */
 static real32_T APP_FluxWeak_GEAR2_Turn(real32_T x)
 {
   real32_T y;
 
-  /* MATLAB Function 'Turn': '<S85>:207' */
-  /* Graphical Function 'Turn': '<S85>:207' */
-  /* '<S85>:213:1' sf_internal_predicateOutput = ... */
-  /* '<S85>:213:1' x>=4096; */
+  /* MATLAB Function 'Turn': '<S87>:207' */
+  /* Graphical Function 'Turn': '<S87>:207' */
+  /* '<S87>:213:1' sf_internal_predicateOutput = ... */
+  /* '<S87>:213:1' x>=4096; */
   if (x >= 4096.0F) {
-    /* '<S85>:215:1' y=x-4096; */
+    /* '<S87>:215:1' y=x-4096; */
     y = x - 4096.0F;
   } else {
-    /* '<S85>:216:1' sf_internal_predicateOutput = ... */
-    /* '<S85>:216:1' x<0; */
+    /* '<S87>:216:1' sf_internal_predicateOutput = ... */
+    /* '<S87>:216:1' x<0; */
     if (x < 0.0F) {
-      /* '<S85>:218:1' y=x+4096; */
+      /* '<S87>:218:1' y=x+4096; */
       y = x + 4096.0F;
     } else {
-      /* '<S85>:217:1' y=x; */
+      /* '<S87>:217:1' y=x; */
       y = x;
     }
   }
@@ -2454,38 +2454,38 @@ static real32_T APP_FluxWeak_GEAR2_Turn(real32_T x)
   return y;
 }
 
-/* Function for Chart: '<S78>/Chart' */
+/* Function for Chart: '<S80>/Chart' */
 static void APP_Fl_enter_internal_SPEEDFORW(real32_T rtu_Data_n,
   DW_ElecZeroStudy_APP_FluxWeak_T *localDW)
 {
   uint16_T qY;
 
-  /* Entry Internal 'SPEEDFORW': '<S85>:97' */
-  /* Transition: '<S85>:116' */
-  /* '<S85>:119:1' sf_internal_predicateOutput = ... */
-  /* '<S85>:119:1' UdFil > 0.03; */
+  /* Entry Internal 'SPEEDFORW': '<S87>:97' */
+  /* Transition: '<S87>:116' */
+  /* '<S87>:119:1' sf_internal_predicateOutput = ... */
+  /* '<S87>:119:1' UdFil > 0.03; */
   if (rtu_Data_n > 0.03) {
-    /* Transition: '<S85>:119' */
-    /* Entry 'Sub1': '<S85>:124' */
-    /* '<S85>:124:1' ZeroStudyCnt = 0; */
+    /* Transition: '<S87>:119' */
+    /* Entry 'Sub1': '<S87>:124' */
+    /* '<S87>:124:1' ZeroStudyCnt = 0; */
     localDW->ZeroStudyCnt = 0U;
 
-    /* '<S85>:124:1' CalibZeroPoint = CalibZeroPoint + 4; */
+    /* '<S87>:124:1' CalibZeroPoint = CalibZeroPoint + 4; */
     localDW->CalibZeroPoint += 4.0F;
 
-    /* '<S85>:124:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+    /* '<S87>:124:4' CalibZeroPoint=Turn(CalibZeroPoint); */
     localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn(localDW->CalibZeroPoint);
 
-    /* '<S85>:124:5' StudyStep=21; */
+    /* '<S87>:124:5' StudyStep=21; */
     localDW->StudyStep = 21U;
   } else {
-    /* Transition: '<S85>:127' */
-    /* '<S85>:102:1' sf_internal_predicateOutput = ... */
-    /* '<S85>:102:1' UdFil>0; */
+    /* Transition: '<S87>:127' */
+    /* '<S87>:102:1' sf_internal_predicateOutput = ... */
+    /* '<S87>:102:1' UdFil>0; */
     if (rtu_Data_n > 0.0F) {
-      /* Transition: '<S85>:102' */
-      /* Entry 'Sub2': '<S85>:130' */
-      /* '<S85>:130:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
+      /* Transition: '<S87>:102' */
+      /* Entry 'Sub2': '<S87>:130' */
+      /* '<S87>:130:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
       qY = localDW->ZeroStudyCnt + /*MW:OvSatOk*/ 1U;
       if (qY < localDW->ZeroStudyCnt) {
         qY = MAX_uint16_T;
@@ -2493,22 +2493,22 @@ static void APP_Fl_enter_internal_SPEEDFORW(real32_T rtu_Data_n,
 
       localDW->ZeroStudyCnt = qY;
 
-      /* '<S85>:130:1' CalibZeroPoint = CalibZeroPoint + 1; */
+      /* '<S87>:130:1' CalibZeroPoint = CalibZeroPoint + 1; */
       localDW->CalibZeroPoint++;
 
-      /* '<S85>:130:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+      /* '<S87>:130:4' CalibZeroPoint=Turn(CalibZeroPoint); */
       localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn(localDW->CalibZeroPoint);
 
-      /* '<S85>:130:5' StudyStep=22; */
+      /* '<S87>:130:5' StudyStep=22; */
       localDW->StudyStep = 22U;
     } else {
-      /* Transition: '<S85>:100' */
-      /* '<S85>:121:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:121:1' UdFil > -0.03; */
+      /* Transition: '<S87>:100' */
+      /* '<S87>:121:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:121:1' UdFil > -0.03; */
       if (rtu_Data_n > -0.03) {
-        /* Transition: '<S85>:121' */
-        /* Entry 'Sub3': '<S85>:111' */
-        /* '<S85>:111:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
+        /* Transition: '<S87>:121' */
+        /* Entry 'Sub3': '<S87>:111' */
+        /* '<S87>:111:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
         qY = localDW->ZeroStudyCnt + /*MW:OvSatOk*/ 1U;
         if (qY < localDW->ZeroStudyCnt) {
           qY = MAX_uint16_T;
@@ -2516,67 +2516,67 @@ static void APP_Fl_enter_internal_SPEEDFORW(real32_T rtu_Data_n,
 
         localDW->ZeroStudyCnt = qY;
 
-        /* '<S85>:111:1' CalibZeroPoint = CalibZeroPoint - 1; */
+        /* '<S87>:111:1' CalibZeroPoint = CalibZeroPoint - 1; */
         localDW->CalibZeroPoint--;
 
-        /* '<S85>:111:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:111:4' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S85>:111:5' StudyStep=22; */
+        /* '<S87>:111:5' StudyStep=22; */
         localDW->StudyStep = 22U;
       } else {
-        /* Transition: '<S85>:113' */
-        /* Entry 'Sub4': '<S85>:99' */
-        /* '<S85>:99:1' ZeroStudyCnt = 0; */
+        /* Transition: '<S87>:113' */
+        /* Entry 'Sub4': '<S87>:99' */
+        /* '<S87>:99:1' ZeroStudyCnt = 0; */
         localDW->ZeroStudyCnt = 0U;
 
-        /* '<S85>:99:1' CalibZeroPoint = CalibZeroPoint - 4; */
+        /* '<S87>:99:1' CalibZeroPoint = CalibZeroPoint - 4; */
         localDW->CalibZeroPoint -= 4.0F;
 
-        /* '<S85>:99:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:99:4' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S85>:99:5' StudyStep=21; */
+        /* '<S87>:99:5' StudyStep=21; */
         localDW->StudyStep = 21U;
       }
     }
   }
 }
 
-/* Function for Chart: '<S78>/Chart' */
+/* Function for Chart: '<S80>/Chart' */
 static void APP_Flu_enter_internal_SPEEDINV(real32_T rtu_Data_n,
   DW_ElecZeroStudy_APP_FluxWeak_T *localDW)
 {
   uint16_T qY;
 
-  /* Entry Internal 'SPEEDINV': '<S85>:98' */
-  /* Transition: '<S85>:96' */
-  /* '<S85>:125:1' sf_internal_predicateOutput = ... */
-  /* '<S85>:125:1' UdFil > 0.03; */
+  /* Entry Internal 'SPEEDINV': '<S87>:98' */
+  /* Transition: '<S87>:96' */
+  /* '<S87>:125:1' sf_internal_predicateOutput = ... */
+  /* '<S87>:125:1' UdFil > 0.03; */
   if (rtu_Data_n > 0.03) {
-    /* Transition: '<S85>:125' */
-    /* Entry 'Sub1': '<S85>:115' */
-    /* '<S85>:115:1' ZeroStudyCnt = 0; */
+    /* Transition: '<S87>:125' */
+    /* Entry 'Sub1': '<S87>:115' */
+    /* '<S87>:115:1' ZeroStudyCnt = 0; */
     localDW->ZeroStudyCnt = 0U;
 
-    /* '<S85>:115:1' CalibZeroPoint = CalibZeroPoint - 4; */
+    /* '<S87>:115:1' CalibZeroPoint = CalibZeroPoint - 4; */
     localDW->CalibZeroPoint -= 4.0F;
 
-    /* '<S85>:115:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+    /* '<S87>:115:4' CalibZeroPoint=Turn(CalibZeroPoint); */
     localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn(localDW->CalibZeroPoint);
 
-    /* '<S85>:115:5' StudyStep=21; */
+    /* '<S87>:115:5' StudyStep=21; */
     localDW->StudyStep = 21U;
   } else {
-    /* Transition: '<S85>:129' */
-    /* '<S85>:110:1' sf_internal_predicateOutput = ... */
-    /* '<S85>:110:1' UdFil>0; */
+    /* Transition: '<S87>:129' */
+    /* '<S87>:110:1' sf_internal_predicateOutput = ... */
+    /* '<S87>:110:1' UdFil>0; */
     if (rtu_Data_n > 0.0F) {
-      /* Transition: '<S85>:110' */
-      /* Entry 'Sub2': '<S85>:112' */
-      /* '<S85>:112:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
+      /* Transition: '<S87>:110' */
+      /* Entry 'Sub2': '<S87>:112' */
+      /* '<S87>:112:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
       qY = localDW->ZeroStudyCnt + /*MW:OvSatOk*/ 1U;
       if (qY < localDW->ZeroStudyCnt) {
         qY = MAX_uint16_T;
@@ -2584,22 +2584,22 @@ static void APP_Flu_enter_internal_SPEEDINV(real32_T rtu_Data_n,
 
       localDW->ZeroStudyCnt = qY;
 
-      /* '<S85>:112:1' CalibZeroPoint = CalibZeroPoint - 1; */
+      /* '<S87>:112:1' CalibZeroPoint = CalibZeroPoint - 1; */
       localDW->CalibZeroPoint--;
 
-      /* '<S85>:112:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+      /* '<S87>:112:4' CalibZeroPoint=Turn(CalibZeroPoint); */
       localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn(localDW->CalibZeroPoint);
 
-      /* '<S85>:112:5' StudyStep=22; */
+      /* '<S87>:112:5' StudyStep=22; */
       localDW->StudyStep = 22U;
     } else {
-      /* Transition: '<S85>:117' */
-      /* '<S85>:126:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:126:1' UdFil > -0.03; */
+      /* Transition: '<S87>:117' */
+      /* '<S87>:126:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:126:1' UdFil > -0.03; */
       if (rtu_Data_n > -0.03) {
-        /* Transition: '<S85>:126' */
-        /* Entry 'Sub3': '<S85>:103' */
-        /* '<S85>:103:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
+        /* Transition: '<S87>:126' */
+        /* Entry 'Sub3': '<S87>:103' */
+        /* '<S87>:103:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
         qY = localDW->ZeroStudyCnt + /*MW:OvSatOk*/ 1U;
         if (qY < localDW->ZeroStudyCnt) {
           qY = MAX_uint16_T;
@@ -2607,107 +2607,107 @@ static void APP_Flu_enter_internal_SPEEDINV(real32_T rtu_Data_n,
 
         localDW->ZeroStudyCnt = qY;
 
-        /* '<S85>:103:1' CalibZeroPoint = CalibZeroPoint + 1; */
+        /* '<S87>:103:1' CalibZeroPoint = CalibZeroPoint + 1; */
         localDW->CalibZeroPoint++;
 
-        /* '<S85>:103:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:103:4' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S85>:103:5' StudyStep=22; */
+        /* '<S87>:103:5' StudyStep=22; */
         localDW->StudyStep = 22U;
       } else {
-        /* Transition: '<S85>:101' */
-        /* Entry 'Sub4': '<S85>:128' */
-        /* '<S85>:128:1' ZeroStudyCnt = 0; */
+        /* Transition: '<S87>:101' */
+        /* Entry 'Sub4': '<S87>:128' */
+        /* '<S87>:128:1' ZeroStudyCnt = 0; */
         localDW->ZeroStudyCnt = 0U;
 
-        /* '<S85>:128:1' CalibZeroPoint = CalibZeroPoint + 4; */
+        /* '<S87>:128:1' CalibZeroPoint = CalibZeroPoint + 4; */
         localDW->CalibZeroPoint += 4.0F;
 
-        /* '<S85>:128:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:128:4' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S85>:128:5' StudyStep=21; */
+        /* '<S87>:128:5' StudyStep=21; */
         localDW->StudyStep = 21U;
       }
     }
   }
 }
 
-/* Function for Chart: '<S78>/Chart' */
+/* Function for Chart: '<S80>/Chart' */
 static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
   real32_T rtu_Data_o, DW_ElecZeroStudy_APP_FluxWeak_T *localDW)
 {
   uint16_T qY;
 
-  /* During 'Study': '<S85>:83' */
+  /* During 'Study': '<S87>:83' */
   switch (localDW->is_Study) {
    case APP_FluxWeak_GEAR2_IN_Fin:
-    /* During 'Fin': '<S85>:133' */
-    /* '<S85>:133:1' StudyResult = CalibZeroPoint; */
+    /* During 'Fin': '<S87>:133' */
+    /* '<S87>:133:1' StudyResult = CalibZeroPoint; */
     localDW->StudyResult = localDW->CalibZeroPoint;
 
-    /* '<S85>:133:1' StudyStep=23; */
+    /* '<S87>:133:1' StudyStep=23; */
     localDW->StudyStep = 23U;
     break;
 
    case APP_FluxWeak_GEAR2_IN_Fin1_c:
-    /* During 'Fin1': '<S85>:194' */
-    /* '<S85>:194:1' StudyResult = CalibZeroPoint; */
+    /* During 'Fin1': '<S87>:194' */
+    /* '<S87>:194:1' StudyResult = CalibZeroPoint; */
     localDW->StudyResult = localDW->CalibZeroPoint;
 
-    /* '<S85>:194:1' StudyStep=23; */
+    /* '<S87>:194:1' StudyStep=23; */
     localDW->StudyStep = 23U;
     break;
 
    case APP_FluxWeak_GEAR2_IN_SPEEDFORW:
-    /* Chart: '<S78>/Chart' */
-    /* During 'SPEEDFORW': '<S85>:97' */
-    /* '<S85>:193:1' sf_internal_predicateOutput = ... */
-    /* '<S85>:193:1' abs(UdFil) < 0.01 && ZeroStudyCnt > 200; */
+    /* Chart: '<S80>/Chart' */
+    /* During 'SPEEDFORW': '<S87>:97' */
+    /* '<S87>:193:1' sf_internal_predicateOutput = ... */
+    /* '<S87>:193:1' abs(UdFil) < 0.01 && ZeroStudyCnt > 200; */
     if ((fabsf(rtu_Data_n) < 0.01) && (localDW->ZeroStudyCnt > 200U)) {
-      /* Transition: '<S85>:193' */
-      /* Exit Internal 'SPEEDFORW': '<S85>:97' */
+      /* Transition: '<S87>:193' */
+      /* Exit Internal 'SPEEDFORW': '<S87>:97' */
       localDW->is_Study = APP_FluxWeak_GEAR2_IN_Fin1_c;
 
-      /* Entry 'Fin1': '<S85>:194' */
+      /* Entry 'Fin1': '<S87>:194' */
       /* 完成 */
-      /* '<S85>:194:1' StudyResult = CalibZeroPoint; */
+      /* '<S87>:194:1' StudyResult = CalibZeroPoint; */
       localDW->StudyResult = localDW->CalibZeroPoint;
 
-      /* '<S85>:194:2' StudyStep=23; */
+      /* '<S87>:194:2' StudyStep=23; */
       localDW->StudyStep = 23U;
     } else {
-      /* Transition: '<S85>:231' */
-      /* '<S85>:119:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:119:1' UdFil > 0.03; */
+      /* Transition: '<S87>:231' */
+      /* '<S87>:119:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:119:1' UdFil > 0.03; */
       if (rtu_Data_n > 0.03) {
-        /* Transition: '<S85>:119' */
-        /* Exit Internal 'SPEEDFORW': '<S85>:97' */
-        /* Entry 'Sub1': '<S85>:124' */
-        /* '<S85>:124:1' ZeroStudyCnt = 0; */
+        /* Transition: '<S87>:119' */
+        /* Exit Internal 'SPEEDFORW': '<S87>:97' */
+        /* Entry 'Sub1': '<S87>:124' */
+        /* '<S87>:124:1' ZeroStudyCnt = 0; */
         localDW->ZeroStudyCnt = 0U;
 
-        /* '<S85>:124:1' CalibZeroPoint = CalibZeroPoint + 4; */
+        /* '<S87>:124:1' CalibZeroPoint = CalibZeroPoint + 4; */
         localDW->CalibZeroPoint += 4.0F;
 
-        /* '<S85>:124:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:124:4' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S85>:124:5' StudyStep=21; */
+        /* '<S87>:124:5' StudyStep=21; */
         localDW->StudyStep = 21U;
       } else {
-        /* Transition: '<S85>:127' */
-        /* '<S85>:102:1' sf_internal_predicateOutput = ... */
-        /* '<S85>:102:1' UdFil>0; */
+        /* Transition: '<S87>:127' */
+        /* '<S87>:102:1' sf_internal_predicateOutput = ... */
+        /* '<S87>:102:1' UdFil>0; */
         if (rtu_Data_n > 0.0F) {
-          /* Transition: '<S85>:102' */
-          /* Exit Internal 'SPEEDFORW': '<S85>:97' */
-          /* Entry 'Sub2': '<S85>:130' */
-          /* '<S85>:130:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
+          /* Transition: '<S87>:102' */
+          /* Exit Internal 'SPEEDFORW': '<S87>:97' */
+          /* Entry 'Sub2': '<S87>:130' */
+          /* '<S87>:130:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
           qY = localDW->ZeroStudyCnt + /*MW:OvSatOk*/ 1U;
           if (qY < localDW->ZeroStudyCnt) {
             qY = MAX_uint16_T;
@@ -2715,24 +2715,24 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
 
           localDW->ZeroStudyCnt = qY;
 
-          /* '<S85>:130:1' CalibZeroPoint = CalibZeroPoint + 1; */
+          /* '<S87>:130:1' CalibZeroPoint = CalibZeroPoint + 1; */
           localDW->CalibZeroPoint++;
 
-          /* '<S85>:130:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+          /* '<S87>:130:4' CalibZeroPoint=Turn(CalibZeroPoint); */
           localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
             (localDW->CalibZeroPoint);
 
-          /* '<S85>:130:5' StudyStep=22; */
+          /* '<S87>:130:5' StudyStep=22; */
           localDW->StudyStep = 22U;
         } else {
-          /* Transition: '<S85>:100' */
-          /* '<S85>:121:1' sf_internal_predicateOutput = ... */
-          /* '<S85>:121:1' UdFil > -0.03; */
+          /* Transition: '<S87>:100' */
+          /* '<S87>:121:1' sf_internal_predicateOutput = ... */
+          /* '<S87>:121:1' UdFil > -0.03; */
           if (rtu_Data_n > -0.03) {
-            /* Transition: '<S85>:121' */
-            /* Exit Internal 'SPEEDFORW': '<S85>:97' */
-            /* Entry 'Sub3': '<S85>:111' */
-            /* '<S85>:111:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
+            /* Transition: '<S87>:121' */
+            /* Exit Internal 'SPEEDFORW': '<S87>:97' */
+            /* Entry 'Sub3': '<S87>:111' */
+            /* '<S87>:111:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
             qY = localDW->ZeroStudyCnt + /*MW:OvSatOk*/ 1U;
             if (qY < localDW->ZeroStudyCnt) {
               qY = MAX_uint16_T;
@@ -2740,30 +2740,30 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
 
             localDW->ZeroStudyCnt = qY;
 
-            /* '<S85>:111:1' CalibZeroPoint = CalibZeroPoint - 1; */
+            /* '<S87>:111:1' CalibZeroPoint = CalibZeroPoint - 1; */
             localDW->CalibZeroPoint--;
 
-            /* '<S85>:111:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+            /* '<S87>:111:4' CalibZeroPoint=Turn(CalibZeroPoint); */
             localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
               (localDW->CalibZeroPoint);
 
-            /* '<S85>:111:5' StudyStep=22; */
+            /* '<S87>:111:5' StudyStep=22; */
             localDW->StudyStep = 22U;
           } else {
-            /* Transition: '<S85>:113' */
-            /* Exit Internal 'SPEEDFORW': '<S85>:97' */
-            /* Entry 'Sub4': '<S85>:99' */
-            /* '<S85>:99:1' ZeroStudyCnt = 0; */
+            /* Transition: '<S87>:113' */
+            /* Exit Internal 'SPEEDFORW': '<S87>:97' */
+            /* Entry 'Sub4': '<S87>:99' */
+            /* '<S87>:99:1' ZeroStudyCnt = 0; */
             localDW->ZeroStudyCnt = 0U;
 
-            /* '<S85>:99:1' CalibZeroPoint = CalibZeroPoint - 4; */
+            /* '<S87>:99:1' CalibZeroPoint = CalibZeroPoint - 4; */
             localDW->CalibZeroPoint -= 4.0F;
 
-            /* '<S85>:99:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+            /* '<S87>:99:4' CalibZeroPoint=Turn(CalibZeroPoint); */
             localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
               (localDW->CalibZeroPoint);
 
-            /* '<S85>:99:5' StudyStep=21; */
+            /* '<S87>:99:5' StudyStep=21; */
             localDW->StudyStep = 21U;
           }
         }
@@ -2772,51 +2772,51 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
     break;
 
    case APP_FluxWeak_GEAR2_IN_SPEEDINV:
-    /* Chart: '<S78>/Chart' */
-    /* During 'SPEEDINV': '<S85>:98' */
-    /* '<S85>:108:1' sf_internal_predicateOutput = ... */
-    /* '<S85>:108:1' abs(UdFil) < 0.01 && ZeroStudyCnt > 200; */
+    /* Chart: '<S80>/Chart' */
+    /* During 'SPEEDINV': '<S87>:98' */
+    /* '<S87>:108:1' sf_internal_predicateOutput = ... */
+    /* '<S87>:108:1' abs(UdFil) < 0.01 && ZeroStudyCnt > 200; */
     if ((fabsf(rtu_Data_n) < 0.01) && (localDW->ZeroStudyCnt > 200U)) {
-      /* Transition: '<S85>:108' */
-      /* Exit Internal 'SPEEDINV': '<S85>:98' */
+      /* Transition: '<S87>:108' */
+      /* Exit Internal 'SPEEDINV': '<S87>:98' */
       localDW->is_Study = APP_FluxWeak_GEAR2_IN_Fin;
 
-      /* Entry 'Fin': '<S85>:133' */
+      /* Entry 'Fin': '<S87>:133' */
       /* 完成 */
-      /* '<S85>:133:1' StudyResult = CalibZeroPoint; */
+      /* '<S87>:133:1' StudyResult = CalibZeroPoint; */
       localDW->StudyResult = localDW->CalibZeroPoint;
 
-      /* '<S85>:133:2' StudyStep=23; */
+      /* '<S87>:133:2' StudyStep=23; */
       localDW->StudyStep = 23U;
     } else {
-      /* Transition: '<S85>:236' */
-      /* '<S85>:125:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:125:1' UdFil > 0.03; */
+      /* Transition: '<S87>:236' */
+      /* '<S87>:125:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:125:1' UdFil > 0.03; */
       if (rtu_Data_n > 0.03) {
-        /* Transition: '<S85>:125' */
-        /* Exit Internal 'SPEEDINV': '<S85>:98' */
-        /* Entry 'Sub1': '<S85>:115' */
-        /* '<S85>:115:1' ZeroStudyCnt = 0; */
+        /* Transition: '<S87>:125' */
+        /* Exit Internal 'SPEEDINV': '<S87>:98' */
+        /* Entry 'Sub1': '<S87>:115' */
+        /* '<S87>:115:1' ZeroStudyCnt = 0; */
         localDW->ZeroStudyCnt = 0U;
 
-        /* '<S85>:115:1' CalibZeroPoint = CalibZeroPoint - 4; */
+        /* '<S87>:115:1' CalibZeroPoint = CalibZeroPoint - 4; */
         localDW->CalibZeroPoint -= 4.0F;
 
-        /* '<S85>:115:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:115:4' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S85>:115:5' StudyStep=21; */
+        /* '<S87>:115:5' StudyStep=21; */
         localDW->StudyStep = 21U;
       } else {
-        /* Transition: '<S85>:129' */
-        /* '<S85>:110:1' sf_internal_predicateOutput = ... */
-        /* '<S85>:110:1' UdFil>0; */
+        /* Transition: '<S87>:129' */
+        /* '<S87>:110:1' sf_internal_predicateOutput = ... */
+        /* '<S87>:110:1' UdFil>0; */
         if (rtu_Data_n > 0.0F) {
-          /* Transition: '<S85>:110' */
-          /* Exit Internal 'SPEEDINV': '<S85>:98' */
-          /* Entry 'Sub2': '<S85>:112' */
-          /* '<S85>:112:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
+          /* Transition: '<S87>:110' */
+          /* Exit Internal 'SPEEDINV': '<S87>:98' */
+          /* Entry 'Sub2': '<S87>:112' */
+          /* '<S87>:112:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
           qY = localDW->ZeroStudyCnt + /*MW:OvSatOk*/ 1U;
           if (qY < localDW->ZeroStudyCnt) {
             qY = MAX_uint16_T;
@@ -2824,24 +2824,24 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
 
           localDW->ZeroStudyCnt = qY;
 
-          /* '<S85>:112:1' CalibZeroPoint = CalibZeroPoint - 1; */
+          /* '<S87>:112:1' CalibZeroPoint = CalibZeroPoint - 1; */
           localDW->CalibZeroPoint--;
 
-          /* '<S85>:112:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+          /* '<S87>:112:4' CalibZeroPoint=Turn(CalibZeroPoint); */
           localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
             (localDW->CalibZeroPoint);
 
-          /* '<S85>:112:5' StudyStep=22; */
+          /* '<S87>:112:5' StudyStep=22; */
           localDW->StudyStep = 22U;
         } else {
-          /* Transition: '<S85>:117' */
-          /* '<S85>:126:1' sf_internal_predicateOutput = ... */
-          /* '<S85>:126:1' UdFil > -0.03; */
+          /* Transition: '<S87>:117' */
+          /* '<S87>:126:1' sf_internal_predicateOutput = ... */
+          /* '<S87>:126:1' UdFil > -0.03; */
           if (rtu_Data_n > -0.03) {
-            /* Transition: '<S85>:126' */
-            /* Exit Internal 'SPEEDINV': '<S85>:98' */
-            /* Entry 'Sub3': '<S85>:103' */
-            /* '<S85>:103:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
+            /* Transition: '<S87>:126' */
+            /* Exit Internal 'SPEEDINV': '<S87>:98' */
+            /* Entry 'Sub3': '<S87>:103' */
+            /* '<S87>:103:1' ZeroStudyCnt = ZeroStudyCnt + 1; */
             qY = localDW->ZeroStudyCnt + /*MW:OvSatOk*/ 1U;
             if (qY < localDW->ZeroStudyCnt) {
               qY = MAX_uint16_T;
@@ -2849,30 +2849,30 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
 
             localDW->ZeroStudyCnt = qY;
 
-            /* '<S85>:103:1' CalibZeroPoint = CalibZeroPoint + 1; */
+            /* '<S87>:103:1' CalibZeroPoint = CalibZeroPoint + 1; */
             localDW->CalibZeroPoint++;
 
-            /* '<S85>:103:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+            /* '<S87>:103:4' CalibZeroPoint=Turn(CalibZeroPoint); */
             localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
               (localDW->CalibZeroPoint);
 
-            /* '<S85>:103:5' StudyStep=22; */
+            /* '<S87>:103:5' StudyStep=22; */
             localDW->StudyStep = 22U;
           } else {
-            /* Transition: '<S85>:101' */
-            /* Exit Internal 'SPEEDINV': '<S85>:98' */
-            /* Entry 'Sub4': '<S85>:128' */
-            /* '<S85>:128:1' ZeroStudyCnt = 0; */
+            /* Transition: '<S87>:101' */
+            /* Exit Internal 'SPEEDINV': '<S87>:98' */
+            /* Entry 'Sub4': '<S87>:128' */
+            /* '<S87>:128:1' ZeroStudyCnt = 0; */
             localDW->ZeroStudyCnt = 0U;
 
-            /* '<S85>:128:1' CalibZeroPoint = CalibZeroPoint + 4; */
+            /* '<S87>:128:1' CalibZeroPoint = CalibZeroPoint + 4; */
             localDW->CalibZeroPoint += 4.0F;
 
-            /* '<S85>:128:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+            /* '<S87>:128:4' CalibZeroPoint=Turn(CalibZeroPoint); */
             localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
               (localDW->CalibZeroPoint);
 
-            /* '<S85>:128:5' StudyStep=21; */
+            /* '<S87>:128:5' StudyStep=21; */
             localDW->StudyStep = 21U;
           }
         }
@@ -2883,26 +2883,26 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
    case APP_FluxWeak_GEAR_IN_ZeroPoint0:
     localDW->IdIqSetEn = 1U;
 
-    /* Chart: '<S78>/Chart' */
-    /* During 'ZeroPoint0': '<S85>:89' */
-    /* '<S85>:92:1' sf_internal_predicateOutput = ... */
-    /* '<S85>:92:1' UsFil > 0.3; */
+    /* Chart: '<S80>/Chart' */
+    /* During 'ZeroPoint0': '<S87>:89' */
+    /* '<S87>:92:1' sf_internal_predicateOutput = ... */
+    /* '<S87>:92:1' UsFil > 0.3; */
     if (rtu_Data_j > 0.3) {
-      /* Transition: '<S85>:92' */
-      /* '<S85>:107:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:107:1' PMSM_Param.ResolverDirChg == 1; */
+      /* Transition: '<S87>:92' */
+      /* '<S87>:107:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:107:1' PMSM_Param.ResolverDirChg == 1; */
       if (PMSM_Param.ResolverDirChg == 1U) {
-        /* Transition: '<S85>:107' */
+        /* Transition: '<S87>:107' */
         localDW->is_Study = APP_FluxWeak_GEAR2_IN_SPEEDINV;
 
-        /* Entry 'SPEEDINV': '<S85>:98' */
+        /* Entry 'SPEEDINV': '<S87>:98' */
         /* 速度反向 */
         APP_Flu_enter_internal_SPEEDINV(rtu_Data_n, localDW);
       } else {
-        /* Transition: '<S85>:109' */
+        /* Transition: '<S87>:109' */
         localDW->is_Study = APP_FluxWeak_GEAR2_IN_SPEEDFORW;
 
-        /* Entry 'SPEEDFORW': '<S85>:97' */
+        /* Entry 'SPEEDFORW': '<S87>:97' */
         /* 速度正向 */
         APP_Fl_enter_internal_SPEEDFORW(rtu_Data_n, localDW);
       }
@@ -2910,26 +2910,26 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
     break;
 
    default:
-    /* During 'ZeroPoint1': '<S85>:138' */
+    /* During 'ZeroPoint1': '<S87>:138' */
     switch (localDW->is_ZeroPoint1) {
      case APP_FluxWeak_GEAR2_IN_AddId_c:
-      /* During 'AddId': '<S85>:151' */
-      /* '<S85>:142:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:142:1' IdRefSet > 0.3; */
+      /* During 'AddId': '<S87>:151' */
+      /* '<S87>:142:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:142:1' IdRefSet > 0.3; */
       if (localDW->IdRefSet > 0.3) {
-        /* Transition: '<S85>:142' */
+        /* Transition: '<S87>:142' */
         localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_Wait1_b;
         localDW->temporalCounter_i1 = 0U;
 
-        /* Entry 'Wait1': '<S85>:152' */
+        /* Entry 'Wait1': '<S87>:152' */
         /* 等 */
-        /* '<S85>:152:1' IdRefSet = 0.3; */
+        /* '<S87>:152:1' IdRefSet = 0.3; */
         localDW->IdRefSet = 0.3F;
 
-        /* '<S85>:152:1' StudyStep=31; */
+        /* '<S87>:152:1' StudyStep=31; */
         localDW->StudyStep = 31U;
       } else {
-        /* '<S85>:151:1' IdRefSet = IdRefSet + 0.001; */
+        /* '<S87>:151:1' IdRefSet = IdRefSet + 0.001; */
         localDW->IdRefSet += 0.001F;
       }
       break;
@@ -2937,63 +2937,63 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
      case APP_FluxWeak_GEAR2_IN_AddIq:
       localDW->AngleSetEn = 0U;
 
-      /* Chart: '<S78>/Chart' */
-      /* During 'AddIq': '<S85>:154' */
-      /* '<S85>:145:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:145:1' UsFil > 0.4 || IqRefSet > 0.3; */
+      /* Chart: '<S80>/Chart' */
+      /* During 'AddIq': '<S87>:154' */
+      /* '<S87>:145:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:145:1' UsFil > 0.4 || IqRefSet > 0.3; */
       if ((rtu_Data_j > 0.4) || (localDW->IqRefSet > 0.3)) {
-        /* Transition: '<S85>:145' */
-        /* '<S85>:148:1' sf_internal_predicateOutput = ... */
-        /* '<S85>:148:1' UsFil > 0.4; */
+        /* Transition: '<S87>:145' */
+        /* '<S87>:148:1' sf_internal_predicateOutput = ... */
+        /* '<S87>:148:1' UsFil > 0.4; */
         if (rtu_Data_j > 0.4) {
-          /* Transition: '<S85>:148' */
+          /* Transition: '<S87>:148' */
           localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_ClrIq;
           localDW->temporalCounter_i1 = 0U;
 
-          /* Entry 'ClrIq': '<S85>:156' */
+          /* Entry 'ClrIq': '<S87>:156' */
           /* 清除iq */
-          /* '<S85>:156:1' IqRefSet = 0; */
+          /* '<S87>:156:1' IqRefSet = 0; */
           localDW->IqRefSet = 0.0F;
         } else {
-          /* Transition: '<S85>:147' */
+          /* Transition: '<S87>:147' */
           localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_Wait2;
           localDW->temporalCounter_i1 = 0U;
 
-          /* Entry 'Wait2': '<S85>:157' */
+          /* Entry 'Wait2': '<S87>:157' */
           /* 增加iq */
-          /* '<S85>:157:1' IqRefSet = 0.3; */
+          /* '<S87>:157:1' IqRefSet = 0.3; */
           localDW->IqRefSet = 0.3F;
         }
       } else {
-        /* '<S85>:154:3' IqRefSet = IqRefSet + 0.001; */
+        /* '<S87>:154:3' IqRefSet = IqRefSet + 0.001; */
         localDW->IqRefSet += 0.001F;
       }
       break;
 
      case APP_FluxWeak_GEAR2_IN_ClrIq:
-      /* During 'ClrIq': '<S85>:156' */
-      /* '<S85>:105:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:105:1' after(100,tick); */
+      /* During 'ClrIq': '<S87>:156' */
+      /* '<S87>:105:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:105:1' after(100,tick); */
       if (localDW->temporalCounter_i1 >= 100U) {
-        /* Transition: '<S85>:105' */
-        /* '<S85>:107:1' sf_internal_predicateOutput = ... */
-        /* '<S85>:107:1' PMSM_Param.ResolverDirChg == 1; */
+        /* Transition: '<S87>:105' */
+        /* '<S87>:107:1' sf_internal_predicateOutput = ... */
+        /* '<S87>:107:1' PMSM_Param.ResolverDirChg == 1; */
         if (PMSM_Param.ResolverDirChg == 1U) {
-          /* Transition: '<S85>:107' */
+          /* Transition: '<S87>:107' */
           localDW->is_ZeroPoint1 = APP_FluxWe_IN_NO_ACTIVE_CHILD_o;
           localDW->is_Study = APP_FluxWeak_GEAR2_IN_SPEEDINV;
 
-          /* Chart: '<S78>/Chart' */
-          /* Entry 'SPEEDINV': '<S85>:98' */
+          /* Chart: '<S80>/Chart' */
+          /* Entry 'SPEEDINV': '<S87>:98' */
           /* 速度反向 */
           APP_Flu_enter_internal_SPEEDINV(rtu_Data_n, localDW);
         } else {
-          /* Transition: '<S85>:109' */
+          /* Transition: '<S87>:109' */
           localDW->is_ZeroPoint1 = APP_FluxWe_IN_NO_ACTIVE_CHILD_o;
           localDW->is_Study = APP_FluxWeak_GEAR2_IN_SPEEDFORW;
 
-          /* Chart: '<S78>/Chart' */
-          /* Entry 'SPEEDFORW': '<S85>:97' */
+          /* Chart: '<S80>/Chart' */
+          /* Entry 'SPEEDFORW': '<S87>:97' */
           /* 速度正向 */
           APP_Fl_enter_internal_SPEEDFORW(rtu_Data_n, localDW);
         }
@@ -3001,38 +3001,38 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
       break;
 
      case APP_FluxWeak_GEAR2_IN_DecId_l:
-      /* During 'DecId': '<S85>:153' */
-      /* '<S85>:144:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:144:1' IdRefSet < 0.002; */
+      /* During 'DecId': '<S87>:153' */
+      /* '<S87>:144:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:144:1' IdRefSet < 0.002; */
       if (localDW->IdRefSet < 0.002) {
-        /* Transition: '<S85>:144' */
+        /* Transition: '<S87>:144' */
         localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_AddIq;
 
-        /* Entry 'AddIq': '<S85>:154' */
+        /* Entry 'AddIq': '<S87>:154' */
         /* 增加iq */
-        /* '<S85>:154:1' IdRefSet = 0; */
+        /* '<S87>:154:1' IdRefSet = 0; */
         localDW->IdRefSet = 0.0F;
 
-        /* '<S85>:154:1' AngleSetEn = 0; */
+        /* '<S87>:154:1' AngleSetEn = 0; */
         localDW->AngleSetEn = 0U;
 
-        /* '<S85>:154:1' StudyStep=33; */
+        /* '<S87>:154:1' StudyStep=33; */
         localDW->StudyStep = 33U;
       } else {
-        /* '<S85>:153:3' IdRefSet = IdRefSet - 0.001; */
+        /* '<S87>:153:3' IdRefSet = IdRefSet - 0.001; */
         localDW->IdRefSet -= 0.001F;
       }
       break;
 
      case APP_FluxWeak_GEAR2_IN_Fault_i:
-      /* During 'Fault': '<S85>:155' */
-      /* '<S85>:155:1' IqRefSet = 0; */
+      /* During 'Fault': '<S87>:155' */
+      /* '<S87>:155:1' IqRefSet = 0; */
       localDW->IqRefSet = 0.0F;
 
-      /* '<S85>:155:1' StudyResult = 5555; */
+      /* '<S87>:155:1' StudyResult = 5555; */
       localDW->StudyResult = 5555.0F;
 
-      /* '<S85>:155:1' StudyStep=36; */
+      /* '<S87>:155:1' StudyStep=36; */
       localDW->StudyStep = 36U;
       break;
 
@@ -3040,70 +3040,70 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
       localDW->IdIqSetEn = 1U;
       localDW->AngleSetEn = 1U;
 
-      /* During 'Init': '<S85>:150' */
-      /* Transition: '<S85>:141' */
+      /* During 'Init': '<S87>:150' */
+      /* Transition: '<S87>:141' */
       localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_AddId_c;
 
-      /* Entry 'AddId': '<S85>:151' */
+      /* Entry 'AddId': '<S87>:151' */
       /* 增加id */
-      /* '<S85>:151:1' IdRefSet = IdRefSet + 0.001; */
+      /* '<S87>:151:1' IdRefSet = IdRefSet + 0.001; */
       localDW->IdRefSet += 0.001F;
       break;
 
      case APP_FluxWeak_GEAR2_IN_Wait1_b:
-      /* During 'Wait1': '<S85>:152' */
-      /* '<S85>:143:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:143:1' after(100,tick); */
+      /* During 'Wait1': '<S87>:152' */
+      /* '<S87>:143:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:143:1' after(100,tick); */
       if (localDW->temporalCounter_i1 >= 100U) {
-        /* Transition: '<S85>:143' */
+        /* Transition: '<S87>:143' */
         localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_DecId_l;
 
-        /* Chart: '<S78>/Chart' */
-        /* Entry 'DecId': '<S85>:153' */
+        /* Chart: '<S80>/Chart' */
+        /* Entry 'DecId': '<S87>:153' */
         /* 减id */
-        /* '<S85>:153:1' CalibZeroPoint =single( ThetaRT); */
+        /* '<S87>:153:1' CalibZeroPoint =single( ThetaRT); */
         localDW->CalibZeroPoint = rtu_Data_o;
       } else {
-        /* '<S85>:152:1' IdRefSet = 0.3; */
+        /* '<S87>:152:1' IdRefSet = 0.3; */
         localDW->IdRefSet = 0.3F;
 
-        /* '<S85>:152:1' StudyStep=31; */
+        /* '<S87>:152:1' StudyStep=31; */
         localDW->StudyStep = 31U;
       }
       break;
 
      default:
-      /* During 'Wait2': '<S85>:157' */
-      /* '<S85>:149:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:149:1' after(3000,tick); */
+      /* During 'Wait2': '<S87>:157' */
+      /* '<S87>:149:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:149:1' after(3000,tick); */
       if (localDW->temporalCounter_i1 >= 3000U) {
-        /* Transition: '<S85>:149' */
+        /* Transition: '<S87>:149' */
         localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_Fault_i;
 
-        /* Entry 'Fault': '<S85>:155' */
-        /* '<S85>:155:1' IqRefSet = 0; */
+        /* Entry 'Fault': '<S87>:155' */
+        /* '<S87>:155:1' IqRefSet = 0; */
         localDW->IqRefSet = 0.0F;
 
-        /* '<S85>:155:1' StudyResult = 5555; */
+        /* '<S87>:155:1' StudyResult = 5555; */
         localDW->StudyResult = 5555.0F;
 
-        /* '<S85>:155:3' StudyStep=36; */
+        /* '<S87>:155:3' StudyStep=36; */
         localDW->StudyStep = 36U;
       } else {
-        /* Chart: '<S78>/Chart' */
-        /* '<S85>:146:1' sf_internal_predicateOutput = ... */
-        /* '<S85>:146:1' UsFil > 0.4; */
+        /* Chart: '<S80>/Chart' */
+        /* '<S87>:146:1' sf_internal_predicateOutput = ... */
+        /* '<S87>:146:1' UsFil > 0.4; */
         if (rtu_Data_j > 0.4) {
-          /* Transition: '<S85>:146' */
+          /* Transition: '<S87>:146' */
           localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_ClrIq;
           localDW->temporalCounter_i1 = 0U;
 
-          /* Entry 'ClrIq': '<S85>:156' */
+          /* Entry 'ClrIq': '<S87>:156' */
           /* 清除iq */
-          /* '<S85>:156:1' IqRefSet = 0; */
+          /* '<S87>:156:1' IqRefSet = 0; */
           localDW->IqRefSet = 0.0F;
         } else {
-          /* '<S85>:157:1' IqRefSet = 0.3; */
+          /* '<S87>:157:1' IqRefSet = 0.3; */
           localDW->IqRefSet = 0.3F;
         }
       }
@@ -3113,10 +3113,10 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
   }
 }
 
-/* System initialize for function-call system: '<S62>/ElecZeroStudy' */
+/* System initialize for function-call system: '<S64>/ElecZeroStudy' */
 void APP_FluxWeak_ElecZeroStudy_Init(DW_ElecZeroStudy_APP_FluxWeak_T *localDW)
 {
-  /* SystemInitialize for Chart: '<S78>/Chart' */
+  /* SystemInitialize for Chart: '<S80>/Chart' */
   localDW->is_Study = APP_FluxWe_IN_NO_ACTIVE_CHILD_o;
   localDW->is_ZeroPoint1 = APP_FluxWe_IN_NO_ACTIVE_CHILD_o;
   localDW->temporalCounter_i1 = 0U;
@@ -3133,14 +3133,14 @@ void APP_FluxWeak_ElecZeroStudy_Init(DW_ElecZeroStudy_APP_FluxWeak_T *localDW)
   localDW->StudyStep = 0U;
 }
 
-/* Output and update for function-call system: '<S62>/ElecZeroStudy' */
+/* Output and update for function-call system: '<S64>/ElecZeroStudy' */
 void APP_FluxWeak_GEAR_ElecZeroStudy(uint16_T rtu_Data, real32_T rtu_Data_b,
   real32_T rtu_Data_n, real32_T rtu_Data_j, real32_T rtu_Data_o, uint16_T
   *rty_Out1, real32_T *rty_Out1_b, real32_T *rty_Out1_n, real32_T *rty_Out1_j,
   uint16_T *rty_Out1_o, uint16_T *rty_Out1_j3, real32_T *rty_Out1_k, real32_T
   *rty_Out1_e, DW_ElecZeroStudy_APP_FluxWeak_T *localDW)
 {
-  /* Chart: '<S78>/Chart' */
+  /* Chart: '<S80>/Chart' */
   /* Gateway: implement/method/All_loop/Calib/ElecZeroStudy/Chart */
   if (localDW->temporalCounter_i1 < 4095U) {
     localDW->temporalCounter_i1++;
@@ -3152,82 +3152,82 @@ void APP_FluxWeak_GEAR_ElecZeroStudy(uint16_T rtu_Data, real32_T rtu_Data_b,
     localDW->is_active_c11_APP_FluxWeak_GEAR = 1U;
 
     /* Entry Internal: implement/method/All_loop/Calib/ElecZeroStudy/Chart */
-    /* Transition: '<S85>:85' */
+    /* Transition: '<S87>:85' */
     localDW->is_c11_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Init_d;
 
-    /* Entry 'Init': '<S85>:84' */
+    /* Entry 'Init': '<S87>:84' */
     /* 初始化 */
-    /* '<S85>:84:1' CalibZeroPoint = 0; */
+    /* '<S87>:84:1' CalibZeroPoint = 0; */
     localDW->CalibZeroPoint = 0.0F;
 
-    /* '<S85>:84:1' StudyResult = 8888; */
+    /* '<S87>:84:1' StudyResult = 8888; */
     localDW->StudyResult = 8888.0F;
 
-    /* '<S85>:84:3' ZeroStudyCnt = 0; */
+    /* '<S87>:84:3' ZeroStudyCnt = 0; */
     localDW->ZeroStudyCnt = 0U;
 
-    /* '<S85>:84:4' IdIqSetEn = 0; */
+    /* '<S87>:84:4' IdIqSetEn = 0; */
     localDW->IdIqSetEn = 0U;
 
-    /* '<S85>:84:5' AngleSetEn = 0; */
+    /* '<S87>:84:5' AngleSetEn = 0; */
     localDW->AngleSetEn = 0U;
 
-    /* '<S85>:84:5' IdRefSet = 0; */
+    /* '<S87>:84:5' IdRefSet = 0; */
     localDW->IdRefSet = 0.0F;
 
-    /* '<S85>:84:6' IqRefSet = 0; */
+    /* '<S87>:84:6' IqRefSet = 0; */
     localDW->IqRefSet = 0.0F;
 
-    /* '<S85>:84:7' AngleRefSet = 0; */
+    /* '<S87>:84:7' AngleRefSet = 0; */
     localDW->AngleRefSet = 0.0F;
 
-    /* '<S85>:84:8' StudyStep=20; */
+    /* '<S87>:84:8' StudyStep=20; */
     localDW->StudyStep = 20U;
   } else if (localDW->is_c11_APP_FluxWeak_GEAR2 == 1U) {
     localDW->IdIqSetEn = 0U;
     localDW->AngleSetEn = 0U;
     localDW->AngleRefSet = 0.0F;
 
-    /* During 'Init': '<S85>:84' */
-    /* '<S85>:86:1' sf_internal_predicateOutput = ... */
-    /* '<S85>:86:1' TqReq > 0.001; */
+    /* During 'Init': '<S87>:84' */
+    /* '<S87>:86:1' sf_internal_predicateOutput = ... */
+    /* '<S87>:86:1' TqReq > 0.001; */
     if (rtu_Data_b > 0.001) {
-      /* Transition: '<S85>:86' */
+      /* Transition: '<S87>:86' */
       localDW->is_c11_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Study_e;
 
-      /* Entry 'Study': '<S85>:83' */
+      /* Entry 'Study': '<S87>:83' */
       /* 学习 */
-      /* Entry Internal 'Study': '<S85>:83' */
-      /* Transition: '<S85>:87' */
-      /* '<S85>:90:1' sf_internal_predicateOutput = ... */
-      /* '<S85>:90:1' ElecZeroStep ==0; */
+      /* Entry Internal 'Study': '<S87>:83' */
+      /* Transition: '<S87>:87' */
+      /* '<S87>:90:1' sf_internal_predicateOutput = ... */
+      /* '<S87>:90:1' ElecZeroStep ==0; */
       if (rtu_Data == 0U) {
-        /* Transition: '<S85>:90' */
+        /* Transition: '<S87>:90' */
         localDW->is_Study = APP_FluxWeak_GEAR_IN_ZeroPoint0;
 
-        /* Entry 'ZeroPoint0': '<S85>:89' */
+        /* Entry 'ZeroPoint0': '<S87>:89' */
         /* 被拖 */
-        /* '<S85>:89:1' IdIqSetEn = 1; */
+        /* '<S87>:89:1' IdIqSetEn = 1; */
         localDW->IdIqSetEn = 1U;
       } else {
-        /* Transition: '<S85>:160' */
+        /* Transition: '<S87>:160' */
         localDW->is_Study = APP_FluxWeak_GEAR_IN_ZeroPoint1;
 
-        /* Entry 'ZeroPoint1': '<S85>:138' */
+        /* Entry 'ZeroPoint1': '<S87>:138' */
         /* 被拖学习零点 */
-        /* Entry Internal 'ZeroPoint1': '<S85>:138' */
-        /* Transition: '<S85>:140' */
+        /* Entry Internal 'ZeroPoint1': '<S87>:138' */
+        /* Transition: '<S87>:140' */
         localDW->is_ZeroPoint1 = APP_FluxWeak_GEAR2_IN_Init_du;
 
-        /* Entry 'Init': '<S85>:150' */
+        /* Entry 'Init': '<S87>:150' */
         /* 初始化 */
-        /* '<S85>:150:1' IdIqSetEn = 1; */
+        /* '<S87>:150:1' IdIqSetEn = 1; */
         localDW->IdIqSetEn = 1U;
 
-        /* '<S85>:150:1' AngleSetEn = 1; */
+        /* '<S87>:150:1' AngleSetEn = 1; */
         localDW->AngleSetEn = 1U;
 
-        /* '<S85>:150:1' StudyStep=32; */
+        /* '<S87>:150:1' StudyStep=32; */
         localDW->StudyStep = 32U;
       }
     }
@@ -3235,128 +3235,128 @@ void APP_FluxWeak_GEAR_ElecZeroStudy(uint16_T rtu_Data, real32_T rtu_Data_b,
     APP_FluxWeak_GEAR2_Study(rtu_Data_n, rtu_Data_j, rtu_Data_o, localDW);
   }
 
-  /* End of Chart: '<S78>/Chart' */
+  /* End of Chart: '<S80>/Chart' */
 
-  /* DataStoreWrite: '<S78>/Data Store Write' */
+  /* DataStoreWrite: '<S80>/Data Store Write' */
   AppFun.StudyResult = localDW->StudyResult;
 
-  /* DataStoreWrite: '<S78>/Data Store Write1' */
+  /* DataStoreWrite: '<S80>/Data Store Write1' */
   AppFun.StudyStep = localDW->StudyStep;
 
-  /* SignalConversion: '<S78>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S78>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_b = localDW->IdRefSet;
 
-  /* SignalConversion: '<S78>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_n = localDW->IqRefSet;
 
-  /* SignalConversion: '<S78>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_j = localDW->AngleRefSet;
 
-  /* SignalConversion: '<S78>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_o = localDW->IdIqSetEn;
 
-  /* SignalConversion: '<S78>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_j3 = localDW->AngleSetEn;
 
-  /* SignalConversion: '<S78>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_k = localDW->CalibZeroPoint;
 
-  /* SignalConversion: '<S78>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S80>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_e = 0.0F;
 }
 
-/* System initialize for function-call system: '<S62>/IdqStudy' */
+/* System initialize for function-call system: '<S64>/IdqStudy' */
 void APP_FluxWeak_GEAR_IdqStudy_Init(DW_IdqStudy_APP_FluxWeak_GEAR_T *localDW)
 {
-  /* InitializeConditions for DiscreteIntegrator: '<S95>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S97>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE = 0.0F;
 
-  /* InitializeConditions for DiscreteIntegrator: '<S96>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S98>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE_g = 0.0F;
 }
 
-/* System reset for function-call system: '<S62>/IdqStudy' */
+/* System reset for function-call system: '<S64>/IdqStudy' */
 void APP_FluxWeak_GEA_IdqStudy_Reset(DW_IdqStudy_APP_FluxWeak_GEAR_T *localDW)
 {
-  /* InitializeConditions for DiscreteIntegrator: '<S95>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S97>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE = 0.0F;
 
-  /* InitializeConditions for DiscreteIntegrator: '<S96>/Discrete-Time Integrator' */
+  /* InitializeConditions for DiscreteIntegrator: '<S98>/Discrete-Time Integrator' */
   localDW->DiscreteTimeIntegrator_DSTATE_g = 0.0F;
 }
 
-/* Output and update for function-call system: '<S62>/IdqStudy' */
+/* Output and update for function-call system: '<S64>/IdqStudy' */
 void APP_FluxWeak_GEAR2_IdqStudy(real32_T rtu_Data, real32_T rtu_Data_p,
   uint16_T *rty_Out1, real32_T *rty_Out1_p, real32_T *rty_Out1_f, real32_T
   *rty_Out1_g, uint16_T *rty_Out1_o, uint16_T *rty_Out1_i, real32_T *rty_Out1_n,
   real32_T *rty_Out1_d, DW_IdqStudy_APP_FluxWeak_GEAR_T *localDW)
 {
-  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' incorporates:
-   *  DiscreteIntegrator: '<S95>/Discrete-Time Integrator'
+  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' incorporates:
+   *  DiscreteIntegrator: '<S97>/Discrete-Time Integrator'
    */
   *rty_Out1_p = localDW->DiscreteTimeIntegrator_DSTATE;
 
-  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' incorporates:
-   *  DiscreteIntegrator: '<S96>/Discrete-Time Integrator'
+  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' incorporates:
+   *  DiscreteIntegrator: '<S98>/Discrete-Time Integrator'
    */
   *rty_Out1_f = localDW->DiscreteTimeIntegrator_DSTATE_g;
 
-  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_g = 0.0F;
 
-  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_o = 1U;
 
-  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_i = 0U;
 
-  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_n = 0.0F;
 
-  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S83>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_d = 0.0F;
 
-  /* Update for DiscreteIntegrator: '<S95>/Discrete-Time Integrator' incorporates:
-   *  Gain: '<S95>/Gain'
-   *  Sum: '<S95>/Sum'
+  /* Update for DiscreteIntegrator: '<S97>/Discrete-Time Integrator' incorporates:
+   *  Gain: '<S97>/Gain'
+   *  Sum: '<S97>/Sum'
    */
   localDW->DiscreteTimeIntegrator_DSTATE += (rtu_Data -
     localDW->DiscreteTimeIntegrator_DSTATE) * 10.0F * 0.002F;
 
-  /* Update for DiscreteIntegrator: '<S96>/Discrete-Time Integrator' incorporates:
-   *  Gain: '<S96>/Gain'
-   *  Sum: '<S96>/Sum'
+  /* Update for DiscreteIntegrator: '<S98>/Discrete-Time Integrator' incorporates:
+   *  Gain: '<S98>/Gain'
+   *  Sum: '<S98>/Sum'
    */
   localDW->DiscreteTimeIntegrator_DSTATE_g += (rtu_Data_p -
     localDW->DiscreteTimeIntegrator_DSTATE_g) * 10.0F * 0.002F;
 }
 
-/* System initialize for function-call system: '<S62>/FluxLinkage' */
+/* System initialize for function-call system: '<S64>/FluxLinkage' */
 void APP_FluxWeak_G_FluxLinkage_Init(DW_FluxLinkage_APP_FluxWeak_G_T *localDW)
 {
-  /* InitializeConditions for UnitDelay: '<S87>/Delay Input2'
+  /* InitializeConditions for UnitDelay: '<S89>/Delay Input2'
    *
-   * Block description for '<S87>/Delay Input2':
+   * Block description for '<S89>/Delay Input2':
    *
    *  Store in Global RAM
    */
   localDW->DelayInput2_DSTATE = 0.0F;
 
-  /* InitializeConditions for UnitDelay: '<S88>/Delay Input2'
+  /* InitializeConditions for UnitDelay: '<S90>/Delay Input2'
    *
-   * Block description for '<S88>/Delay Input2':
+   * Block description for '<S90>/Delay Input2':
    *
    *  Store in Global RAM
    */
   localDW->DelayInput2_DSTATE_g = 0.0F;
 
-  /* SystemInitialize for Chart: '<S79>/Chart' */
+  /* SystemInitialize for Chart: '<S81>/Chart' */
   localDW->is_AngCount = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
   localDW->is_Stop = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
   localDW->is_work = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
@@ -3366,26 +3366,26 @@ void APP_FluxWeak_G_FluxLinkage_Init(DW_FluxLinkage_APP_FluxWeak_G_T *localDW)
   localDW->IsReq = 0.0F;
 }
 
-/* System reset for function-call system: '<S62>/FluxLinkage' */
+/* System reset for function-call system: '<S64>/FluxLinkage' */
 void APP_FluxWeak__FluxLinkage_Reset(DW_FluxLinkage_APP_FluxWeak_G_T *localDW)
 {
-  /* InitializeConditions for UnitDelay: '<S87>/Delay Input2'
+  /* InitializeConditions for UnitDelay: '<S89>/Delay Input2'
    *
-   * Block description for '<S87>/Delay Input2':
+   * Block description for '<S89>/Delay Input2':
    *
    *  Store in Global RAM
    */
   localDW->DelayInput2_DSTATE = 0.0F;
 
-  /* InitializeConditions for UnitDelay: '<S88>/Delay Input2'
+  /* InitializeConditions for UnitDelay: '<S90>/Delay Input2'
    *
-   * Block description for '<S88>/Delay Input2':
+   * Block description for '<S90>/Delay Input2':
    *
    *  Store in Global RAM
    */
   localDW->DelayInput2_DSTATE_g = 0.0F;
 
-  /* SystemReset for Chart: '<S79>/Chart' */
+  /* SystemReset for Chart: '<S81>/Chart' */
   localDW->is_AngCount = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
   localDW->is_Stop = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
   localDW->is_work = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
@@ -3395,7 +3395,7 @@ void APP_FluxWeak__FluxLinkage_Reset(DW_FluxLinkage_APP_FluxWeak_G_T *localDW)
   localDW->IsReq = 0.0F;
 }
 
-/* Output and update for function-call system: '<S62>/FluxLinkage' */
+/* Output and update for function-call system: '<S64>/FluxLinkage' */
 void APP_FluxWeak_GEAR2_FluxLinkage(real32_T rtu_Data, uint16_T *rty_Out1,
   real32_T *rty_Out1_n, real32_T *rty_Out1_i, real32_T *rty_Out1_a, uint16_T
   *rty_Out1_h, uint16_T *rty_Out1_k, real32_T *rty_Out1_c, real32_T *rty_Out1_im,
@@ -3404,7 +3404,7 @@ void APP_FluxWeak_GEAR2_FluxLinkage(real32_T rtu_Data, uint16_T *rty_Out1,
   real32_T rtb_IdRefSet;
   real32_T rtb_IqRefSet;
 
-  /* Chart: '<S79>/Chart' */
+  /* Chart: '<S81>/Chart' */
   /* Gateway: implement/method/All_loop/Calib/FluxLinkage/Chart */
   if (localDW->temporalCounter_i1 < 1023U) {
     localDW->temporalCounter_i1++;
@@ -3416,173 +3416,173 @@ void APP_FluxWeak_GEAR2_FluxLinkage(real32_T rtu_Data, uint16_T *rty_Out1,
     localDW->is_active_c9_APP_FluxWeak_GEAR2 = 1U;
 
     /* Entry Internal: implement/method/All_loop/Calib/FluxLinkage/Chart */
-    /* Entry Internal 'AngCount': '<S86>:4' */
-    /* Transition: '<S86>:9' */
+    /* Entry Internal 'AngCount': '<S88>:4' */
+    /* Transition: '<S88>:9' */
     localDW->is_AngCount = APP_FluxWeak_GEAR2_IN_wait;
 
-    /* Entry 'wait': '<S86>:12' */
-    /* '<S86>:12:1' CalibAng=0; */
+    /* Entry 'wait': '<S88>:12' */
+    /* '<S88>:12:1' CalibAng=0; */
     localDW->CalibAng = 0.0F;
 
-    /* '<S86>:12:1' IsReq=0; */
+    /* '<S88>:12:1' IsReq=0; */
     localDW->IsReq = 0.0F;
 
-    /* Entry 'Idq': '<S86>:19' */
-    /* '<S86>:19:1' IqRefSet = IsReq * cos(CalibAng); */
+    /* Entry 'Idq': '<S88>:19' */
+    /* '<S88>:19:1' IqRefSet = IsReq * cos(CalibAng); */
     rtb_IqRefSet = localDW->IsReq * cosf(localDW->CalibAng);
 
-    /* '<S86>:19:3' IdRefSet = -abs(IsReq * sin(CalibAng)); */
+    /* '<S88>:19:3' IdRefSet = -abs(IsReq * sin(CalibAng)); */
     rtb_IdRefSet = -fabsf(localDW->IsReq * sinf(localDW->CalibAng));
   } else {
-    /* During 'AngCount': '<S86>:4' */
+    /* During 'AngCount': '<S88>:4' */
     switch (localDW->is_AngCount) {
      case APP_FluxWeak_GEAR2_IN_Stop_l:
-      /* During 'Stop': '<S86>:43' */
-      /* '<S86>:43:1' IsReq=0; */
+      /* During 'Stop': '<S88>:43' */
+      /* '<S88>:43:1' IsReq=0; */
       localDW->IsReq = 0.0F;
 
-      /* '<S86>:43:1' CalibAng=0; */
+      /* '<S88>:43:1' CalibAng=0; */
       localDW->CalibAng = 0.0F;
       if (localDW->is_Stop == 1U) {
-        /* During 'stop': '<S86>:46' */
-        /* '<S86>:50:1' sf_internal_predicateOutput = ... */
-        /* '<S86>:50:1' TqReq==0; */
+        /* During 'stop': '<S88>:46' */
+        /* '<S88>:50:1' sf_internal_predicateOutput = ... */
+        /* '<S88>:50:1' TqReq==0; */
         if (rtu_Data == 0.0F) {
-          /* Transition: '<S86>:50' */
+          /* Transition: '<S88>:50' */
           localDW->is_Stop = APP_FluxWeak_GEAR2_IN_wait;
         }
       } else {
-        /* During 'wait': '<S86>:49' */
-        /* Transition: '<S86>:54' */
-        /* '<S86>:55:1' sf_internal_predicateOutput = ... */
-        /* '<S86>:55:1' TqReq>0.01; */
+        /* During 'wait': '<S88>:49' */
+        /* Transition: '<S88>:54' */
+        /* '<S88>:55:1' sf_internal_predicateOutput = ... */
+        /* '<S88>:55:1' TqReq>0.01; */
         if (rtu_Data > 0.01) {
-          /* Transition: '<S86>:55' */
+          /* Transition: '<S88>:55' */
           localDW->is_Stop = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
           localDW->is_AngCount = APP_FluxWeak_GEAR2_IN_wait;
 
-          /* Entry 'wait': '<S86>:12' */
-          /* '<S86>:12:1' CalibAng=0; */
+          /* Entry 'wait': '<S88>:12' */
+          /* '<S88>:12:1' CalibAng=0; */
           localDW->CalibAng = 0.0F;
 
-          /* '<S86>:12:1' IsReq=0; */
+          /* '<S88>:12:1' IsReq=0; */
           localDW->IsReq = 0.0F;
         }
       }
       break;
 
      case APP_FluxWeak_GEAR2_IN_wait:
-      /* During 'wait': '<S86>:12' */
-      /* '<S86>:13:1' sf_internal_predicateOutput = ... */
-      /* '<S86>:13:1' TqReq>0.01; */
+      /* During 'wait': '<S88>:12' */
+      /* '<S88>:13:1' sf_internal_predicateOutput = ... */
+      /* '<S88>:13:1' TqReq>0.01; */
       if (rtu_Data > 0.01) {
-        /* Transition: '<S86>:13' */
-        /* '<S86>:13:1' CalibAng=PMSM_Param.FLStartAng/180*pi; */
+        /* Transition: '<S88>:13' */
+        /* '<S88>:13:1' CalibAng=PMSM_Param.FLStartAng/180*pi; */
         localDW->CalibAng = PMSM_Param.FLStartAng / 180.0F * 3.14159274F;
 
-        /* '<S86>:13:2' IsReq=0; */
+        /* '<S88>:13:2' IsReq=0; */
         localDW->IsReq = 0.0F;
         localDW->is_AngCount = APP_FluxWeak_GEAR2_IN_work;
         localDW->is_work = APP_FluxWeak_G_IN_increaseValue;
         localDW->temporalCounter_i1 = 0U;
 
-        /* Entry 'increaseValue': '<S86>:8' */
+        /* Entry 'increaseValue': '<S88>:8' */
         /* 加 */
       } else {
-        /* '<S86>:12:1' CalibAng=0; */
+        /* '<S88>:12:1' CalibAng=0; */
         localDW->CalibAng = 0.0F;
 
-        /* '<S86>:12:1' IsReq=0; */
+        /* '<S88>:12:1' IsReq=0; */
         localDW->IsReq = 0.0F;
       }
       break;
 
      default:
-      /* During 'work': '<S86>:56' */
-      /* '<S86>:58:1' sf_internal_predicateOutput = ... */
-      /* '<S86>:58:1' TqReq==0; */
+      /* During 'work': '<S88>:56' */
+      /* '<S88>:58:1' sf_internal_predicateOutput = ... */
+      /* '<S88>:58:1' TqReq==0; */
       if (rtu_Data == 0.0F) {
-        /* Transition: '<S86>:58' */
-        /* Transition: '<S86>:59' */
-        /* Exit Internal 'work': '<S86>:56' */
+        /* Transition: '<S88>:58' */
+        /* Transition: '<S88>:59' */
+        /* Exit Internal 'work': '<S88>:56' */
         localDW->is_work = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
         localDW->is_AngCount = APP_FluxWeak_GEAR2_IN_Stop_l;
 
-        /* Entry 'Stop': '<S86>:43' */
-        /* '<S86>:43:1' IsReq=0; */
+        /* Entry 'Stop': '<S88>:43' */
+        /* '<S88>:43:1' IsReq=0; */
         localDW->IsReq = 0.0F;
 
-        /* '<S86>:43:1' CalibAng=0; */
+        /* '<S88>:43:1' CalibAng=0; */
         localDW->CalibAng = 0.0F;
 
-        /* Entry Internal 'Stop': '<S86>:43' */
-        /* Transition: '<S86>:52' */
+        /* Entry Internal 'Stop': '<S88>:43' */
+        /* Transition: '<S88>:52' */
         localDW->is_Stop = APP_FluxWeak_GEAR2_IN_stop;
       } else if (localDW->is_work == 1U) {
-        /* During 'DecreaseValue': '<S86>:20' */
-        /* '<S86>:28:1' sf_internal_predicateOutput = ... */
-        /* '<S86>:28:1' after(700,tick); */
+        /* During 'DecreaseValue': '<S88>:20' */
+        /* '<S88>:28:1' sf_internal_predicateOutput = ... */
+        /* '<S88>:28:1' after(700,tick); */
         if (localDW->temporalCounter_i1 >= 700U) {
-          /* Transition: '<S86>:28' */
-          /* '<S86>:30:1' sf_internal_predicateOutput = ... */
-          /* '<S86>:30:1' IsReq<=0; */
+          /* Transition: '<S88>:28' */
+          /* '<S88>:30:1' sf_internal_predicateOutput = ... */
+          /* '<S88>:30:1' IsReq<=0; */
           if (localDW->IsReq <= 0.0F) {
-            /* Transition: '<S86>:30' */
-            /* Transition: '<S86>:37' */
-            /* Transition: '<S86>:44' */
+            /* Transition: '<S88>:30' */
+            /* Transition: '<S88>:37' */
+            /* Transition: '<S88>:44' */
             localDW->is_work = APP_FluxWe_IN_NO_ACTIVE_CHILD_l;
             localDW->is_AngCount = APP_FluxWeak_GEAR2_IN_Stop_l;
 
-            /* Entry 'Stop': '<S86>:43' */
-            /* '<S86>:43:1' IsReq=0; */
+            /* Entry 'Stop': '<S88>:43' */
+            /* '<S88>:43:1' IsReq=0; */
             localDW->IsReq = 0.0F;
 
-            /* '<S86>:43:1' CalibAng=0; */
+            /* '<S88>:43:1' CalibAng=0; */
             localDW->CalibAng = 0.0F;
 
-            /* Entry Internal 'Stop': '<S86>:43' */
-            /* Transition: '<S86>:52' */
+            /* Entry Internal 'Stop': '<S88>:43' */
+            /* Transition: '<S88>:52' */
             localDW->is_Stop = APP_FluxWeak_GEAR2_IN_stop;
           } else {
-            /* Transition: '<S86>:32' */
-            /* Transition: '<S86>:34' */
-            /* '<S86>:34:1' IsReq=IsReq-0.05; */
+            /* Transition: '<S88>:32' */
+            /* Transition: '<S88>:34' */
+            /* '<S88>:34:1' IsReq=IsReq-0.05; */
             localDW->IsReq -= 0.05F;
 
-            /* Transition: '<S86>:35' */
+            /* Transition: '<S88>:35' */
             localDW->is_work = APP_FluxWeak_G_IN_DecreaseValue;
             localDW->temporalCounter_i1 = 0U;
 
-            /* Entry 'DecreaseValue': '<S86>:20' */
+            /* Entry 'DecreaseValue': '<S88>:20' */
             /* 减 */
           }
         }
       } else {
-        /* During 'increaseValue': '<S86>:8' */
-        /* '<S86>:18:1' sf_internal_predicateOutput = ... */
-        /* '<S86>:18:1' after(700,tick); */
+        /* During 'increaseValue': '<S88>:8' */
+        /* '<S88>:18:1' sf_internal_predicateOutput = ... */
+        /* '<S88>:18:1' after(700,tick); */
         if (localDW->temporalCounter_i1 >= 700U) {
-          /* Transition: '<S86>:18' */
-          /* '<S86>:21:1' sf_internal_predicateOutput = ... */
-          /* '<S86>:21:1' IsReq>=1; */
+          /* Transition: '<S88>:18' */
+          /* '<S88>:21:1' sf_internal_predicateOutput = ... */
+          /* '<S88>:21:1' IsReq>=1; */
           if (localDW->IsReq >= 1.0F) {
-            /* Transition: '<S86>:21' */
+            /* Transition: '<S88>:21' */
             localDW->is_work = APP_FluxWeak_G_IN_DecreaseValue;
             localDW->temporalCounter_i1 = 0U;
 
-            /* Entry 'DecreaseValue': '<S86>:20' */
+            /* Entry 'DecreaseValue': '<S88>:20' */
             /* 减 */
           } else {
-            /* Transition: '<S86>:23' */
-            /* Transition: '<S86>:25' */
-            /* '<S86>:25:1' IsReq=IsReq+0.05; */
+            /* Transition: '<S88>:23' */
+            /* Transition: '<S88>:25' */
+            /* '<S88>:25:1' IsReq=IsReq+0.05; */
             localDW->IsReq += 0.05F;
 
-            /* Transition: '<S86>:26' */
+            /* Transition: '<S88>:26' */
             localDW->is_work = APP_FluxWeak_G_IN_increaseValue;
             localDW->temporalCounter_i1 = 0U;
 
-            /* Entry 'increaseValue': '<S86>:8' */
+            /* Entry 'increaseValue': '<S88>:8' */
             /* 加 */
           }
         }
@@ -3590,134 +3590,134 @@ void APP_FluxWeak_GEAR2_FluxLinkage(real32_T rtu_Data, uint16_T *rty_Out1,
       break;
     }
 
-    /* During 'Idq': '<S86>:19' */
-    /* '<S86>:19:1' IqRefSet = IsReq * cos(CalibAng); */
+    /* During 'Idq': '<S88>:19' */
+    /* '<S88>:19:1' IqRefSet = IsReq * cos(CalibAng); */
     rtb_IqRefSet = localDW->IsReq * cosf(localDW->CalibAng);
 
-    /* '<S86>:19:1' IdRefSet = -abs(IsReq * sin(CalibAng)); */
+    /* '<S88>:19:1' IdRefSet = -abs(IsReq * sin(CalibAng)); */
     rtb_IdRefSet = -fabsf(localDW->IsReq * sinf(localDW->CalibAng));
   }
 
-  /* End of Chart: '<S79>/Chart' */
+  /* End of Chart: '<S81>/Chart' */
 
-  /* Gain: '<S79>/Gain1' incorporates:
-   *  DataStoreWrite: '<S79>/Data Store Write'
+  /* Gain: '<S81>/Gain1' incorporates:
+   *  DataStoreWrite: '<S81>/Data Store Write'
    */
   AppFun.StudyResult = 100.0F * localDW->IsReq;
 
-  /* SignalConversion: '<S79>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1 = 0U;
 
-  /* Sum: '<S87>/Difference Inputs1' incorporates:
-   *  UnitDelay: '<S87>/Delay Input2'
+  /* Sum: '<S89>/Difference Inputs1' incorporates:
+   *  UnitDelay: '<S89>/Delay Input2'
    *
-   * Block description for '<S87>/Difference Inputs1':
+   * Block description for '<S89>/Difference Inputs1':
    *
    *  Add in CPU
    *
-   * Block description for '<S87>/Delay Input2':
+   * Block description for '<S89>/Delay Input2':
    *
    *  Store in Global RAM
    */
   rtb_IdRefSet -= localDW->DelayInput2_DSTATE;
 
-  /* Switch: '<S89>/Switch2' incorporates:
-   *  RelationalOperator: '<S89>/LowerRelop1'
-   *  RelationalOperator: '<S89>/UpperRelop'
-   *  Switch: '<S89>/Switch'
+  /* Switch: '<S91>/Switch2' incorporates:
+   *  RelationalOperator: '<S91>/LowerRelop1'
+   *  RelationalOperator: '<S91>/UpperRelop'
+   *  Switch: '<S91>/Switch'
    */
   if (rtb_IdRefSet > 0.002F) {
     rtb_IdRefSet = 0.002F;
   } else {
     if (rtb_IdRefSet < -0.002F) {
-      /* Switch: '<S89>/Switch' */
+      /* Switch: '<S91>/Switch' */
       rtb_IdRefSet = -0.002F;
     }
   }
 
-  /* End of Switch: '<S89>/Switch2' */
+  /* End of Switch: '<S91>/Switch2' */
 
-  /* Sum: '<S87>/Difference Inputs2' incorporates:
-   *  UnitDelay: '<S87>/Delay Input2'
+  /* Sum: '<S89>/Difference Inputs2' incorporates:
+   *  UnitDelay: '<S89>/Delay Input2'
    *
-   * Block description for '<S87>/Difference Inputs2':
+   * Block description for '<S89>/Difference Inputs2':
    *
    *  Add in CPU
    *
-   * Block description for '<S87>/Delay Input2':
+   * Block description for '<S89>/Delay Input2':
    *
    *  Store in Global RAM
    */
   localDW->DelayInput2_DSTATE += rtb_IdRefSet;
 
-  /* SignalConversion: '<S79>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_n = localDW->DelayInput2_DSTATE;
 
-  /* Sum: '<S88>/Difference Inputs1' incorporates:
-   *  UnitDelay: '<S88>/Delay Input2'
+  /* Sum: '<S90>/Difference Inputs1' incorporates:
+   *  UnitDelay: '<S90>/Delay Input2'
    *
-   * Block description for '<S88>/Difference Inputs1':
+   * Block description for '<S90>/Difference Inputs1':
    *
    *  Add in CPU
    *
-   * Block description for '<S88>/Delay Input2':
+   * Block description for '<S90>/Delay Input2':
    *
    *  Store in Global RAM
    */
   rtb_IqRefSet -= localDW->DelayInput2_DSTATE_g;
 
-  /* Switch: '<S90>/Switch2' incorporates:
-   *  RelationalOperator: '<S90>/LowerRelop1'
-   *  RelationalOperator: '<S90>/UpperRelop'
-   *  Switch: '<S90>/Switch'
+  /* Switch: '<S92>/Switch2' incorporates:
+   *  RelationalOperator: '<S92>/LowerRelop1'
+   *  RelationalOperator: '<S92>/UpperRelop'
+   *  Switch: '<S92>/Switch'
    */
   if (rtb_IqRefSet > 0.002F) {
     rtb_IqRefSet = 0.002F;
   } else {
     if (rtb_IqRefSet < -0.002F) {
-      /* Switch: '<S90>/Switch' */
+      /* Switch: '<S92>/Switch' */
       rtb_IqRefSet = -0.002F;
     }
   }
 
-  /* End of Switch: '<S90>/Switch2' */
+  /* End of Switch: '<S92>/Switch2' */
 
-  /* Sum: '<S88>/Difference Inputs2' incorporates:
-   *  UnitDelay: '<S88>/Delay Input2'
+  /* Sum: '<S90>/Difference Inputs2' incorporates:
+   *  UnitDelay: '<S90>/Delay Input2'
    *
-   * Block description for '<S88>/Difference Inputs2':
+   * Block description for '<S90>/Difference Inputs2':
    *
    *  Add in CPU
    *
-   * Block description for '<S88>/Delay Input2':
+   * Block description for '<S90>/Delay Input2':
    *
    *  Store in Global RAM
    */
   localDW->DelayInput2_DSTATE_g += rtb_IqRefSet;
 
-  /* SignalConversion: '<S79>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_i = localDW->DelayInput2_DSTATE_g;
 
-  /* SignalConversion: '<S79>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_a = 0.0F;
 
-  /* SignalConversion: '<S79>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_h = 1U;
 
-  /* SignalConversion: '<S79>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_k = 0U;
 
-  /* SignalConversion: '<S79>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_c = 0.0F;
 
-  /* SignalConversion: '<S79>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  /* SignalConversion: '<S81>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_im = 0.0F;
 }
 
-/* System initialize for function-call system: '<S62>/MtpaStudy' */
+/* System initialize for function-call system: '<S64>/MtpaStudy' */
 void APP_FluxWeak_GEA_MtpaStudy_Init(DW_MtpaStudy_APP_FluxWeak_GEA_T *localDW)
 {
-  /* SystemInitialize for Chart: '<S82>/Chart' */
+  /* SystemInitialize for Chart: '<S84>/Chart' */
   localDW->is_Mtpa = APP_FluxWe_IN_NO_ACTIVE_CHILD_i;
   localDW->temporalCounter_i1 = 0U;
   localDW->is_active_c26_APP_FluxWeak_GEAR = 0U;
@@ -3727,7 +3727,7 @@ void APP_FluxWeak_GEA_MtpaStudy_Init(DW_MtpaStudy_APP_FluxWeak_GEA_T *localDW)
   localDW->AngRef = 0.0F;
 }
 
-/* Output and update for function-call system: '<S62>/MtpaStudy' */
+/* Output and update for function-call system: '<S64>/MtpaStudy' */
 void APP_FluxWeak_GEAR2_MtpaStudy(real32_T rtu_Data, real32_T rtu_Data_c,
   real32_T rtu_Data_p, uint16_T *rty_Out1, real32_T *rty_Out1_c, real32_T
   *rty_Out1_p, real32_T *rty_Out1_l, uint16_T *rty_Out1_m, uint16_T *rty_Out1_f,
@@ -3737,7 +3737,7 @@ void APP_FluxWeak_GEAR2_MtpaStudy(real32_T rtu_Data, real32_T rtu_Data_c,
   uint16_T qY;
   boolean_T guard1 = false;
 
-  /* Chart: '<S82>/Chart' */
+  /* Chart: '<S84>/Chart' */
   /* Gateway: implement/method/All_loop/Calib/MtpaStudy/Chart */
   if (localDW->temporalCounter_i1 < 1023U) {
     localDW->temporalCounter_i1++;
@@ -3749,75 +3749,75 @@ void APP_FluxWeak_GEAR2_MtpaStudy(real32_T rtu_Data, real32_T rtu_Data_c,
     localDW->is_active_c26_APP_FluxWeak_GEAR = 1U;
 
     /* Entry Internal: implement/method/All_loop/Calib/MtpaStudy/Chart */
-    /* Transition: '<S97>:5' */
+    /* Transition: '<S99>:5' */
     localDW->is_c26_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Prepare;
 
-    /* Entry 'Prepare': '<S97>:12' */
-    /* '<S97>:12:1' IsRef=0; */
+    /* Entry 'Prepare': '<S99>:12' */
+    /* '<S99>:12:1' IsRef=0; */
     localDW->IsRef = 0.0F;
   } else {
     guard1 = false;
     switch (localDW->is_c26_APP_FluxWeak_GEAR2) {
      case APP_FluxWeak_GEAR_IN_IsDecrease:
-      /* During 'IsDecrease': '<S97>:46' */
-      /* Transition: '<S97>:51' */
-      /* '<S97>:52:1' sf_internal_predicateOutput = ... */
-      /* '<S97>:52:1' IsRef<0.001; */
+      /* During 'IsDecrease': '<S99>:46' */
+      /* Transition: '<S99>:51' */
+      /* '<S99>:52:1' sf_internal_predicateOutput = ... */
+      /* '<S99>:52:1' IsRef<0.001; */
       if (localDW->IsRef < 0.001) {
-        /* Transition: '<S97>:52' */
+        /* Transition: '<S99>:52' */
         localDW->is_c26_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Prepare;
 
-        /* Entry 'Prepare': '<S97>:12' */
-        /* '<S97>:12:1' IsRef=0; */
+        /* Entry 'Prepare': '<S99>:12' */
+        /* '<S99>:12:1' IsRef=0; */
         localDW->IsRef = 0.0F;
       } else {
-        /* Transition: '<S97>:54' */
-        /* Transition: '<S97>:55' */
+        /* Transition: '<S99>:54' */
+        /* Transition: '<S99>:55' */
         localDW->is_c26_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR_IN_IsDecrease;
 
-        /* Entry 'IsDecrease': '<S97>:46' */
-        /* '<S97>:46:1' IsRef=IsRef-0.001; */
+        /* Entry 'IsDecrease': '<S99>:46' */
+        /* '<S99>:46:1' IsRef=IsRef-0.001; */
         localDW->IsRef -= 0.001F;
       }
       break;
 
      case APP_FluxWeak_GEAR2_IN_Mtpa:
-      /* During 'Mtpa': '<S97>:4' */
-      /* '<S97>:15:1' sf_internal_predicateOutput = ... */
-      /* '<S97>:15:1' CalibTq2<0.01; */
+      /* During 'Mtpa': '<S99>:4' */
+      /* '<S99>:15:1' sf_internal_predicateOutput = ... */
+      /* '<S99>:15:1' CalibTq2<0.01; */
       if (rtu_Data < 0.01) {
-        /* Transition: '<S97>:15' */
-        /* Exit Internal 'Mtpa': '<S97>:4' */
+        /* Transition: '<S99>:15' */
+        /* Exit Internal 'Mtpa': '<S99>:4' */
         localDW->is_Mtpa = APP_FluxWe_IN_NO_ACTIVE_CHILD_i;
         localDW->is_c26_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR_IN_IsDecrease;
 
-        /* Entry 'IsDecrease': '<S97>:46' */
-        /* '<S97>:46:1' IsRef=IsRef-0.001; */
+        /* Entry 'IsDecrease': '<S99>:46' */
+        /* '<S99>:46:1' IsRef=IsRef-0.001; */
         localDW->IsRef -= 0.001F;
       } else {
         switch (localDW->is_Mtpa) {
          case APP_FluxWeak_G_IN_AngleIncrease:
-          /* During 'AngleIncrease': '<S97>:31' */
-          /* Transition: '<S97>:64' */
-          /* '<S97>:61:1' sf_internal_predicateOutput = ... */
-          /* '<S97>:61:1' count<15; */
+          /* During 'AngleIncrease': '<S99>:31' */
+          /* Transition: '<S99>:64' */
+          /* '<S99>:61:1' sf_internal_predicateOutput = ... */
+          /* '<S99>:61:1' count<15; */
           if (localDW->count < 15U) {
-            /* Transition: '<S97>:61' */
+            /* Transition: '<S99>:61' */
             guard1 = true;
           } else {
-            /* Transition: '<S97>:67' */
-            /* '<S97>:41:1' sf_internal_predicateOutput = ... */
-            /* '<S97>:41:1' AngRef>=pi/2; */
+            /* Transition: '<S99>:67' */
+            /* '<S99>:41:1' sf_internal_predicateOutput = ... */
+            /* '<S99>:41:1' AngRef>=pi/2; */
             if (localDW->AngRef >= 1.5707963267948966) {
-              /* Transition: '<S97>:41' */
+              /* Transition: '<S99>:41' */
               localDW->is_Mtpa = APP_FluxWeak_GEAR2_IN_Qaxis;
             } else {
-              /* '<S97>:43:1' sf_internal_predicateOutput = ... */
-              /* '<S97>:43:1' after(1000,tick); */
+              /* '<S99>:43:1' sf_internal_predicateOutput = ... */
+              /* '<S99>:43:1' after(1000,tick); */
               if (localDW->temporalCounter_i1 >= 1000U) {
-                /* Transition: '<S97>:43' */
-                /* Transition: '<S97>:49' */
-                /* '<S97>:49:1' count=0; */
+                /* Transition: '<S99>:43' */
+                /* Transition: '<S99>:49' */
+                /* '<S99>:49:1' count=0; */
                 localDW->count = 0U;
                 guard1 = true;
               }
@@ -3826,20 +3826,20 @@ void APP_FluxWeak_GEAR2_MtpaStudy(real32_T rtu_Data, real32_T rtu_Data_c,
           break;
 
          case APP_FluxWeak_GEAR_IN_FirstPoint:
-          /* During 'FirstPoint': '<S97>:68' */
-          /* '<S97>:69:1' sf_internal_predicateOutput = ... */
-          /* '<S97>:69:1' after(1000,tick); */
+          /* During 'FirstPoint': '<S99>:68' */
+          /* '<S99>:69:1' sf_internal_predicateOutput = ... */
+          /* '<S99>:69:1' after(1000,tick); */
           if (localDW->temporalCounter_i1 >= 1000U) {
-            /* Transition: '<S97>:69' */
+            /* Transition: '<S99>:69' */
             localDW->is_Mtpa = APP_FluxWeak_G_IN_AngleIncrease;
             localDW->temporalCounter_i1 = 0U;
 
-            /* Entry 'AngleIncrease': '<S97>:31' */
+            /* Entry 'AngleIncrease': '<S99>:31' */
             /* 加角度 */
-            /* '<S97>:31:1' AngRef=AngRef+0.1/180*pi; */
+            /* '<S99>:31:1' AngRef=AngRef+0.1/180*pi; */
             localDW->AngRef += 0.00174532924F;
 
-            /* '<S97>:31:1' count=count+1; */
+            /* '<S99>:31:1' count=count+1; */
             qY = localDW->count + /*MW:OvSatOk*/ 1U;
             if (qY < localDW->count) {
               qY = MAX_uint16_T;
@@ -3850,35 +3850,35 @@ void APP_FluxWeak_GEAR2_MtpaStudy(real32_T rtu_Data, real32_T rtu_Data_c,
           break;
 
          case APP_FluxWeak_GEAR_IN_IsIncrease:
-          /* During 'IsIncrease': '<S97>:17' */
-          /* Transition: '<S97>:30' */
-          /* '<S97>:32:1' sf_internal_predicateOutput = ... */
-          /* '<S97>:32:1' IsRef>=TqReq; */
+          /* During 'IsIncrease': '<S99>:17' */
+          /* Transition: '<S99>:30' */
+          /* '<S99>:32:1' sf_internal_predicateOutput = ... */
+          /* '<S99>:32:1' IsRef>=TqReq; */
           if (localDW->IsRef >= rtu_Data_c) {
-            /* Transition: '<S97>:32' */
+            /* Transition: '<S99>:32' */
             localDW->is_Mtpa = APP_FluxWeak_GEAR_IN_FirstPoint;
             localDW->temporalCounter_i1 = 0U;
           } else {
-            /* Transition: '<S97>:34' */
-            /* Transition: '<S97>:36' */
-            /* Transition: '<S97>:37' */
+            /* Transition: '<S99>:34' */
+            /* Transition: '<S99>:36' */
+            /* Transition: '<S99>:37' */
             localDW->is_Mtpa = APP_FluxWeak_GEAR_IN_IsIncrease;
 
-            /* Entry 'IsIncrease': '<S97>:17' */
+            /* Entry 'IsIncrease': '<S99>:17' */
             /* 加Is */
-            /* '<S97>:17:1' IsRef=IsRef+0.001; */
+            /* '<S99>:17:1' IsRef=IsRef+0.001; */
             localDW->IsRef += 0.001F;
           }
           break;
 
          default:
-          /* During 'Qaxis': '<S97>:23' */
-          /* Transition: '<S97>:56' */
+          /* During 'Qaxis': '<S99>:23' */
+          /* Transition: '<S99>:56' */
           localDW->is_Mtpa = APP_FluxWe_IN_NO_ACTIVE_CHILD_i;
           localDW->is_c26_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR_IN_IsDecrease;
 
-          /* Entry 'IsDecrease': '<S97>:46' */
-          /* '<S97>:46:1' IsRef=IsRef-0.001; */
+          /* Entry 'IsDecrease': '<S99>:46' */
+          /* '<S99>:46:1' IsRef=IsRef-0.001; */
           localDW->IsRef -= 0.001F;
           break;
         }
@@ -3886,45 +3886,45 @@ void APP_FluxWeak_GEAR2_MtpaStudy(real32_T rtu_Data, real32_T rtu_Data_c,
       break;
 
      default:
-      /* During 'Prepare': '<S97>:12' */
-      /* '<S97>:13:1' sf_internal_predicateOutput = ... */
-      /* '<S97>:13:1' CalibTq2>0.01; */
+      /* During 'Prepare': '<S99>:12' */
+      /* '<S99>:13:1' sf_internal_predicateOutput = ... */
+      /* '<S99>:13:1' CalibTq2>0.01; */
       if (rtu_Data > 0.01) {
-        /* Transition: '<S97>:13' */
-        /* '<S97>:13:1' AngRef=CalibMTPATheta; */
+        /* Transition: '<S99>:13' */
+        /* '<S99>:13:1' AngRef=CalibMTPATheta; */
         localDW->AngRef = rtu_Data_p;
 
-        /* '<S97>:13:1' count=0; */
+        /* '<S99>:13:1' count=0; */
         localDW->count = 0U;
         localDW->is_c26_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_Mtpa;
 
-        /* Entry Internal 'Mtpa': '<S97>:4' */
-        /* Transition: '<S97>:18' */
+        /* Entry Internal 'Mtpa': '<S99>:4' */
+        /* Transition: '<S99>:18' */
         localDW->is_Mtpa = APP_FluxWeak_GEAR_IN_IsIncrease;
 
-        /* Entry 'IsIncrease': '<S97>:17' */
+        /* Entry 'IsIncrease': '<S99>:17' */
         /* 加Is */
-        /* '<S97>:17:1' IsRef=IsRef+0.001; */
+        /* '<S99>:17:1' IsRef=IsRef+0.001; */
         localDW->IsRef += 0.001F;
       } else {
-        /* '<S97>:12:1' IsRef=0; */
+        /* '<S99>:12:1' IsRef=0; */
         localDW->IsRef = 0.0F;
       }
       break;
     }
 
     if (guard1) {
-      /* Transition: '<S97>:66' */
-      /* Transition: '<S97>:47' */
+      /* Transition: '<S99>:66' */
+      /* Transition: '<S99>:47' */
       localDW->is_Mtpa = APP_FluxWeak_G_IN_AngleIncrease;
       localDW->temporalCounter_i1 = 0U;
 
-      /* Entry 'AngleIncrease': '<S97>:31' */
+      /* Entry 'AngleIncrease': '<S99>:31' */
       /* 加角度 */
-      /* '<S97>:31:1' AngRef=AngRef+0.1/180*pi; */
+      /* '<S99>:31:1' AngRef=AngRef+0.1/180*pi; */
       localDW->AngRef += 0.00174532924F;
 
-      /* '<S97>:31:1' count=count+1; */
+      /* '<S99>:31:1' count=count+1; */
       qY = localDW->count + /*MW:OvSatOk*/ 1U;
       if (qY < localDW->count) {
         qY = MAX_uint16_T;
@@ -3934,82 +3934,38 @@ void APP_FluxWeak_GEAR2_MtpaStudy(real32_T rtu_Data, real32_T rtu_Data_c,
     }
   }
 
-  /* End of Chart: '<S82>/Chart' */
+  /* End of Chart: '<S84>/Chart' */
 
-  /* Gain: '<S82>/Gain1' incorporates:
-   *  DataStoreWrite: '<S82>/Data Store Write'
+  /* Gain: '<S84>/Gain1' incorporates:
+   *  DataStoreWrite: '<S84>/Data Store Write'
    */
   AppFun.StudyResult = 57.2957802F * localDW->AngRef;
 
-  /* Gain: '<S82>/Gain' incorporates:
-   *  Product: '<S82>/Product'
-   *  Trigonometry: '<S82>/Trigonometric Function'
+  /* Gain: '<S84>/Gain' incorporates:
+   *  Product: '<S84>/Product'
+   *  Trigonometry: '<S84>/Trigonometric Function'
    */
   *rty_Out1_c = -(localDW->IsRef * sinf(localDW->AngRef));
 
-  /* Product: '<S82>/Product1' incorporates:
-   *  Trigonometry: '<S82>/Trigonometric Function1'
+  /* Product: '<S84>/Product1' incorporates:
+   *  Trigonometry: '<S84>/Trigonometric Function1'
    */
   *rty_Out1_p = localDW->IsRef * cosf(localDW->AngRef);
-
-  /* SignalConversion: '<S82>/TmpBufferAtConstant2Outport1' incorporates:
-   *  Constant: '<S82>/Constant2'
-   */
-  *rty_Out1_l = 0.0F;
-
-  /* SignalConversion: '<S82>/TmpBufferAtConstant3Outport1' incorporates:
-   *  Constant: '<S82>/Constant3'
-   */
-  *rty_Out1_m = 1U;
-
-  /* SignalConversion: '<S82>/TmpBufferAtConstant4Outport1' incorporates:
-   *  Constant: '<S82>/Constant4'
-   */
-  *rty_Out1_f = 0U;
-
-  /* SignalConversion: '<S82>/TmpBufferAtConstant5Outport1' incorporates:
-   *  Constant: '<S82>/Constant5'
-   */
-  *rty_Out1 = 0U;
-
-  /* SignalConversion: '<S82>/TmpBufferAtConstant7Outport1' incorporates:
-   *  Constant: '<S82>/Constant7'
-   */
-  *rty_Out1_h = 0.0F;
-
-  /* SignalConversion: '<S82>/TmpBufferAtConstant8Outport1' incorporates:
-   *  Constant: '<S82>/Constant8'
-   */
-  *rty_Out1_cv = 0.0F;
-}
-
-/* Output and update for function-call system: '<S62>/Tlin' */
-void APP_FluxWeak_GEAR2_Tlin(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
-  *rty_Out1_o, real32_T *rty_Out1_k, real32_T *rty_Out1_oy, uint16_T *rty_Out1_p,
-  uint16_T *rty_Out1_d, real32_T *rty_Out1_km, real32_T *rty_Out1_i)
-{
-  /* SignalConversion: '<S84>/TmpLatchAtDataOutport1' */
-  *rty_Out1_i = rtu_Data;
-
-  /* SignalConversion: '<S84>/TmpBufferAtConstant1Outport1' incorporates:
-   *  Constant: '<S84>/Constant1'
-   */
-  *rty_Out1_k = 0.0F;
 
   /* SignalConversion: '<S84>/TmpBufferAtConstant2Outport1' incorporates:
    *  Constant: '<S84>/Constant2'
    */
-  *rty_Out1_oy = 0.0F;
+  *rty_Out1_l = 0.0F;
 
   /* SignalConversion: '<S84>/TmpBufferAtConstant3Outport1' incorporates:
    *  Constant: '<S84>/Constant3'
    */
-  *rty_Out1_p = 1U;
+  *rty_Out1_m = 1U;
 
   /* SignalConversion: '<S84>/TmpBufferAtConstant4Outport1' incorporates:
    *  Constant: '<S84>/Constant4'
    */
-  *rty_Out1_d = 0U;
+  *rty_Out1_f = 0U;
 
   /* SignalConversion: '<S84>/TmpBufferAtConstant5Outport1' incorporates:
    *  Constant: '<S84>/Constant5'
@@ -4019,81 +3975,125 @@ void APP_FluxWeak_GEAR2_Tlin(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
   /* SignalConversion: '<S84>/TmpBufferAtConstant7Outport1' incorporates:
    *  Constant: '<S84>/Constant7'
    */
+  *rty_Out1_h = 0.0F;
+
+  /* SignalConversion: '<S84>/TmpBufferAtConstant8Outport1' incorporates:
+   *  Constant: '<S84>/Constant8'
+   */
+  *rty_Out1_cv = 0.0F;
+}
+
+/* Output and update for function-call system: '<S64>/Tlin' */
+void APP_FluxWeak_GEAR2_Tlin(real32_T rtu_Data, uint16_T *rty_Out1, real32_T
+  *rty_Out1_o, real32_T *rty_Out1_k, real32_T *rty_Out1_oy, uint16_T *rty_Out1_p,
+  uint16_T *rty_Out1_d, real32_T *rty_Out1_km, real32_T *rty_Out1_i)
+{
+  /* SignalConversion: '<S86>/TmpLatchAtDataOutport1' */
+  *rty_Out1_i = rtu_Data;
+
+  /* SignalConversion: '<S86>/TmpBufferAtConstant1Outport1' incorporates:
+   *  Constant: '<S86>/Constant1'
+   */
+  *rty_Out1_k = 0.0F;
+
+  /* SignalConversion: '<S86>/TmpBufferAtConstant2Outport1' incorporates:
+   *  Constant: '<S86>/Constant2'
+   */
+  *rty_Out1_oy = 0.0F;
+
+  /* SignalConversion: '<S86>/TmpBufferAtConstant3Outport1' incorporates:
+   *  Constant: '<S86>/Constant3'
+   */
+  *rty_Out1_p = 1U;
+
+  /* SignalConversion: '<S86>/TmpBufferAtConstant4Outport1' incorporates:
+   *  Constant: '<S86>/Constant4'
+   */
+  *rty_Out1_d = 0U;
+
+  /* SignalConversion: '<S86>/TmpBufferAtConstant5Outport1' incorporates:
+   *  Constant: '<S86>/Constant5'
+   */
+  *rty_Out1 = 0U;
+
+  /* SignalConversion: '<S86>/TmpBufferAtConstant7Outport1' incorporates:
+   *  Constant: '<S86>/Constant7'
+   */
   *rty_Out1_km = 0.0F;
 
-  /* SignalConversion: '<S84>/TmpBufferAtConstantOutport1' incorporates:
-   *  Constant: '<S84>/Constant'
+  /* SignalConversion: '<S86>/TmpBufferAtConstantOutport1' incorporates:
+   *  Constant: '<S86>/Constant'
    */
   *rty_Out1_o = 0.0F;
 }
 
-/* System initialize for function-call system: '<S54>/Calib' */
+/* System initialize for function-call system: '<S56>/Calib' */
 void APP_FluxWeak_GEAR2_Calib_Init(DW_Calib_APP_FluxWeak_GEAR2_T *localDW)
 {
   localDW->is_Sel_mode = APP_FluxW_IN_NO_ACTIVE_CHILD_km;
   localDW->is_active_c15_APP_FluxWeak_GEAR = 0U;
 
-  /* SystemInitialize for Chart: '<S62>/Chart1' incorporates:
-   *  SubSystem: '<S62>/PhaseStudy'
+  /* SystemInitialize for Chart: '<S64>/Chart1' incorporates:
+   *  SubSystem: '<S64>/PhaseStudy'
    */
   APP_FluxWeak_GE_PhaseStudy_Init(&localDW->PhaseStudy);
 
-  /* SystemInitialize for Chart: '<S62>/Chart1' incorporates:
-   *  SubSystem: '<S62>/Hall'
+  /* SystemInitialize for Chart: '<S64>/Chart1' incorporates:
+   *  SubSystem: '<S64>/Hall'
    */
   APP_FluxWeak_GEAR2_Hall_Init(&localDW->Hall);
 
-  /* SystemInitialize for Chart: '<S62>/Chart1' incorporates:
-   *  SubSystem: '<S62>/ElecZeroStudy'
+  /* SystemInitialize for Chart: '<S64>/Chart1' incorporates:
+   *  SubSystem: '<S64>/ElecZeroStudy'
    */
   APP_FluxWeak_ElecZeroStudy_Init(&localDW->ElecZeroStudy);
 
-  /* SystemInitialize for Chart: '<S62>/Chart1' incorporates:
-   *  SubSystem: '<S62>/IdqStudy'
+  /* SystemInitialize for Chart: '<S64>/Chart1' incorporates:
+   *  SubSystem: '<S64>/IdqStudy'
    */
   APP_FluxWeak_GEAR_IdqStudy_Init(&localDW->IdqStudy);
 
-  /* SystemInitialize for Chart: '<S62>/Chart1' incorporates:
-   *  SubSystem: '<S62>/FluxLinkage'
+  /* SystemInitialize for Chart: '<S64>/Chart1' incorporates:
+   *  SubSystem: '<S64>/FluxLinkage'
    */
   APP_FluxWeak_G_FluxLinkage_Init(&localDW->FluxLinkage);
 
-  /* SystemInitialize for Chart: '<S62>/Chart1' incorporates:
-   *  SubSystem: '<S62>/MtpaStudy'
+  /* SystemInitialize for Chart: '<S64>/Chart1' incorporates:
+   *  SubSystem: '<S64>/MtpaStudy'
    */
   APP_FluxWeak_GEA_MtpaStudy_Init(&localDW->MtpaStudy);
 }
 
-/* System reset for function-call system: '<S54>/Calib' */
+/* System reset for function-call system: '<S56>/Calib' */
 void APP_FluxWeak_GEAR2_Calib_Reset(DW_Calib_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* SystemReset for Chart: '<S62>/Chart1' */
+  /* SystemReset for Chart: '<S64>/Chart1' */
   localDW->is_Sel_mode = APP_FluxW_IN_NO_ACTIVE_CHILD_km;
   localDW->is_active_c15_APP_FluxWeak_GEAR = 0U;
 }
 
-/* Enable for function-call system: '<S54>/Calib' */
+/* Enable for function-call system: '<S56>/Calib' */
 void APP_FluxWeak_GEAR2_Calib_Enable(DW_Calib_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* SystemReset for Function Call SubSystem: '<S62>/Hall' */
+  /* SystemReset for Function Call SubSystem: '<S64>/Hall' */
 
-  /* Enable for Chart: '<S62>/Chart1' */
+  /* Enable for Chart: '<S64>/Chart1' */
   APP_FluxWeak_GEAR2_Hall_Reset(&localDW->Hall);
 
-  /* End of SystemReset for SubSystem: '<S62>/Hall' */
+  /* End of SystemReset for SubSystem: '<S64>/Hall' */
 
-  /* SystemReset for Function Call SubSystem: '<S62>/IdqStudy' */
+  /* SystemReset for Function Call SubSystem: '<S64>/IdqStudy' */
   APP_FluxWeak_GEA_IdqStudy_Reset(&localDW->IdqStudy);
 
-  /* End of SystemReset for SubSystem: '<S62>/IdqStudy' */
+  /* End of SystemReset for SubSystem: '<S64>/IdqStudy' */
 
-  /* SystemReset for Function Call SubSystem: '<S62>/FluxLinkage' */
+  /* SystemReset for Function Call SubSystem: '<S64>/FluxLinkage' */
   APP_FluxWeak__FluxLinkage_Reset(&localDW->FluxLinkage);
 
-  /* End of SystemReset for SubSystem: '<S62>/FluxLinkage' */
+  /* End of SystemReset for SubSystem: '<S64>/FluxLinkage' */
 }
 
-/* Output and update for function-call system: '<S54>/Calib' */
+/* Output and update for function-call system: '<S56>/Calib' */
 void APP_FluxWeak_GEAR2_Calib(uint16_T rtu_Data, real32_T rtu_Data_h, real32_T
   rtu_Data_b, uint16_T rtu_Data_c, real32_T rtu_Data_g, real32_T rtu_Data_hs,
   real32_T rtu_Data_l, real32_T rtu_Data_e, uint16_T *rty_Out1, real32_T
@@ -4103,7 +4103,7 @@ void APP_FluxWeak_GEAR2_Calib(uint16_T rtu_Data, real32_T rtu_Data_h, real32_T
 {
   uint16_T CalibStep_prev;
 
-  /* Chart: '<S62>/Chart1' */
+  /* Chart: '<S64>/Chart1' */
   /* Gateway: implement/method/All_loop/Calib/Chart1 */
   CalibStep_prev = localDW->CalibStep_start;
   localDW->CalibStep_start = rtu_Data;
@@ -4114,409 +4114,409 @@ void APP_FluxWeak_GEAR2_Calib(uint16_T rtu_Data, real32_T rtu_Data_h, real32_T
     localDW->is_active_c15_APP_FluxWeak_GEAR = 1U;
 
     /* Entry Internal: implement/method/All_loop/Calib/Chart1 */
-    /* Entry Internal 'Sel_mode': '<S77>:2' */
-    /* Transition: '<S77>:23' */
-    /* '<S77>:9:1' sf_internal_predicateOutput = ... */
-    /* '<S77>:9:1' CalibStep==1; */
+    /* Entry Internal 'Sel_mode': '<S79>:2' */
+    /* Transition: '<S79>:23' */
+    /* '<S79>:9:1' sf_internal_predicateOutput = ... */
+    /* '<S79>:9:1' CalibStep==1; */
     switch (rtu_Data) {
      case 1U:
-      /* Transition: '<S77>:9' */
+      /* Transition: '<S79>:9' */
       localDW->is_Sel_mode = APP_FluxWeak_GEAR_IN_PhaseStudy;
 
-      /* Outputs for Function Call SubSystem: '<S62>/PhaseStudy' */
+      /* Outputs for Function Call SubSystem: '<S64>/PhaseStudy' */
 
-      /* Entry 'PhaseStudy': '<S77>:31' */
-      /* '<S77>:31:1' PhaseStudy; */
-      /* Event: '<S77>:32' */
+      /* Entry 'PhaseStudy': '<S79>:31' */
+      /* '<S79>:31:1' PhaseStudy; */
+      /* Event: '<S79>:32' */
       APP_FluxWeak_GEAR2_PhaseStudy(rtu_Data_h, rtu_Data_b, rty_Out1, rty_Out1_h,
         rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e,
         &localDW->PhaseStudy);
 
-      /* End of Outputs for SubSystem: '<S62>/PhaseStudy' */
+      /* End of Outputs for SubSystem: '<S64>/PhaseStudy' */
       break;
 
      case 2U:
-      /* Transition: '<S77>:6' */
-      /* '<S77>:24:1' sf_internal_predicateOutput = ... */
-      /* '<S77>:24:1' CalibStep==2; */
-      /* Transition: '<S77>:24' */
+      /* Transition: '<S79>:6' */
+      /* '<S79>:24:1' sf_internal_predicateOutput = ... */
+      /* '<S79>:24:1' CalibStep==2; */
+      /* Transition: '<S79>:24' */
       localDW->is_Sel_mode = APP_FluxWeak_G_IN_ElecZeroStudy;
 
-      /* Outputs for Function Call SubSystem: '<S62>/Hall' */
+      /* Outputs for Function Call SubSystem: '<S64>/Hall' */
 
-      /* Entry 'ElecZeroStudy': '<S77>:37' */
-      /* '<S77>:37:1' Hall; */
-      /* Event: '<S77>:55' */
+      /* Entry 'ElecZeroStudy': '<S79>:37' */
+      /* '<S79>:37:1' Hall; */
+      /* Event: '<S79>:55' */
       APP_FluxWeak_GEAR2_Hall(rtu_Data_b, rty_Out1, rty_Out1_h, rty_Out1_b,
         rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e,
         &localDW->Hall);
 
-      /* End of Outputs for SubSystem: '<S62>/Hall' */
+      /* End of Outputs for SubSystem: '<S64>/Hall' */
       break;
 
      case 3U:
-      /* Transition: '<S77>:21' */
-      /* '<S77>:12:1' sf_internal_predicateOutput = ... */
-      /* '<S77>:12:1' CalibStep==3; */
-      /* Transition: '<S77>:12' */
+      /* Transition: '<S79>:21' */
+      /* '<S79>:12:1' sf_internal_predicateOutput = ... */
+      /* '<S79>:12:1' CalibStep==3; */
+      /* Transition: '<S79>:12' */
       localDW->is_Sel_mode = APP_FluxWeak_GEAR2_IN_IfStudy;
 
-      /* Outputs for Function Call SubSystem: '<S62>/ElecZeroStudy' */
+      /* Outputs for Function Call SubSystem: '<S64>/ElecZeroStudy' */
 
-      /* Entry 'IfStudy': '<S77>:39' */
-      /* '<S77>:39:1' ElecZeroStudy; */
-      /* Event: '<S77>:49' */
+      /* Entry 'IfStudy': '<S79>:39' */
+      /* '<S79>:39:1' ElecZeroStudy; */
+      /* Event: '<S79>:49' */
       APP_FluxWeak_GEAR_ElecZeroStudy(rtu_Data_c, rtu_Data_b, rtu_Data_g,
         rtu_Data_hs, rtu_Data_h, rty_Out1, rty_Out1_h, rty_Out1_b, rty_Out1_c,
         rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e, &localDW->ElecZeroStudy);
 
-      /* End of Outputs for SubSystem: '<S62>/ElecZeroStudy' */
+      /* End of Outputs for SubSystem: '<S64>/ElecZeroStudy' */
       break;
 
      case 4U:
-      /* Transition: '<S77>:22' */
-      /* '<S77>:10:1' sf_internal_predicateOutput = ... */
-      /* '<S77>:10:1' CalibStep==4; */
-      /* Transition: '<S77>:10' */
+      /* Transition: '<S79>:22' */
+      /* '<S79>:10:1' sf_internal_predicateOutput = ... */
+      /* '<S79>:10:1' CalibStep==4; */
+      /* Transition: '<S79>:10' */
       localDW->is_Sel_mode = APP_FluxWeak_GEAR2_IN_LdStudy;
 
-      /* Outputs for Function Call SubSystem: '<S62>/IdqStudy' */
+      /* Outputs for Function Call SubSystem: '<S64>/IdqStudy' */
 
-      /* Entry 'LdStudy': '<S77>:41' */
-      /* '<S77>:41:1' IdqStudy; */
-      /* Event: '<S77>:50' */
+      /* Entry 'LdStudy': '<S79>:41' */
+      /* '<S79>:41:1' IdqStudy; */
+      /* Event: '<S79>:50' */
       APP_FluxWeak_GEAR2_IdqStudy(rtu_Data_b, rtu_Data_l, rty_Out1, rty_Out1_h,
         rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e,
         &localDW->IdqStudy);
 
-      /* End of Outputs for SubSystem: '<S62>/IdqStudy' */
+      /* End of Outputs for SubSystem: '<S64>/IdqStudy' */
       break;
 
      case 5U:
-      /* Transition: '<S77>:27' */
-      /* '<S77>:25:1' sf_internal_predicateOutput = ... */
-      /* '<S77>:25:1' CalibStep==5; */
-      /* Transition: '<S77>:25' */
+      /* Transition: '<S79>:27' */
+      /* '<S79>:25:1' sf_internal_predicateOutput = ... */
+      /* '<S79>:25:1' CalibStep==5; */
+      /* Transition: '<S79>:25' */
       localDW->is_Sel_mode = APP_FluxWeak_GEAR2_IN_MtpaStudy;
 
-      /* Outputs for Function Call SubSystem: '<S62>/FluxLinkage' */
+      /* Outputs for Function Call SubSystem: '<S64>/FluxLinkage' */
 
-      /* Entry 'MtpaStudy': '<S77>:43' */
-      /* '<S77>:43:1' FluxLinkage; */
-      /* Event: '<S77>:53' */
+      /* Entry 'MtpaStudy': '<S79>:43' */
+      /* '<S79>:43:1' FluxLinkage; */
+      /* Event: '<S79>:53' */
       APP_FluxWeak_GEAR2_FluxLinkage(rtu_Data_b, rty_Out1, rty_Out1_h,
         rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e,
         &localDW->FluxLinkage);
 
-      /* End of Outputs for SubSystem: '<S62>/FluxLinkage' */
+      /* End of Outputs for SubSystem: '<S64>/FluxLinkage' */
       break;
 
      case 6U:
-      /* Transition: '<S77>:13' */
-      /* '<S77>:28:1' sf_internal_predicateOutput = ... */
-      /* '<S77>:28:1' CalibStep==6; */
-      /* Transition: '<S77>:28' */
+      /* Transition: '<S79>:13' */
+      /* '<S79>:28:1' sf_internal_predicateOutput = ... */
+      /* '<S79>:28:1' CalibStep==6; */
+      /* Transition: '<S79>:28' */
       localDW->is_Sel_mode = APP_FluxWeak_IN_IsMax_TLinStudy;
 
-      /* Outputs for Function Call SubSystem: '<S62>/MtpaStudy' */
+      /* Outputs for Function Call SubSystem: '<S64>/MtpaStudy' */
 
-      /* Entry 'IsMax_TLinStudy': '<S77>:45' */
-      /* '<S77>:45:1' MTPA; */
-      /* Event: '<S77>:51' */
+      /* Entry 'IsMax_TLinStudy': '<S79>:45' */
+      /* '<S79>:45:1' MTPA; */
+      /* Event: '<S79>:51' */
       APP_FluxWeak_GEAR2_MtpaStudy(rtu_Data_l, rtu_Data_b, rtu_Data_e, rty_Out1,
         rty_Out1_h, rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l,
         rty_Out1_e, &localDW->MtpaStudy);
 
-      /* End of Outputs for SubSystem: '<S62>/MtpaStudy' */
+      /* End of Outputs for SubSystem: '<S64>/MtpaStudy' */
       break;
 
      default:
-      /* Transition: '<S77>:26' */
-      /* Transition: '<S77>:18' */
+      /* Transition: '<S79>:26' */
+      /* Transition: '<S79>:18' */
       localDW->is_Sel_mode = APP_FluxWeak_GEAR2_IN_Normal;
 
-      /* Outputs for Function Call SubSystem: '<S62>/Tlin' */
+      /* Outputs for Function Call SubSystem: '<S64>/Tlin' */
 
-      /* Entry 'Normal': '<S77>:47' */
-      /* '<S77>:47:1' Normal; */
-      /* Event: '<S77>:54' */
+      /* Entry 'Normal': '<S79>:47' */
+      /* '<S79>:47:1' Normal; */
+      /* Event: '<S79>:54' */
       APP_FluxWeak_GEAR2_Tlin(rtu_Data_b, rty_Out1, rty_Out1_h, rty_Out1_b,
         rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e);
 
-      /* End of Outputs for SubSystem: '<S62>/Tlin' */
+      /* End of Outputs for SubSystem: '<S64>/Tlin' */
       break;
     }
   } else {
-    /* During 'Sel_mode': '<S77>:2' */
-    /* '<S77>:57:1' sf_internal_predicateOutput = ... */
-    /* '<S77>:57:1' hasChanged(CalibStep); */
+    /* During 'Sel_mode': '<S79>:2' */
+    /* '<S79>:57:1' sf_internal_predicateOutput = ... */
+    /* '<S79>:57:1' hasChanged(CalibStep); */
     if (CalibStep_prev != localDW->CalibStep_start) {
-      /* Transition: '<S77>:57' */
-      /* '<S77>:9:1' sf_internal_predicateOutput = ... */
-      /* '<S77>:9:1' CalibStep==1; */
+      /* Transition: '<S79>:57' */
+      /* '<S79>:9:1' sf_internal_predicateOutput = ... */
+      /* '<S79>:9:1' CalibStep==1; */
       switch (rtu_Data) {
        case 1U:
-        /* Transition: '<S77>:9' */
-        /* Exit Internal 'Sel_mode': '<S77>:2' */
+        /* Transition: '<S79>:9' */
+        /* Exit Internal 'Sel_mode': '<S79>:2' */
         localDW->is_Sel_mode = APP_FluxWeak_GEAR_IN_PhaseStudy;
 
-        /* Outputs for Function Call SubSystem: '<S62>/PhaseStudy' */
+        /* Outputs for Function Call SubSystem: '<S64>/PhaseStudy' */
 
-        /* Entry 'PhaseStudy': '<S77>:31' */
-        /* '<S77>:31:1' PhaseStudy; */
-        /* Event: '<S77>:32' */
+        /* Entry 'PhaseStudy': '<S79>:31' */
+        /* '<S79>:31:1' PhaseStudy; */
+        /* Event: '<S79>:32' */
         APP_FluxWeak_GEAR2_PhaseStudy(rtu_Data_h, rtu_Data_b, rty_Out1,
           rty_Out1_h, rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs,
           rty_Out1_l, rty_Out1_e, &localDW->PhaseStudy);
 
-        /* End of Outputs for SubSystem: '<S62>/PhaseStudy' */
+        /* End of Outputs for SubSystem: '<S64>/PhaseStudy' */
         break;
 
        case 2U:
-        /* Transition: '<S77>:6' */
-        /* '<S77>:24:1' sf_internal_predicateOutput = ... */
-        /* '<S77>:24:1' CalibStep==2; */
-        /* Transition: '<S77>:24' */
-        /* Exit Internal 'Sel_mode': '<S77>:2' */
+        /* Transition: '<S79>:6' */
+        /* '<S79>:24:1' sf_internal_predicateOutput = ... */
+        /* '<S79>:24:1' CalibStep==2; */
+        /* Transition: '<S79>:24' */
+        /* Exit Internal 'Sel_mode': '<S79>:2' */
         localDW->is_Sel_mode = APP_FluxWeak_G_IN_ElecZeroStudy;
 
-        /* Outputs for Function Call SubSystem: '<S62>/Hall' */
+        /* Outputs for Function Call SubSystem: '<S64>/Hall' */
 
-        /* Entry 'ElecZeroStudy': '<S77>:37' */
-        /* '<S77>:37:1' Hall; */
-        /* Event: '<S77>:55' */
+        /* Entry 'ElecZeroStudy': '<S79>:37' */
+        /* '<S79>:37:1' Hall; */
+        /* Event: '<S79>:55' */
         APP_FluxWeak_GEAR2_Hall(rtu_Data_b, rty_Out1, rty_Out1_h, rty_Out1_b,
           rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e,
           &localDW->Hall);
 
-        /* End of Outputs for SubSystem: '<S62>/Hall' */
+        /* End of Outputs for SubSystem: '<S64>/Hall' */
         break;
 
        case 3U:
-        /* Transition: '<S77>:21' */
-        /* '<S77>:12:1' sf_internal_predicateOutput = ... */
-        /* '<S77>:12:1' CalibStep==3; */
-        /* Transition: '<S77>:12' */
-        /* Exit Internal 'Sel_mode': '<S77>:2' */
+        /* Transition: '<S79>:21' */
+        /* '<S79>:12:1' sf_internal_predicateOutput = ... */
+        /* '<S79>:12:1' CalibStep==3; */
+        /* Transition: '<S79>:12' */
+        /* Exit Internal 'Sel_mode': '<S79>:2' */
         localDW->is_Sel_mode = APP_FluxWeak_GEAR2_IN_IfStudy;
 
-        /* Outputs for Function Call SubSystem: '<S62>/ElecZeroStudy' */
+        /* Outputs for Function Call SubSystem: '<S64>/ElecZeroStudy' */
 
-        /* Entry 'IfStudy': '<S77>:39' */
-        /* '<S77>:39:1' ElecZeroStudy; */
-        /* Event: '<S77>:49' */
+        /* Entry 'IfStudy': '<S79>:39' */
+        /* '<S79>:39:1' ElecZeroStudy; */
+        /* Event: '<S79>:49' */
         APP_FluxWeak_GEAR_ElecZeroStudy(rtu_Data_c, rtu_Data_b, rtu_Data_g,
           rtu_Data_hs, rtu_Data_h, rty_Out1, rty_Out1_h, rty_Out1_b, rty_Out1_c,
           rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e,
           &localDW->ElecZeroStudy);
 
-        /* End of Outputs for SubSystem: '<S62>/ElecZeroStudy' */
+        /* End of Outputs for SubSystem: '<S64>/ElecZeroStudy' */
         break;
 
        case 4U:
-        /* Transition: '<S77>:22' */
-        /* '<S77>:10:1' sf_internal_predicateOutput = ... */
-        /* '<S77>:10:1' CalibStep==4; */
-        /* Transition: '<S77>:10' */
-        /* Exit Internal 'Sel_mode': '<S77>:2' */
+        /* Transition: '<S79>:22' */
+        /* '<S79>:10:1' sf_internal_predicateOutput = ... */
+        /* '<S79>:10:1' CalibStep==4; */
+        /* Transition: '<S79>:10' */
+        /* Exit Internal 'Sel_mode': '<S79>:2' */
         localDW->is_Sel_mode = APP_FluxWeak_GEAR2_IN_LdStudy;
 
-        /* Outputs for Function Call SubSystem: '<S62>/IdqStudy' */
+        /* Outputs for Function Call SubSystem: '<S64>/IdqStudy' */
 
-        /* Entry 'LdStudy': '<S77>:41' */
-        /* '<S77>:41:1' IdqStudy; */
-        /* Event: '<S77>:50' */
+        /* Entry 'LdStudy': '<S79>:41' */
+        /* '<S79>:41:1' IdqStudy; */
+        /* Event: '<S79>:50' */
         APP_FluxWeak_GEAR2_IdqStudy(rtu_Data_b, rtu_Data_l, rty_Out1, rty_Out1_h,
           rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l,
           rty_Out1_e, &localDW->IdqStudy);
 
-        /* End of Outputs for SubSystem: '<S62>/IdqStudy' */
+        /* End of Outputs for SubSystem: '<S64>/IdqStudy' */
         break;
 
        case 5U:
-        /* Transition: '<S77>:27' */
-        /* '<S77>:25:1' sf_internal_predicateOutput = ... */
-        /* '<S77>:25:1' CalibStep==5; */
-        /* Transition: '<S77>:25' */
-        /* Exit Internal 'Sel_mode': '<S77>:2' */
+        /* Transition: '<S79>:27' */
+        /* '<S79>:25:1' sf_internal_predicateOutput = ... */
+        /* '<S79>:25:1' CalibStep==5; */
+        /* Transition: '<S79>:25' */
+        /* Exit Internal 'Sel_mode': '<S79>:2' */
         localDW->is_Sel_mode = APP_FluxWeak_GEAR2_IN_MtpaStudy;
 
-        /* Outputs for Function Call SubSystem: '<S62>/FluxLinkage' */
+        /* Outputs for Function Call SubSystem: '<S64>/FluxLinkage' */
 
-        /* Entry 'MtpaStudy': '<S77>:43' */
-        /* '<S77>:43:1' FluxLinkage; */
-        /* Event: '<S77>:53' */
+        /* Entry 'MtpaStudy': '<S79>:43' */
+        /* '<S79>:43:1' FluxLinkage; */
+        /* Event: '<S79>:53' */
         APP_FluxWeak_GEAR2_FluxLinkage(rtu_Data_b, rty_Out1, rty_Out1_h,
           rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l,
           rty_Out1_e, &localDW->FluxLinkage);
 
-        /* End of Outputs for SubSystem: '<S62>/FluxLinkage' */
+        /* End of Outputs for SubSystem: '<S64>/FluxLinkage' */
         break;
 
        case 6U:
-        /* Transition: '<S77>:13' */
-        /* '<S77>:28:1' sf_internal_predicateOutput = ... */
-        /* '<S77>:28:1' CalibStep==6; */
-        /* Transition: '<S77>:28' */
-        /* Exit Internal 'Sel_mode': '<S77>:2' */
+        /* Transition: '<S79>:13' */
+        /* '<S79>:28:1' sf_internal_predicateOutput = ... */
+        /* '<S79>:28:1' CalibStep==6; */
+        /* Transition: '<S79>:28' */
+        /* Exit Internal 'Sel_mode': '<S79>:2' */
         localDW->is_Sel_mode = APP_FluxWeak_IN_IsMax_TLinStudy;
 
-        /* Outputs for Function Call SubSystem: '<S62>/MtpaStudy' */
+        /* Outputs for Function Call SubSystem: '<S64>/MtpaStudy' */
 
-        /* Entry 'IsMax_TLinStudy': '<S77>:45' */
-        /* '<S77>:45:1' MTPA; */
-        /* Event: '<S77>:51' */
+        /* Entry 'IsMax_TLinStudy': '<S79>:45' */
+        /* '<S79>:45:1' MTPA; */
+        /* Event: '<S79>:51' */
         APP_FluxWeak_GEAR2_MtpaStudy(rtu_Data_l, rtu_Data_b, rtu_Data_e,
           rty_Out1, rty_Out1_h, rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs,
           rty_Out1_l, rty_Out1_e, &localDW->MtpaStudy);
 
-        /* End of Outputs for SubSystem: '<S62>/MtpaStudy' */
+        /* End of Outputs for SubSystem: '<S64>/MtpaStudy' */
         break;
 
        default:
-        /* Transition: '<S77>:26' */
-        /* Transition: '<S77>:18' */
-        /* Exit Internal 'Sel_mode': '<S77>:2' */
+        /* Transition: '<S79>:26' */
+        /* Transition: '<S79>:18' */
+        /* Exit Internal 'Sel_mode': '<S79>:2' */
         localDW->is_Sel_mode = APP_FluxWeak_GEAR2_IN_Normal;
 
-        /* Outputs for Function Call SubSystem: '<S62>/Tlin' */
+        /* Outputs for Function Call SubSystem: '<S64>/Tlin' */
 
-        /* Entry 'Normal': '<S77>:47' */
-        /* '<S77>:47:1' Normal; */
-        /* Event: '<S77>:54' */
+        /* Entry 'Normal': '<S79>:47' */
+        /* '<S79>:47:1' Normal; */
+        /* Event: '<S79>:54' */
         APP_FluxWeak_GEAR2_Tlin(rtu_Data_b, rty_Out1, rty_Out1_h, rty_Out1_b,
           rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e);
 
-        /* End of Outputs for SubSystem: '<S62>/Tlin' */
+        /* End of Outputs for SubSystem: '<S64>/Tlin' */
         break;
       }
     } else {
       switch (localDW->is_Sel_mode) {
        case APP_FluxWeak_G_IN_ElecZeroStudy:
-        /* Outputs for Function Call SubSystem: '<S62>/Hall' */
+        /* Outputs for Function Call SubSystem: '<S64>/Hall' */
 
-        /* During 'ElecZeroStudy': '<S77>:37' */
-        /* '<S77>:37:1' Hall; */
-        /* Event: '<S77>:55' */
+        /* During 'ElecZeroStudy': '<S79>:37' */
+        /* '<S79>:37:1' Hall; */
+        /* Event: '<S79>:55' */
         APP_FluxWeak_GEAR2_Hall(rtu_Data_b, rty_Out1, rty_Out1_h, rty_Out1_b,
           rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e,
           &localDW->Hall);
 
-        /* End of Outputs for SubSystem: '<S62>/Hall' */
+        /* End of Outputs for SubSystem: '<S64>/Hall' */
         break;
 
        case APP_FluxWeak_GEAR2_IN_IfStudy:
-        /* Outputs for Function Call SubSystem: '<S62>/ElecZeroStudy' */
+        /* Outputs for Function Call SubSystem: '<S64>/ElecZeroStudy' */
 
-        /* During 'IfStudy': '<S77>:39' */
-        /* '<S77>:39:1' ElecZeroStudy; */
-        /* Event: '<S77>:49' */
+        /* During 'IfStudy': '<S79>:39' */
+        /* '<S79>:39:1' ElecZeroStudy; */
+        /* Event: '<S79>:49' */
         APP_FluxWeak_GEAR_ElecZeroStudy(rtu_Data_c, rtu_Data_b, rtu_Data_g,
           rtu_Data_hs, rtu_Data_h, rty_Out1, rty_Out1_h, rty_Out1_b, rty_Out1_c,
           rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e,
           &localDW->ElecZeroStudy);
 
-        /* End of Outputs for SubSystem: '<S62>/ElecZeroStudy' */
+        /* End of Outputs for SubSystem: '<S64>/ElecZeroStudy' */
         break;
 
        case APP_FluxWeak_IN_IsMax_TLinStudy:
-        /* Outputs for Function Call SubSystem: '<S62>/MtpaStudy' */
+        /* Outputs for Function Call SubSystem: '<S64>/MtpaStudy' */
 
-        /* During 'IsMax_TLinStudy': '<S77>:45' */
-        /* '<S77>:45:1' MTPA; */
-        /* Event: '<S77>:51' */
+        /* During 'IsMax_TLinStudy': '<S79>:45' */
+        /* '<S79>:45:1' MTPA; */
+        /* Event: '<S79>:51' */
         APP_FluxWeak_GEAR2_MtpaStudy(rtu_Data_l, rtu_Data_b, rtu_Data_e,
           rty_Out1, rty_Out1_h, rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs,
           rty_Out1_l, rty_Out1_e, &localDW->MtpaStudy);
 
-        /* End of Outputs for SubSystem: '<S62>/MtpaStudy' */
+        /* End of Outputs for SubSystem: '<S64>/MtpaStudy' */
         break;
 
        case APP_FluxWeak_GEAR2_IN_LdStudy:
-        /* Outputs for Function Call SubSystem: '<S62>/IdqStudy' */
+        /* Outputs for Function Call SubSystem: '<S64>/IdqStudy' */
 
-        /* During 'LdStudy': '<S77>:41' */
-        /* '<S77>:41:1' IdqStudy; */
-        /* Event: '<S77>:50' */
+        /* During 'LdStudy': '<S79>:41' */
+        /* '<S79>:41:1' IdqStudy; */
+        /* Event: '<S79>:50' */
         APP_FluxWeak_GEAR2_IdqStudy(rtu_Data_b, rtu_Data_l, rty_Out1, rty_Out1_h,
           rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l,
           rty_Out1_e, &localDW->IdqStudy);
 
-        /* End of Outputs for SubSystem: '<S62>/IdqStudy' */
+        /* End of Outputs for SubSystem: '<S64>/IdqStudy' */
         break;
 
        case APP_FluxWeak_GEAR2_IN_MtpaStudy:
-        /* Outputs for Function Call SubSystem: '<S62>/FluxLinkage' */
+        /* Outputs for Function Call SubSystem: '<S64>/FluxLinkage' */
 
-        /* During 'MtpaStudy': '<S77>:43' */
-        /* '<S77>:43:1' FluxLinkage; */
-        /* Event: '<S77>:53' */
+        /* During 'MtpaStudy': '<S79>:43' */
+        /* '<S79>:43:1' FluxLinkage; */
+        /* Event: '<S79>:53' */
         APP_FluxWeak_GEAR2_FluxLinkage(rtu_Data_b, rty_Out1, rty_Out1_h,
           rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l,
           rty_Out1_e, &localDW->FluxLinkage);
 
-        /* End of Outputs for SubSystem: '<S62>/FluxLinkage' */
+        /* End of Outputs for SubSystem: '<S64>/FluxLinkage' */
         break;
 
        case APP_FluxWeak_GEAR2_IN_Normal:
-        /* Outputs for Function Call SubSystem: '<S62>/Tlin' */
+        /* Outputs for Function Call SubSystem: '<S64>/Tlin' */
 
-        /* During 'Normal': '<S77>:47' */
-        /* '<S77>:47:1' Normal; */
-        /* Event: '<S77>:54' */
+        /* During 'Normal': '<S79>:47' */
+        /* '<S79>:47:1' Normal; */
+        /* Event: '<S79>:54' */
         APP_FluxWeak_GEAR2_Tlin(rtu_Data_b, rty_Out1, rty_Out1_h, rty_Out1_b,
           rty_Out1_c, rty_Out1_g, rty_Out1_hs, rty_Out1_l, rty_Out1_e);
 
-        /* End of Outputs for SubSystem: '<S62>/Tlin' */
+        /* End of Outputs for SubSystem: '<S64>/Tlin' */
         break;
 
        default:
-        /* Outputs for Function Call SubSystem: '<S62>/PhaseStudy' */
+        /* Outputs for Function Call SubSystem: '<S64>/PhaseStudy' */
 
-        /* During 'PhaseStudy': '<S77>:31' */
-        /* '<S77>:31:1' PhaseStudy; */
-        /* Event: '<S77>:32' */
+        /* During 'PhaseStudy': '<S79>:31' */
+        /* '<S79>:31:1' PhaseStudy; */
+        /* Event: '<S79>:32' */
         APP_FluxWeak_GEAR2_PhaseStudy(rtu_Data_h, rtu_Data_b, rty_Out1,
           rty_Out1_h, rty_Out1_b, rty_Out1_c, rty_Out1_g, rty_Out1_hs,
           rty_Out1_l, rty_Out1_e, &localDW->PhaseStudy);
 
-        /* End of Outputs for SubSystem: '<S62>/PhaseStudy' */
+        /* End of Outputs for SubSystem: '<S64>/PhaseStudy' */
         break;
       }
     }
   }
 
-  /* End of Chart: '<S62>/Chart1' */
+  /* End of Chart: '<S64>/Chart1' */
 }
 
-/* Output and update for function-call system: '<S54>/Initial_D' */
+/* Output and update for function-call system: '<S56>/Initial_D' */
 void APP_FluxWeak_GEAR2_Initial_D(void)
 {
-  /* StateWriter: '<S67>/State Writer4' incorporates:
-   *  Constant: '<S67>/Constant'
+  /* StateWriter: '<S69>/State Writer4' incorporates:
+   *  Constant: '<S69>/Constant'
    */
   APP_FluxWeak_GEAR2_DW.Spd_g.Spd_D_Int = 0.0F;
 }
 
-/* System initialize for function-call system: '<S54>/UVW_check' */
+/* System initialize for function-call system: '<S56>/UVW_check' */
 void APP_FluxWeak_GEA_UVW_check_Init(DW_UVW_check_APP_FluxWeak_GEA_T *localDW)
 {
-  /* SystemInitialize for Atomic SubSystem: '<S135>/lpf' */
-  LPF_App_Init(&localDW->lpf);
-
-  /* End of SystemInitialize for SubSystem: '<S135>/lpf' */
-
-  /* SystemInitialize for Atomic SubSystem: '<S136>/lpf' */
-  LPF_App_Init(&localDW->lpf_e);
-
-  /* End of SystemInitialize for SubSystem: '<S136>/lpf' */
-
   /* SystemInitialize for Atomic SubSystem: '<S137>/lpf' */
-  LPF_App_Init(&localDW->lpf_c);
+  LPF_App_Init(&localDW->lpf);
 
   /* End of SystemInitialize for SubSystem: '<S137>/lpf' */
 
-  /* SystemInitialize for Chart: '<S75>/Chart' */
+  /* SystemInitialize for Atomic SubSystem: '<S138>/lpf' */
+  LPF_App_Init(&localDW->lpf_e);
+
+  /* End of SystemInitialize for SubSystem: '<S138>/lpf' */
+
+  /* SystemInitialize for Atomic SubSystem: '<S139>/lpf' */
+  LPF_App_Init(&localDW->lpf_c);
+
+  /* End of SystemInitialize for SubSystem: '<S139>/lpf' */
+
+  /* SystemInitialize for Chart: '<S77>/Chart' */
   localDW->temporalCounter_i1 = 0U;
   localDW->is_active_c28_APP_FluxWeak_GEAR = 0U;
   localDW->is_c28_APP_FluxWeak_GEAR2 = APP_FluxW_IN_NO_ACTIVE_CHILD_oa;
@@ -4527,25 +4527,25 @@ void APP_FluxWeak_GEA_UVW_check_Init(DW_UVW_check_APP_FluxWeak_GEA_T *localDW)
   localDW->UVW_offline = 0U;
 }
 
-/* System reset for function-call system: '<S54>/UVW_check' */
+/* System reset for function-call system: '<S56>/UVW_check' */
 void APP_FluxWeak_GE_UVW_check_Reset(DW_UVW_check_APP_FluxWeak_GEA_T *localDW)
 {
-  /* SystemReset for Atomic SubSystem: '<S135>/lpf' */
-  LPF_App_Reset(&localDW->lpf);
-
-  /* End of SystemReset for SubSystem: '<S135>/lpf' */
-
-  /* SystemReset for Atomic SubSystem: '<S136>/lpf' */
-  LPF_App_Reset(&localDW->lpf_e);
-
-  /* End of SystemReset for SubSystem: '<S136>/lpf' */
-
   /* SystemReset for Atomic SubSystem: '<S137>/lpf' */
-  LPF_App_Reset(&localDW->lpf_c);
+  LPF_App_Reset(&localDW->lpf);
 
   /* End of SystemReset for SubSystem: '<S137>/lpf' */
 
-  /* SystemReset for Chart: '<S75>/Chart' */
+  /* SystemReset for Atomic SubSystem: '<S138>/lpf' */
+  LPF_App_Reset(&localDW->lpf_e);
+
+  /* End of SystemReset for SubSystem: '<S138>/lpf' */
+
+  /* SystemReset for Atomic SubSystem: '<S139>/lpf' */
+  LPF_App_Reset(&localDW->lpf_c);
+
+  /* End of SystemReset for SubSystem: '<S139>/lpf' */
+
+  /* SystemReset for Chart: '<S77>/Chart' */
   localDW->temporalCounter_i1 = 0U;
   localDW->is_active_c28_APP_FluxWeak_GEAR = 0U;
   localDW->is_c28_APP_FluxWeak_GEAR2 = APP_FluxW_IN_NO_ACTIVE_CHILD_oa;
@@ -4556,7 +4556,7 @@ void APP_FluxWeak_GE_UVW_check_Reset(DW_UVW_check_APP_FluxWeak_GEA_T *localDW)
   localDW->UVW_offline = 0U;
 }
 
-/* Output and update for function-call system: '<S54>/UVW_check' */
+/* Output and update for function-call system: '<S56>/UVW_check' */
 void APP_FluxWeak_GEAR2_UVW_check(real32_T rtu_Data, real32_T rtu_Data_l,
   real32_T rtu_Data_h, uint16_T *rty_UVWCheckOut, real32_T *rty_UVWCheckOut_l,
   real32_T *rty_UVWCheckOut_h, real32_T *rty_UVWCheckOut_p, uint16_T
@@ -4568,43 +4568,43 @@ void APP_FluxWeak_GEAR2_UVW_check(real32_T rtu_Data, real32_T rtu_Data_l,
   real32_T rtb_DiscreteTimeIntegrator1_p;
   real32_T rtb_DiscreteTimeIntegrator1_l;
 
-  /* SignalConversion: '<S75>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
+  /* SignalConversion: '<S77>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
   *rty_UVWCheckOut = 0U;
-
-  /* Outputs for Atomic SubSystem: '<S135>/lpf' */
-
-  /* Abs: '<S75>/Abs' incorporates:
-   *  Constant: '<S135>/Constant'
-   *  Constant: '<S135>/Constant1'
-   */
-  LPF_App(fabsf(rtu_Data), 0.002F, 20.0F, &rtb_DiscreteTimeIntegrator1_hl,
-          &localDW->lpf);
-
-  /* End of Outputs for SubSystem: '<S135>/lpf' */
-
-  /* Outputs for Atomic SubSystem: '<S136>/lpf' */
-
-  /* Abs: '<S75>/Abs1' incorporates:
-   *  Constant: '<S136>/Constant'
-   *  Constant: '<S136>/Constant1'
-   */
-  LPF_App(fabsf(rtu_Data_l), 0.002F, 20.0F, &rtb_DiscreteTimeIntegrator1_p,
-          &localDW->lpf_e);
-
-  /* End of Outputs for SubSystem: '<S136>/lpf' */
 
   /* Outputs for Atomic SubSystem: '<S137>/lpf' */
 
-  /* Abs: '<S75>/Abs2' incorporates:
+  /* Abs: '<S77>/Abs' incorporates:
    *  Constant: '<S137>/Constant'
    *  Constant: '<S137>/Constant1'
    */
-  LPF_App(fabsf(rtu_Data_h), 0.002F, 20.0F, &rtb_DiscreteTimeIntegrator1_l,
-          &localDW->lpf_c);
+  LPF_App(fabsf(rtu_Data), 0.002F, 10.0F, &rtb_DiscreteTimeIntegrator1_hl,
+          &localDW->lpf);
 
   /* End of Outputs for SubSystem: '<S137>/lpf' */
 
-  /* Chart: '<S75>/Chart' */
+  /* Outputs for Atomic SubSystem: '<S138>/lpf' */
+
+  /* Abs: '<S77>/Abs1' incorporates:
+   *  Constant: '<S138>/Constant'
+   *  Constant: '<S138>/Constant1'
+   */
+  LPF_App(fabsf(rtu_Data_l), 0.002F, 10.0F, &rtb_DiscreteTimeIntegrator1_p,
+          &localDW->lpf_e);
+
+  /* End of Outputs for SubSystem: '<S138>/lpf' */
+
+  /* Outputs for Atomic SubSystem: '<S139>/lpf' */
+
+  /* Abs: '<S77>/Abs2' incorporates:
+   *  Constant: '<S139>/Constant'
+   *  Constant: '<S139>/Constant1'
+   */
+  LPF_App(fabsf(rtu_Data_h), 0.002F, 10.0F, &rtb_DiscreteTimeIntegrator1_l,
+          &localDW->lpf_c);
+
+  /* End of Outputs for SubSystem: '<S139>/lpf' */
+
+  /* Chart: '<S77>/Chart' */
   /* Gateway: implement/method/All_loop/UVW_check/Chart */
   if (localDW->temporalCounter_i1 < 127U) {
     localDW->temporalCounter_i1 = ((int16_T)localDW->temporalCounter_i1 + 1) &
@@ -4617,265 +4617,265 @@ void APP_FluxWeak_GEAR2_UVW_check(real32_T rtu_Data, real32_T rtu_Data_l,
     localDW->is_active_c28_APP_FluxWeak_GEAR = 1U;
 
     /* Entry Internal: implement/method/All_loop/UVW_check/Chart */
-    /* Transition: '<S134>:5' */
+    /* Transition: '<S136>:5' */
     localDW->is_c28_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_start;
 
-    /* Entry 'start': '<S134>:6' */
-    /* '<S134>:6:1' IdIqSetEn=1; */
+    /* Entry 'start': '<S136>:6' */
+    /* '<S136>:6:1' IdIqSetEn=1; */
     localDW->IdIqSetEn = 1U;
 
-    /* '<S134>:6:1' AngleSetEn =1 ; */
+    /* '<S136>:6:1' AngleSetEn =1 ; */
     localDW->AngleSetEn = 1U;
 
-    /* '<S134>:6:1' IdRefSet=IdRefSet+0.006; */
+    /* '<S136>:6:1' IdRefSet=IdRefSet+0.006; */
     localDW->IdRefSet += 0.006F;
 
-    /* '<S134>:6:4' AngleRefSet=0; */
+    /* '<S136>:6:4' AngleRefSet=0; */
     localDW->AngleRefSet = 0.0F;
   } else {
     switch (localDW->is_c28_APP_FluxWeak_GEAR2) {
      case APP_FluxWeak_GEAR2_IN_check:
-      /* During 'check': '<S134>:13' */
-      /* Transition: '<S134>:27' */
+      /* During 'check': '<S136>:13' */
+      /* Transition: '<S136>:27' */
       localDW->is_c28_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_quitcheck;
 
-      /* Entry 'quitcheck': '<S134>:26' */
-      /* '<S134>:26:1' IdIqSetEn=1; */
+      /* Entry 'quitcheck': '<S136>:26' */
+      /* '<S136>:26:1' IdIqSetEn=1; */
       localDW->IdIqSetEn = 1U;
 
-      /* '<S134>:26:1' AngleSetEn =1 ; */
+      /* '<S136>:26:1' AngleSetEn =1 ; */
       localDW->AngleSetEn = 1U;
 
-      /* '<S134>:26:1' IdRefSet=IdRefSet-0.006; */
+      /* '<S136>:26:1' IdRefSet=IdRefSet-0.006; */
       localDW->IdRefSet -= 0.006F;
 
-      /* '<S134>:26:4' AngleRefSet=0; */
+      /* '<S136>:26:4' AngleRefSet=0; */
       localDW->AngleRefSet = 0.0F;
       break;
 
      case APP_FluxWeak_GEAR2_IN_fin:
-      /* During 'fin': '<S134>:28' */
+      /* During 'fin': '<S136>:28' */
       break;
 
      case APP_FluxWeak_GEAR2_IN_hold:
-      /* During 'hold': '<S134>:11' */
-      /* '<S134>:14:1' sf_internal_predicateOutput = ... */
-      /* '<S134>:14:1' after(100,tick); */
+      /* During 'hold': '<S136>:11' */
+      /* '<S136>:14:1' sf_internal_predicateOutput = ... */
+      /* '<S136>:14:1' after(100,tick); */
       if ((int16_T)localDW->temporalCounter_i1 >= 100) {
-        /* Transition: '<S134>:14' */
+        /* Transition: '<S136>:14' */
         localDW->is_c28_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_check;
 
-        /* Entry Internal 'check': '<S134>:13' */
-        /* Transition: '<S134>:16' */
-        /* '<S134>:18:1' sf_internal_predicateOutput = ... */
-        /* '<S134>:18:1' CurU>0.15 && CurV>0.075 && CurW>0.075; */
+        /* Entry Internal 'check': '<S136>:13' */
+        /* Transition: '<S136>:16' */
+        /* '<S136>:18:1' sf_internal_predicateOutput = ... */
+        /* '<S136>:18:1' CurU>0.15 && CurV>0.075 && CurW>0.075; */
         if ((rtb_DiscreteTimeIntegrator1_hl > 0.15) &&
             (rtb_DiscreteTimeIntegrator1_p > 0.075) &&
             (rtb_DiscreteTimeIntegrator1_l > 0.075)) {
-          /* Transition: '<S134>:18' */
-          /* Transition: '<S134>:21' */
-          /* '<S134>:21:1' UVW_offline=0; */
+          /* Transition: '<S136>:18' */
+          /* Transition: '<S136>:21' */
+          /* '<S136>:21:1' UVW_offline=0; */
           localDW->UVW_offline = 0U;
 
-          /* Transition: '<S134>:24' */
+          /* Transition: '<S136>:24' */
         } else {
-          /* Transition: '<S134>:22' */
-          /* '<S134>:22:1' UVW_offline=1; */
+          /* Transition: '<S136>:22' */
+          /* '<S136>:22:1' UVW_offline=1; */
           localDW->UVW_offline = 1U;
         }
       } else {
-        /* '<S134>:11:1' IdIqSetEn=1; */
+        /* '<S136>:11:1' IdIqSetEn=1; */
         localDW->IdIqSetEn = 1U;
 
-        /* '<S134>:11:1' AngleSetEn =1 ; */
+        /* '<S136>:11:1' AngleSetEn =1 ; */
         localDW->AngleSetEn = 1U;
 
-        /* '<S134>:11:1' IdRefSet=0.3; */
+        /* '<S136>:11:1' IdRefSet=0.3; */
         localDW->IdRefSet = 0.3F;
 
-        /* '<S134>:11:3' AngleRefSet=0; */
+        /* '<S136>:11:3' AngleRefSet=0; */
         localDW->AngleRefSet = 0.0F;
       }
       break;
 
      case APP_FluxWeak_GEAR2_IN_quitcheck:
-      /* During 'quitcheck': '<S134>:26' */
-      /* '<S134>:29:1' sf_internal_predicateOutput = ... */
-      /* '<S134>:29:1' IdRefSet<0.01; */
+      /* During 'quitcheck': '<S136>:26' */
+      /* '<S136>:29:1' sf_internal_predicateOutput = ... */
+      /* '<S136>:29:1' IdRefSet<0.01; */
       if (localDW->IdRefSet < 0.01) {
-        /* Transition: '<S134>:29' */
+        /* Transition: '<S136>:29' */
         localDW->is_c28_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_fin;
 
-        /* Entry 'fin': '<S134>:28' */
-        /* '<S134>:28:1' IdIqSetEn=0; */
+        /* Entry 'fin': '<S136>:28' */
+        /* '<S136>:28:1' IdIqSetEn=0; */
         localDW->IdIqSetEn = 0U;
 
-        /* '<S134>:28:1' AngleSetEn =0 ; */
+        /* '<S136>:28:1' AngleSetEn =0 ; */
         localDW->AngleSetEn = 0U;
 
-        /* '<S134>:28:1' IdRefSet=0; */
+        /* '<S136>:28:1' IdRefSet=0; */
         localDW->IdRefSet = 0.0F;
 
-        /* '<S134>:28:3' AngleRefSet=0; */
+        /* '<S136>:28:3' AngleRefSet=0; */
         localDW->AngleRefSet = 0.0F;
       } else {
-        /* '<S134>:26:1' IdIqSetEn=1; */
+        /* '<S136>:26:1' IdIqSetEn=1; */
         localDW->IdIqSetEn = 1U;
 
-        /* '<S134>:26:1' AngleSetEn =1 ; */
+        /* '<S136>:26:1' AngleSetEn =1 ; */
         localDW->AngleSetEn = 1U;
 
-        /* '<S134>:26:1' IdRefSet=IdRefSet-0.006; */
+        /* '<S136>:26:1' IdRefSet=IdRefSet-0.006; */
         localDW->IdRefSet -= 0.006F;
 
-        /* '<S134>:26:4' AngleRefSet=0; */
+        /* '<S136>:26:4' AngleRefSet=0; */
         localDW->AngleRefSet = 0.0F;
       }
       break;
 
      default:
-      /* During 'start': '<S134>:6' */
-      /* '<S134>:12:1' sf_internal_predicateOutput = ... */
-      /* '<S134>:12:1' IdRefSet>=0.3; */
-      if (localDW->IdRefSet >= 0.3) {
-        /* Transition: '<S134>:12' */
+      /* During 'start': '<S136>:6' */
+      /* '<S136>:12:1' sf_internal_predicateOutput = ... */
+      /* '<S136>:12:1' IdRefSet>=0.05; */
+      if (localDW->IdRefSet >= 0.05) {
+        /* Transition: '<S136>:12' */
         localDW->is_c28_APP_FluxWeak_GEAR2 = APP_FluxWeak_GEAR2_IN_hold;
         localDW->temporalCounter_i1 = 0U;
 
-        /* Entry 'hold': '<S134>:11' */
-        /* '<S134>:11:1' IdIqSetEn=1; */
+        /* Entry 'hold': '<S136>:11' */
+        /* '<S136>:11:1' IdIqSetEn=1; */
         localDW->IdIqSetEn = 1U;
 
-        /* '<S134>:11:1' AngleSetEn =1 ; */
+        /* '<S136>:11:1' AngleSetEn =1 ; */
         localDW->AngleSetEn = 1U;
 
-        /* '<S134>:11:1' IdRefSet=0.3; */
+        /* '<S136>:11:1' IdRefSet=0.3; */
         localDW->IdRefSet = 0.3F;
 
-        /* '<S134>:11:3' AngleRefSet=0; */
+        /* '<S136>:11:3' AngleRefSet=0; */
         localDW->AngleRefSet = 0.0F;
       } else {
-        /* '<S134>:6:1' IdIqSetEn=1; */
+        /* '<S136>:6:1' IdIqSetEn=1; */
         localDW->IdIqSetEn = 1U;
 
-        /* '<S134>:6:1' AngleSetEn =1 ; */
+        /* '<S136>:6:1' AngleSetEn =1 ; */
         localDW->AngleSetEn = 1U;
 
-        /* '<S134>:6:1' IdRefSet=IdRefSet+0.006; */
+        /* '<S136>:6:1' IdRefSet=IdRefSet+0.006; */
         localDW->IdRefSet += 0.006F;
 
-        /* '<S134>:6:4' AngleRefSet=0; */
+        /* '<S136>:6:4' AngleRefSet=0; */
         localDW->AngleRefSet = 0.0F;
       }
       break;
     }
   }
 
-  /* End of Chart: '<S75>/Chart' */
+  /* End of Chart: '<S77>/Chart' */
 
-  /* SignalConversion: '<S75>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
+  /* SignalConversion: '<S77>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
   *rty_UVWCheckOut_l = localDW->IdRefSet;
 
-  /* SignalConversion: '<S75>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
+  /* SignalConversion: '<S77>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
   *rty_UVWCheckOut_h = 0.0F;
 
-  /* SignalConversion: '<S75>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
+  /* SignalConversion: '<S77>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
   *rty_UVWCheckOut_p = localDW->AngleRefSet;
 
-  /* SignalConversion: '<S75>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
+  /* SignalConversion: '<S77>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
   *rty_UVWCheckOut_j = localDW->IdIqSetEn;
 
-  /* SignalConversion: '<S75>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
+  /* SignalConversion: '<S77>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
   *rty_UVWCheckOut_b = localDW->AngleSetEn;
 
-  /* SignalConversion: '<S75>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
+  /* SignalConversion: '<S77>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
   *rty_UVWCheckOut_a = 0.0F;
 
-  /* SignalConversion: '<S75>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
+  /* SignalConversion: '<S77>/BusConversion_InsertedFor_UVWCheckOut_at_inport_0' */
   *rty_UVWCheckOut_b3 = 0.0F;
 
-  /* SignalConversion: '<S75>/OutportBufferForUVWFault' */
+  /* SignalConversion: '<S77>/OutportBufferForUVWFault' */
   *rty_UVWFault = localDW->UVW_offline;
 }
 
 /*
  * Output and update for function-call system:
- *    '<S150>/Lim_state'
- *    '<S156>/Lim_state'
+ *    '<S152>/Lim_state'
+ *    '<S158>/Lim_state'
  */
 void APP_FluxWeak_GEAR2_Lim_state(void)
 {
-  /* Saturate: '<S153>/Saturation' incorporates:
-   *  StateReader: '<S153>/State Reader'
+  /* Saturate: '<S155>/Saturation' incorporates:
+   *  StateReader: '<S155>/State Reader'
    */
   if (APP_FluxWeak_GEAR2_DW.sf_Chart_lj.FunctionCallSubsystem.PI.I_state > 1.0F)
   {
-    /* StateWriter: '<S153>/State Writer' */
+    /* StateWriter: '<S155>/State Writer' */
     APP_FluxWeak_GEAR2_DW.sf_Chart_lj.FunctionCallSubsystem.PI.I_state = 1.0F;
   } else {
     if (APP_FluxWeak_GEAR2_DW.sf_Chart_lj.FunctionCallSubsystem.PI.I_state <
         0.0F) {
-      /* StateWriter: '<S153>/State Writer' */
+      /* StateWriter: '<S155>/State Writer' */
       APP_FluxWeak_GEAR2_DW.sf_Chart_lj.FunctionCallSubsystem.PI.I_state = 0.0F;
     }
   }
 
-  /* End of Saturate: '<S153>/Saturation' */
+  /* End of Saturate: '<S155>/Saturation' */
 }
 
 /*
  * System initialize for function-call system:
- *    '<S150>/Function-Call Subsystem'
- *    '<S156>/Function-Call Subsystem'
+ *    '<S152>/Function-Call Subsystem'
+ *    '<S158>/Function-Call Subsystem'
  */
 void AP_FunctionCallSubsystem_a_Init(real32_T *rty_PIOut)
 {
-  /* SystemInitialize for Outport: '<S152>/PIOut' */
+  /* SystemInitialize for Outport: '<S154>/PIOut' */
   *rty_PIOut = 1.0F;
 }
 
 /*
  * Output and update for function-call system:
- *    '<S150>/Function-Call Subsystem'
- *    '<S156>/Function-Call Subsystem'
+ *    '<S152>/Function-Call Subsystem'
+ *    '<S158>/Function-Call Subsystem'
  */
 void APP_Flu_FunctionCallSubsystem_p(real32_T rtu_Err, real32_T *rty_PIOut,
   DW_FunctionCallSubsystem_AP_g_T *localDW)
 {
   real32_T rtb_DiscreteTimeIntegrator1_n;
 
-  /* Outputs for Atomic SubSystem: '<S152>/PI' */
+  /* Outputs for Atomic SubSystem: '<S154>/PI' */
 
-  /* Constant: '<S152>/Constant' incorporates:
-   *  Constant: '<S152>/Constant1'
-   *  Constant: '<S152>/Constant2'
+  /* Constant: '<S154>/Constant' incorporates:
+   *  Constant: '<S154>/Constant1'
+   *  Constant: '<S154>/Constant2'
    */
   PI_App(rtu_Err, PMSM_Param.LimIKp, PMSM_Param.LimIKi, 0.002F, rty_PIOut,
          &rtb_DiscreteTimeIntegrator1_n, &localDW->PI);
 
-  /* End of Outputs for SubSystem: '<S152>/PI' */
+  /* End of Outputs for SubSystem: '<S154>/PI' */
 }
 
 /*
  * System initialize for atomic system:
- *    '<S150>/Chart'
- *    '<S156>/Chart'
+ *    '<S152>/Chart'
+ *    '<S158>/Chart'
  */
 void APP_FluxWeak_GEAR2_Chart_Init(real32_T *rty_0,
   DW_Chart_APP_FluxWeak_GEAR2_T *localDW)
 {
   localDW->is_active_c25_APP_FluxWeak_GEAR = 0U;
 
-  /* SystemInitialize for Function Call SubSystem: '<S150>/Function-Call Subsystem' */
+  /* SystemInitialize for Function Call SubSystem: '<S152>/Function-Call Subsystem' */
   AP_FunctionCallSubsystem_a_Init(rty_0);
 
-  /* End of SystemInitialize for SubSystem: '<S150>/Function-Call Subsystem' */
+  /* End of SystemInitialize for SubSystem: '<S152>/Function-Call Subsystem' */
 }
 
 /*
  * System reset for atomic system:
- *    '<S150>/Chart'
- *    '<S156>/Chart'
+ *    '<S152>/Chart'
+ *    '<S158>/Chart'
  */
 void APP_FluxWeak_GEAR2_Chart_Reset(DW_Chart_APP_FluxWeak_GEAR2_T *localDW)
 {
@@ -4884,59 +4884,59 @@ void APP_FluxWeak_GEAR2_Chart_Reset(DW_Chart_APP_FluxWeak_GEAR2_T *localDW)
 
 /*
  * Output and update for atomic system:
- *    '<S150>/Chart'
- *    '<S156>/Chart'
+ *    '<S152>/Chart'
+ *    '<S158>/Chart'
  */
 void APP_FluxWeak_GEAR2_Chart(real32_T rtu_0, real32_T *rty_0,
   DW_Chart_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* Chart: '<S150>/Chart' */
+  /* Chart: '<S152>/Chart' */
   /* Gateway: implement/method/Lim&Fault/LimI/LimChg/PI/Chart */
   /* During: implement/method/Lim&Fault/LimI/LimChg/PI/Chart */
   if (localDW->is_active_c25_APP_FluxWeak_GEAR == 0U) {
     /* Entry: implement/method/Lim&Fault/LimI/LimChg/PI/Chart */
     localDW->is_active_c25_APP_FluxWeak_GEAR = 1U;
 
-    /* Outputs for Function Call SubSystem: '<S150>/Function-Call Subsystem' */
+    /* Outputs for Function Call SubSystem: '<S152>/Function-Call Subsystem' */
 
     /* Entry Internal: implement/method/Lim&Fault/LimI/LimChg/PI/Chart */
-    /* Transition: '<S151>:2' */
-    /* Entry 'NV_weak_call': '<S151>:1' */
-    /* '<S151>:1:1' PI_call; */
-    /* Event: '<S151>:4' */
+    /* Transition: '<S153>:2' */
+    /* Entry 'NV_weak_call': '<S153>:1' */
+    /* '<S153>:1:1' PI_call; */
+    /* Event: '<S153>:4' */
     APP_Flu_FunctionCallSubsystem_p(rtu_0, rty_0,
       &localDW->FunctionCallSubsystem);
 
-    /* End of Outputs for SubSystem: '<S150>/Function-Call Subsystem' */
+    /* End of Outputs for SubSystem: '<S152>/Function-Call Subsystem' */
 
-    /* Outputs for Function Call SubSystem: '<S150>/Lim_state' */
+    /* Outputs for Function Call SubSystem: '<S152>/Lim_state' */
 
-    /* '<S151>:1:1' IntLim_nv; */
-    /* Event: '<S151>:3' */
+    /* '<S153>:1:1' IntLim_nv; */
+    /* Event: '<S153>:3' */
     APP_FluxWeak_GEAR2_Lim_state();
 
-    /* End of Outputs for SubSystem: '<S150>/Lim_state' */
+    /* End of Outputs for SubSystem: '<S152>/Lim_state' */
   } else {
-    /* Outputs for Function Call SubSystem: '<S150>/Function-Call Subsystem' */
+    /* Outputs for Function Call SubSystem: '<S152>/Function-Call Subsystem' */
 
-    /* During 'NV_weak_call': '<S151>:1' */
-    /* '<S151>:1:1' PI_call; */
-    /* Event: '<S151>:4' */
+    /* During 'NV_weak_call': '<S153>:1' */
+    /* '<S153>:1:1' PI_call; */
+    /* Event: '<S153>:4' */
     APP_Flu_FunctionCallSubsystem_p(rtu_0, rty_0,
       &localDW->FunctionCallSubsystem);
 
-    /* End of Outputs for SubSystem: '<S150>/Function-Call Subsystem' */
+    /* End of Outputs for SubSystem: '<S152>/Function-Call Subsystem' */
 
-    /* Outputs for Function Call SubSystem: '<S150>/Lim_state' */
+    /* Outputs for Function Call SubSystem: '<S152>/Lim_state' */
 
-    /* '<S151>:1:1' IntLim_nv; */
-    /* Event: '<S151>:3' */
+    /* '<S153>:1:1' IntLim_nv; */
+    /* Event: '<S153>:3' */
     APP_FluxWeak_GEAR2_Lim_state();
 
-    /* End of Outputs for SubSystem: '<S150>/Lim_state' */
+    /* End of Outputs for SubSystem: '<S152>/Lim_state' */
   }
 
-  /* End of Chart: '<S150>/Chart' */
+  /* End of Chart: '<S152>/Chart' */
 }
 
 /* Output and update for Simulink Function: '<S10>/Simulink Function2' */
@@ -4945,80 +4945,80 @@ void APP_FluxWeak_GEAR2_n2MaxT(real32_T rtu_Psi, real32_T *rty_Tmax)
   uint32_T bpIdx;
   real32_T frac;
 
-  /* Lookup_n-D: '<S59>/table' incorporates:
-   *  SignalConversion: '<S59>/TmpSignal ConversionAtPsiOutport1'
+  /* Lookup_n-D: '<S61>/table' incorporates:
+   *  SignalConversion: '<S61>/TmpSignal ConversionAtPsiOutport1'
    */
   bpIdx = plook_u32ff_evenca(rtu_Psi, 0.165408403F, 0.013502717F, 49UL, &frac);
 
-  /* SignalConversion: '<S59>/TmpSignal ConversionAtTmaxInport1' incorporates:
-   *  Lookup_n-D: '<S59>/table'
+  /* SignalConversion: '<S61>/TmpSignal ConversionAtTmaxInport1' incorporates:
+   *  Lookup_n-D: '<S61>/table'
    */
   *rty_Tmax = intrp1d_fu32fla_pw(bpIdx, frac, rtCP_table_tableData_f, 49UL);
 }
 
-/* Function for Chart: '<S54>/Chart' */
+/* Function for Chart: '<S56>/Chart' */
 static void APP_Flux_exit_internal_sys_mode(const real32_T
   *DiscreteTimeIntegrator1, const real32_T *DiscreteTimeIntegrator1_i)
 {
-  /* Exit Internal 'sys_mode': '<S63>:7' */
+  /* Exit Internal 'sys_mode': '<S65>:7' */
   switch (APP_FluxWeak_GEAR2_DW.is_sys_mode) {
    case APP_FluxWeak_GEAR2_IN_Speed:
-    /* Exit Internal 'Speed': '<S63>:5' */
+    /* Exit Internal 'Speed': '<S65>:5' */
     APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
 
-    /* Outputs for Function Call SubSystem: '<S54>/Update' */
+    /* Outputs for Function Call SubSystem: '<S56>/Update' */
 
-    /* Exit 'Speed': '<S63>:5' */
-    /* '<S63>:5:1' Update; */
-    /* Event: '<S63>:13' */
+    /* Exit 'Speed': '<S65>:5' */
+    /* '<S65>:5:1' Update; */
+    /* Event: '<S65>:13' */
     APP_FluxWeak_GEAR2_Update(&APP_FluxWeak_GEAR2_DW.Merge1,
       *DiscreteTimeIntegrator1_i, *DiscreteTimeIntegrator1);
 
-    /* End of Outputs for SubSystem: '<S54>/Update' */
+    /* End of Outputs for SubSystem: '<S56>/Update' */
 
-    /* Outputs for Function Call SubSystem: '<S54>/Initial_D' */
+    /* Outputs for Function Call SubSystem: '<S56>/Initial_D' */
 
-    /* '<S63>:5:1' Initial_D  */
-    /* Event: '<S63>:85' */
+    /* '<S65>:5:1' Initial_D  */
+    /* Event: '<S65>:85' */
     APP_FluxWeak_GEAR2_Initial_D();
 
-    /* End of Outputs for SubSystem: '<S54>/Initial_D' */
+    /* End of Outputs for SubSystem: '<S56>/Initial_D' */
     APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
     break;
 
    case APP_FluxWeak_GEAR2_IN_Torque:
-    /* Outputs for Function Call SubSystem: '<S54>/Update' */
+    /* Outputs for Function Call SubSystem: '<S56>/Update' */
 
-    /* Exit 'Torque': '<S63>:3' */
-    /* '<S63>:3:1' Update; */
-    /* Event: '<S63>:13' */
+    /* Exit 'Torque': '<S65>:3' */
+    /* '<S65>:3:1' Update; */
+    /* Event: '<S65>:13' */
     APP_FluxWeak_GEAR2_Update(&APP_FluxWeak_GEAR2_DW.Merge1,
       *DiscreteTimeIntegrator1_i, *DiscreteTimeIntegrator1);
 
-    /* End of Outputs for SubSystem: '<S54>/Update' */
+    /* End of Outputs for SubSystem: '<S56>/Update' */
 
-    /* Outputs for Function Call SubSystem: '<S54>/Initial_D' */
+    /* Outputs for Function Call SubSystem: '<S56>/Initial_D' */
 
-    /* '<S63>:3:1' Initial_D  */
-    /* Event: '<S63>:85' */
+    /* '<S65>:3:1' Initial_D  */
+    /* Event: '<S65>:85' */
     APP_FluxWeak_GEAR2_Initial_D();
 
-    /* End of Outputs for SubSystem: '<S54>/Initial_D' */
+    /* End of Outputs for SubSystem: '<S56>/Initial_D' */
     APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
     break;
 
    case APP_FluxWeak_GEAR2_IN_appoint:
-    /* Exit Internal 'appoint': '<S63>:6' */
+    /* Exit Internal 'appoint': '<S65>:6' */
     APP_FluxWeak_GEAR2_DW.is_appoint = APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
 
-    /* Outputs for Function Call SubSystem: '<S54>/Initial' */
+    /* Outputs for Function Call SubSystem: '<S56>/Initial' */
 
-    /* Exit 'appoint': '<S63>:6' */
-    /* '<S63>:6:1' Initial; */
-    /* Event: '<S63>:12' */
+    /* Exit 'appoint': '<S65>:6' */
+    /* '<S65>:6:1' Initial; */
+    /* Event: '<S65>:12' */
     APP_FluxWeak_GEAR2_Initial();
 
-    /* End of Outputs for SubSystem: '<S54>/Initial' */
+    /* End of Outputs for SubSystem: '<S56>/Initial' */
     APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
     break;
   }
@@ -5029,16 +5029,16 @@ void APP_FluxWeak_GEAR2_step(void)
 {
   uint16_T ii;
   uint32_T bpIdx;
-  real32_T rtb_InvTemp;
   real32_T rtb_BusConversion_InsertedFor_0;
   real32_T rtb_DiscreteTimeIntegrator1;
+  real32_T rtb_MotTemp;
   real32_T rtb_Psi_i;
   uint16_T rtb_UVWoffline;
   int16_T rtb_LogicalOperator;
-  real32_T rtb_DeadZone;
-  real32_T rtb_Saturation1_i;
+  real32_T rtb_Add_b;
   real32_T rtb_Divide_p;
-  real32_T rtb_Saturation1;
+  real32_T rtb_Abs_l;
+  real32_T rtb_Divide_o;
   boolean_T rtb_MultiportSwitch;
   boolean_T rtb_LogicalOperator_f;
   real32_T rtb_Switch_nd[2];
@@ -5081,11 +5081,11 @@ void APP_FluxWeak_GEAR2_step(void)
    *  DataStoreRead: '<Root>/Data Store Read2'
    */
   if (Algo_Output.Cur_loop.Vs > 5.0F) {
-    rtb_InvTemp = 5.0F;
+    rtb_MotTemp = 5.0F;
   } else if (Algo_Output.Cur_loop.Vs < 1.0F) {
-    rtb_InvTemp = 1.0F;
+    rtb_MotTemp = 1.0F;
   } else {
-    rtb_InvTemp = Algo_Output.Cur_loop.Vs;
+    rtb_MotTemp = Algo_Output.Cur_loop.Vs;
   }
 
   /* End of Saturate: '<S175>/Saturation' */
@@ -5106,16 +5106,16 @@ void APP_FluxWeak_GEAR2_step(void)
   LPF_App(PMSM_Param.CurNorm * 1.22474492F * ((Algo_Output.Cur_loop.Ud *
             Algo_Output.Cur_loop.Id + Algo_Output.Cur_loop.Uq *
             Algo_Output.Cur_loop.Iq) * (intrp1d_fu32fla_pw(bpIdx, rtb_Divide_p,
-             rtCP_uDLookupTable_tableData, 128UL) / rtb_InvTemp)), 0.002F, 5.0F,
+             rtCP_uDLookupTable_tableData, 128UL) / rtb_MotTemp)), 0.002F, 5.0F,
           &rtb_DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.lpf_p);
 
   /* End of Outputs for SubSystem: '<S189>/lpf' */
 
-  /* MinMax: '<S194>/Min1' incorporates:
+  /* MinMax: '<S194>/Min' incorporates:
    *  DataStoreRead: '<Root>/Data Store Read'
    */
-  rtb_InvTemp = fmaxf(fmaxf(PMSM_Input.AppSample.InvTemp1,
-    PMSM_Input.AppSample.InvTemp2), PMSM_Input.AppSample.InvTemp3);
+  rtb_MotTemp = fmaxf(PMSM_Input.AppSample.MotTemp1,
+                      PMSM_Input.AppSample.MotTemp2);
 
   /* Chart: '<S173>/Chart' */
   /* Gateway: inputdata_process/Filter&Normalization/Subsystem/Chart */
@@ -5146,10 +5146,10 @@ void APP_FluxWeak_GEAR2_step(void)
 
   /* BusCreator: '<S4>/BusConversion_InsertedFor_Bus Creator_at_inport_0' incorporates:
    *  DataStoreRead: '<Root>/Data Store Read'
-   *  MinMax: '<S194>/Min'
+   *  MinMax: '<S194>/Min1'
    */
-  rtb_BusConversion_InsertedFor_0 = fmaxf(PMSM_Input.AppSample.MotTemp1,
-    PMSM_Input.AppSample.MotTemp2);
+  rtb_BusConversion_InsertedFor_0 = fmaxf(fmaxf(PMSM_Input.AppSample.InvTemp1,
+    PMSM_Input.AppSample.InvTemp2), PMSM_Input.AppSample.InvTemp3);
   qY = APP_FluxWeak_GEAR2_DW.tick;
 
   /* Chart: '<S1>/Chart' incorporates:
@@ -5432,27 +5432,27 @@ void APP_FluxWeak_GEAR2_step(void)
   if (APP_FluxWeak_GEAR2_DW.FaultSt > 0U) {
     /* Outputs for Atomic SubSystem: '<S8>/judgment' */
     /* Outputs for Enabled SubSystem: '<S15>/Block' incorporates:
-     *  EnablePort: '<S17>/Enable'
+     *  EnablePort: '<S19>/Enable'
      */
-    /* RelationalOperator: '<S19>/Compare' incorporates:
-     *  Constant: '<S19>/Constant'
+    /* RelationalOperator: '<S21>/Compare' incorporates:
+     *  Constant: '<S21>/Constant'
      */
     if (APP_FluxWeak_GEAR2_DW.tick == 2U) {
-      /* Abs: '<S17>/Abs' */
+      /* Abs: '<S19>/Abs' */
       rtb_Switch_b = fabsf(DiscreteTimeIntegrator1);
 
-      /* MultiPortSwitch: '<S33>/Multiport Switch' incorporates:
-       *  Abs: '<S33>/Abs1'
-       *  Abs: '<S33>/Abs2'
-       *  Constant: '<S33>/Constant'
-       *  Constant: '<S33>/Constant1'
-       *  Constant: '<S33>/Constant2'
-       *  Constant: '<S33>/Constant3'
-       *  Constant: '<S34>/Constant'
+      /* MultiPortSwitch: '<S35>/Multiport Switch' incorporates:
+       *  Abs: '<S35>/Abs1'
+       *  Abs: '<S35>/Abs2'
        *  Constant: '<S35>/Constant'
+       *  Constant: '<S35>/Constant1'
+       *  Constant: '<S35>/Constant2'
+       *  Constant: '<S35>/Constant3'
+       *  Constant: '<S36>/Constant'
+       *  Constant: '<S37>/Constant'
        *  DataStoreRead: '<Root>/Data Store Read'
-       *  RelationalOperator: '<S34>/Compare'
-       *  RelationalOperator: '<S35>/Compare'
+       *  RelationalOperator: '<S36>/Compare'
+       *  RelationalOperator: '<S37>/Compare'
        */
       switch (APP_FluxWeak_GEAR2_DW.ModeSt) {
        case 0:
@@ -5480,53 +5480,53 @@ void APP_FluxWeak_GEAR2_step(void)
         break;
       }
 
-      /* End of MultiPortSwitch: '<S33>/Multiport Switch' */
+      /* End of MultiPortSwitch: '<S35>/Multiport Switch' */
 
-      /* Chart: '<S17>/Chart' incorporates:
-       *  Abs: '<S17>/Abs'
+      /* Chart: '<S19>/Chart' incorporates:
+       *  Abs: '<S19>/Abs'
        *  DataStoreRead: '<Root>/Data Store Read2'
        *  Math: '<S177>/Math Function'
        */
       /* Gateway: implement/Fault/judgment/Block/Chart */
       /* During: implement/Fault/judgment/Block/Chart */
       /* Entry Internal: implement/Fault/judgment/Block/Chart */
-      /* Transition: '<S31>:6' */
-      /* '<S31>:17:1' sf_internal_predicateOutput = ... */
-      /* '<S31>:17:1' Spd>200 || LowReq; */
+      /* Transition: '<S33>:6' */
+      /* '<S33>:17:1' sf_internal_predicateOutput = ... */
+      /* '<S33>:17:1' Spd>200 || LowReq; */
       if ((rtb_Switch_b > 200.0F) || rtb_MultiportSwitch) {
-        /* Transition: '<S31>:17' */
-        /* Transition: '<S31>:19' */
-        /* '<S31>:19:1' BlockState=0; */
+        /* Transition: '<S33>:17' */
+        /* Transition: '<S33>:19' */
+        /* '<S33>:19:1' BlockState=0; */
         APP_FluxWeak_GEAR2_DW.BlockState = 0.0F;
 
-        /* Transition: '<S31>:20' */
-        /* Transition: '<S31>:12' */
+        /* Transition: '<S33>:20' */
+        /* Transition: '<S33>:12' */
       } else {
-        /* Transition: '<S31>:15' */
-        /* '<S31>:8:1' sf_internal_predicateOutput = ... */
-        /* '<S31>:8:1' Spd<=10; */
+        /* Transition: '<S33>:15' */
+        /* '<S33>:8:1' sf_internal_predicateOutput = ... */
+        /* '<S33>:8:1' Spd<=10; */
         if (rtb_Switch_b <= 10.0F) {
-          /* Transition: '<S31>:8' */
-          /* Transition: '<S31>:10' */
-          /* '<S31>:10:1' BlockState=BlockState+Is*0.02; */
+          /* Transition: '<S33>:8' */
+          /* Transition: '<S33>:10' */
+          /* '<S33>:10:1' BlockState=BlockState+Is*0.02; */
           APP_FluxWeak_GEAR2_DW.BlockState += rt_hypotf_snf
             (Algo_Output.Cur_loop.Id, Algo_Output.Cur_loop.Iq) * 0.02F;
 
-          /* Transition: '<S31>:12' */
+          /* Transition: '<S33>:12' */
         } else {
-          /* Transition: '<S31>:13' */
+          /* Transition: '<S33>:13' */
         }
       }
 
-      /* End of Chart: '<S17>/Chart' */
+      /* End of Chart: '<S19>/Chart' */
 
-      /* RelationalOperator: '<S32>/Compare' incorporates:
-       *  Constant: '<S32>/Constant'
+      /* RelationalOperator: '<S34>/Compare' incorporates:
+       *  Constant: '<S34>/Constant'
        */
       APP_FluxWeak_GEAR2_DW.Compare = (APP_FluxWeak_GEAR2_DW.BlockState > 2.0F);
     }
 
-    /* End of RelationalOperator: '<S19>/Compare' */
+    /* End of RelationalOperator: '<S21>/Compare' */
     /* End of Outputs for SubSystem: '<S15>/Block' */
 
     /* SignalConversion: '<S15>/BusConversion_InsertedFor_Fault_App_at_inport_0' incorporates:
@@ -5534,183 +5534,183 @@ void APP_FluxWeak_GEAR2_step(void)
      */
     rtb_UVWoffline = APP_FluxWeak_GEAR2_DW.UnitDelay_DSTATE;
 
-    /* Logic: '<S18>/Logical Operator' incorporates:
+    /* Logic: '<S20>/Logical Operator' incorporates:
      *  DataStoreRead: '<Root>/Data Store Read'
      */
     rtb_LogicalOperator = ((PMSM_Input.AppComm.CanMsg1Lost != 0U) ||
       (PMSM_Input.AppComm.CanMsg2Lost != 0U));
 
-    /* RelationalOperator: '<S20>/Compare' incorporates:
-     *  Constant: '<S20>/Constant'
+    /* RelationalOperator: '<S22>/Compare' incorporates:
+     *  Constant: '<S22>/Constant'
      */
     rtb_MultiportSwitch = (APP_FluxWeak_GEAR2_DW.tick == 3U);
 
     /* Outputs for Enabled SubSystem: '<S15>/DisChg' incorporates:
-     *  EnablePort: '<S25>/Enable'
+     *  EnablePort: '<S27>/Enable'
      */
-    /* RelationalOperator: '<S24>/Compare' incorporates:
-     *  Constant: '<S24>/Constant'
+    /* RelationalOperator: '<S26>/Compare' incorporates:
+     *  Constant: '<S26>/Constant'
      */
     if (APP_FluxWeak_GEAR2_DW.tick == 7U) {
-      /* Chart: '<S25>/Chart1' incorporates:
-       *  Constant: '<S37>/Constant'
+      /* Chart: '<S27>/Chart1' incorporates:
+       *  Constant: '<S39>/Constant'
        *  DataStoreRead: '<Root>/Data Store Read'
-       *  RelationalOperator: '<S37>/Compare'
+       *  RelationalOperator: '<S39>/Compare'
        */
       /* Gateway: implement/Fault/judgment/DisChg/Chart1 */
       /* During: implement/Fault/judgment/DisChg/Chart1 */
       /* Entry Internal: implement/Fault/judgment/DisChg/Chart1 */
-      /* Transition: '<S36>:4' */
-      /* '<S36>:14:1' sf_internal_predicateOutput = ... */
-      /* '<S36>:14:1' ~ChgMode; */
+      /* Transition: '<S38>:4' */
+      /* '<S38>:14:1' sf_internal_predicateOutput = ... */
+      /* '<S38>:14:1' ~ChgMode; */
       if (!(PMSM_Input.AppComm.ModeReq == 6U)) {
-        /* Transition: '<S36>:14' */
-        /* Transition: '<S36>:16' */
-        /* '<S36>:16:1' DisChg_time=0; */
+        /* Transition: '<S38>:14' */
+        /* Transition: '<S38>:16' */
+        /* '<S38>:16:1' DisChg_time=0; */
         APP_FluxWeak_GEAR2_DW.DisChg_time = 0.0F;
 
-        /* SignalConversion: '<S25>/OutportBufferForDisChg' */
-        /* '<S36>:16:1' ChgCode=0; */
+        /* SignalConversion: '<S27>/OutportBufferForDisChg' */
+        /* '<S38>:16:1' ChgCode=0; */
         APP_FluxWeak_GEAR2_DW.OutportBufferForDisChg = 0UL;
 
-        /* Transition: '<S36>:31' */
-        /* Transition: '<S36>:32' */
-        /* Transition: '<S36>:33' */
+        /* Transition: '<S38>:31' */
+        /* Transition: '<S38>:32' */
+        /* Transition: '<S38>:33' */
       } else {
-        /* Transition: '<S36>:18' */
-        /* '<S36>:20:1' sf_internal_predicateOutput = ... */
-        /* '<S36>:20:1' VoltCap>=36; */
+        /* Transition: '<S38>:18' */
+        /* '<S38>:20:1' sf_internal_predicateOutput = ... */
+        /* '<S38>:20:1' VoltCap>=36; */
         if (DiscreteTimeIntegrator1_i4 >= 36.0F) {
-          /* Transition: '<S36>:20' */
-          /* Transition: '<S36>:22' */
-          /* '<S36>:22:1' DisChg_time=DisChg_time+0.001; */
-          APP_FluxWeak_GEAR2_DW.DisChg_time += 0.001F;
+          /* Transition: '<S38>:20' */
+          /* Transition: '<S38>:22' */
+          /* '<S38>:22:1' DisChg_time=DisChg_time+0.02; */
+          APP_FluxWeak_GEAR2_DW.DisChg_time += 0.02F;
 
-          /* '<S36>:25:1' sf_internal_predicateOutput = ... */
-          /* '<S36>:25:1' DisChg_time>=5; */
+          /* '<S38>:25:1' sf_internal_predicateOutput = ... */
+          /* '<S38>:25:1' DisChg_time>=5; */
           if (APP_FluxWeak_GEAR2_DW.DisChg_time >= 5.0F) {
-            /* SignalConversion: '<S25>/OutportBufferForDisChg' */
-            /* Transition: '<S36>:25' */
-            /* Transition: '<S36>:30' */
-            /* '<S36>:30:1' ChgCode=1; */
+            /* SignalConversion: '<S27>/OutportBufferForDisChg' */
+            /* Transition: '<S38>:25' */
+            /* Transition: '<S38>:30' */
+            /* '<S38>:30:1' ChgCode=1; */
             APP_FluxWeak_GEAR2_DW.OutportBufferForDisChg = 1UL;
 
-            /* Transition: '<S36>:32' */
-            /* Transition: '<S36>:33' */
+            /* Transition: '<S38>:32' */
+            /* Transition: '<S38>:33' */
           } else {
-            /* SignalConversion: '<S25>/OutportBufferForDisChg' */
-            /* Transition: '<S36>:27' */
-            /* '<S36>:27:1' ChgCode=0; */
+            /* SignalConversion: '<S27>/OutportBufferForDisChg' */
+            /* Transition: '<S38>:27' */
+            /* '<S38>:27:1' ChgCode=0; */
             APP_FluxWeak_GEAR2_DW.OutportBufferForDisChg = 0UL;
 
-            /* Transition: '<S36>:33' */
+            /* Transition: '<S38>:33' */
           }
         } else {
-          /* Transition: '<S36>:34' */
-          /* '<S36>:34:1' DisChg_time=0; */
+          /* Transition: '<S38>:34' */
+          /* '<S38>:34:1' DisChg_time=0; */
           APP_FluxWeak_GEAR2_DW.DisChg_time = 0.0F;
 
-          /* SignalConversion: '<S25>/OutportBufferForDisChg' */
-          /* '<S36>:34:1' ChgCode=0; */
+          /* SignalConversion: '<S27>/OutportBufferForDisChg' */
+          /* '<S38>:34:1' ChgCode=0; */
           APP_FluxWeak_GEAR2_DW.OutportBufferForDisChg = 0UL;
         }
       }
 
-      /* End of Chart: '<S25>/Chart1' */
+      /* End of Chart: '<S27>/Chart1' */
     }
 
-    /* End of RelationalOperator: '<S24>/Compare' */
+    /* End of RelationalOperator: '<S26>/Compare' */
     /* End of Outputs for SubSystem: '<S15>/DisChg' */
 
     /* Outputs for Enabled SubSystem: '<S15>/Spd' incorporates:
-     *  EnablePort: '<S27>/Enable'
+     *  EnablePort: '<S29>/Enable'
      */
-    /* RelationalOperator: '<S21>/Compare' incorporates:
-     *  Constant: '<S21>/Constant'
+    /* RelationalOperator: '<S23>/Compare' incorporates:
+     *  Constant: '<S23>/Constant'
      */
     if (APP_FluxWeak_GEAR2_DW.tick == 4U) {
-      /* Abs: '<S27>/Abs' */
+      /* Abs: '<S29>/Abs' */
       rtb_Switch_b = fabsf(DiscreteTimeIntegrator1);
 
-      /* Chart: '<S27>/Chart1' incorporates:
-       *  Abs: '<S27>/Abs'
+      /* Chart: '<S29>/Chart1' incorporates:
+       *  Abs: '<S29>/Abs'
        */
       /* Gateway: implement/Fault/judgment/Spd/Chart1 */
       /* During: implement/Fault/judgment/Spd/Chart1 */
       /* Entry Internal: implement/Fault/judgment/Spd/Chart1 */
-      /* Transition: '<S38>:15' */
-      /* '<S38>:17:1' sf_internal_predicateOutput = ... */
-      /* '<S38>:17:1' SpdCode(2); */
+      /* Transition: '<S40>:15' */
+      /* '<S40>:17:1' sf_internal_predicateOutput = ... */
+      /* '<S40>:17:1' SpdCode(2); */
       if ((APP_FluxWeak_GEAR2_DW.SpdCode_o[1] != 0UL) || (!(rtb_Switch_b >
             PMSM_Param.OS2))) {
-        /* Transition: '<S38>:17' */
-        /* Transition: '<S38>:78' */
-        /* Transition: '<S38>:79' */
-        /* Transition: '<S38>:51' */
-        /* '<S38>:66:1' sf_internal_predicateOutput = ... */
-        /* '<S38>:66:1' SpdCode(1); */
+        /* Transition: '<S40>:17' */
+        /* Transition: '<S40>:78' */
+        /* Transition: '<S40>:79' */
+        /* Transition: '<S40>:51' */
+        /* '<S40>:66:1' sf_internal_predicateOutput = ... */
+        /* '<S40>:66:1' SpdCode(1); */
         if (APP_FluxWeak_GEAR2_DW.SpdCode_o[0] != 0UL) {
-          /* Transition: '<S38>:66' */
-          /* '<S38>:68:1' sf_internal_predicateOutput = ... */
-          /* '<S38>:68:1' NmFil<=PMSM_Param.OS1-100; */
+          /* Transition: '<S40>:66' */
+          /* '<S40>:68:1' sf_internal_predicateOutput = ... */
+          /* '<S40>:68:1' NmFil<=PMSM_Param.OS1-100; */
           if (rtb_Switch_b <= PMSM_Param.OS1 - 100.0F) {
-            /* Transition: '<S38>:68' */
-            /* Transition: '<S38>:70' */
-            /* '<S38>:70:1' SpdCode(1)=0; */
+            /* Transition: '<S40>:68' */
+            /* Transition: '<S40>:70' */
+            /* '<S40>:70:1' SpdCode(1)=0; */
             APP_FluxWeak_GEAR2_DW.SpdCode_o[0] = 0UL;
 
-            /* Transition: '<S38>:72' */
-            /* Transition: '<S38>:76' */
-            /* Transition: '<S38>:45' */
+            /* Transition: '<S40>:72' */
+            /* Transition: '<S40>:76' */
+            /* Transition: '<S40>:45' */
           } else {
-            /* Transition: '<S38>:73' */
-            /* Transition: '<S38>:76' */
-            /* Transition: '<S38>:45' */
+            /* Transition: '<S40>:73' */
+            /* Transition: '<S40>:76' */
+            /* Transition: '<S40>:45' */
           }
         } else {
-          /* Transition: '<S38>:52' */
-          /* '<S38>:40:1' sf_internal_predicateOutput = ... */
-          /* '<S38>:40:1' NmFil>PMSM_Param.OS1; */
+          /* Transition: '<S40>:52' */
+          /* '<S40>:40:1' sf_internal_predicateOutput = ... */
+          /* '<S40>:40:1' NmFil>PMSM_Param.OS1; */
           if (rtb_Switch_b > PMSM_Param.OS1) {
-            /* Transition: '<S38>:40' */
-            /* Transition: '<S38>:42' */
-            /* '<S38>:42:1' SpdCode(1)=1; */
+            /* Transition: '<S40>:40' */
+            /* Transition: '<S40>:42' */
+            /* '<S40>:42:1' SpdCode(1)=1; */
             APP_FluxWeak_GEAR2_DW.SpdCode_o[0] = 1UL;
 
-            /* Transition: '<S38>:45' */
+            /* Transition: '<S40>:45' */
           } else {
-            /* Transition: '<S38>:44' */
+            /* Transition: '<S40>:44' */
           }
         }
       } else {
-        /* Transition: '<S38>:21' */
-        /* '<S38>:33:1' sf_internal_predicateOutput = ... */
-        /* '<S38>:33:1' NmFil>PMSM_Param.OS2; */
-        /* Transition: '<S38>:33' */
-        /* Transition: '<S38>:35' */
-        /* '<S38>:35:1' SpdCode(1)=0; */
+        /* Transition: '<S40>:21' */
+        /* '<S40>:33:1' sf_internal_predicateOutput = ... */
+        /* '<S40>:33:1' NmFil>PMSM_Param.OS2; */
+        /* Transition: '<S40>:33' */
+        /* Transition: '<S40>:35' */
+        /* '<S40>:35:1' SpdCode(1)=0; */
         APP_FluxWeak_GEAR2_DW.SpdCode_o[0] = 0UL;
 
-        /* '<S38>:35:1' SpdCode(2)=1; */
+        /* '<S40>:35:1' SpdCode(2)=1; */
         APP_FluxWeak_GEAR2_DW.SpdCode_o[1] = 1UL;
 
-        /* Transition: '<S38>:75' */
-        /* Transition: '<S38>:72' */
-        /* Transition: '<S38>:76' */
-        /* Transition: '<S38>:45' */
+        /* Transition: '<S40>:75' */
+        /* Transition: '<S40>:72' */
+        /* Transition: '<S40>:76' */
+        /* Transition: '<S40>:45' */
       }
 
-      /* End of Chart: '<S27>/Chart1' */
+      /* End of Chart: '<S29>/Chart1' */
 
-      /* SignalConversion: '<S27>/BusConversion_InsertedFor_Spd_at_inport_0' */
+      /* SignalConversion: '<S29>/BusConversion_InsertedFor_Spd_at_inport_0' */
       APP_FluxWeak_GEAR2_DW.SpdCode[0] = APP_FluxWeak_GEAR2_DW.SpdCode_o[0];
       APP_FluxWeak_GEAR2_DW.SpdCode[1] = APP_FluxWeak_GEAR2_DW.SpdCode_o[1];
 
-      /* Logic: '<S27>/Logical Operator' */
+      /* Logic: '<S29>/Logical Operator' */
       rtb_LogicalOperator_f = !(APP_FluxWeak_GEAR2_DW.SpdCode_o[0] != 0UL);
 
-      /* RateLimiter: '<S27>/Rate Limiter' incorporates:
-       *  DataTypeConversion: '<S27>/Data Type Conversion'
+      /* RateLimiter: '<S29>/Rate Limiter' incorporates:
+       *  DataTypeConversion: '<S29>/Data Type Conversion'
        */
       rtb_Switch_b = (real32_T)rtb_LogicalOperator_f -
         APP_FluxWeak_GEAR2_DW.PrevY;
@@ -5722,12 +5722,12 @@ void APP_FluxWeak_GEAR2_step(void)
         APP_FluxWeak_GEAR2_DW.PrevY = rtb_LogicalOperator_f;
       }
 
-      /* End of RateLimiter: '<S27>/Rate Limiter' */
+      /* End of RateLimiter: '<S29>/Rate Limiter' */
 
-      /* Switch: '<S27>/Switch' incorporates:
-       *  Constant: '<S27>/Constant'
-       *  Constant: '<S27>/Constant1'
-       *  Gain: '<S27>/Gain1'
+      /* Switch: '<S29>/Switch' incorporates:
+       *  Constant: '<S29>/Constant'
+       *  Constant: '<S29>/Constant1'
+       *  Gain: '<S29>/Gain1'
        */
       if (DiscreteTimeIntegrator1 >= 0.0F) {
         rtb_Switch_nd[0] = APP_FluxWeak_GEAR2_DW.PrevY;
@@ -5737,35 +5737,35 @@ void APP_FluxWeak_GEAR2_step(void)
         rtb_Switch_nd[1] = -APP_FluxWeak_GEAR2_DW.PrevY;
       }
 
-      /* End of Switch: '<S27>/Switch' */
+      /* End of Switch: '<S29>/Switch' */
 
-      /* SignalConversion: '<S27>/BusConversion_InsertedFor_Spd_at_inport_0' */
+      /* SignalConversion: '<S29>/BusConversion_InsertedFor_Spd_at_inport_0' */
       APP_FluxWeak_GEAR2_DW.OSLimTP = rtb_Switch_nd[0];
 
-      /* SignalConversion: '<S27>/BusConversion_InsertedFor_Spd_at_inport_0' */
+      /* SignalConversion: '<S29>/BusConversion_InsertedFor_Spd_at_inport_0' */
       APP_FluxWeak_GEAR2_DW.OSLimTN = rtb_Switch_nd[1];
     }
 
-    /* End of RelationalOperator: '<S21>/Compare' */
+    /* End of RelationalOperator: '<S23>/Compare' */
     /* End of Outputs for SubSystem: '<S15>/Spd' */
 
     /* Outputs for Enabled SubSystem: '<S15>/TempSensor' incorporates:
-     *  EnablePort: '<S29>/Enable'
+     *  EnablePort: '<S31>/Enable'
      */
-    /* RelationalOperator: '<S22>/Compare' incorporates:
-     *  Constant: '<S22>/Constant'
-     *  Constant: '<S48>/Constant'
-     *  Constant: '<S48>/Constant1'
-     *  Constant: '<S49>/Constant'
-     *  Constant: '<S49>/Constant1'
+    /* RelationalOperator: '<S24>/Compare' incorporates:
+     *  Constant: '<S24>/Constant'
+     *  Constant: '<S50>/Constant'
+     *  Constant: '<S50>/Constant1'
+     *  Constant: '<S51>/Constant'
+     *  Constant: '<S51>/Constant1'
      */
     if (APP_FluxWeak_GEAR2_DW.tick == 5U) {
-      /* Logic: '<S29>/Logical Operator1' incorporates:
-       *  Constant: '<S43>/Constant'
-       *  Constant: '<S44>/Constant'
+      /* Logic: '<S31>/Logical Operator1' incorporates:
+       *  Constant: '<S45>/Constant'
+       *  Constant: '<S46>/Constant'
        *  DataStoreRead: '<Root>/Data Store Read'
-       *  RelationalOperator: '<S43>/Compare'
-       *  RelationalOperator: '<S44>/Compare'
+       *  RelationalOperator: '<S45>/Compare'
+       *  RelationalOperator: '<S46>/Compare'
        */
       APP_FluxWeak_GEAR2_DW.LogicalOperator1[0] = (uint32_T)
         ((PMSM_Input.AppSample.MotTemp1 < -50.0F) ||
@@ -5774,52 +5774,52 @@ void APP_FluxWeak_GEAR2_step(void)
         ((PMSM_Input.AppSample.MotTemp2 < -50.0F) ||
          (PMSM_Input.AppSample.MotTemp2 > 180.0F));
 
-      /* SignalConversion: '<S40>/TmpSignal ConversionAt SFunction Inport2' incorporates:
-       *  Chart: '<S29>/Chart1'
+      /* SignalConversion: '<S42>/TmpSignal ConversionAt SFunction Inport2' incorporates:
+       *  Chart: '<S31>/Chart1'
        *  DataStoreRead: '<Root>/Data Store Read'
        */
       rtb_Switch_nd[0] = PMSM_Input.AppSample.MotTemp1;
       rtb_Switch_nd[1] = PMSM_Input.AppSample.MotTemp2;
 
-      /* Chart: '<S29>/Chart1' */
+      /* Chart: '<S31>/Chart1' */
       /* Gateway: implement/Fault/judgment/TempSensor/Chart1 */
       /* During: implement/Fault/judgment/TempSensor/Chart1 */
       /* Entry Internal: implement/Fault/judgment/TempSensor/Chart1 */
-      /* Transition: '<S40>:26' */
-      /* Transition: '<S40>:29' */
-      /* '<S40>:29:1' ii=1; */
-      /* '<S40>:27:1' sf_internal_predicateOutput = ... */
-      /* '<S40>:27:1' ii<3; */
+      /* Transition: '<S42>:26' */
+      /* Transition: '<S42>:29' */
+      /* '<S42>:29:1' ii=1; */
+      /* '<S42>:27:1' sf_internal_predicateOutput = ... */
+      /* '<S42>:27:1' ii<3; */
       for (ii = 1U; (int16_T)ii < 3; ii++) {
-        /* Transition: '<S40>:27' */
-        /* '<S40>:40:1' sf_internal_predicateOutput = ... */
-        /* '<S40>:40:1' id(ii); */
+        /* Transition: '<S42>:27' */
+        /* '<S42>:40:1' sf_internal_predicateOutput = ... */
+        /* '<S42>:40:1' id(ii); */
         i = (int16_T)ii - 1;
         if (APP_FluxWeak_GEAR2_DW.LogicalOperator1[i] != 0UL) {
-          /* Transition: '<S40>:40' */
-          /* Transition: '<S40>:42' */
-          /* '<S40>:42:1' out(ii)=-50; */
+          /* Transition: '<S42>:40' */
+          /* Transition: '<S42>:42' */
+          /* '<S42>:42:1' out(ii)=-50; */
           APP_FluxWeak_GEAR2_DW.out_e[i] = -50.0F;
 
-          /* Transition: '<S40>:44' */
+          /* Transition: '<S42>:44' */
         } else {
-          /* Transition: '<S40>:43' */
-          /* '<S40>:43:1' out(ii)=Temp(ii); */
+          /* Transition: '<S42>:43' */
+          /* '<S42>:43:1' out(ii)=Temp(ii); */
           APP_FluxWeak_GEAR2_DW.out_e[i] = rtb_Switch_nd[i];
         }
 
-        /* Transition: '<S40>:30' */
-        /* '<S40>:30:1' ii=ii+1; */
+        /* Transition: '<S42>:30' */
+        /* '<S42>:30:1' ii=ii+1; */
       }
 
-      /* Logic: '<S29>/Logical Operator2' incorporates:
-       *  Constant: '<S45>/Constant'
-       *  Constant: '<S46>/Constant'
+      /* Logic: '<S31>/Logical Operator2' incorporates:
+       *  Constant: '<S47>/Constant'
+       *  Constant: '<S48>/Constant'
        *  DataStoreRead: '<Root>/Data Store Read'
-       *  RelationalOperator: '<S45>/Compare'
-       *  RelationalOperator: '<S46>/Compare'
+       *  RelationalOperator: '<S47>/Compare'
+       *  RelationalOperator: '<S48>/Compare'
        */
-      /* Transition: '<S40>:31' */
+      /* Transition: '<S42>:31' */
       APP_FluxWeak_GEAR2_DW.LogicalOperator2[0] = (uint32_T)
         ((PMSM_Input.AppSample.InvTemp1 < -50.0F) ||
          (PMSM_Input.AppSample.InvTemp1 > 120.0F));
@@ -5830,53 +5830,53 @@ void APP_FluxWeak_GEAR2_step(void)
         ((PMSM_Input.AppSample.InvTemp3 < -50.0F) ||
          (PMSM_Input.AppSample.InvTemp3 > 120.0F));
 
-      /* SignalConversion: '<S41>/TmpSignal ConversionAt SFunction Inport2' incorporates:
-       *  Chart: '<S29>/Chart2'
+      /* SignalConversion: '<S43>/TmpSignal ConversionAt SFunction Inport2' incorporates:
+       *  Chart: '<S31>/Chart2'
        *  DataStoreRead: '<Root>/Data Store Read'
        */
       rtb_TmpSignalConversionAtSFunct[0] = PMSM_Input.AppSample.InvTemp1;
       rtb_TmpSignalConversionAtSFunct[1] = PMSM_Input.AppSample.InvTemp2;
       rtb_TmpSignalConversionAtSFunct[2] = PMSM_Input.AppSample.InvTemp3;
 
-      /* Chart: '<S29>/Chart2' */
+      /* Chart: '<S31>/Chart2' */
       /* Gateway: implement/Fault/judgment/TempSensor/Chart2 */
       /* During: implement/Fault/judgment/TempSensor/Chart2 */
       /* Entry Internal: implement/Fault/judgment/TempSensor/Chart2 */
-      /* Transition: '<S41>:26' */
-      /* Transition: '<S41>:29' */
-      /* '<S41>:29:1' ii=1; */
-      /* '<S41>:27:1' sf_internal_predicateOutput = ... */
-      /* '<S41>:27:1' ii<4; */
+      /* Transition: '<S43>:26' */
+      /* Transition: '<S43>:29' */
+      /* '<S43>:29:1' ii=1; */
+      /* '<S43>:27:1' sf_internal_predicateOutput = ... */
+      /* '<S43>:27:1' ii<4; */
       for (ii = 1U; (int16_T)ii < 4; ii++) {
-        /* Transition: '<S41>:27' */
-        /* '<S41>:40:1' sf_internal_predicateOutput = ... */
-        /* '<S41>:40:1' id(ii); */
+        /* Transition: '<S43>:27' */
+        /* '<S43>:40:1' sf_internal_predicateOutput = ... */
+        /* '<S43>:40:1' id(ii); */
         i = (int16_T)ii - 1;
         if (APP_FluxWeak_GEAR2_DW.LogicalOperator2[i] != 0UL) {
-          /* Transition: '<S41>:40' */
-          /* Transition: '<S41>:42' */
-          /* '<S41>:42:1' out(ii)=-50; */
+          /* Transition: '<S43>:40' */
+          /* Transition: '<S43>:42' */
+          /* '<S43>:42:1' out(ii)=-50; */
           APP_FluxWeak_GEAR2_DW.out[i] = -50.0F;
 
-          /* Transition: '<S41>:44' */
+          /* Transition: '<S43>:44' */
         } else {
-          /* Transition: '<S41>:43' */
-          /* '<S41>:43:1' out(ii)=Temp(ii); */
+          /* Transition: '<S43>:43' */
+          /* '<S43>:43:1' out(ii)=Temp(ii); */
           APP_FluxWeak_GEAR2_DW.out[i] = rtb_TmpSignalConversionAtSFunct[i];
         }
 
-        /* Transition: '<S41>:30' */
-        /* '<S41>:30:1' ii=ii+1; */
+        /* Transition: '<S43>:30' */
+        /* '<S43>:30:1' ii=ii+1; */
       }
 
-      /* Switch: '<S29>/Switch' incorporates:
-       *  Constant: '<S29>/Constant4'
-       *  Constant: '<S47>/Constant'
-       *  MinMax: '<S29>/MinMax2'
-       *  RelationalOperator: '<S47>/Compare'
-       *  Sum: '<S29>/Sum of Elements'
+      /* Switch: '<S31>/Switch' incorporates:
+       *  Constant: '<S31>/Constant4'
+       *  Constant: '<S49>/Constant'
+       *  MinMax: '<S31>/MinMax2'
+       *  RelationalOperator: '<S49>/Compare'
+       *  Sum: '<S31>/Sum of Elements'
        */
-      /* Transition: '<S41>:31' */
+      /* Transition: '<S43>:31' */
       if (APP_FluxWeak_GEAR2_DW.LogicalOperator1[0] +
           APP_FluxWeak_GEAR2_DW.LogicalOperator1[1] == 2UL) {
         rtb_Switch_b = 200.0F;
@@ -5885,23 +5885,23 @@ void APP_FluxWeak_GEAR2_step(void)
                              APP_FluxWeak_GEAR2_DW.out_e[1L]);
       }
 
-      /* End of Switch: '<S29>/Switch' */
+      /* End of Switch: '<S31>/Switch' */
 
-      /* Outputs for Atomic SubSystem: '<S48>/lpf' */
+      /* Outputs for Atomic SubSystem: '<S50>/lpf' */
       LPF_App(rtb_Switch_b, 0.02F, 10.0F,
               &APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_c,
               &APP_FluxWeak_GEAR2_DW.lpf_e);
 
-      /* End of Outputs for SubSystem: '<S48>/lpf' */
+      /* End of Outputs for SubSystem: '<S50>/lpf' */
 
-      /* Switch: '<S29>/Switch1' incorporates:
-       *  Constant: '<S29>/Constant7'
-       *  Constant: '<S42>/Constant'
-       *  Constant: '<S48>/Constant'
-       *  Constant: '<S48>/Constant1'
-       *  MinMax: '<S29>/MinMax1'
-       *  RelationalOperator: '<S42>/Compare'
-       *  Sum: '<S29>/Sum of Elements1'
+      /* Switch: '<S31>/Switch1' incorporates:
+       *  Constant: '<S31>/Constant7'
+       *  Constant: '<S44>/Constant'
+       *  Constant: '<S50>/Constant'
+       *  Constant: '<S50>/Constant1'
+       *  MinMax: '<S31>/MinMax1'
+       *  RelationalOperator: '<S44>/Compare'
+       *  Sum: '<S31>/Sum of Elements1'
        */
       if ((APP_FluxWeak_GEAR2_DW.LogicalOperator2[0] +
            APP_FluxWeak_GEAR2_DW.LogicalOperator2[1]) +
@@ -5912,352 +5912,352 @@ void APP_FluxWeak_GEAR2_step(void)
           APP_FluxWeak_GEAR2_DW.out[1L]), APP_FluxWeak_GEAR2_DW.out[2L]);
       }
 
-      /* End of Switch: '<S29>/Switch1' */
+      /* End of Switch: '<S31>/Switch1' */
 
-      /* Outputs for Atomic SubSystem: '<S49>/lpf' */
+      /* Outputs for Atomic SubSystem: '<S51>/lpf' */
       LPF_App(rtb_Switch_b, 0.02F, 10.0F,
               &APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_a,
               &APP_FluxWeak_GEAR2_DW.lpf_i);
 
-      /* End of Outputs for SubSystem: '<S49>/lpf' */
+      /* End of Outputs for SubSystem: '<S51>/lpf' */
     }
 
-    /* End of RelationalOperator: '<S22>/Compare' */
+    /* End of RelationalOperator: '<S24>/Compare' */
     /* End of Outputs for SubSystem: '<S15>/TempSensor' */
 
     /* Outputs for Enabled SubSystem: '<S15>/Temp' incorporates:
-     *  EnablePort: '<S28>/Enable'
+     *  EnablePort: '<S30>/Enable'
      */
-    /* RelationalOperator: '<S23>/Compare' incorporates:
-     *  Constant: '<S23>/Constant'
+    /* RelationalOperator: '<S25>/Compare' incorporates:
+     *  Constant: '<S25>/Constant'
      */
     if (APP_FluxWeak_GEAR2_DW.tick == 6U) {
-      /* Chart: '<S28>/Chart' */
+      /* Chart: '<S30>/Chart' */
       /* Gateway: implement/Fault/judgment/Temp/Chart */
       /* During: implement/Fault/judgment/Temp/Chart */
       /* Entry Internal: implement/Fault/judgment/Temp/Chart */
-      /* Transition: '<S39>:54' */
-      /* '<S39>:56:1' sf_internal_predicateOutput = ... */
-      /* '<S39>:56:1' TempCode(3); */
+      /* Transition: '<S41>:54' */
+      /* '<S41>:56:1' sf_internal_predicateOutput = ... */
+      /* '<S41>:56:1' TempCode(3); */
       if (APP_FluxWeak_GEAR2_DW.TempCode_g[2] == 0UL) {
-        /* Transition: '<S39>:60' */
-        /* '<S39>:62:1' sf_internal_predicateOutput = ... */
-        /* '<S39>:62:1' MotTemp>PMSM_Param.MotOT3; */
+        /* Transition: '<S41>:60' */
+        /* '<S41>:62:1' sf_internal_predicateOutput = ... */
+        /* '<S41>:62:1' MotTemp>PMSM_Param.MotOT3; */
         if (APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_c > PMSM_Param.MotOT3)
         {
-          /* Transition: '<S39>:62' */
-          /* Transition: '<S39>:64' */
-          /* '<S39>:64:1' TempCode(1)=0; */
+          /* Transition: '<S41>:62' */
+          /* Transition: '<S41>:64' */
+          /* '<S41>:64:1' TempCode(1)=0; */
           APP_FluxWeak_GEAR2_DW.TempCode_g[0] = 0UL;
 
-          /* '<S39>:64:1' TempCode(2)=0; */
+          /* '<S41>:64:1' TempCode(2)=0; */
           APP_FluxWeak_GEAR2_DW.TempCode_g[1] = 0UL;
 
-          /* '<S39>:64:1' TempCode(3)=1; */
+          /* '<S41>:64:1' TempCode(3)=1; */
           APP_FluxWeak_GEAR2_DW.TempCode_g[2] = 1UL;
 
           /* 电机三级 */
-          /* Transition: '<S39>:78' */
-          /* Transition: '<S39>:79' */
-          /* Transition: '<S39>:80' */
+          /* Transition: '<S41>:78' */
+          /* Transition: '<S41>:79' */
+          /* Transition: '<S41>:80' */
         } else {
-          /* Transition: '<S39>:66' */
-          /* '<S39>:68:1' sf_internal_predicateOutput = ... */
-          /* '<S39>:68:1' MotTemp>PMSM_Param.MotOT2; */
+          /* Transition: '<S41>:66' */
+          /* '<S41>:68:1' sf_internal_predicateOutput = ... */
+          /* '<S41>:68:1' MotTemp>PMSM_Param.MotOT2; */
           if (APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_c >
               PMSM_Param.MotOT2) {
-            /* Transition: '<S39>:68' */
-            /* Transition: '<S39>:70' */
-            /* '<S39>:70:1' TempCode(1)=0; */
+            /* Transition: '<S41>:68' */
+            /* Transition: '<S41>:70' */
+            /* '<S41>:70:1' TempCode(1)=0; */
             APP_FluxWeak_GEAR2_DW.TempCode_g[0] = 0UL;
 
-            /* '<S39>:70:1' TempCode(2)=1; */
+            /* '<S41>:70:1' TempCode(2)=1; */
             APP_FluxWeak_GEAR2_DW.TempCode_g[1] = 1UL;
 
             /* 电机二级 */
-            /* Transition: '<S39>:79' */
-            /* Transition: '<S39>:80' */
+            /* Transition: '<S41>:79' */
+            /* Transition: '<S41>:80' */
           } else {
-            /* Transition: '<S39>:72' */
-            /* '<S39>:74:1' sf_internal_predicateOutput = ... */
-            /* '<S39>:74:1' MotTemp>PMSM_Param.MotOT1; */
+            /* Transition: '<S41>:72' */
+            /* '<S41>:74:1' sf_internal_predicateOutput = ... */
+            /* '<S41>:74:1' MotTemp>PMSM_Param.MotOT1; */
             if (APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_c >
                 PMSM_Param.MotOT1) {
-              /* Transition: '<S39>:74' */
-              /* Transition: '<S39>:76' */
-              /* '<S39>:76:1' TempCode(1)=1; */
+              /* Transition: '<S41>:74' */
+              /* Transition: '<S41>:76' */
+              /* '<S41>:76:1' TempCode(1)=1; */
               APP_FluxWeak_GEAR2_DW.TempCode_g[0] = 1UL;
 
-              /* '<S39>:76:1' TempCode(2)=0; */
+              /* '<S41>:76:1' TempCode(2)=0; */
               APP_FluxWeak_GEAR2_DW.TempCode_g[1] = 0UL;
 
               /* 电机一级 */
-              /* Transition: '<S39>:80' */
+              /* Transition: '<S41>:80' */
             } else {
-              /* Transition: '<S39>:81' */
-              /* '<S39>:81:1' TempCode(1)=0; */
+              /* Transition: '<S41>:81' */
+              /* '<S41>:81:1' TempCode(1)=0; */
               APP_FluxWeak_GEAR2_DW.TempCode_g[0] = 0UL;
 
-              /* '<S39>:81:1' TempCode(2)=0; */
+              /* '<S41>:81:1' TempCode(2)=0; */
               APP_FluxWeak_GEAR2_DW.TempCode_g[1] = 0UL;
             }
           }
         }
       } else {
-        /* Transition: '<S39>:56' */
-        /* Transition: '<S39>:58' */
-        /* Transition: '<S39>:113' */
+        /* Transition: '<S41>:56' */
+        /* Transition: '<S41>:58' */
+        /* Transition: '<S41>:113' */
       }
 
-      /* Transition: '<S39>:112' */
-      /* '<S39>:83:1' sf_internal_predicateOutput = ... */
-      /* '<S39>:83:1' TempCode(6); */
+      /* Transition: '<S41>:112' */
+      /* '<S41>:83:1' sf_internal_predicateOutput = ... */
+      /* '<S41>:83:1' TempCode(6); */
       if (APP_FluxWeak_GEAR2_DW.TempCode_g[5] == 0UL) {
-        /* Transition: '<S39>:87' */
-        /* '<S39>:97:1' sf_internal_predicateOutput = ... */
-        /* '<S39>:97:1' InvTemp>PMSM_Param.InvOT3; */
+        /* Transition: '<S41>:87' */
+        /* '<S41>:97:1' sf_internal_predicateOutput = ... */
+        /* '<S41>:97:1' InvTemp>PMSM_Param.InvOT3; */
         if (APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_a > PMSM_Param.InvOT3)
         {
-          /* Transition: '<S39>:97' */
-          /* Transition: '<S39>:94' */
-          /* '<S39>:94:1' TempCode(4)=0; */
+          /* Transition: '<S41>:97' */
+          /* Transition: '<S41>:94' */
+          /* '<S41>:94:1' TempCode(4)=0; */
           APP_FluxWeak_GEAR2_DW.TempCode_g[3] = 0UL;
 
-          /* '<S39>:94:1' TempCode(5)=0; */
+          /* '<S41>:94:1' TempCode(5)=0; */
           APP_FluxWeak_GEAR2_DW.TempCode_g[4] = 0UL;
 
-          /* '<S39>:94:1' TempCode(6)=1; */
+          /* '<S41>:94:1' TempCode(6)=1; */
           APP_FluxWeak_GEAR2_DW.TempCode_g[5] = 1UL;
 
           /* 控制器三级 */
-          /* Transition: '<S39>:103' */
-          /* Transition: '<S39>:86' */
-          /* Transition: '<S39>:110' */
+          /* Transition: '<S41>:103' */
+          /* Transition: '<S41>:86' */
+          /* Transition: '<S41>:110' */
         } else {
-          /* Transition: '<S39>:98' */
-          /* '<S39>:89:1' sf_internal_predicateOutput = ... */
-          /* '<S39>:89:1' InvTemp>PMSM_Param.InvOT2; */
+          /* Transition: '<S41>:98' */
+          /* '<S41>:89:1' sf_internal_predicateOutput = ... */
+          /* '<S41>:89:1' InvTemp>PMSM_Param.InvOT2; */
           if (APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_a >
               PMSM_Param.InvOT2) {
-            /* Transition: '<S39>:89' */
-            /* Transition: '<S39>:100' */
-            /* '<S39>:100:1' TempCode(4)=0; */
+            /* Transition: '<S41>:89' */
+            /* Transition: '<S41>:100' */
+            /* '<S41>:100:1' TempCode(4)=0; */
             APP_FluxWeak_GEAR2_DW.TempCode_g[3] = 0UL;
 
-            /* '<S39>:100:1' TempCode(5)=1; */
+            /* '<S41>:100:1' TempCode(5)=1; */
             APP_FluxWeak_GEAR2_DW.TempCode_g[4] = 1UL;
 
             /* 控制器二级 */
-            /* Transition: '<S39>:86' */
-            /* Transition: '<S39>:110' */
+            /* Transition: '<S41>:86' */
+            /* Transition: '<S41>:110' */
           } else {
-            /* Transition: '<S39>:85' */
-            /* '<S39>:105:1' sf_internal_predicateOutput = ... */
-            /* '<S39>:105:1' InvTemp>PMSM_Param.InvOT1; */
+            /* Transition: '<S41>:85' */
+            /* '<S41>:105:1' sf_internal_predicateOutput = ... */
+            /* '<S41>:105:1' InvTemp>PMSM_Param.InvOT1; */
             if (APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_a >
                 PMSM_Param.InvOT1) {
-              /* Transition: '<S39>:105' */
-              /* Transition: '<S39>:104' */
-              /* '<S39>:104:1' TempCode(4)=1; */
+              /* Transition: '<S41>:105' */
+              /* Transition: '<S41>:104' */
+              /* '<S41>:104:1' TempCode(4)=1; */
               APP_FluxWeak_GEAR2_DW.TempCode_g[3] = 1UL;
 
-              /* '<S39>:104:1' TempCode(5)=0; */
+              /* '<S41>:104:1' TempCode(5)=0; */
               APP_FluxWeak_GEAR2_DW.TempCode_g[4] = 0UL;
 
               /* 控制器一级 */
-              /* Transition: '<S39>:110' */
+              /* Transition: '<S41>:110' */
             } else {
-              /* Transition: '<S39>:111' */
-              /* '<S39>:111:1' TempCode(4)=0; */
+              /* Transition: '<S41>:111' */
+              /* '<S41>:111:1' TempCode(4)=0; */
               APP_FluxWeak_GEAR2_DW.TempCode_g[3] = 0UL;
 
-              /* '<S39>:111:1' TempCode(5)=0; */
+              /* '<S41>:111:1' TempCode(5)=0; */
               APP_FluxWeak_GEAR2_DW.TempCode_g[4] = 0UL;
             }
           }
         }
       } else {
-        /* Transition: '<S39>:83' */
-        /* Transition: '<S39>:106' */
-        /* Transition: '<S39>:114' */
+        /* Transition: '<S41>:83' */
+        /* Transition: '<S41>:106' */
+        /* Transition: '<S41>:114' */
       }
 
-      /* End of Chart: '<S28>/Chart' */
+      /* End of Chart: '<S30>/Chart' */
 
-      /* SignalConversion: '<S28>/BusConversion_InsertedFor_Temp_at_inport_0' */
+      /* SignalConversion: '<S30>/BusConversion_InsertedFor_Temp_at_inport_0' */
       for (i = 0; i < 6; i++) {
         APP_FluxWeak_GEAR2_DW.TempCode[i] = APP_FluxWeak_GEAR2_DW.TempCode_g[i];
       }
 
-      /* End of SignalConversion: '<S28>/BusConversion_InsertedFor_Temp_at_inport_0' */
+      /* End of SignalConversion: '<S30>/BusConversion_InsertedFor_Temp_at_inport_0' */
 
-      /* FunctionCaller: '<S28>/Function Caller' incorporates:
-       *  Constant: '<S28>/Constant'
-       *  Constant: '<S28>/Constant1'
+      /* FunctionCaller: '<S30>/Function Caller' incorporates:
+       *  Constant: '<S30>/Constant'
+       *  Constant: '<S30>/Constant1'
        */
       APP_FluxWeak_GEAR2_Lim_coef
         (APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_c, PMSM_Param.MotOT1,
          PMSM_Param.MotOT2, &rtb_InvCoef);
 
-      /* SignalConversion: '<S28>/BusConversion_InsertedFor_Temp_at_inport_0' */
+      /* SignalConversion: '<S30>/BusConversion_InsertedFor_Temp_at_inport_0' */
       APP_FluxWeak_GEAR2_DW.MotCoef = rtb_InvCoef;
 
-      /* FunctionCaller: '<S28>/Function Caller1' incorporates:
-       *  Constant: '<S28>/Constant2'
-       *  Constant: '<S28>/Constant3'
+      /* FunctionCaller: '<S30>/Function Caller1' incorporates:
+       *  Constant: '<S30>/Constant2'
+       *  Constant: '<S30>/Constant3'
        */
       APP_FluxWeak_GEAR2_Lim_coef
         (APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_a, PMSM_Param.InvOT1,
          PMSM_Param.InvOT2, &rtb_InvCoef);
 
-      /* SignalConversion: '<S28>/BusConversion_InsertedFor_Temp_at_inport_0' */
+      /* SignalConversion: '<S30>/BusConversion_InsertedFor_Temp_at_inport_0' */
       APP_FluxWeak_GEAR2_DW.InvCoef = rtb_InvCoef;
     }
 
-    /* End of RelationalOperator: '<S23>/Compare' */
+    /* End of RelationalOperator: '<S25>/Compare' */
     /* End of Outputs for SubSystem: '<S15>/Temp' */
 
     /* Outputs for Enabled SubSystem: '<S15>/Volt' incorporates:
-     *  EnablePort: '<S30>/Enable'
+     *  EnablePort: '<S32>/Enable'
      */
     if (rtb_MultiportSwitch) {
-      /* Chart: '<S30>/Chart3' incorporates:
+      /* Chart: '<S32>/Chart3' incorporates:
        *  DataStoreRead: '<Root>/Data Store Read'
        */
       /* Gateway: implement/Fault/judgment/Volt/Chart3 */
       /* During: implement/Fault/judgment/Volt/Chart3 */
       /* Entry Internal: implement/Fault/judgment/Volt/Chart3 */
-      /* Transition: '<S52>:39' */
-      /* '<S52>:41:1' sf_internal_predicateOutput = ... */
-      /* '<S52>:41:1' VoltCapFil<PMSM_Param.OV1; */
+      /* Transition: '<S54>:39' */
+      /* '<S54>:41:1' sf_internal_predicateOutput = ... */
+      /* '<S54>:41:1' VoltCapFil<PMSM_Param.OV1; */
       if (DiscreteTimeIntegrator1_i4 < PMSM_Param.OV1) {
-        /* Transition: '<S52>:41' */
-        /* Transition: '<S52>:43' */
-        /* '<S52>:43:1' Chg_coef=1; */
+        /* Transition: '<S54>:41' */
+        /* Transition: '<S54>:43' */
+        /* '<S54>:43:1' Chg_coef=1; */
         rtb_InvCoef = 1.0F;
 
-        /* '<S52>:43:1' VoltCode(1)=0; */
+        /* '<S54>:43:1' VoltCode(1)=0; */
         APP_FluxWeak_GEAR2_DW.VoltCode_m[0] = 0UL;
 
-        /* '<S52>:43:1' VoltCode(2)=0; */
+        /* '<S54>:43:1' VoltCode(2)=0; */
         APP_FluxWeak_GEAR2_DW.VoltCode_m[1] = 0UL;
 
-        /* '<S52>:65:1' sf_internal_predicateOutput = ... */
-        /* '<S52>:65:1' ~MainRelayState; */
+        /* '<S54>:65:1' sf_internal_predicateOutput = ... */
+        /* '<S54>:65:1' ~MainRelayState; */
         if (PMSM_Input.AppComm.MainRelayState != 0U) {
-          /* Transition: '<S52>:67' */
-          /* '<S52>:69:1' sf_internal_predicateOutput = ... */
-          /* '<S52>:69:1' VoltCapFil<PMSM_Param.LV2; */
+          /* Transition: '<S54>:67' */
+          /* '<S54>:69:1' sf_internal_predicateOutput = ... */
+          /* '<S54>:69:1' VoltCapFil<PMSM_Param.LV2; */
           if (DiscreteTimeIntegrator1_i4 < PMSM_Param.LV2) {
-            /* Transition: '<S52>:69' */
-            /* Transition: '<S52>:71' */
-            /* '<S52>:71:1' VoltCode(3)=0; */
+            /* Transition: '<S54>:69' */
+            /* Transition: '<S54>:71' */
+            /* '<S54>:71:1' VoltCode(3)=0; */
             APP_FluxWeak_GEAR2_DW.VoltCode_m[2] = 0UL;
 
-            /* '<S52>:71:1' VoltCode(4)=1; */
+            /* '<S54>:71:1' VoltCode(4)=1; */
             APP_FluxWeak_GEAR2_DW.VoltCode_m[3] = 1UL;
 
-            /* '<S52>:71:1' DisChg_coef=0; */
+            /* '<S54>:71:1' DisChg_coef=0; */
             APP_FluxWeak_GEAR2_DW.DisChg_coef = 0.0F;
 
             /* 欠压2 */
-            /* Transition: '<S52>:81' */
-            /* Transition: '<S52>:82' */
+            /* Transition: '<S54>:81' */
+            /* Transition: '<S54>:82' */
           } else {
-            /* '<S52>:73:1' sf_internal_predicateOutput = ... */
-            /* '<S52>:73:1' VoltCapFil<PMSM_Param.LV1; */
+            /* '<S54>:73:1' sf_internal_predicateOutput = ... */
+            /* '<S54>:73:1' VoltCapFil<PMSM_Param.LV1; */
             if (DiscreteTimeIntegrator1_i4 < PMSM_Param.LV1) {
-              /* Transition: '<S52>:73' */
-              /* Transition: '<S52>:75' */
-              /* '<S52>:75:1' VoltCode(3)=1; */
+              /* Transition: '<S54>:73' */
+              /* Transition: '<S54>:75' */
+              /* '<S54>:75:1' VoltCode(3)=1; */
               APP_FluxWeak_GEAR2_DW.VoltCode_m[2] = 1UL;
 
-              /* '<S52>:75:1' VoltCode(4)=0; */
+              /* '<S54>:75:1' VoltCode(4)=0; */
               APP_FluxWeak_GEAR2_DW.VoltCode_m[3] = 0UL;
 
-              /* '<S52>:75:1' DisChg_coef=Lim_coef(VoltCapFil,PMSM_Param.LV1,PMSM_Param.LV2); */
+              /* '<S54>:75:1' DisChg_coef=Lim_coef(VoltCapFil,PMSM_Param.LV1,PMSM_Param.LV2); */
               APP_FluxWeak_GEAR2_Lim_coef(DiscreteTimeIntegrator1_i4,
                 PMSM_Param.LV1, PMSM_Param.LV2,
                 &APP_FluxWeak_GEAR2_DW.DisChg_coef);
 
               /* 欠压1 */
             } else {
-              /* Transition: '<S52>:79' */
-              /* '<S52>:79:1' DisChg_coef=1; */
+              /* Transition: '<S54>:79' */
+              /* '<S54>:79:1' DisChg_coef=1; */
               APP_FluxWeak_GEAR2_DW.DisChg_coef = 1.0F;
 
-              /* '<S52>:79:1' VoltCode(3)=0; */
+              /* '<S54>:79:1' VoltCode(3)=0; */
               APP_FluxWeak_GEAR2_DW.VoltCode_m[2] = 0UL;
 
-              /* '<S52>:79:1' VoltCode(4)=0; */
+              /* '<S54>:79:1' VoltCode(4)=0; */
               APP_FluxWeak_GEAR2_DW.VoltCode_m[3] = 0UL;
 
-              /* Transition: '<S52>:82' */
+              /* Transition: '<S54>:82' */
             }
           }
         } else {
-          /* Transition: '<S52>:65' */
-          /* Transition: '<S52>:77' */
-          /* Transition: '<S52>:80' */
-          /* Transition: '<S52>:81' */
-          /* Transition: '<S52>:82' */
+          /* Transition: '<S54>:65' */
+          /* Transition: '<S54>:77' */
+          /* Transition: '<S54>:80' */
+          /* Transition: '<S54>:81' */
+          /* Transition: '<S54>:82' */
         }
 
-        /* Transition: '<S52>:83' */
+        /* Transition: '<S54>:83' */
       } else {
-        /* Transition: '<S52>:45' */
-        /* '<S52>:45:1' DisChg_coef=1; */
+        /* Transition: '<S54>:45' */
+        /* '<S54>:45:1' DisChg_coef=1; */
         APP_FluxWeak_GEAR2_DW.DisChg_coef = 1.0F;
 
-        /* '<S52>:45:1' VoltCode(3)=0; */
+        /* '<S54>:45:1' VoltCode(3)=0; */
         APP_FluxWeak_GEAR2_DW.VoltCode_m[2] = 0UL;
 
-        /* '<S52>:45:1' VoltCode(4)=0; */
+        /* '<S54>:45:1' VoltCode(4)=0; */
         APP_FluxWeak_GEAR2_DW.VoltCode_m[3] = 0UL;
 
-        /* '<S52>:47:1' sf_internal_predicateOutput = ... */
-        /* '<S52>:47:1' VoltCapFil>PMSM_Param.OV2; */
+        /* '<S54>:47:1' sf_internal_predicateOutput = ... */
+        /* '<S54>:47:1' VoltCapFil>PMSM_Param.OV2; */
         if (DiscreteTimeIntegrator1_i4 > PMSM_Param.OV2) {
-          /* Transition: '<S52>:47' */
-          /* Transition: '<S52>:49' */
-          /* '<S52>:49:1' VoltCode(1)=0; */
+          /* Transition: '<S54>:47' */
+          /* Transition: '<S54>:49' */
+          /* '<S54>:49:1' VoltCode(1)=0; */
           APP_FluxWeak_GEAR2_DW.VoltCode_m[0] = 0UL;
 
-          /* '<S52>:49:1' VoltCode(2)=1; */
+          /* '<S54>:49:1' VoltCode(2)=1; */
           APP_FluxWeak_GEAR2_DW.VoltCode_m[1] = 1UL;
 
-          /* '<S52>:49:1' Chg_coef=0; */
+          /* '<S54>:49:1' Chg_coef=0; */
           rtb_InvCoef = 0.0F;
 
           /* 过压2 */
-          /* Transition: '<S52>:53' */
+          /* Transition: '<S54>:53' */
         } else {
-          /* Transition: '<S52>:51' */
-          /* '<S52>:51:1' VoltCode(1)=1; */
+          /* Transition: '<S54>:51' */
+          /* '<S54>:51:1' VoltCode(1)=1; */
           APP_FluxWeak_GEAR2_DW.VoltCode_m[0] = 1UL;
 
-          /* '<S52>:51:1' VoltCode(2)=0; */
+          /* '<S54>:51:1' VoltCode(2)=0; */
           APP_FluxWeak_GEAR2_DW.VoltCode_m[1] = 0UL;
 
-          /* '<S52>:51:1' Chg_coef=Lim_coef(VoltCapFil,PMSM_Param.OV1,PMSM_Param.OV2); */
+          /* '<S54>:51:1' Chg_coef=Lim_coef(VoltCapFil,PMSM_Param.OV1,PMSM_Param.OV2); */
           APP_FluxWeak_GEAR2_Lim_coef(DiscreteTimeIntegrator1_i4, PMSM_Param.OV1,
             PMSM_Param.OV2, &rtb_InvCoef);
 
           /* 过压1 */
         }
 
-        /* Transition: '<S52>:56' */
+        /* Transition: '<S54>:56' */
       }
 
-      /* End of Chart: '<S30>/Chart3' */
+      /* End of Chart: '<S32>/Chart3' */
 
-      /* SignalConversion: '<S30>/BusConversion_InsertedFor_Volt_at_inport_0' */
+      /* SignalConversion: '<S32>/BusConversion_InsertedFor_Volt_at_inport_0' */
       APP_FluxWeak_GEAR2_DW.VoltCode[0] = APP_FluxWeak_GEAR2_DW.VoltCode_m[0];
       APP_FluxWeak_GEAR2_DW.VoltCode[1] = APP_FluxWeak_GEAR2_DW.VoltCode_m[1];
       APP_FluxWeak_GEAR2_DW.VoltCode[2] = APP_FluxWeak_GEAR2_DW.VoltCode_m[2];
       APP_FluxWeak_GEAR2_DW.VoltCode[3] = APP_FluxWeak_GEAR2_DW.VoltCode_m[3];
 
-      /* Relay: '<S30>/Relay' incorporates:
+      /* Relay: '<S32>/Relay' incorporates:
        *  DataStoreRead: '<Root>/Data Store Read'
        */
       if (PMSM_Input.AgoSample.Speed >= 20.0F) {
@@ -6268,16 +6268,16 @@ void APP_FluxWeak_GEAR2_step(void)
         }
       }
 
-      /* End of Relay: '<S30>/Relay' */
+      /* End of Relay: '<S32>/Relay' */
 
-      /* SignalConversion: '<S30>/BusConversion_InsertedFor_Volt_at_inport_0' incorporates:
-       *  Switch: '<S30>/Switch'
+      /* SignalConversion: '<S32>/BusConversion_InsertedFor_Volt_at_inport_0' incorporates:
+       *  Switch: '<S32>/Switch'
        */
       APP_FluxWeak_GEAR2_DW.OVLimTP_g = APP_FluxWeak_GEAR2_DW.DisChg_coef;
 
-      /* SignalConversion: '<S30>/BusConversion_InsertedFor_Volt_at_inport_0' incorporates:
-       *  Gain: '<S30>/Gain'
-       *  Switch: '<S30>/Switch'
+      /* SignalConversion: '<S32>/BusConversion_InsertedFor_Volt_at_inport_0' incorporates:
+       *  Gain: '<S32>/Gain'
+       *  Switch: '<S32>/Switch'
        */
       APP_FluxWeak_GEAR2_DW.OVLimTN_m = -rtb_InvCoef;
     }
@@ -6306,31 +6306,63 @@ void APP_FluxWeak_GEAR2_step(void)
       /* DataStoreWrite: '<S11>/Data Store Write1' */
       AppFun.FaultLimTN = APP_FluxWeak_GEAR2_DW.FaultLimTN;
 
-      /* Logic: '<S11>/Logical Operator' */
-      rtb_MultiportSwitch = !(APP_FluxWeak_GEAR2_DW.Compare ||
+      /* Sum: '<S17>/Difference Inputs1' incorporates:
+       *  DataTypeConversion: '<S11>/Data Type Conversion'
+       *  Logic: '<S11>/Logical Operator'
+       *  UnitDelay: '<S17>/Delay Input2'
+       *
+       * Block description for '<S17>/Difference Inputs1':
+       *
+       *  Add in CPU
+       *
+       * Block description for '<S17>/Delay Input2':
+       *
+       *  Store in Global RAM
+       */
+      rtb_InvCoef = (real32_T)!(APP_FluxWeak_GEAR2_DW.Compare ||
         (APP_FluxWeak_GEAR2_DW.TempCode[1] != 0UL) ||
         (APP_FluxWeak_GEAR2_DW.TempCode[2] != 0UL) ||
         (APP_FluxWeak_GEAR2_DW.TempCode[4] != 0UL) ||
         (APP_FluxWeak_GEAR2_DW.TempCode[5] != 0UL) || ((uint16_T)
-        rtb_LogicalOperator != 0U));
+        rtb_LogicalOperator != 0U)) - APP_FluxWeak_GEAR2_DW.DelayInput2_DSTATE;
 
-      /* RateLimiter: '<S11>/Rate Limiter' incorporates:
-       *  DataTypeConversion: '<S11>/Data Type Conversion'
+      /* Switch: '<S18>/Switch2' incorporates:
+       *  RelationalOperator: '<S18>/LowerRelop1'
+       *  RelationalOperator: '<S18>/UpperRelop'
+       *  Switch: '<S18>/Switch'
        */
-      rtb_Switch_b = (real32_T)rtb_MultiportSwitch -
-        APP_FluxWeak_GEAR2_DW.PrevY_i;
-      if (rtb_Switch_b > 0.002F) {
-        APP_FluxWeak_GEAR2_DW.PrevY_i += 0.002F;
-      } else if (rtb_Switch_b < -0.002F) {
-        APP_FluxWeak_GEAR2_DW.PrevY_i += -0.002F;
+      if (rtb_InvCoef > 0.02F) {
+        rtb_InvCoef = 0.02F;
       } else {
-        APP_FluxWeak_GEAR2_DW.PrevY_i = rtb_MultiportSwitch;
+        if (rtb_InvCoef < -0.02F) {
+          /* Switch: '<S18>/Switch' */
+          rtb_InvCoef = -0.02F;
+        }
       }
 
-      /* End of RateLimiter: '<S11>/Rate Limiter' */
+      /* End of Switch: '<S18>/Switch2' */
 
-      /* DataStoreWrite: '<S11>/Data Store Write2' */
-      AppFun.FaultCoef = APP_FluxWeak_GEAR2_DW.PrevY_i;
+      /* Sum: '<S17>/Difference Inputs2' incorporates:
+       *  UnitDelay: '<S17>/Delay Input2'
+       *
+       * Block description for '<S17>/Difference Inputs2':
+       *
+       *  Add in CPU
+       *
+       * Block description for '<S17>/Delay Input2':
+       *
+       *  Store in Global RAM
+       */
+      APP_FluxWeak_GEAR2_DW.DelayInput2_DSTATE += rtb_InvCoef;
+
+      /* DataStoreWrite: '<S11>/Data Store Write2' incorporates:
+       *  UnitDelay: '<S17>/Delay Input2'
+       *
+       * Block description for '<S17>/Delay Input2':
+       *
+       *  Store in Global RAM
+       */
+      AppFun.FaultCoef = APP_FluxWeak_GEAR2_DW.DelayInput2_DSTATE;
 
       /* Chart: '<S11>/Chart' */
       /* Gateway: implement/Fault/Act/Chart */
@@ -6370,10 +6402,17 @@ void APP_FluxWeak_GEAR2_step(void)
 
       /* End of Chart: '<S11>/Chart' */
 
-      /* MinMax: '<S11>/MinMax' */
+      /* MinMax: '<S11>/MinMax' incorporates:
+       *  UnitDelay: '<S17>/Delay Input2'
+       *
+       * Block description for '<S17>/Delay Input2':
+       *
+       *  Store in Global RAM
+       */
       /* Transition: '<S16>:16' */
-      APP_FluxWeak_GEAR2_DW.MinMax = fminf(fminf(APP_FluxWeak_GEAR2_DW.PrevY_i,
-        APP_FluxWeak_GEAR2_DW.MotCoef), APP_FluxWeak_GEAR2_DW.InvCoef);
+      APP_FluxWeak_GEAR2_DW.MinMax = fminf(fminf
+        (APP_FluxWeak_GEAR2_DW.DelayInput2_DSTATE, APP_FluxWeak_GEAR2_DW.MotCoef),
+        APP_FluxWeak_GEAR2_DW.InvCoef);
     }
 
     /* End of RelationalOperator: '<S13>/Compare' */
@@ -6471,26 +6510,26 @@ void APP_FluxWeak_GEAR2_step(void)
    */
   if (APP_FluxWeak_GEAR2_DW.RunSt == 2U) {
     if (!APP_FluxWeak_GEAR2_DW.method_MODE) {
-      /* SystemReset for Atomic SubSystem: '<S142>/LimDrv' */
+      /* SystemReset for Atomic SubSystem: '<S144>/LimDrv' */
 
-      /* SystemReset for Chart: '<S156>/Chart' */
+      /* SystemReset for Chart: '<S158>/Chart' */
       APP_FluxWeak_GEAR2_Chart_Reset(&APP_FluxWeak_GEAR2_DW.sf_Chart_c);
 
-      /* End of SystemReset for SubSystem: '<S142>/LimDrv' */
+      /* End of SystemReset for SubSystem: '<S144>/LimDrv' */
 
-      /* SystemReset for Atomic SubSystem: '<S142>/LimChg' */
+      /* SystemReset for Atomic SubSystem: '<S144>/LimChg' */
 
-      /* SystemReset for Chart: '<S150>/Chart' */
+      /* SystemReset for Chart: '<S152>/Chart' */
       APP_FluxWeak_GEAR2_Chart_Reset(&APP_FluxWeak_GEAR2_DW.sf_Chart_lj);
 
-      /* End of SystemReset for SubSystem: '<S142>/LimChg' */
+      /* End of SystemReset for SubSystem: '<S144>/LimChg' */
 
-      /* SystemReset for Chart: '<S142>/Chart1' */
+      /* SystemReset for Chart: '<S144>/Chart1' */
       APP_FluxWeak_GEAR2_DW.is_active_c20_APP_FluxWeak_GEAR = 0U;
       APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2 =
         APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
 
-      /* SystemReset for Chart: '<S54>/Chart' */
+      /* SystemReset for Chart: '<S56>/Chart' */
       APP_FluxWeak_GEAR2_DW.temporalCounter_i1 = 0U;
       APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
       APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
@@ -6499,196 +6538,193 @@ void APP_FluxWeak_GEAR2_step(void)
       APP_FluxWeak_GEAR2_DW.is_c2_APP_FluxWeak_GEAR2 =
         APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
 
-      /* Enable for Chart: '<S54>/Chart' incorporates:
-       *  SubSystem: '<S54>/Slope'
+      /* Enable for Chart: '<S56>/Chart' incorporates:
+       *  SubSystem: '<S56>/Slope'
        */
       APP_FluxWeak_GEAR2_Slope_Enable(&APP_FluxWeak_GEAR2_DW.Slope);
 
-      /* SystemReset for Function Call SubSystem: '<S54>/Calib' */
+      /* SystemReset for Function Call SubSystem: '<S56>/Calib' */
       APP_FluxWeak_GEAR2_Calib_Reset(&APP_FluxWeak_GEAR2_DW.Calib);
 
-      /* End of SystemReset for SubSystem: '<S54>/Calib' */
+      /* End of SystemReset for SubSystem: '<S56>/Calib' */
 
-      /* Enable for Chart: '<S54>/Chart' incorporates:
-       *  SubSystem: '<S54>/Calib'
+      /* Enable for Chart: '<S56>/Chart' incorporates:
+       *  SubSystem: '<S56>/Calib'
        */
       APP_FluxWeak_GEAR2_Calib_Enable(&APP_FluxWeak_GEAR2_DW.Calib);
       if ((int16_T)APP_FluxWeak_GEAR2_DW.is_c2_APP_FluxWeak_GEAR2 == (int16_T)
           APP_FluxWeak_GEAR2_IN_UVWcheck) {
-        /* SystemReset for Function Call SubSystem: '<S54>/UVW_check' */
+        /* SystemReset for Function Call SubSystem: '<S56>/UVW_check' */
         APP_FluxWeak_GE_UVW_check_Reset(&APP_FluxWeak_GEAR2_DW.UVW_check);
 
-        /* End of SystemReset for SubSystem: '<S54>/UVW_check' */
+        /* End of SystemReset for SubSystem: '<S56>/UVW_check' */
       }
 
       APP_FluxWeak_GEAR2_DW.method_MODE = true;
     }
 
-    /* Gain: '<S141>/Gain' */
+    /* Gain: '<S143>/Gain' */
     rtb_InvCoef = -APP_FluxWeak_GEAR2_DW.LimtCoef;
 
-    /* DeadZone: '<S142>/Dead Zone' */
+    /* DeadZone: '<S144>/Dead Zone' */
     if (DiscreteTimeIntegrator1 > 20.0F) {
-      rtb_DeadZone = DiscreteTimeIntegrator1 - 20.0F;
+      rtb_Switch_b = DiscreteTimeIntegrator1 - 20.0F;
     } else if (DiscreteTimeIntegrator1 >= -20.0F) {
-      rtb_DeadZone = 0.0F;
+      rtb_Switch_b = 0.0F;
     } else {
-      rtb_DeadZone = DiscreteTimeIntegrator1 - -20.0F;
+      rtb_Switch_b = DiscreteTimeIntegrator1 - -20.0F;
     }
 
-    /* End of DeadZone: '<S142>/Dead Zone' */
+    /* End of DeadZone: '<S144>/Dead Zone' */
 
-    /* Outputs for Atomic SubSystem: '<S142>/LimDrv' */
-    /* Abs: '<S155>/Abs' */
-    rtb_Saturation1_i = fabsf(DiscreteTimeIntegrator1);
+    /* Outputs for Atomic SubSystem: '<S144>/LimDrv' */
+    /* Abs: '<S157>/Abs' */
+    rtb_Abs_l = fabsf(DiscreteTimeIntegrator1);
 
-    /* Lookup_n-D: '<S155>/table' incorporates:
-     *  Abs: '<S155>/Abs'
+    /* Lookup_n-D: '<S157>/table' incorporates:
+     *  Abs: '<S157>/Abs'
      */
-    bpIdx = plook_u32ff_evenca(rtb_Saturation1_i, 1000.0F, 500.0F, 7UL,
-      &rtb_Divide_p);
-    rtb_Switch_b = intrp1d_fu32fla_pw(bpIdx, rtb_Divide_p,
-      rtCP_table_tableData_o, 7UL);
+    bpIdx = plook_u32ff_evenca(rtb_Abs_l, 1000.0F, 500.0F, 7UL, &rtb_Divide_p);
+    rtb_Add_b = intrp1d_fu32fla_pw(bpIdx, rtb_Divide_p, rtCP_table_tableData_o,
+      7UL);
 
-    /* Saturate: '<S155>/Saturation1' incorporates:
-     *  Abs: '<S155>/Abs'
+    /* Saturate: '<S157>/Saturation1' incorporates:
+     *  Abs: '<S157>/Abs'
      */
-    if (rtb_Saturation1_i > 100000.0F) {
-      rtb_Saturation1_i = 100000.0F;
+    if (rtb_Abs_l > 100000.0F) {
+      rtb_Abs_l = 100000.0F;
     } else {
-      if (rtb_Saturation1_i < 1.0F) {
-        rtb_Saturation1_i = 1.0F;
+      if (rtb_Abs_l < 1.0F) {
+        rtb_Abs_l = 1.0F;
       }
     }
 
-    /* End of Saturate: '<S155>/Saturation1' */
+    /* End of Saturate: '<S157>/Saturation1' */
 
-    /* Product: '<S155>/Divide' incorporates:
+    /* Product: '<S157>/Divide' incorporates:
      *  DataStoreRead: '<Root>/Data Store Read'
-     *  Gain: '<S155>/Gain'
-     *  Product: '<S155>/Product'
+     *  Gain: '<S157>/Gain'
+     *  Product: '<S157>/Product'
      */
     rtb_Divide_p = DiscreteTimeIntegrator1_i4 * PMSM_Input.AppComm.DrvLimCur *
-      9.55F * rtb_Switch_b / rtb_Saturation1_i;
+      9.55F * rtb_Add_b / rtb_Abs_l;
 
-    /* FunctionCaller: '<S155>/Function Caller' */
-    APP_FluxWeak_GEAR2_n2MaxT(rtb_Psi_i, &rtb_Switch_b);
+    /* FunctionCaller: '<S157>/Function Caller' */
+    APP_FluxWeak_GEAR2_n2MaxT(rtb_Psi_i, &rtb_Add_b);
 
-    /* Product: '<S155>/Divide1' */
-    rtb_Switch_b = rtb_Divide_p / rtb_Switch_b;
+    /* Product: '<S157>/Divide1' */
+    rtb_Add_b = rtb_Divide_p / rtb_Add_b;
 
-    /* Saturate: '<S155>/Saturation' */
-    if (rtb_Switch_b > 1.0F) {
-      rtb_Switch_b = 1.0F;
-    } else {
-      if (rtb_Switch_b < 0.0F) {
-        rtb_Switch_b = 0.0F;
-      }
-    }
-
-    /* End of Saturate: '<S155>/Saturation' */
-
-    /* Chart: '<S156>/Chart' incorporates:
+    /* Chart: '<S158>/Chart' incorporates:
      *  DataStoreRead: '<Root>/Data Store Read'
-     *  Sum: '<S148>/Sum'
+     *  Sum: '<S150>/Sum'
      */
     APP_FluxWeak_GEAR2_Chart(PMSM_Input.AppComm.DrvLimCur -
       rtb_DiscreteTimeIntegrator1, &rtb_Divide_p,
       &APP_FluxWeak_GEAR2_DW.sf_Chart_c);
 
-    /* Sum: '<S148>/Add' */
-    rtb_Switch_b += rtb_Divide_p;
-
-    /* Saturate: '<S148>/Saturation' */
-    if (rtb_Switch_b > 1.0F) {
-      rtb_Switch_b = 1.0F;
+    /* Saturate: '<S157>/Saturation' */
+    if (rtb_Add_b > 1.0F) {
+      rtb_Add_b = 1.0F;
     } else {
-      if (rtb_Switch_b < 0.0F) {
-        rtb_Switch_b = 0.0F;
+      if (rtb_Add_b < 0.0F) {
+        rtb_Add_b = 0.0F;
       }
     }
 
-    /* End of Saturate: '<S148>/Saturation' */
-    /* End of Outputs for SubSystem: '<S142>/LimDrv' */
+    /* End of Saturate: '<S157>/Saturation' */
 
-    /* Outputs for Atomic SubSystem: '<S142>/LimChg' */
-    /* Abs: '<S147>/Abs' incorporates:
+    /* Sum: '<S150>/Add' */
+    rtb_Add_b += rtb_Divide_p;
+
+    /* Saturate: '<S150>/Saturation' */
+    if (rtb_Add_b > 1.0F) {
+      rtb_Add_b = 1.0F;
+    } else {
+      if (rtb_Add_b < 0.0F) {
+        rtb_Add_b = 0.0F;
+      }
+    }
+
+    /* End of Saturate: '<S150>/Saturation' */
+    /* End of Outputs for SubSystem: '<S144>/LimDrv' */
+
+    /* Outputs for Atomic SubSystem: '<S144>/LimChg' */
+    /* Abs: '<S149>/Abs' incorporates:
      *  DataStoreRead: '<Root>/Data Store Read'
      */
-    rtb_Saturation1_i = fabsf(PMSM_Input.AppComm.GenLimCur);
+    rtb_Abs_l = fabsf(PMSM_Input.AppComm.GenLimCur);
 
-    /* Abs: '<S149>/Abs' */
-    rtb_Saturation1 = fabsf(DiscreteTimeIntegrator1);
+    /* Abs: '<S151>/Abs' */
+    rtb_Divide_o = fabsf(DiscreteTimeIntegrator1);
 
-    /* Lookup_n-D: '<S149>/table' incorporates:
-     *  Abs: '<S149>/Abs'
+    /* Lookup_n-D: '<S151>/table' incorporates:
+     *  Abs: '<S151>/Abs'
      */
-    bpIdx = plook_u32ff_evenca(rtb_Saturation1, 1400.0F, 200.0F, 2UL,
-      &rtb_Divide_p);
+    bpIdx = plook_u32ff_evenca(rtb_Divide_o, 1400.0F, 200.0F, 2UL, &rtb_Divide_p);
     rtb_Divide_p = intrp1d_fu32fla_pw(bpIdx, rtb_Divide_p, rtCP_table_tableData,
       2UL);
 
-    /* Saturate: '<S149>/Saturation1' incorporates:
-     *  Abs: '<S149>/Abs'
+    /* Saturate: '<S151>/Saturation1' incorporates:
+     *  Abs: '<S151>/Abs'
      */
-    if (rtb_Saturation1 > 100000.0F) {
-      rtb_Saturation1 = 100000.0F;
+    if (rtb_Divide_o > 100000.0F) {
+      rtb_Divide_o = 100000.0F;
     } else {
-      if (rtb_Saturation1 < 1.0F) {
-        rtb_Saturation1 = 1.0F;
+      if (rtb_Divide_o < 1.0F) {
+        rtb_Divide_o = 1.0F;
       }
     }
 
-    /* End of Saturate: '<S149>/Saturation1' */
+    /* End of Saturate: '<S151>/Saturation1' */
 
-    /* Product: '<S149>/Divide' incorporates:
-     *  Gain: '<S149>/Gain'
-     *  Product: '<S149>/Product'
+    /* Product: '<S151>/Divide' incorporates:
+     *  Gain: '<S151>/Gain'
+     *  Product: '<S151>/Product'
      */
-    rtb_Saturation1 = DiscreteTimeIntegrator1_i4 * rtb_Saturation1_i * 9.55F /
-      rtb_Divide_p / rtb_Saturation1;
+    rtb_Divide_o = DiscreteTimeIntegrator1_i4 * rtb_Abs_l * 9.55F / rtb_Divide_p
+      / rtb_Divide_o;
 
-    /* FunctionCaller: '<S149>/Function Caller' */
+    /* FunctionCaller: '<S151>/Function Caller' */
     APP_FluxWeak_GEAR2_n2MaxT(rtb_Psi_i, &rtb_Divide_p);
 
-    /* Product: '<S149>/Divide1' */
-    rtb_Divide_p = rtb_Saturation1 / rtb_Divide_p;
+    /* Product: '<S151>/Divide1' */
+    rtb_Divide_p = rtb_Divide_o / rtb_Divide_p;
 
-    /* Saturate: '<S149>/Saturation' */
+    /* Chart: '<S152>/Chart' incorporates:
+     *  Abs: '<S149>/Abs1'
+     *  Sum: '<S149>/Sum'
+     */
+    APP_FluxWeak_GEAR2_Chart(rtb_Abs_l - fabsf(rtb_DiscreteTimeIntegrator1),
+      &rtb_Divide_o, &APP_FluxWeak_GEAR2_DW.sf_Chart_lj);
+
+    /* Saturate: '<S151>/Saturation' */
     if (rtb_Divide_p > 1.0F) {
       rtb_Divide_p = 1.0F;
     } else {
       if (rtb_Divide_p < 0.0F) {
         rtb_Divide_p = 0.0F;
+      }
+    }
+
+    /* End of Saturate: '<S151>/Saturation' */
+
+    /* Sum: '<S149>/Add' */
+    rtb_Abs_l = rtb_Divide_p + rtb_Divide_o;
+
+    /* Saturate: '<S149>/Saturation' */
+    if (rtb_Abs_l > 1.0F) {
+      rtb_Abs_l = 1.0F;
+    } else {
+      if (rtb_Abs_l < 0.0F) {
+        rtb_Abs_l = 0.0F;
       }
     }
 
     /* End of Saturate: '<S149>/Saturation' */
+    /* End of Outputs for SubSystem: '<S144>/LimChg' */
 
-    /* Chart: '<S150>/Chart' incorporates:
-     *  Abs: '<S147>/Abs1'
-     *  Sum: '<S147>/Sum'
-     */
-    APP_FluxWeak_GEAR2_Chart(rtb_Saturation1_i - fabsf
-      (rtb_DiscreteTimeIntegrator1), &rtb_Saturation1,
-      &APP_FluxWeak_GEAR2_DW.sf_Chart_lj);
-
-    /* Sum: '<S147>/Add' */
-    rtb_Divide_p += rtb_Saturation1;
-
-    /* Saturate: '<S147>/Saturation' */
-    if (rtb_Divide_p > 1.0F) {
-      rtb_Divide_p = 1.0F;
-    } else {
-      if (rtb_Divide_p < 0.0F) {
-        rtb_Divide_p = 0.0F;
-      }
-    }
-
-    /* End of Saturate: '<S147>/Saturation' */
-    /* End of Outputs for SubSystem: '<S142>/LimChg' */
-
-    /* Chart: '<S142>/Chart1' */
+    /* Chart: '<S144>/Chart1' */
     /* Gateway: implement/method/Lim&Fault/LimI/Chart1 */
     /* During: implement/method/Lim&Fault/LimI/Chart1 */
     if (APP_FluxWeak_GEAR2_DW.is_active_c20_APP_FluxWeak_GEAR == 0U) {
@@ -6696,118 +6732,118 @@ void APP_FluxWeak_GEAR2_step(void)
       APP_FluxWeak_GEAR2_DW.is_active_c20_APP_FluxWeak_GEAR = 1U;
 
       /* Entry Internal: implement/method/Lim&Fault/LimI/Chart1 */
-      /* Transition: '<S146>:7' */
+      /* Transition: '<S148>:7' */
       APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2 =
         APP_FluxWeak_GEAR2_IN_ZreoSpd;
 
-      /* Entry 'ZreoSpd': '<S146>:6' */
-      /* '<S146>:6:1' LimTP_I = DrvLimit; */
-      rtb_DeadZone = rtb_Switch_b;
+      /* Entry 'ZreoSpd': '<S148>:6' */
+      /* '<S148>:6:1' LimTP_I = DrvLimit; */
+      rtb_Divide_p = rtb_Add_b;
 
-      /* '<S146>:6:1' LimTN_I = -DrvLimit; */
-      rtb_Divide_p = -rtb_Switch_b;
+      /* '<S148>:6:1' LimTN_I = -DrvLimit; */
+      rtb_Add_b = -rtb_Add_b;
     } else {
       switch (APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2) {
        case APP_FluxWeak_GEAR2_IN_NegSpd:
-        /* During 'NegSpd': '<S146>:20' */
-        /* '<S146>:22:1' sf_internal_predicateOutput = ... */
-        /* '<S146>:22:1' Spd >= 0; */
-        if (rtb_DeadZone >= 0.0F) {
-          /* Transition: '<S146>:22' */
+        /* During 'NegSpd': '<S148>:20' */
+        /* '<S148>:22:1' sf_internal_predicateOutput = ... */
+        /* '<S148>:22:1' Spd >= 0; */
+        if (rtb_Switch_b >= 0.0F) {
+          /* Transition: '<S148>:22' */
           APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2 =
             APP_FluxWeak_GEAR2_IN_ZreoSpd;
 
-          /* Entry 'ZreoSpd': '<S146>:6' */
-          /* '<S146>:6:1' LimTP_I = DrvLimit; */
-          rtb_DeadZone = rtb_Switch_b;
+          /* Entry 'ZreoSpd': '<S148>:6' */
+          /* '<S148>:6:1' LimTP_I = DrvLimit; */
+          rtb_Divide_p = rtb_Add_b;
 
-          /* '<S146>:6:1' LimTN_I = -DrvLimit; */
-          rtb_Divide_p = -rtb_Switch_b;
+          /* '<S148>:6:1' LimTN_I = -DrvLimit; */
+          rtb_Add_b = -rtb_Add_b;
         } else {
-          /* '<S146>:20:1' LimTP_I = ChgLimit; */
-          rtb_DeadZone = rtb_Divide_p;
+          /* '<S148>:20:1' LimTP_I = ChgLimit; */
+          rtb_Divide_p = rtb_Abs_l;
 
-          /* '<S146>:20:1' LimTN_I = -DrvLimit; */
-          rtb_Divide_p = -rtb_Switch_b;
+          /* '<S148>:20:1' LimTN_I = -DrvLimit; */
+          rtb_Add_b = -rtb_Add_b;
         }
         break;
 
        case APP_FluxWeak_GEAR2_IN_PosSpd:
-        /* During 'PosSpd': '<S146>:18' */
-        /* '<S146>:19:1' sf_internal_predicateOutput = ... */
-        /* '<S146>:19:1' Spd <= 0; */
-        if (rtb_DeadZone <= 0.0F) {
-          /* Transition: '<S146>:19' */
+        /* During 'PosSpd': '<S148>:18' */
+        /* '<S148>:19:1' sf_internal_predicateOutput = ... */
+        /* '<S148>:19:1' Spd <= 0; */
+        if (rtb_Switch_b <= 0.0F) {
+          /* Transition: '<S148>:19' */
           APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2 =
             APP_FluxWeak_GEAR2_IN_ZreoSpd;
 
-          /* Entry 'ZreoSpd': '<S146>:6' */
-          /* '<S146>:6:1' LimTP_I = DrvLimit; */
-          rtb_DeadZone = rtb_Switch_b;
+          /* Entry 'ZreoSpd': '<S148>:6' */
+          /* '<S148>:6:1' LimTP_I = DrvLimit; */
+          rtb_Divide_p = rtb_Add_b;
 
-          /* '<S146>:6:1' LimTN_I = -DrvLimit; */
-          rtb_Divide_p = -rtb_Switch_b;
+          /* '<S148>:6:1' LimTN_I = -DrvLimit; */
+          rtb_Add_b = -rtb_Add_b;
         } else {
-          /* '<S146>:18:1' LimTP_I = DrvLimit; */
-          rtb_DeadZone = rtb_Switch_b;
+          /* '<S148>:18:1' LimTP_I = DrvLimit; */
+          rtb_Divide_p = rtb_Add_b;
 
-          /* '<S146>:18:1' LimTN_I = -ChgLimit; */
-          rtb_Divide_p = -rtb_Divide_p;
+          /* '<S148>:18:1' LimTN_I = -ChgLimit; */
+          rtb_Add_b = -rtb_Abs_l;
         }
         break;
 
        default:
-        /* During 'ZreoSpd': '<S146>:6' */
-        /* '<S146>:17:1' sf_internal_predicateOutput = ... */
-        /* '<S146>:17:1' Spd > 0; */
-        if (rtb_DeadZone > 0.0F) {
-          /* Transition: '<S146>:17' */
+        /* During 'ZreoSpd': '<S148>:6' */
+        /* '<S148>:17:1' sf_internal_predicateOutput = ... */
+        /* '<S148>:17:1' Spd > 0; */
+        if (rtb_Switch_b > 0.0F) {
+          /* Transition: '<S148>:17' */
           APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2 =
             APP_FluxWeak_GEAR2_IN_PosSpd;
 
-          /* Entry 'PosSpd': '<S146>:18' */
-          /* '<S146>:18:1' LimTP_I = DrvLimit; */
-          rtb_DeadZone = rtb_Switch_b;
+          /* Entry 'PosSpd': '<S148>:18' */
+          /* '<S148>:18:1' LimTP_I = DrvLimit; */
+          rtb_Divide_p = rtb_Add_b;
 
-          /* '<S146>:18:1' LimTN_I = -ChgLimit; */
-          rtb_Divide_p = -rtb_Divide_p;
+          /* '<S148>:18:1' LimTN_I = -ChgLimit; */
+          rtb_Add_b = -rtb_Abs_l;
         } else {
-          /* '<S146>:21:1' sf_internal_predicateOutput = ... */
-          /* '<S146>:21:1' Spd < 0; */
-          if (rtb_DeadZone < 0.0F) {
-            /* Transition: '<S146>:21' */
+          /* '<S148>:21:1' sf_internal_predicateOutput = ... */
+          /* '<S148>:21:1' Spd < 0; */
+          if (rtb_Switch_b < 0.0F) {
+            /* Transition: '<S148>:21' */
             APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2 =
               APP_FluxWeak_GEAR2_IN_NegSpd;
 
-            /* Entry 'NegSpd': '<S146>:20' */
-            /* '<S146>:20:1' LimTP_I = ChgLimit; */
-            rtb_DeadZone = rtb_Divide_p;
+            /* Entry 'NegSpd': '<S148>:20' */
+            /* '<S148>:20:1' LimTP_I = ChgLimit; */
+            rtb_Divide_p = rtb_Abs_l;
 
-            /* '<S146>:20:1' LimTN_I = -DrvLimit; */
-            rtb_Divide_p = -rtb_Switch_b;
+            /* '<S148>:20:1' LimTN_I = -DrvLimit; */
+            rtb_Add_b = -rtb_Add_b;
           } else {
-            /* '<S146>:6:1' LimTP_I = DrvLimit; */
-            rtb_DeadZone = rtb_Switch_b;
+            /* '<S148>:6:1' LimTP_I = DrvLimit; */
+            rtb_Divide_p = rtb_Add_b;
 
-            /* '<S146>:6:1' LimTN_I = -DrvLimit; */
-            rtb_Divide_p = -rtb_Switch_b;
+            /* '<S148>:6:1' LimTN_I = -DrvLimit; */
+            rtb_Add_b = -rtb_Add_b;
           }
         }
         break;
       }
     }
 
-    /* End of Chart: '<S142>/Chart1' */
+    /* End of Chart: '<S144>/Chart1' */
 
-    /* MinMax: '<S141>/MinMax2' */
-    rtb_InvCoef = fmaxf(fmaxf(rtb_InvCoef, rtb_Divide_p),
+    /* MinMax: '<S143>/MinMax2' */
+    rtb_InvCoef = fmaxf(fmaxf(rtb_InvCoef, rtb_Add_b),
                         APP_FluxWeak_GEAR2_DW.OVLimTN);
 
-    /* MinMax: '<S141>/MinMax1' */
-    rtb_Saturation1_i = fminf(fminf(APP_FluxWeak_GEAR2_DW.OVLimTP, rtb_DeadZone),
-      APP_FluxWeak_GEAR2_DW.LimtCoef);
+    /* MinMax: '<S143>/MinMax1' */
+    rtb_Abs_l = fminf(fminf(APP_FluxWeak_GEAR2_DW.OVLimTP, rtb_Divide_p),
+                      APP_FluxWeak_GEAR2_DW.LimtCoef);
 
-    /* Chart: '<S54>/Chart' incorporates:
+    /* Chart: '<S56>/Chart' incorporates:
      *  DataStoreRead: '<Root>/Data Store Read'
      *  DataStoreRead: '<Root>/Data Store Read2'
      */
@@ -6825,30 +6861,30 @@ void APP_FluxWeak_GEAR2_step(void)
       /* Entry: implement/method/All_loop/Chart */
       APP_FluxWeak_GEAR2_DW.is_active_c2_APP_FluxWeak_GEAR2 = 1U;
 
-      /* Outputs for Function Call SubSystem: '<S54>/Initial' */
+      /* Outputs for Function Call SubSystem: '<S56>/Initial' */
 
       /* Entry Internal: implement/method/All_loop/Chart */
-      /* Transition: '<S63>:84' */
-      /* '<S63>:84:1' Initial; */
-      /* Event: '<S63>:12' */
+      /* Transition: '<S65>:84' */
+      /* '<S65>:84:1' Initial; */
+      /* Event: '<S65>:12' */
       APP_FluxWeak_GEAR2_Initial();
 
-      /* End of Outputs for SubSystem: '<S54>/Initial' */
+      /* End of Outputs for SubSystem: '<S56>/Initial' */
       APP_FluxWeak_GEAR2_DW.is_c2_APP_FluxWeak_GEAR2 =
         APP_FluxWeak_GEAR2_IN_UVWcheck;
       APP_FluxWeak_GEAR2_DW.temporalCounter_i1 = 0U;
 
-      /* SystemReset for Function Call SubSystem: '<S54>/UVW_check' */
+      /* SystemReset for Function Call SubSystem: '<S56>/UVW_check' */
 
-      /* Entry 'UVWcheck': '<S63>:86' */
+      /* Entry 'UVWcheck': '<S65>:86' */
       APP_FluxWeak_GE_UVW_check_Reset(&APP_FluxWeak_GEAR2_DW.UVW_check);
 
-      /* End of SystemReset for SubSystem: '<S54>/UVW_check' */
+      /* End of SystemReset for SubSystem: '<S56>/UVW_check' */
 
-      /* Outputs for Function Call SubSystem: '<S54>/UVW_check' */
+      /* Outputs for Function Call SubSystem: '<S56>/UVW_check' */
 
-      /* '<S63>:86:1' UVWcheck; */
-      /* Event: '<S63>:87' */
+      /* '<S65>:86:1' UVWcheck; */
+      /* Event: '<S65>:87' */
       APP_FluxWeak_GEAR2_UVW_check(PMSM_Input.AgoSample.CurUPu,
         PMSM_Input.AgoSample.CurVPu, PMSM_Input.AgoSample.CurWPu,
         &APP_FluxWeak_GEAR2_DW.AscEn_l, &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
@@ -6858,39 +6894,39 @@ void APP_FluxWeak_GEAR2_step(void)
         &APP_FluxWeak_GEAR2_DW.OutportBufferForUVWFault,
         &APP_FluxWeak_GEAR2_DW.UVW_check);
 
-      /* End of Outputs for SubSystem: '<S54>/UVW_check' */
+      /* End of Outputs for SubSystem: '<S56>/UVW_check' */
     } else if (APP_FluxWeak_GEAR2_DW.is_c2_APP_FluxWeak_GEAR2 == 1U) {
-      /* During 'UVWcheck': '<S63>:86' */
-      /* '<S63>:88:1' sf_internal_predicateOutput = ... */
-      /* '<S63>:88:1' after(250,tick); */
+      /* During 'UVWcheck': '<S65>:86' */
+      /* '<S65>:88:1' sf_internal_predicateOutput = ... */
+      /* '<S65>:88:1' after(250,tick); */
       if ((int16_T)APP_FluxWeak_GEAR2_DW.temporalCounter_i1 >= 250) {
-        /* Transition: '<S63>:88' */
-        /* Exit 'UVWcheck': '<S63>:86' */
+        /* Transition: '<S65>:88' */
+        /* Exit 'UVWcheck': '<S65>:86' */
         APP_FluxWeak_GEAR2_DW.is_c2_APP_FluxWeak_GEAR2 =
           APP_FluxWeak_GEAR2_IN_sys_mode;
 
-        /* Outputs for Function Call SubSystem: '<S54>/Initial' */
+        /* Outputs for Function Call SubSystem: '<S56>/Initial' */
 
-        /* Entry Internal 'sys_mode': '<S63>:7' */
-        /* Transition: '<S63>:4' */
-        /* '<S63>:4:1' Initial; */
-        /* Event: '<S63>:12' */
+        /* Entry Internal 'sys_mode': '<S65>:7' */
+        /* Transition: '<S65>:4' */
+        /* '<S65>:4:1' Initial; */
+        /* Event: '<S65>:12' */
         APP_FluxWeak_GEAR2_Initial();
 
-        /* End of Outputs for SubSystem: '<S54>/Initial' */
+        /* End of Outputs for SubSystem: '<S56>/Initial' */
 
-        /* '<S63>:9:1' sf_internal_predicateOutput = ... */
-        /* '<S63>:9:1' ModeSt==0; */
+        /* '<S65>:9:1' sf_internal_predicateOutput = ... */
+        /* '<S65>:9:1' ModeSt==0; */
         switch (APP_FluxWeak_GEAR2_DW.ModeSt) {
          case 0U:
-          /* Transition: '<S63>:9' */
+          /* Transition: '<S65>:9' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Torque;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Torque' */
+          /* Outputs for Function Call SubSystem: '<S56>/Torque' */
 
-          /* Entry 'Torque': '<S63>:3' */
-          /* '<S63>:3:1' Torque; */
-          /* Event: '<S63>:10' */
+          /* Entry 'Torque': '<S65>:3' */
+          /* '<S65>:3:1' Torque; */
+          /* Event: '<S65>:10' */
           APP_FluxWeak_GEAR2_Torque(PMSM_Input.AppComm.TqReq,
             &APP_FluxWeak_GEAR2_DW.AscEn_l, &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
             &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -6900,22 +6936,22 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Torque);
 
-          /* End of Outputs for SubSystem: '<S54>/Torque' */
+          /* End of Outputs for SubSystem: '<S56>/Torque' */
           break;
 
          case 1U:
-          /* Transition: '<S63>:36' */
-          /* '<S63>:37:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:37:1' ModeSt==1; */
-          /* Transition: '<S63>:37' */
+          /* Transition: '<S65>:36' */
+          /* '<S65>:37:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:37:1' ModeSt==1; */
+          /* Transition: '<S65>:37' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Spd;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Spd' */
+          /* Outputs for Function Call SubSystem: '<S56>/Spd' */
 
-          /* Entry 'Spd': '<S63>:14' */
-          /* '<S63>:14:1' Spd; */
-          /* Event: '<S63>:16' */
+          /* Entry 'Spd': '<S65>:14' */
+          /* '<S65>:14:1' Spd; */
+          /* Event: '<S65>:16' */
           APP_FluxWeak_GEAR2_Spd(DiscreteTimeIntegrator1_i,
             DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -6925,22 +6961,22 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Spd_g);
 
-          /* End of Outputs for SubSystem: '<S54>/Spd' */
+          /* End of Outputs for SubSystem: '<S56>/Spd' */
           break;
 
          case 2U:
-          /* Transition: '<S63>:38' */
-          /* '<S63>:39:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:39:1' ModeSt==2; */
-          /* Transition: '<S63>:39' */
+          /* Transition: '<S65>:38' */
+          /* '<S65>:39:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:39:1' ModeSt==2; */
+          /* Transition: '<S65>:39' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Genrate;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Genrate' */
+          /* Outputs for Function Call SubSystem: '<S56>/Genrate' */
 
-          /* Entry 'Genrate': '<S63>:18' */
-          /* '<S63>:18:1' Genrate; */
-          /* Event: '<S63>:19' */
+          /* Entry 'Genrate': '<S65>:18' */
+          /* '<S65>:18:1' Genrate; */
+          /* Event: '<S65>:19' */
           APP_FluxWeak_GEAR2_Genrate(DiscreteTimeIntegrator1_i,
             DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -6950,22 +6986,22 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Genrate);
 
-          /* End of Outputs for SubSystem: '<S54>/Genrate' */
+          /* End of Outputs for SubSystem: '<S56>/Genrate' */
           break;
 
          case 3U:
-          /* Transition: '<S63>:76' */
-          /* '<S63>:77:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:77:1' ModeSt==3; */
-          /* Transition: '<S63>:77' */
+          /* Transition: '<S65>:76' */
+          /* '<S65>:77:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:77:1' ModeSt==3; */
+          /* Transition: '<S65>:77' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Starter;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Starter' */
+          /* Outputs for Function Call SubSystem: '<S56>/Starter' */
 
-          /* Entry 'Starter': '<S63>:72' */
-          /* '<S63>:72:1' Starter; */
-          /* Event: '<S63>:74' */
+          /* Entry 'Starter': '<S65>:72' */
+          /* '<S65>:72:1' Starter; */
+          /* Event: '<S65>:74' */
           APP_FluxWeak_GEAR2_Starter(DiscreteTimeIntegrator1_i,
             DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -6975,22 +7011,22 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Starter);
 
-          /* End of Outputs for SubSystem: '<S54>/Starter' */
+          /* End of Outputs for SubSystem: '<S56>/Starter' */
           break;
 
          case 4U:
-          /* Transition: '<S63>:40' */
-          /* '<S63>:41:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:41:1' ModeSt==4; */
-          /* Transition: '<S63>:41' */
+          /* Transition: '<S65>:40' */
+          /* '<S65>:41:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:41:1' ModeSt==4; */
+          /* Transition: '<S65>:41' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Slope;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Slope' */
+          /* Outputs for Function Call SubSystem: '<S56>/Slope' */
 
-          /* Entry 'Slope': '<S63>:20' */
-          /* '<S63>:20:1' Slope; */
-          /* Event: '<S63>:21' */
+          /* Entry 'Slope': '<S65>:20' */
+          /* '<S65>:20:1' Slope; */
+          /* Event: '<S65>:21' */
           APP_FluxWeak_GEAR2_Slope(PMSM_Input.AgoSample.Speed,
             DiscreteTimeIntegrator1, PMSM_Input.AppComm.GearState,
             PMSM_Input.AppSample.KsiSt, DiscreteTimeIntegrator1_i,
@@ -7002,22 +7038,22 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Slope);
 
-          /* End of Outputs for SubSystem: '<S54>/Slope' */
+          /* End of Outputs for SubSystem: '<S56>/Slope' */
           break;
 
          case 5U:
-          /* Transition: '<S63>:43' */
-          /* '<S63>:42:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:42:1' ModeSt==5; */
-          /* Transition: '<S63>:42' */
+          /* Transition: '<S65>:43' */
+          /* '<S65>:42:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:42:1' ModeSt==5; */
+          /* Transition: '<S65>:42' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Sync;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Sync' */
+          /* Outputs for Function Call SubSystem: '<S56>/Sync' */
 
-          /* Entry 'Sync': '<S63>:22' */
-          /* '<S63>:22:1' Sync; */
-          /* Event: '<S63>:23' */
+          /* Entry 'Sync': '<S65>:22' */
+          /* '<S65>:22:1' Sync; */
+          /* Event: '<S65>:23' */
           APP_FluxWeak_GEAR2_Sync(DiscreteTimeIntegrator1_i,
             DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7027,22 +7063,22 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Sync);
 
-          /* End of Outputs for SubSystem: '<S54>/Sync' */
+          /* End of Outputs for SubSystem: '<S56>/Sync' */
           break;
 
          case 6U:
-          /* Transition: '<S63>:44' */
-          /* '<S63>:45:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:45:1' ModeSt==6; */
-          /* Transition: '<S63>:45' */
+          /* Transition: '<S65>:44' */
+          /* '<S65>:45:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:45:1' ModeSt==6; */
+          /* Transition: '<S65>:45' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_appoint;
           APP_FluxWeak_GEAR2_DW.is_appoint = APP_FluxWeak_GEAR2_IN_Dischg;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Dischg' */
+          /* Outputs for Function Call SubSystem: '<S56>/Dischg' */
 
-          /* Entry 'Dischg': '<S63>:25' */
-          /* '<S63>:25:1' Dischg; */
-          /* Event: '<S63>:27' */
+          /* Entry 'Dischg': '<S65>:25' */
+          /* '<S65>:25:1' Dischg; */
+          /* Event: '<S65>:27' */
           APP_FluxWeak_GEAR2_Dischg(DiscreteTimeIntegrator1_i4,
             &APP_FluxWeak_GEAR2_DW.AscEn_l, &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
             &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7052,22 +7088,22 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Dischg);
 
-          /* End of Outputs for SubSystem: '<S54>/Dischg' */
+          /* End of Outputs for SubSystem: '<S56>/Dischg' */
           break;
 
          case 7U:
-          /* Transition: '<S63>:46' */
-          /* '<S63>:50:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:50:1' ModeSt==7; */
-          /* Transition: '<S63>:50' */
+          /* Transition: '<S65>:46' */
+          /* '<S65>:50:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:50:1' ModeSt==7; */
+          /* Transition: '<S65>:50' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_appoint;
           APP_FluxWeak_GEAR2_DW.is_appoint = APP_FluxWeak_GEAR2_IN_ASC;
 
-          /* Outputs for Function Call SubSystem: '<S54>/ASC' */
+          /* Outputs for Function Call SubSystem: '<S56>/ASC' */
 
-          /* Entry 'ASC': '<S63>:48' */
-          /* '<S63>:48:1' ASC; */
-          /* Event: '<S63>:49' */
+          /* Entry 'ASC': '<S65>:48' */
+          /* '<S65>:48:1' ASC; */
+          /* Event: '<S65>:49' */
           APP_FluxWeak_GEAR2_ASC(&APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
             &APP_FluxWeak_GEAR2_DW.AngleRefSet_e,
@@ -7075,21 +7111,21 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.AngleSetEn_c,
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b);
 
-          /* End of Outputs for SubSystem: '<S54>/ASC' */
+          /* End of Outputs for SubSystem: '<S56>/ASC' */
           break;
 
          default:
-          /* Transition: '<S63>:52' */
-          /* Transition: '<S63>:53' */
+          /* Transition: '<S65>:52' */
+          /* Transition: '<S65>:53' */
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_appoint;
           APP_FluxWeak_GEAR2_DW.is_appoint = APP_FluxWeak_GEAR2_IN_standard;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Calib' */
+          /* Outputs for Function Call SubSystem: '<S56>/Calib' */
 
-          /* Entry 'standard': '<S63>:28' */
+          /* Entry 'standard': '<S65>:28' */
           /* 标定 */
-          /* '<S63>:28:1' Calib; */
-          /* Event: '<S63>:29' */
+          /* '<S65>:28:1' Calib; */
+          /* Event: '<S65>:29' */
           APP_FluxWeak_GEAR2_Calib(PMSM_Input.AppSample.CalibStep,
             PMSM_Input.AgoSample.ThetaRT, PMSM_Input.AppComm.TqReq,
             PMSM_Input.AppSample.ElecZeroStep, Algo_Output.Cur_loop.Ud, Vs,
@@ -7102,14 +7138,14 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Calib);
 
-          /* End of Outputs for SubSystem: '<S54>/Calib' */
+          /* End of Outputs for SubSystem: '<S56>/Calib' */
           break;
         }
       } else {
-        /* Outputs for Function Call SubSystem: '<S54>/UVW_check' */
+        /* Outputs for Function Call SubSystem: '<S56>/UVW_check' */
 
-        /* '<S63>:86:1' UVWcheck; */
-        /* Event: '<S63>:87' */
+        /* '<S65>:86:1' UVWcheck; */
+        /* Event: '<S65>:87' */
         APP_FluxWeak_GEAR2_UVW_check(PMSM_Input.AgoSample.CurUPu,
           PMSM_Input.AgoSample.CurVPu, PMSM_Input.AgoSample.CurWPu,
           &APP_FluxWeak_GEAR2_DW.AscEn_l, &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
@@ -7121,31 +7157,31 @@ void APP_FluxWeak_GEAR2_step(void)
           &APP_FluxWeak_GEAR2_DW.OutportBufferForUVWFault,
           &APP_FluxWeak_GEAR2_DW.UVW_check);
 
-        /* End of Outputs for SubSystem: '<S54>/UVW_check' */
+        /* End of Outputs for SubSystem: '<S56>/UVW_check' */
       }
     } else {
-      /* Outputs for Function Call SubSystem: '<S54>/IntLim' */
-      /* Switch: '<S106>/Switch2' incorporates:
-       *  RelationalOperator: '<S106>/LowerRelop1'
-       *  RelationalOperator: '<S106>/UpperRelop'
-       *  StateReader: '<S68>/State Reader1'
-       *  Switch: '<S106>/Switch'
+      /* Outputs for Function Call SubSystem: '<S56>/IntLim' */
+      /* Switch: '<S108>/Switch2' incorporates:
+       *  RelationalOperator: '<S108>/LowerRelop1'
+       *  RelationalOperator: '<S108>/UpperRelop'
+       *  StateReader: '<S70>/State Reader1'
+       *  Switch: '<S108>/Switch'
        */
-      /* During 'sys_mode': '<S63>:7' */
-      /* '<S63>:7:1' IntLim; */
-      /* Event: '<S63>:78' */
-      if (APP_FluxWeak_GEAR2_DW.Slope.PI.I_state > rtb_Saturation1_i) {
-        rtb_Switch_b = rtb_Saturation1_i;
+      /* During 'sys_mode': '<S65>:7' */
+      /* '<S65>:7:1' IntLim; */
+      /* Event: '<S65>:78' */
+      if (APP_FluxWeak_GEAR2_DW.Slope.PI.I_state > rtb_Abs_l) {
+        rtb_Switch_b = rtb_Abs_l;
       } else if (APP_FluxWeak_GEAR2_DW.Slope.PI.I_state < rtb_InvCoef) {
-        /* Switch: '<S106>/Switch' */
+        /* Switch: '<S108>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
       } else {
         rtb_Switch_b = APP_FluxWeak_GEAR2_DW.Slope.PI.I_state;
       }
 
-      /* End of Switch: '<S106>/Switch2' */
+      /* End of Switch: '<S108>/Switch2' */
 
-      /* Saturate: '<S68>/Saturation2' */
+      /* Saturate: '<S70>/Saturation2' */
       if (rtb_Switch_b > PMSM_Param.SlopeMaxT) {
         rtb_Switch_b = PMSM_Param.SlopeMaxT;
       } else {
@@ -7154,91 +7190,91 @@ void APP_FluxWeak_GEAR2_step(void)
         }
       }
 
-      /* End of Saturate: '<S68>/Saturation2' */
+      /* End of Saturate: '<S70>/Saturation2' */
 
-      /* Chart: '<S68>/Chart' incorporates:
+      /* Chart: '<S70>/Chart' incorporates:
        *  DataStoreRead: '<Root>/Data Store Read'
        */
       /* Gateway: implement/method/All_loop/IntLim/Chart */
       /* During: implement/method/All_loop/IntLim/Chart */
       /* Entry Internal: implement/method/All_loop/IntLim/Chart */
-      /* Transition: '<S101>:4' */
-      /* '<S101>:5:1' sf_internal_predicateOutput = ... */
-      /* '<S101>:5:1' Gear==1; */
+      /* Transition: '<S103>:4' */
+      /* '<S103>:5:1' sf_internal_predicateOutput = ... */
+      /* '<S103>:5:1' Gear==1; */
       switch (PMSM_Input.AppComm.GearState) {
        case 1U:
-        /* Transition: '<S101>:5' */
-        /* Transition: '<S101>:7' */
-        /* '<S101>:7:1' out=max(0,In); */
+        /* Transition: '<S103>:5' */
+        /* Transition: '<S103>:7' */
+        /* '<S103>:7:1' out=max(0,In); */
         if (0.0F > rtb_Switch_b) {
-          /* StateWriter: '<S68>/State Writer1' */
+          /* StateWriter: '<S70>/State Writer1' */
           APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = 0.0F;
         } else if (rtIsNaNF(rtb_Switch_b)) {
-          /* StateWriter: '<S68>/State Writer1' */
+          /* StateWriter: '<S70>/State Writer1' */
           APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = 0.0F;
         } else {
-          /* StateWriter: '<S68>/State Writer1' */
+          /* StateWriter: '<S70>/State Writer1' */
           APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = rtb_Switch_b;
         }
 
-        /* Transition: '<S101>:12' */
-        /* Transition: '<S101>:11' */
+        /* Transition: '<S103>:12' */
+        /* Transition: '<S103>:11' */
         break;
 
        case 2U:
-        /* Transition: '<S101>:6' */
-        /* '<S101>:8:1' sf_internal_predicateOutput = ... */
-        /* '<S101>:8:1' Gear==2; */
-        /* Transition: '<S101>:8' */
-        /* Transition: '<S101>:10' */
-        /* '<S101>:10:1' out=min(0,In); */
+        /* Transition: '<S103>:6' */
+        /* '<S103>:8:1' sf_internal_predicateOutput = ... */
+        /* '<S103>:8:1' Gear==2; */
+        /* Transition: '<S103>:8' */
+        /* Transition: '<S103>:10' */
+        /* '<S103>:10:1' out=min(0,In); */
         if (0.0F < rtb_Switch_b) {
-          /* StateWriter: '<S68>/State Writer1' */
+          /* StateWriter: '<S70>/State Writer1' */
           APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = 0.0F;
 
-          /* Transition: '<S101>:11' */
+          /* Transition: '<S103>:11' */
         } else if (rtIsNaNF(rtb_Switch_b)) {
-          /* StateWriter: '<S68>/State Writer1' */
+          /* StateWriter: '<S70>/State Writer1' */
           APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = 0.0F;
 
-          /* Transition: '<S101>:11' */
+          /* Transition: '<S103>:11' */
         } else {
-          /* StateWriter: '<S68>/State Writer1' */
+          /* StateWriter: '<S70>/State Writer1' */
           APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = rtb_Switch_b;
 
-          /* Transition: '<S101>:11' */
+          /* Transition: '<S103>:11' */
         }
         break;
 
        default:
-        /* StateWriter: '<S68>/State Writer1' */
-        /* Transition: '<S101>:9' */
-        /* '<S101>:9:1' out=0; */
+        /* StateWriter: '<S70>/State Writer1' */
+        /* Transition: '<S103>:9' */
+        /* '<S103>:9:1' out=0; */
         APP_FluxWeak_GEAR2_DW.Slope.PI.I_state = 0.0F;
         break;
       }
 
-      /* End of Chart: '<S68>/Chart' */
+      /* End of Chart: '<S70>/Chart' */
 
-      /* Switch: '<S105>/Switch2' incorporates:
-       *  RelationalOperator: '<S105>/LowerRelop1'
-       *  RelationalOperator: '<S105>/UpperRelop'
-       *  StateReader: '<S68>/State Reader2'
-       *  Switch: '<S105>/Switch'
+      /* Switch: '<S107>/Switch2' incorporates:
+       *  RelationalOperator: '<S107>/LowerRelop1'
+       *  RelationalOperator: '<S107>/UpperRelop'
+       *  StateReader: '<S70>/State Reader2'
+       *  Switch: '<S107>/Switch'
        */
-      /* Transition: '<S101>:13' */
-      if (APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state > rtb_Saturation1_i) {
-        rtb_Switch_b = rtb_Saturation1_i;
+      /* Transition: '<S103>:13' */
+      if (APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state > rtb_Abs_l) {
+        rtb_Switch_b = rtb_Abs_l;
       } else if (APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state < rtb_InvCoef) {
-        /* Switch: '<S105>/Switch' */
+        /* Switch: '<S107>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
       } else {
         rtb_Switch_b = APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state;
       }
 
-      /* End of Switch: '<S105>/Switch2' */
+      /* End of Switch: '<S107>/Switch2' */
 
-      /* Saturate: '<S68>/Saturation3' */
+      /* Saturate: '<S70>/Saturation3' */
       if (rtb_Switch_b > 1.0F) {
         rtb_Switch_b = 1.0F;
       } else {
@@ -7247,146 +7283,146 @@ void APP_FluxWeak_GEAR2_step(void)
         }
       }
 
-      /* End of Saturate: '<S68>/Saturation3' */
+      /* End of Saturate: '<S70>/Saturation3' */
 
-      /* Switch: '<S68>/Switch' incorporates:
-       *  Abs: '<S68>/Abs'
+      /* Switch: '<S70>/Switch' incorporates:
+       *  Abs: '<S70>/Abs'
        */
       if (fabsf(DiscreteTimeIntegrator1_i) > 10.0F) {
-        /* StateWriter: '<S68>/State Writer2' */
+        /* StateWriter: '<S70>/State Writer2' */
         APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state = rtb_Switch_b;
       } else {
-        /* StateWriter: '<S68>/State Writer2' incorporates:
-         *  Gain: '<S68>/N'
-         *  Gain: '<S68>/Ts'
-         *  Sum: '<S68>/Subtract'
+        /* StateWriter: '<S70>/State Writer2' incorporates:
+         *  Gain: '<S70>/N'
+         *  Gain: '<S70>/Ts'
+         *  Sum: '<S70>/Subtract'
          */
         APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state = rtb_Switch_b - 20.0F *
           rtb_Switch_b * 0.002F;
       }
 
-      /* End of Switch: '<S68>/Switch' */
+      /* End of Switch: '<S70>/Switch' */
 
-      /* Switch: '<S104>/Switch2' incorporates:
-       *  RelationalOperator: '<S104>/LowerRelop1'
-       *  RelationalOperator: '<S104>/UpperRelop'
-       *  StateReader: '<S68>/State Reader3'
-       *  Switch: '<S104>/Switch'
+      /* Switch: '<S106>/Switch2' incorporates:
+       *  RelationalOperator: '<S106>/LowerRelop1'
+       *  RelationalOperator: '<S106>/UpperRelop'
+       *  StateReader: '<S70>/State Reader3'
+       *  Switch: '<S106>/Switch'
        */
-      if (APP_FluxWeak_GEAR2_DW.Sync.PI.I_state > rtb_Saturation1_i) {
-        /* StateWriter: '<S68>/State Writer3' */
-        APP_FluxWeak_GEAR2_DW.Sync.PI.I_state = rtb_Saturation1_i;
+      if (APP_FluxWeak_GEAR2_DW.Sync.PI.I_state > rtb_Abs_l) {
+        /* StateWriter: '<S70>/State Writer3' */
+        APP_FluxWeak_GEAR2_DW.Sync.PI.I_state = rtb_Abs_l;
       } else {
         if (APP_FluxWeak_GEAR2_DW.Sync.PI.I_state < rtb_InvCoef) {
-          /* Switch: '<S104>/Switch' incorporates:
-           *  StateWriter: '<S68>/State Writer3'
+          /* Switch: '<S106>/Switch' incorporates:
+           *  StateWriter: '<S70>/State Writer3'
            */
           APP_FluxWeak_GEAR2_DW.Sync.PI.I_state = rtb_InvCoef;
         }
       }
 
-      /* End of Switch: '<S104>/Switch2' */
+      /* End of Switch: '<S106>/Switch2' */
 
-      /* Switch: '<S103>/Switch2' incorporates:
-       *  RelationalOperator: '<S103>/LowerRelop1'
-       *  RelationalOperator: '<S103>/UpperRelop'
-       *  StateReader: '<S68>/State Reader4'
-       *  Switch: '<S103>/Switch'
+      /* Switch: '<S105>/Switch2' incorporates:
+       *  RelationalOperator: '<S105>/LowerRelop1'
+       *  RelationalOperator: '<S105>/UpperRelop'
+       *  StateReader: '<S70>/State Reader4'
+       *  Switch: '<S105>/Switch'
        */
-      if (APP_FluxWeak_GEAR2_DW.Starter.PI.I_state > rtb_Saturation1_i) {
-        rtb_Switch_b = rtb_Saturation1_i;
+      if (APP_FluxWeak_GEAR2_DW.Starter.PI.I_state > rtb_Abs_l) {
+        rtb_Switch_b = rtb_Abs_l;
       } else if (APP_FluxWeak_GEAR2_DW.Starter.PI.I_state < rtb_InvCoef) {
-        /* Switch: '<S103>/Switch' */
+        /* Switch: '<S105>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
       } else {
         rtb_Switch_b = APP_FluxWeak_GEAR2_DW.Starter.PI.I_state;
       }
 
-      /* End of Switch: '<S103>/Switch2' */
+      /* End of Switch: '<S105>/Switch2' */
 
-      /* Saturate: '<S68>/Saturation1' */
+      /* Saturate: '<S70>/Saturation1' */
       if (rtb_Switch_b > 1.0F) {
-        /* StateWriter: '<S68>/State Writer4' */
+        /* StateWriter: '<S70>/State Writer4' */
         APP_FluxWeak_GEAR2_DW.Starter.PI.I_state = 1.0F;
       } else if (rtb_Switch_b < 0.0F) {
-        /* StateWriter: '<S68>/State Writer4' */
+        /* StateWriter: '<S70>/State Writer4' */
         APP_FluxWeak_GEAR2_DW.Starter.PI.I_state = 0.0F;
       } else {
-        /* StateWriter: '<S68>/State Writer4' */
+        /* StateWriter: '<S70>/State Writer4' */
         APP_FluxWeak_GEAR2_DW.Starter.PI.I_state = rtb_Switch_b;
       }
 
-      /* End of Saturate: '<S68>/Saturation1' */
+      /* End of Saturate: '<S70>/Saturation1' */
 
-      /* Switch: '<S102>/Switch2' incorporates:
-       *  RelationalOperator: '<S102>/LowerRelop1'
-       *  RelationalOperator: '<S102>/UpperRelop'
-       *  StateReader: '<S68>/State Reader5'
-       *  Switch: '<S102>/Switch'
+      /* Switch: '<S104>/Switch2' incorporates:
+       *  RelationalOperator: '<S104>/LowerRelop1'
+       *  RelationalOperator: '<S104>/UpperRelop'
+       *  StateReader: '<S70>/State Reader5'
+       *  Switch: '<S104>/Switch'
        */
-      if (APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE > rtb_Saturation1_i) {
-        /* StateWriter: '<S68>/State Writer5' */
-        APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE = rtb_Saturation1_i;
+      if (APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE > rtb_Abs_l) {
+        /* StateWriter: '<S70>/State Writer5' */
+        APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE = rtb_Abs_l;
       } else {
         if (APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE < rtb_InvCoef) {
-          /* Switch: '<S102>/Switch' incorporates:
-           *  StateWriter: '<S68>/State Writer5'
+          /* Switch: '<S104>/Switch' incorporates:
+           *  StateWriter: '<S70>/State Writer5'
            */
           APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE = rtb_InvCoef;
         }
       }
 
-      /* End of Switch: '<S102>/Switch2' */
+      /* End of Switch: '<S104>/Switch2' */
 
-      /* Switch: '<S107>/Switch2' incorporates:
-       *  RelationalOperator: '<S107>/LowerRelop1'
-       *  RelationalOperator: '<S107>/UpperRelop'
-       *  StateReader: '<S68>/State Reader'
-       *  Switch: '<S107>/Switch'
+      /* Switch: '<S109>/Switch2' incorporates:
+       *  RelationalOperator: '<S109>/LowerRelop1'
+       *  RelationalOperator: '<S109>/UpperRelop'
+       *  StateReader: '<S70>/State Reader'
+       *  Switch: '<S109>/Switch'
        */
-      if (APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state > rtb_Saturation1_i) {
-        rtb_Switch_b = rtb_Saturation1_i;
+      if (APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state > rtb_Abs_l) {
+        rtb_Switch_b = rtb_Abs_l;
       } else if (APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state < rtb_InvCoef) {
-        /* Switch: '<S107>/Switch' */
+        /* Switch: '<S109>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
       } else {
         rtb_Switch_b = APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state;
       }
 
-      /* End of Switch: '<S107>/Switch2' */
+      /* End of Switch: '<S109>/Switch2' */
 
-      /* Saturate: '<S68>/Saturation' */
+      /* Saturate: '<S70>/Saturation' */
       if (rtb_Switch_b > 0.0F) {
-        /* StateWriter: '<S68>/State Writer6' */
+        /* StateWriter: '<S70>/State Writer6' */
         APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state = 0.0F;
       } else if (rtb_Switch_b < -1.0F) {
-        /* StateWriter: '<S68>/State Writer6' */
+        /* StateWriter: '<S70>/State Writer6' */
         APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state = -1.0F;
       } else {
-        /* StateWriter: '<S68>/State Writer6' */
+        /* StateWriter: '<S70>/State Writer6' */
         APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state = rtb_Switch_b;
       }
 
-      /* End of Saturate: '<S68>/Saturation' */
-      /* End of Outputs for SubSystem: '<S54>/IntLim' */
-      /* '<S63>:57:1' sf_internal_predicateOutput = ... */
-      /* '<S63>:57:1' hasChanged (ModeSt); */
+      /* End of Saturate: '<S70>/Saturation' */
+      /* End of Outputs for SubSystem: '<S56>/IntLim' */
+      /* '<S65>:57:1' sf_internal_predicateOutput = ... */
+      /* '<S65>:57:1' hasChanged (ModeSt); */
       if (rtb_UVWoffline != APP_FluxWeak_GEAR2_DW.ModeSt_start) {
-        /* Transition: '<S63>:57' */
-        /* '<S63>:9:1' sf_internal_predicateOutput = ... */
-        /* '<S63>:9:1' ModeSt==0; */
+        /* Transition: '<S65>:57' */
+        /* '<S65>:9:1' sf_internal_predicateOutput = ... */
+        /* '<S65>:9:1' ModeSt==0; */
         switch (APP_FluxWeak_GEAR2_DW.ModeSt) {
          case 0U:
-          /* Transition: '<S63>:9' */
+          /* Transition: '<S65>:9' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Torque;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Torque' */
+          /* Outputs for Function Call SubSystem: '<S56>/Torque' */
 
-          /* Entry 'Torque': '<S63>:3' */
-          /* '<S63>:3:1' Torque; */
-          /* Event: '<S63>:10' */
+          /* Entry 'Torque': '<S65>:3' */
+          /* '<S65>:3:1' Torque; */
+          /* Event: '<S65>:10' */
           APP_FluxWeak_GEAR2_Torque(PMSM_Input.AppComm.TqReq,
             &APP_FluxWeak_GEAR2_DW.AscEn_l, &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
             &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7396,24 +7432,24 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Torque);
 
-          /* End of Outputs for SubSystem: '<S54>/Torque' */
+          /* End of Outputs for SubSystem: '<S56>/Torque' */
           break;
 
          case 1U:
-          /* Transition: '<S63>:36' */
-          /* '<S63>:37:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:37:1' ModeSt==1; */
-          /* Transition: '<S63>:37' */
+          /* Transition: '<S65>:36' */
+          /* '<S65>:37:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:37:1' ModeSt==1; */
+          /* Transition: '<S65>:37' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Spd;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Spd' */
+          /* Outputs for Function Call SubSystem: '<S56>/Spd' */
 
-          /* Entry 'Spd': '<S63>:14' */
-          /* '<S63>:14:1' Spd; */
-          /* Event: '<S63>:16' */
+          /* Entry 'Spd': '<S65>:14' */
+          /* '<S65>:14:1' Spd; */
+          /* Event: '<S65>:16' */
           APP_FluxWeak_GEAR2_Spd(DiscreteTimeIntegrator1_i,
             DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7423,24 +7459,24 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Spd_g);
 
-          /* End of Outputs for SubSystem: '<S54>/Spd' */
+          /* End of Outputs for SubSystem: '<S56>/Spd' */
           break;
 
          case 2U:
-          /* Transition: '<S63>:38' */
-          /* '<S63>:39:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:39:1' ModeSt==2; */
-          /* Transition: '<S63>:39' */
+          /* Transition: '<S65>:38' */
+          /* '<S65>:39:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:39:1' ModeSt==2; */
+          /* Transition: '<S65>:39' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Genrate;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Genrate' */
+          /* Outputs for Function Call SubSystem: '<S56>/Genrate' */
 
-          /* Entry 'Genrate': '<S63>:18' */
-          /* '<S63>:18:1' Genrate; */
-          /* Event: '<S63>:19' */
+          /* Entry 'Genrate': '<S65>:18' */
+          /* '<S65>:18:1' Genrate; */
+          /* Event: '<S65>:19' */
           APP_FluxWeak_GEAR2_Genrate(DiscreteTimeIntegrator1_i,
             DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7450,24 +7486,24 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Genrate);
 
-          /* End of Outputs for SubSystem: '<S54>/Genrate' */
+          /* End of Outputs for SubSystem: '<S56>/Genrate' */
           break;
 
          case 3U:
-          /* Transition: '<S63>:76' */
-          /* '<S63>:77:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:77:1' ModeSt==3; */
-          /* Transition: '<S63>:77' */
+          /* Transition: '<S65>:76' */
+          /* '<S65>:77:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:77:1' ModeSt==3; */
+          /* Transition: '<S65>:77' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Starter;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Starter' */
+          /* Outputs for Function Call SubSystem: '<S56>/Starter' */
 
-          /* Entry 'Starter': '<S63>:72' */
-          /* '<S63>:72:1' Starter; */
-          /* Event: '<S63>:74' */
+          /* Entry 'Starter': '<S65>:72' */
+          /* '<S65>:72:1' Starter; */
+          /* Event: '<S65>:74' */
           APP_FluxWeak_GEAR2_Starter(DiscreteTimeIntegrator1_i,
             DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7477,24 +7513,24 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Starter);
 
-          /* End of Outputs for SubSystem: '<S54>/Starter' */
+          /* End of Outputs for SubSystem: '<S56>/Starter' */
           break;
 
          case 4U:
-          /* Transition: '<S63>:40' */
-          /* '<S63>:41:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:41:1' ModeSt==4; */
-          /* Transition: '<S63>:41' */
+          /* Transition: '<S65>:40' */
+          /* '<S65>:41:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:41:1' ModeSt==4; */
+          /* Transition: '<S65>:41' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Slope;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Slope' */
+          /* Outputs for Function Call SubSystem: '<S56>/Slope' */
 
-          /* Entry 'Slope': '<S63>:20' */
-          /* '<S63>:20:1' Slope; */
-          /* Event: '<S63>:21' */
+          /* Entry 'Slope': '<S65>:20' */
+          /* '<S65>:20:1' Slope; */
+          /* Event: '<S65>:21' */
           APP_FluxWeak_GEAR2_Slope(PMSM_Input.AgoSample.Speed,
             DiscreteTimeIntegrator1, PMSM_Input.AppComm.GearState,
             PMSM_Input.AppSample.KsiSt, DiscreteTimeIntegrator1_i,
@@ -7506,24 +7542,24 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Slope);
 
-          /* End of Outputs for SubSystem: '<S54>/Slope' */
+          /* End of Outputs for SubSystem: '<S56>/Slope' */
           break;
 
          case 5U:
-          /* Transition: '<S63>:43' */
-          /* '<S63>:42:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:42:1' ModeSt==5; */
-          /* Transition: '<S63>:42' */
+          /* Transition: '<S65>:43' */
+          /* '<S65>:42:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:42:1' ModeSt==5; */
+          /* Transition: '<S65>:42' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_Speed;
           APP_FluxWeak_GEAR2_DW.is_Speed = APP_FluxWeak_GEAR2_IN_Sync;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Sync' */
+          /* Outputs for Function Call SubSystem: '<S56>/Sync' */
 
-          /* Entry 'Sync': '<S63>:22' */
-          /* '<S63>:22:1' Sync; */
-          /* Event: '<S63>:23' */
+          /* Entry 'Sync': '<S65>:22' */
+          /* '<S65>:22:1' Sync; */
+          /* Event: '<S65>:23' */
           APP_FluxWeak_GEAR2_Sync(DiscreteTimeIntegrator1_i,
             DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7533,24 +7569,24 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Sync);
 
-          /* End of Outputs for SubSystem: '<S54>/Sync' */
+          /* End of Outputs for SubSystem: '<S56>/Sync' */
           break;
 
          case 6U:
-          /* Transition: '<S63>:44' */
-          /* '<S63>:45:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:45:1' ModeSt==6; */
-          /* Transition: '<S63>:45' */
+          /* Transition: '<S65>:44' */
+          /* '<S65>:45:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:45:1' ModeSt==6; */
+          /* Transition: '<S65>:45' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_appoint;
           APP_FluxWeak_GEAR2_DW.is_appoint = APP_FluxWeak_GEAR2_IN_Dischg;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Dischg' */
+          /* Outputs for Function Call SubSystem: '<S56>/Dischg' */
 
-          /* Entry 'Dischg': '<S63>:25' */
-          /* '<S63>:25:1' Dischg; */
-          /* Event: '<S63>:27' */
+          /* Entry 'Dischg': '<S65>:25' */
+          /* '<S65>:25:1' Dischg; */
+          /* Event: '<S65>:27' */
           APP_FluxWeak_GEAR2_Dischg(DiscreteTimeIntegrator1_i4,
             &APP_FluxWeak_GEAR2_DW.AscEn_l, &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
             &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7560,24 +7596,24 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Dischg);
 
-          /* End of Outputs for SubSystem: '<S54>/Dischg' */
+          /* End of Outputs for SubSystem: '<S56>/Dischg' */
           break;
 
          case 7U:
-          /* Transition: '<S63>:46' */
-          /* '<S63>:50:1' sf_internal_predicateOutput = ... */
-          /* '<S63>:50:1' ModeSt==7; */
-          /* Transition: '<S63>:50' */
+          /* Transition: '<S65>:46' */
+          /* '<S65>:50:1' sf_internal_predicateOutput = ... */
+          /* '<S65>:50:1' ModeSt==7; */
+          /* Transition: '<S65>:50' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_appoint;
           APP_FluxWeak_GEAR2_DW.is_appoint = APP_FluxWeak_GEAR2_IN_ASC;
 
-          /* Outputs for Function Call SubSystem: '<S54>/ASC' */
+          /* Outputs for Function Call SubSystem: '<S56>/ASC' */
 
-          /* Entry 'ASC': '<S63>:48' */
-          /* '<S63>:48:1' ASC; */
-          /* Event: '<S63>:49' */
+          /* Entry 'ASC': '<S65>:48' */
+          /* '<S65>:48:1' ASC; */
+          /* Event: '<S65>:49' */
           APP_FluxWeak_GEAR2_ASC(&APP_FluxWeak_GEAR2_DW.AscEn_l,
             &APP_FluxWeak_GEAR2_DW.IdRefSet_i, &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
             &APP_FluxWeak_GEAR2_DW.AngleRefSet_e,
@@ -7585,23 +7621,23 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.AngleSetEn_c,
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b);
 
-          /* End of Outputs for SubSystem: '<S54>/ASC' */
+          /* End of Outputs for SubSystem: '<S56>/ASC' */
           break;
 
          default:
-          /* Transition: '<S63>:52' */
-          /* Transition: '<S63>:53' */
+          /* Transition: '<S65>:52' */
+          /* Transition: '<S65>:53' */
           APP_Flux_exit_internal_sys_mode(&DiscreteTimeIntegrator1,
             &DiscreteTimeIntegrator1_i);
           APP_FluxWeak_GEAR2_DW.is_sys_mode = APP_FluxWeak_GEAR2_IN_appoint;
           APP_FluxWeak_GEAR2_DW.is_appoint = APP_FluxWeak_GEAR2_IN_standard;
 
-          /* Outputs for Function Call SubSystem: '<S54>/Calib' */
+          /* Outputs for Function Call SubSystem: '<S56>/Calib' */
 
-          /* Entry 'standard': '<S63>:28' */
+          /* Entry 'standard': '<S65>:28' */
           /* 标定 */
-          /* '<S63>:28:1' Calib; */
-          /* Event: '<S63>:29' */
+          /* '<S65>:28:1' Calib; */
+          /* Event: '<S65>:29' */
           APP_FluxWeak_GEAR2_Calib(PMSM_Input.AppSample.CalibStep,
             PMSM_Input.AgoSample.ThetaRT, PMSM_Input.AppComm.TqReq,
             PMSM_Input.AppSample.ElecZeroStep, Algo_Output.Cur_loop.Ud, Vs,
@@ -7614,20 +7650,20 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Calib);
 
-          /* End of Outputs for SubSystem: '<S54>/Calib' */
+          /* End of Outputs for SubSystem: '<S56>/Calib' */
           break;
         }
       } else {
         switch (APP_FluxWeak_GEAR2_DW.is_sys_mode) {
          case APP_FluxWeak_GEAR2_IN_Speed:
-          /* During 'Speed': '<S63>:5' */
+          /* During 'Speed': '<S65>:5' */
           switch (APP_FluxWeak_GEAR2_DW.is_Speed) {
            case APP_FluxWeak_GEAR2_IN_Genrate:
-            /* Outputs for Function Call SubSystem: '<S54>/Genrate' */
+            /* Outputs for Function Call SubSystem: '<S56>/Genrate' */
 
-            /* During 'Genrate': '<S63>:18' */
-            /* '<S63>:18:1' Genrate; */
-            /* Event: '<S63>:19' */
+            /* During 'Genrate': '<S65>:18' */
+            /* '<S65>:18:1' Genrate; */
+            /* Event: '<S65>:19' */
             APP_FluxWeak_GEAR2_Genrate(DiscreteTimeIntegrator1_i,
               DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
               &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
@@ -7638,15 +7674,15 @@ void APP_FluxWeak_GEAR2_step(void)
               &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
               &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Genrate);
 
-            /* End of Outputs for SubSystem: '<S54>/Genrate' */
+            /* End of Outputs for SubSystem: '<S56>/Genrate' */
             break;
 
            case APP_FluxWeak_GEAR2_IN_Slope:
-            /* Outputs for Function Call SubSystem: '<S54>/Slope' */
+            /* Outputs for Function Call SubSystem: '<S56>/Slope' */
 
-            /* During 'Slope': '<S63>:20' */
-            /* '<S63>:20:1' Slope; */
-            /* Event: '<S63>:21' */
+            /* During 'Slope': '<S65>:20' */
+            /* '<S65>:20:1' Slope; */
+            /* Event: '<S65>:21' */
             APP_FluxWeak_GEAR2_Slope(PMSM_Input.AgoSample.Speed,
               DiscreteTimeIntegrator1, PMSM_Input.AppComm.GearState,
               PMSM_Input.AppSample.KsiSt, DiscreteTimeIntegrator1_i,
@@ -7659,15 +7695,15 @@ void APP_FluxWeak_GEAR2_step(void)
               &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
               &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Slope);
 
-            /* End of Outputs for SubSystem: '<S54>/Slope' */
+            /* End of Outputs for SubSystem: '<S56>/Slope' */
             break;
 
            case APP_FluxWeak_GEAR2_IN_Spd:
-            /* Outputs for Function Call SubSystem: '<S54>/Spd' */
+            /* Outputs for Function Call SubSystem: '<S56>/Spd' */
 
-            /* During 'Spd': '<S63>:14' */
-            /* '<S63>:14:1' Spd; */
-            /* Event: '<S63>:16' */
+            /* During 'Spd': '<S65>:14' */
+            /* '<S65>:14:1' Spd; */
+            /* Event: '<S65>:16' */
             APP_FluxWeak_GEAR2_Spd(DiscreteTimeIntegrator1_i,
               DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
               &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
@@ -7678,15 +7714,15 @@ void APP_FluxWeak_GEAR2_step(void)
               &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
               &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Spd_g);
 
-            /* End of Outputs for SubSystem: '<S54>/Spd' */
+            /* End of Outputs for SubSystem: '<S56>/Spd' */
             break;
 
            case APP_FluxWeak_GEAR2_IN_Starter:
-            /* Outputs for Function Call SubSystem: '<S54>/Starter' */
+            /* Outputs for Function Call SubSystem: '<S56>/Starter' */
 
-            /* During 'Starter': '<S63>:72' */
-            /* '<S63>:72:1' Starter; */
-            /* Event: '<S63>:74' */
+            /* During 'Starter': '<S65>:72' */
+            /* '<S65>:72:1' Starter; */
+            /* Event: '<S65>:74' */
             APP_FluxWeak_GEAR2_Starter(DiscreteTimeIntegrator1_i,
               DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
               &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
@@ -7697,15 +7733,15 @@ void APP_FluxWeak_GEAR2_step(void)
               &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
               &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Starter);
 
-            /* End of Outputs for SubSystem: '<S54>/Starter' */
+            /* End of Outputs for SubSystem: '<S56>/Starter' */
             break;
 
            default:
-            /* Outputs for Function Call SubSystem: '<S54>/Sync' */
+            /* Outputs for Function Call SubSystem: '<S56>/Sync' */
 
-            /* During 'Sync': '<S63>:22' */
-            /* '<S63>:22:1' Sync; */
-            /* Event: '<S63>:23' */
+            /* During 'Sync': '<S65>:22' */
+            /* '<S65>:22:1' Sync; */
+            /* Event: '<S65>:23' */
             APP_FluxWeak_GEAR2_Sync(DiscreteTimeIntegrator1_i,
               DiscreteTimeIntegrator1, &APP_FluxWeak_GEAR2_DW.AscEn_l,
               &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
@@ -7716,17 +7752,17 @@ void APP_FluxWeak_GEAR2_step(void)
               &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
               &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Sync);
 
-            /* End of Outputs for SubSystem: '<S54>/Sync' */
+            /* End of Outputs for SubSystem: '<S56>/Sync' */
             break;
           }
           break;
 
          case APP_FluxWeak_GEAR2_IN_Torque:
-          /* Outputs for Function Call SubSystem: '<S54>/Torque' */
+          /* Outputs for Function Call SubSystem: '<S56>/Torque' */
 
-          /* During 'Torque': '<S63>:3' */
-          /* '<S63>:3:1' Torque; */
-          /* Event: '<S63>:10' */
+          /* During 'Torque': '<S65>:3' */
+          /* '<S65>:3:1' Torque; */
+          /* Event: '<S65>:10' */
           APP_FluxWeak_GEAR2_Torque(PMSM_Input.AppComm.TqReq,
             &APP_FluxWeak_GEAR2_DW.AscEn_l, &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
             &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7736,18 +7772,18 @@ void APP_FluxWeak_GEAR2_step(void)
             &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
             &APP_FluxWeak_GEAR2_DW.Merge1, &APP_FluxWeak_GEAR2_DW.Torque);
 
-          /* End of Outputs for SubSystem: '<S54>/Torque' */
+          /* End of Outputs for SubSystem: '<S56>/Torque' */
           break;
 
          default:
-          /* During 'appoint': '<S63>:6' */
+          /* During 'appoint': '<S65>:6' */
           switch (APP_FluxWeak_GEAR2_DW.is_appoint) {
            case APP_FluxWeak_GEAR2_IN_ASC:
-            /* Outputs for Function Call SubSystem: '<S54>/ASC' */
+            /* Outputs for Function Call SubSystem: '<S56>/ASC' */
 
-            /* During 'ASC': '<S63>:48' */
-            /* '<S63>:48:1' ASC; */
-            /* Event: '<S63>:49' */
+            /* During 'ASC': '<S65>:48' */
+            /* '<S65>:48:1' ASC; */
+            /* Event: '<S65>:49' */
             APP_FluxWeak_GEAR2_ASC(&APP_FluxWeak_GEAR2_DW.AscEn_l,
               &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
               &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7756,15 +7792,15 @@ void APP_FluxWeak_GEAR2_step(void)
               &APP_FluxWeak_GEAR2_DW.AngleSetEn_c,
               &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b);
 
-            /* End of Outputs for SubSystem: '<S54>/ASC' */
+            /* End of Outputs for SubSystem: '<S56>/ASC' */
             break;
 
            case APP_FluxWeak_GEAR2_IN_Dischg:
-            /* Outputs for Function Call SubSystem: '<S54>/Dischg' */
+            /* Outputs for Function Call SubSystem: '<S56>/Dischg' */
 
-            /* During 'Dischg': '<S63>:25' */
-            /* '<S63>:25:1' Dischg; */
-            /* Event: '<S63>:27' */
+            /* During 'Dischg': '<S65>:25' */
+            /* '<S65>:25:1' Dischg; */
+            /* Event: '<S65>:27' */
             APP_FluxWeak_GEAR2_Dischg(DiscreteTimeIntegrator1_i4,
               &APP_FluxWeak_GEAR2_DW.AscEn_l, &APP_FluxWeak_GEAR2_DW.IdRefSet_i,
               &APP_FluxWeak_GEAR2_DW.IqRefSet_m,
@@ -7774,15 +7810,15 @@ void APP_FluxWeak_GEAR2_step(void)
               &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
               &APP_FluxWeak_GEAR2_DW.Dischg);
 
-            /* End of Outputs for SubSystem: '<S54>/Dischg' */
+            /* End of Outputs for SubSystem: '<S56>/Dischg' */
             break;
 
            default:
-            /* Outputs for Function Call SubSystem: '<S54>/Calib' */
+            /* Outputs for Function Call SubSystem: '<S56>/Calib' */
 
-            /* During 'standard': '<S63>:28' */
-            /* '<S63>:28:1' Calib; */
-            /* Event: '<S63>:29' */
+            /* During 'standard': '<S65>:28' */
+            /* '<S65>:28:1' Calib; */
+            /* Event: '<S65>:29' */
             APP_FluxWeak_GEAR2_Calib(PMSM_Input.AppSample.CalibStep,
               PMSM_Input.AgoSample.ThetaRT, PMSM_Input.AppComm.TqReq,
               PMSM_Input.AppSample.ElecZeroStep, Algo_Output.Cur_loop.Ud, Vs,
@@ -7796,7 +7832,7 @@ void APP_FluxWeak_GEAR2_step(void)
               &APP_FluxWeak_GEAR2_DW.CalibZeroPoint_f, &rtb_Switch_b,
               &APP_FluxWeak_GEAR2_DW.Calib);
 
-            /* End of Outputs for SubSystem: '<S54>/Calib' */
+            /* End of Outputs for SubSystem: '<S56>/Calib' */
             break;
           }
           break;
@@ -7804,32 +7840,32 @@ void APP_FluxWeak_GEAR2_step(void)
       }
     }
 
-    /* End of Chart: '<S54>/Chart' */
+    /* End of Chart: '<S56>/Chart' */
 
-    /* DataStoreWrite: '<S69>/Data Store Write2' */
+    /* DataStoreWrite: '<S71>/Data Store Write2' */
     AppFun.Tqreq = rtb_Switch_b;
 
-    /* Switch: '<S108>/Switch2' incorporates:
-     *  RelationalOperator: '<S108>/LowerRelop1'
-     *  RelationalOperator: '<S108>/UpperRelop'
-     *  Switch: '<S108>/Switch'
+    /* Switch: '<S110>/Switch2' incorporates:
+     *  RelationalOperator: '<S110>/LowerRelop1'
+     *  RelationalOperator: '<S110>/UpperRelop'
+     *  Switch: '<S110>/Switch'
      */
-    if (rtb_Switch_b > rtb_Saturation1_i) {
-      rtb_Switch_b = rtb_Saturation1_i;
+    if (rtb_Switch_b > rtb_Abs_l) {
+      rtb_Switch_b = rtb_Abs_l;
     } else {
       if (rtb_Switch_b < rtb_InvCoef) {
-        /* Switch: '<S108>/Switch' */
+        /* Switch: '<S110>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
       }
     }
 
-    /* End of Switch: '<S108>/Switch2' */
+    /* End of Switch: '<S110>/Switch2' */
 
-    /* DataStoreWrite: '<S142>/Data Store Write' */
-    AppFun.LimTP_I = rtb_DeadZone;
+    /* DataStoreWrite: '<S144>/Data Store Write' */
+    AppFun.LimTP_I = rtb_Divide_p;
 
-    /* DataStoreWrite: '<S142>/Data Store Write1' */
-    AppFun.LimTN_I = rtb_Divide_p;
+    /* DataStoreWrite: '<S144>/Data Store Write1' */
+    AppFun.LimTN_I = rtb_Add_b;
 
     /* Gain: '<S164>/Gain1' incorporates:
      *  Abs: '<S164>/Abs'
@@ -7879,20 +7915,20 @@ void APP_FluxWeak_GEAR2_step(void)
     /* SignalConversion: '<S10>/BusConversion_InsertedFor_Ctrl_at_inport_0' */
     APP_FluxWeak_GEAR2_DW.PwmFreq = rtb_InvCoef;
 
-    /* FunctionCaller: '<S60>/Function Caller' */
+    /* FunctionCaller: '<S62>/Function Caller' */
     APP_FluxWeak_GEAR2_n2MaxT(rtb_Psi_i, &APP_FluxWeak_GEAR2_DW.TqMax);
 
-    /* Product: '<S60>/Product' */
+    /* Product: '<S62>/Product' */
     APP_FluxWeak_GEAR2_DW.TqReal = APP_FluxWeak_GEAR2_DW.TqMax * rtb_Switch_b;
 
-    /* SignalConversion: '<S60>/TmpBufferAtConstantOutport1' incorporates:
-     *  Constant: '<S60>/Constant'
+    /* SignalConversion: '<S62>/TmpBufferAtConstantOutport1' incorporates:
+     *  Constant: '<S62>/Constant'
      */
     APP_FluxWeak_GEAR2_DW.ZeroPointBias = 0.0F;
   } else {
     if (APP_FluxWeak_GEAR2_DW.method_MODE) {
-      /* Disable for Chart: '<S54>/Chart' incorporates:
-       *  SubSystem: '<S54>/Slope'
+      /* Disable for Chart: '<S56>/Chart' incorporates:
+       *  SubSystem: '<S56>/Slope'
        */
       APP_FluxWeak_GEAR_Slope_Disable(&APP_FluxWeak_GEAR2_DW.Slope);
 
@@ -7927,18 +7963,18 @@ void APP_FluxWeak_GEAR2_step(void)
    *  BusCreator: '<S4>/BusConversion_InsertedFor_Bus Creator_at_inport_3'
    *  BusCreator: '<S4>/BusConversion_InsertedFor_Bus Creator_at_inport_4'
    *  BusCreator: '<S4>/BusConversion_InsertedFor_Bus Creator_at_inport_5'
-   *  Constant: '<S53>/Constant'
+   *  Constant: '<S55>/Constant'
    *  Constant: '<S9>/Constant'
    *  Constant: '<S9>/Constant1'
    *  DataStoreWrite: '<Root>/Data Store Write1'
    *  DataTypeConversion: '<S9>/Data Type Conversion'
-   *  RelationalOperator: '<S53>/Compare'
+   *  RelationalOperator: '<S55>/Compare'
    */
   App_Output.data_process.NmFil = DiscreteTimeIntegrator1;
   App_Output.data_process.VoltCapFil = DiscreteTimeIntegrator1_i4;
   App_Output.data_process.CurBusFil = rtb_DiscreteTimeIntegrator1;
-  App_Output.data_process.MotTemp = rtb_BusConversion_InsertedFor_0;
-  App_Output.data_process.InvTemp = rtb_InvTemp;
+  App_Output.data_process.MotTemp = rtb_MotTemp;
+  App_Output.data_process.InvTemp = rtb_BusConversion_InsertedFor_0;
   App_Output.data_process.tick = qY;
   App_Output.table.TqMax = APP_FluxWeak_GEAR2_DW.TqMax;
   App_Output.table.TqReal = APP_FluxWeak_GEAR2_DW.TqReal;
@@ -8035,26 +8071,26 @@ void APP_FluxWeak_GEAR2_initialize(void)
     /* SystemInitialize for Enabled SubSystem: '<S2>/Fault' */
     /* SystemInitialize for Atomic SubSystem: '<S8>/judgment' */
     /* SystemInitialize for Enabled SubSystem: '<S15>/Block' */
-    /* SystemInitialize for Chart: '<S17>/Chart' */
+    /* SystemInitialize for Chart: '<S19>/Chart' */
     APP_FluxWeak_GEAR2_DW.BlockState = 0.0F;
 
     /* End of SystemInitialize for SubSystem: '<S15>/Block' */
 
     /* SystemInitialize for Enabled SubSystem: '<S15>/DisChg' */
-    /* SystemInitialize for Chart: '<S25>/Chart1' */
+    /* SystemInitialize for Chart: '<S27>/Chart1' */
     APP_FluxWeak_GEAR2_DW.DisChg_time = 0.0F;
 
     /* End of SystemInitialize for SubSystem: '<S15>/DisChg' */
 
     /* SystemInitialize for Enabled SubSystem: '<S15>/Spd' */
-    /* InitializeConditions for RateLimiter: '<S27>/Rate Limiter' */
+    /* InitializeConditions for RateLimiter: '<S29>/Rate Limiter' */
     APP_FluxWeak_GEAR2_DW.PrevY = 1.0F;
 
-    /* SystemInitialize for Chart: '<S27>/Chart1' */
+    /* SystemInitialize for Chart: '<S29>/Chart1' */
     APP_FluxWeak_GEAR2_DW.SpdCode_o[0] = 0UL;
     APP_FluxWeak_GEAR2_DW.SpdCode_o[1] = 0UL;
 
-    /* SystemInitialize for Outport: '<S27>/Spd' */
+    /* SystemInitialize for Outport: '<S29>/Spd' */
     APP_FluxWeak_GEAR2_DW.SpdCode[0] = 0UL;
     APP_FluxWeak_GEAR2_DW.SpdCode[1] = 0UL;
     APP_FluxWeak_GEAR2_DW.OSLimTP = 1.0F;
@@ -8063,26 +8099,26 @@ void APP_FluxWeak_GEAR2_initialize(void)
     /* End of SystemInitialize for SubSystem: '<S15>/Spd' */
 
     /* SystemInitialize for Enabled SubSystem: '<S15>/TempSensor' */
-    /* SystemInitialize for Chart: '<S29>/Chart1' */
+    /* SystemInitialize for Chart: '<S31>/Chart1' */
     APP_FluxWeak_GEAR2_DW.out_e[0] = 0.0F;
     APP_FluxWeak_GEAR2_DW.out_e[1] = 0.0F;
 
-    /* SystemInitialize for Chart: '<S29>/Chart2' */
+    /* SystemInitialize for Chart: '<S31>/Chart2' */
     APP_FluxWeak_GEAR2_DW.out[0] = 0.0F;
     APP_FluxWeak_GEAR2_DW.out[1] = 0.0F;
     APP_FluxWeak_GEAR2_DW.out[2] = 0.0F;
 
-    /* SystemInitialize for Atomic SubSystem: '<S48>/lpf' */
+    /* SystemInitialize for Atomic SubSystem: '<S50>/lpf' */
     LPF_App_Init(&APP_FluxWeak_GEAR2_DW.lpf_e);
 
-    /* End of SystemInitialize for SubSystem: '<S48>/lpf' */
+    /* End of SystemInitialize for SubSystem: '<S50>/lpf' */
 
-    /* SystemInitialize for Atomic SubSystem: '<S49>/lpf' */
+    /* SystemInitialize for Atomic SubSystem: '<S51>/lpf' */
     LPF_App_Init(&APP_FluxWeak_GEAR2_DW.lpf_i);
 
-    /* End of SystemInitialize for SubSystem: '<S49>/lpf' */
+    /* End of SystemInitialize for SubSystem: '<S51>/lpf' */
 
-    /* SystemInitialize for Outport: '<S29>/TempSensor' */
+    /* SystemInitialize for Outport: '<S31>/TempSensor' */
     APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_c = 24.0F;
     APP_FluxWeak_GEAR2_DW.DiscreteTimeIntegrator1_a = 24.0F;
     APP_FluxWeak_GEAR2_DW.LogicalOperator1[0] = 0UL;
@@ -8094,7 +8130,7 @@ void APP_FluxWeak_GEAR2_initialize(void)
     /* End of SystemInitialize for SubSystem: '<S15>/TempSensor' */
 
     /* SystemInitialize for Enabled SubSystem: '<S15>/Temp' */
-    /* SystemInitialize for Chart: '<S28>/Chart' */
+    /* SystemInitialize for Chart: '<S30>/Chart' */
     APP_FluxWeak_GEAR2_DW.TempCode_g[0] = 0UL;
     APP_FluxWeak_GEAR2_DW.TempCode_g[1] = 0UL;
     APP_FluxWeak_GEAR2_DW.TempCode_g[2] = 0UL;
@@ -8102,7 +8138,7 @@ void APP_FluxWeak_GEAR2_initialize(void)
     APP_FluxWeak_GEAR2_DW.TempCode_g[4] = 0UL;
     APP_FluxWeak_GEAR2_DW.TempCode_g[5] = 0UL;
 
-    /* SystemInitialize for Outport: '<S28>/Temp' */
+    /* SystemInitialize for Outport: '<S30>/Temp' */
     for (i = 0; i < 6; i++) {
       APP_FluxWeak_GEAR2_DW.TempCode[i] = 0UL;
     }
@@ -8110,18 +8146,18 @@ void APP_FluxWeak_GEAR2_initialize(void)
     APP_FluxWeak_GEAR2_DW.MotCoef = 1.0F;
     APP_FluxWeak_GEAR2_DW.InvCoef = 1.0F;
 
-    /* End of SystemInitialize for Outport: '<S28>/Temp' */
+    /* End of SystemInitialize for Outport: '<S30>/Temp' */
     /* End of SystemInitialize for SubSystem: '<S15>/Temp' */
 
     /* SystemInitialize for Enabled SubSystem: '<S15>/Volt' */
-    /* SystemInitialize for Chart: '<S30>/Chart3' */
+    /* SystemInitialize for Chart: '<S32>/Chart3' */
     APP_FluxWeak_GEAR2_DW.VoltCode_m[0] = 0UL;
     APP_FluxWeak_GEAR2_DW.VoltCode_m[1] = 0UL;
     APP_FluxWeak_GEAR2_DW.VoltCode_m[2] = 0UL;
     APP_FluxWeak_GEAR2_DW.VoltCode_m[3] = 0UL;
     APP_FluxWeak_GEAR2_DW.DisChg_coef = 1.0F;
 
-    /* SystemInitialize for Outport: '<S30>/Volt' */
+    /* SystemInitialize for Outport: '<S32>/Volt' */
     APP_FluxWeak_GEAR2_DW.VoltCode[0] = 0UL;
     APP_FluxWeak_GEAR2_DW.VoltCode[1] = 0UL;
     APP_FluxWeak_GEAR2_DW.VoltCode[2] = 0UL;
@@ -8133,9 +8169,6 @@ void APP_FluxWeak_GEAR2_initialize(void)
     /* End of SystemInitialize for SubSystem: '<S8>/judgment' */
 
     /* SystemInitialize for Enabled SubSystem: '<S8>/Act' */
-    /* InitializeConditions for RateLimiter: '<S11>/Rate Limiter' */
-    APP_FluxWeak_GEAR2_DW.PrevY_i = 1.0F;
-
     /* SystemInitialize for Outport: '<S11>/LimtTorCoef' */
     APP_FluxWeak_GEAR2_DW.MinMax = 1.0F;
 
@@ -8158,21 +8191,21 @@ void APP_FluxWeak_GEAR2_initialize(void)
 
     /* SystemInitialize for Enabled SubSystem: '<S2>/method' */
 
-    /* SystemInitialize for Atomic SubSystem: '<S142>/LimDrv' */
+    /* SystemInitialize for Atomic SubSystem: '<S144>/LimDrv' */
 
-    /* SystemInitialize for Chart: '<S156>/Chart' */
+    /* SystemInitialize for Chart: '<S158>/Chart' */
     APP_FluxWeak_GEAR2_Chart_Init(&Add, &APP_FluxWeak_GEAR2_DW.sf_Chart_c);
 
-    /* End of SystemInitialize for SubSystem: '<S142>/LimDrv' */
+    /* End of SystemInitialize for SubSystem: '<S144>/LimDrv' */
 
-    /* SystemInitialize for Atomic SubSystem: '<S142>/LimChg' */
+    /* SystemInitialize for Atomic SubSystem: '<S144>/LimChg' */
 
-    /* SystemInitialize for Chart: '<S150>/Chart' */
+    /* SystemInitialize for Chart: '<S152>/Chart' */
     APP_FluxWeak_GEAR2_Chart_Init(&Add, &APP_FluxWeak_GEAR2_DW.sf_Chart_lj);
 
-    /* End of SystemInitialize for SubSystem: '<S142>/LimChg' */
+    /* End of SystemInitialize for SubSystem: '<S144>/LimChg' */
 
-    /* SystemInitialize for Chart: '<S142>/Chart1' */
+    /* SystemInitialize for Chart: '<S144>/Chart1' */
     APP_FluxWeak_GEAR2_DW.is_active_c20_APP_FluxWeak_GEAR = 0U;
     APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2 =
       APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
@@ -8184,27 +8217,27 @@ void APP_FluxWeak_GEAR2_initialize(void)
     APP_FluxWeak_GEAR2_DW.is_c2_APP_FluxWeak_GEAR2 =
       APP_FluxWe_IN_NO_ACTIVE_CHILD_c;
 
-    /* SystemInitialize for Chart: '<S54>/Chart' incorporates:
-     *  SubSystem: '<S54>/Torque'
+    /* SystemInitialize for Chart: '<S56>/Chart' incorporates:
+     *  SubSystem: '<S56>/Torque'
      */
     APP_FluxWeak_GEAR2_Torque_Init(&APP_FluxWeak_GEAR2_DW.Torque);
 
-    /* SystemInitialize for Chart: '<S54>/Chart' incorporates:
-     *  SubSystem: '<S54>/Slope'
+    /* SystemInitialize for Chart: '<S56>/Chart' incorporates:
+     *  SubSystem: '<S56>/Slope'
      */
     APP_FluxWeak_GEAR2_Slope_Init(&APP_FluxWeak_GEAR2_DW.Slope);
 
-    /* SystemInitialize for Chart: '<S54>/Chart' incorporates:
-     *  SubSystem: '<S54>/Calib'
+    /* SystemInitialize for Chart: '<S56>/Chart' incorporates:
+     *  SubSystem: '<S56>/Calib'
      */
     APP_FluxWeak_GEAR2_Calib_Init(&APP_FluxWeak_GEAR2_DW.Calib);
 
-    /* SystemInitialize for Chart: '<S54>/Chart' incorporates:
-     *  SubSystem: '<S54>/UVW_check'
+    /* SystemInitialize for Chart: '<S56>/Chart' incorporates:
+     *  SubSystem: '<S56>/UVW_check'
      */
     APP_FluxWeak_GEA_UVW_check_Init(&APP_FluxWeak_GEAR2_DW.UVW_check);
 
-    /* SystemInitialize for Merge: '<S54>/Merge1' */
+    /* SystemInitialize for Merge: '<S56>/Merge1' */
     APP_FluxWeak_GEAR2_DW.Merge1 = 0.0F;
 
     /* SystemInitialize for Outport: '<S10>/Table' */
