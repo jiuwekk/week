@@ -5,7 +5,7 @@
  *
  * Model version                  : 2.6
  * Simulink Coder version         : 8.13 (R2017b) 24-Jul-2017
- * C/C++ source code generated on : Tue Jul 25 15:05:30 2023
+ * C/C++ source code generated on : Thu Aug 17 14:23:34 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Texas Instruments->C2000
@@ -2014,7 +2014,7 @@ void APP_FluxWeak_GEAR2_PhaseStudy(real32_T rtu_Data, real32_T rtu_Data_g,
           /* '<S100>:86:1' AngleRefSet = 1.5708; */
           localDW->AngleRefSet = 1.5708F;
         } else {
-          /* '<S100>:73:2' AngleRefSet = AngleRefSet + 0.001; */
+          /* '<S100>:73:1' AngleRefSet = AngleRefSet + 0.001; */
           localDW->AngleRefSet += 0.001F;
         }
         break;
@@ -2065,7 +2065,7 @@ void APP_FluxWeak_GEAR2_PhaseStudy(real32_T rtu_Data, real32_T rtu_Data_g,
             /* '<S100>:10:1' IdRefSet = 0; */
             localDW->IdRefSet = 0.0F;
 
-            /* '<S100>:10:3' StudyStep=14; */
+            /* '<S100>:10:2' StudyStep=14; */
             localDW->StudyStep = 14U;
           } else {
             /* Transition: '<S100>:89' */
@@ -2473,10 +2473,10 @@ static void APP_Fl_enter_internal_SPEEDFORW(real32_T rtu_Data_n,
     /* '<S87>:124:1' CalibZeroPoint = CalibZeroPoint + 4; */
     localDW->CalibZeroPoint += 4.0F;
 
-    /* '<S87>:124:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+    /* '<S87>:124:3' CalibZeroPoint=Turn(CalibZeroPoint); */
     localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn(localDW->CalibZeroPoint);
 
-    /* '<S87>:124:5' StudyStep=21; */
+    /* '<S87>:124:4' StudyStep=21; */
     localDW->StudyStep = 21U;
   } else {
     /* Transition: '<S87>:127' */
@@ -2496,10 +2496,10 @@ static void APP_Fl_enter_internal_SPEEDFORW(real32_T rtu_Data_n,
       /* '<S87>:130:1' CalibZeroPoint = CalibZeroPoint + 1; */
       localDW->CalibZeroPoint++;
 
-      /* '<S87>:130:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+      /* '<S87>:130:3' CalibZeroPoint=Turn(CalibZeroPoint); */
       localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn(localDW->CalibZeroPoint);
 
-      /* '<S87>:130:5' StudyStep=22; */
+      /* '<S87>:130:4' StudyStep=22; */
       localDW->StudyStep = 22U;
     } else {
       /* Transition: '<S87>:100' */
@@ -2519,11 +2519,11 @@ static void APP_Fl_enter_internal_SPEEDFORW(real32_T rtu_Data_n,
         /* '<S87>:111:1' CalibZeroPoint = CalibZeroPoint - 1; */
         localDW->CalibZeroPoint--;
 
-        /* '<S87>:111:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:111:3' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S87>:111:5' StudyStep=22; */
+        /* '<S87>:111:4' StudyStep=22; */
         localDW->StudyStep = 22U;
       } else {
         /* Transition: '<S87>:113' */
@@ -2534,11 +2534,11 @@ static void APP_Fl_enter_internal_SPEEDFORW(real32_T rtu_Data_n,
         /* '<S87>:99:1' CalibZeroPoint = CalibZeroPoint - 4; */
         localDW->CalibZeroPoint -= 4.0F;
 
-        /* '<S87>:99:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:99:3' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S87>:99:5' StudyStep=21; */
+        /* '<S87>:99:4' StudyStep=21; */
         localDW->StudyStep = 21U;
       }
     }
@@ -2564,10 +2564,10 @@ static void APP_Flu_enter_internal_SPEEDINV(real32_T rtu_Data_n,
     /* '<S87>:115:1' CalibZeroPoint = CalibZeroPoint - 4; */
     localDW->CalibZeroPoint -= 4.0F;
 
-    /* '<S87>:115:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+    /* '<S87>:115:3' CalibZeroPoint=Turn(CalibZeroPoint); */
     localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn(localDW->CalibZeroPoint);
 
-    /* '<S87>:115:5' StudyStep=21; */
+    /* '<S87>:115:4' StudyStep=21; */
     localDW->StudyStep = 21U;
   } else {
     /* Transition: '<S87>:129' */
@@ -2587,10 +2587,10 @@ static void APP_Flu_enter_internal_SPEEDINV(real32_T rtu_Data_n,
       /* '<S87>:112:1' CalibZeroPoint = CalibZeroPoint - 1; */
       localDW->CalibZeroPoint--;
 
-      /* '<S87>:112:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+      /* '<S87>:112:3' CalibZeroPoint=Turn(CalibZeroPoint); */
       localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn(localDW->CalibZeroPoint);
 
-      /* '<S87>:112:5' StudyStep=22; */
+      /* '<S87>:112:4' StudyStep=22; */
       localDW->StudyStep = 22U;
     } else {
       /* Transition: '<S87>:117' */
@@ -2610,11 +2610,11 @@ static void APP_Flu_enter_internal_SPEEDINV(real32_T rtu_Data_n,
         /* '<S87>:103:1' CalibZeroPoint = CalibZeroPoint + 1; */
         localDW->CalibZeroPoint++;
 
-        /* '<S87>:103:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:103:3' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S87>:103:5' StudyStep=22; */
+        /* '<S87>:103:4' StudyStep=22; */
         localDW->StudyStep = 22U;
       } else {
         /* Transition: '<S87>:101' */
@@ -2625,11 +2625,11 @@ static void APP_Flu_enter_internal_SPEEDINV(real32_T rtu_Data_n,
         /* '<S87>:128:1' CalibZeroPoint = CalibZeroPoint + 4; */
         localDW->CalibZeroPoint += 4.0F;
 
-        /* '<S87>:128:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:128:3' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S87>:128:5' StudyStep=21; */
+        /* '<S87>:128:4' StudyStep=21; */
         localDW->StudyStep = 21U;
       }
     }
@@ -2677,7 +2677,7 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
       /* '<S87>:194:1' StudyResult = CalibZeroPoint; */
       localDW->StudyResult = localDW->CalibZeroPoint;
 
-      /* '<S87>:194:2' StudyStep=23; */
+      /* '<S87>:194:1' StudyStep=23; */
       localDW->StudyStep = 23U;
     } else {
       /* Transition: '<S87>:231' */
@@ -2693,11 +2693,11 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
         /* '<S87>:124:1' CalibZeroPoint = CalibZeroPoint + 4; */
         localDW->CalibZeroPoint += 4.0F;
 
-        /* '<S87>:124:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:124:3' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S87>:124:5' StudyStep=21; */
+        /* '<S87>:124:4' StudyStep=21; */
         localDW->StudyStep = 21U;
       } else {
         /* Transition: '<S87>:127' */
@@ -2718,11 +2718,11 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
           /* '<S87>:130:1' CalibZeroPoint = CalibZeroPoint + 1; */
           localDW->CalibZeroPoint++;
 
-          /* '<S87>:130:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+          /* '<S87>:130:3' CalibZeroPoint=Turn(CalibZeroPoint); */
           localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
             (localDW->CalibZeroPoint);
 
-          /* '<S87>:130:5' StudyStep=22; */
+          /* '<S87>:130:4' StudyStep=22; */
           localDW->StudyStep = 22U;
         } else {
           /* Transition: '<S87>:100' */
@@ -2743,11 +2743,11 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
             /* '<S87>:111:1' CalibZeroPoint = CalibZeroPoint - 1; */
             localDW->CalibZeroPoint--;
 
-            /* '<S87>:111:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+            /* '<S87>:111:3' CalibZeroPoint=Turn(CalibZeroPoint); */
             localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
               (localDW->CalibZeroPoint);
 
-            /* '<S87>:111:5' StudyStep=22; */
+            /* '<S87>:111:4' StudyStep=22; */
             localDW->StudyStep = 22U;
           } else {
             /* Transition: '<S87>:113' */
@@ -2759,11 +2759,11 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
             /* '<S87>:99:1' CalibZeroPoint = CalibZeroPoint - 4; */
             localDW->CalibZeroPoint -= 4.0F;
 
-            /* '<S87>:99:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+            /* '<S87>:99:3' CalibZeroPoint=Turn(CalibZeroPoint); */
             localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
               (localDW->CalibZeroPoint);
 
-            /* '<S87>:99:5' StudyStep=21; */
+            /* '<S87>:99:4' StudyStep=21; */
             localDW->StudyStep = 21U;
           }
         }
@@ -2786,7 +2786,7 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
       /* '<S87>:133:1' StudyResult = CalibZeroPoint; */
       localDW->StudyResult = localDW->CalibZeroPoint;
 
-      /* '<S87>:133:2' StudyStep=23; */
+      /* '<S87>:133:1' StudyStep=23; */
       localDW->StudyStep = 23U;
     } else {
       /* Transition: '<S87>:236' */
@@ -2802,11 +2802,11 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
         /* '<S87>:115:1' CalibZeroPoint = CalibZeroPoint - 4; */
         localDW->CalibZeroPoint -= 4.0F;
 
-        /* '<S87>:115:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+        /* '<S87>:115:3' CalibZeroPoint=Turn(CalibZeroPoint); */
         localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
           (localDW->CalibZeroPoint);
 
-        /* '<S87>:115:5' StudyStep=21; */
+        /* '<S87>:115:4' StudyStep=21; */
         localDW->StudyStep = 21U;
       } else {
         /* Transition: '<S87>:129' */
@@ -2827,11 +2827,11 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
           /* '<S87>:112:1' CalibZeroPoint = CalibZeroPoint - 1; */
           localDW->CalibZeroPoint--;
 
-          /* '<S87>:112:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+          /* '<S87>:112:3' CalibZeroPoint=Turn(CalibZeroPoint); */
           localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
             (localDW->CalibZeroPoint);
 
-          /* '<S87>:112:5' StudyStep=22; */
+          /* '<S87>:112:4' StudyStep=22; */
           localDW->StudyStep = 22U;
         } else {
           /* Transition: '<S87>:117' */
@@ -2852,11 +2852,11 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
             /* '<S87>:103:1' CalibZeroPoint = CalibZeroPoint + 1; */
             localDW->CalibZeroPoint++;
 
-            /* '<S87>:103:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+            /* '<S87>:103:3' CalibZeroPoint=Turn(CalibZeroPoint); */
             localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
               (localDW->CalibZeroPoint);
 
-            /* '<S87>:103:5' StudyStep=22; */
+            /* '<S87>:103:4' StudyStep=22; */
             localDW->StudyStep = 22U;
           } else {
             /* Transition: '<S87>:101' */
@@ -2868,11 +2868,11 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
             /* '<S87>:128:1' CalibZeroPoint = CalibZeroPoint + 4; */
             localDW->CalibZeroPoint += 4.0F;
 
-            /* '<S87>:128:4' CalibZeroPoint=Turn(CalibZeroPoint); */
+            /* '<S87>:128:3' CalibZeroPoint=Turn(CalibZeroPoint); */
             localDW->CalibZeroPoint = APP_FluxWeak_GEAR2_Turn
               (localDW->CalibZeroPoint);
 
-            /* '<S87>:128:5' StudyStep=21; */
+            /* '<S87>:128:4' StudyStep=21; */
             localDW->StudyStep = 21U;
           }
         }
@@ -3087,7 +3087,7 @@ static void APP_FluxWeak_GEAR2_Study(real32_T rtu_Data_n, real32_T rtu_Data_j,
         /* '<S87>:155:1' StudyResult = 5555; */
         localDW->StudyResult = 5555.0F;
 
-        /* '<S87>:155:3' StudyStep=36; */
+        /* '<S87>:155:2' StudyStep=36; */
         localDW->StudyStep = 36U;
       } else {
         /* Chart: '<S80>/Chart' */
@@ -3169,7 +3169,7 @@ void APP_FluxWeak_GEAR_ElecZeroStudy(uint16_T rtu_Data, real32_T rtu_Data_b,
     /* '<S87>:84:4' IdIqSetEn = 0; */
     localDW->IdIqSetEn = 0U;
 
-    /* '<S87>:84:5' AngleSetEn = 0; */
+    /* '<S87>:84:4' AngleSetEn = 0; */
     localDW->AngleSetEn = 0U;
 
     /* '<S87>:84:5' IdRefSet = 0; */
@@ -3431,7 +3431,7 @@ void APP_FluxWeak_GEAR2_FluxLinkage(real32_T rtu_Data, uint16_T *rty_Out1,
     /* '<S88>:19:1' IqRefSet = IsReq * cos(CalibAng); */
     rtb_IqRefSet = localDW->IsReq * cosf(localDW->CalibAng);
 
-    /* '<S88>:19:3' IdRefSet = -abs(IsReq * sin(CalibAng)); */
+    /* '<S88>:19:2' IdRefSet = -abs(IsReq * sin(CalibAng)); */
     rtb_IdRefSet = -fabsf(localDW->IsReq * sinf(localDW->CalibAng));
   } else {
     /* During 'AngCount': '<S88>:4' */
@@ -4690,8 +4690,8 @@ void APP_FluxWeak_GEAR2_UVW_check(real32_T rtu_Data, real32_T rtu_Data_l,
         /* '<S136>:11:1' AngleSetEn =1 ; */
         localDW->AngleSetEn = 1U;
 
-        /* '<S136>:11:1' IdRefSet=0.3; */
-        localDW->IdRefSet = 0.3F;
+        /* '<S136>:11:1' IdRefSet=0.05; */
+        localDW->IdRefSet = 0.05F;
 
         /* '<S136>:11:3' AngleRefSet=0; */
         localDW->AngleRefSet = 0.0F;
@@ -4749,8 +4749,8 @@ void APP_FluxWeak_GEAR2_UVW_check(real32_T rtu_Data, real32_T rtu_Data_l,
         /* '<S136>:11:1' AngleSetEn =1 ; */
         localDW->AngleSetEn = 1U;
 
-        /* '<S136>:11:1' IdRefSet=0.3; */
-        localDW->IdRefSet = 0.3F;
+        /* '<S136>:11:1' IdRefSet=0.05; */
+        localDW->IdRefSet = 0.05F;
 
         /* '<S136>:11:3' AngleRefSet=0; */
         localDW->AngleRefSet = 0.0F;

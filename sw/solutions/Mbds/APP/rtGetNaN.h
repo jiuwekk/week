@@ -5,7 +5,7 @@
  *
  * Model version                  : 2.6
  * Simulink Coder version         : 8.13 (R2017b) 24-Jul-2017
- * C/C++ source code generated on : Tue Jul 25 15:05:30 2023
+ * C/C++ source code generated on : Thu Aug 17 14:19:51 2023
  */
 
 #ifndef RTW_HEADER_rtGetNaN_h_
