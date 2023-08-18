@@ -179,7 +179,8 @@ typedef union
         uint16_t DCRelayState:1;   // 母线接触器状态（预充状态）
         uint16_t Rsvd0:1;
         uint16_t MotGateReq:1;     // 使能
-        uint16_t Rsvd1:4;
+        uint16_t GearState:2;
+        uint16_t Rsvd1:2;
         uint16_t VcuKeyOn:1;       // VCU ON档信号
         uint16_t MotModeReq : 8;   // 动作命令
 
