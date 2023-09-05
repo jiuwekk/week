@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'APP_FluxWeak_GEAR2'.
  *
- * Model version                  : 2.11
+ * Model version                  : 2.13
  * Simulink Coder version         : 8.13 (R2017b) 24-Jul-2017
- * C/C++ source code generated on : Fri Aug 18 09:09:08 2023
+ * C/C++ source code generated on : Tue Aug 29 15:47:44 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Texas Instruments->C2000
@@ -670,7 +670,7 @@ void APP_FluxWeak_GEAR2_Genrate(real32_T rtu_Data, real32_T rtu_Data_d, uint16_T
   uint16_T *rty_Out1_g, uint16_T *rty_Out1_h, real32_T *rty_Out1_k, real32_T
   *rty_Out1_d4, real32_T *rty_Tor, DW_Genrate_APP_FluxWeak_GEAR2_T *localDW)
 {
-  real32_T rtb_Add_ct;
+  real32_T rtb_Add_a;
   real32_T rtb_DiscreteTimeIntegrator1_j;
 
   /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
@@ -703,26 +703,26 @@ void APP_FluxWeak_GEAR2_Genrate(real32_T rtu_Data, real32_T rtu_Data_d, uint16_T
    *  Sum: '<S67>/Subtract'
    */
   PI_App(0.0001F * (rtu_Data - rtu_Data_d), PMSM_Param.GenKp, PMSM_Param.GenKi,
-         0.002F, &rtb_Add_ct, &rtb_DiscreteTimeIntegrator1_j, &localDW->PI);
+         0.002F, &rtb_Add_a, &rtb_DiscreteTimeIntegrator1_j, &localDW->PI);
 
   /* End of Outputs for SubSystem: '<S101>/PI' */
 
   /* Saturate: '<S101>/Saturation' */
-  if (rtb_Add_ct > 0.0F) {
-    rtb_Add_ct = 0.0F;
+  if (rtb_Add_a > 0.0F) {
+    rtb_Add_a = 0.0F;
   } else {
-    if (rtb_Add_ct < -1.0F) {
-      rtb_Add_ct = -1.0F;
+    if (rtb_Add_a < -1.0F) {
+      rtb_Add_a = -1.0F;
     }
   }
 
   /* End of Saturate: '<S101>/Saturation' */
 
   /* SignalConversion: '<S67>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_d4 = rtb_Add_ct;
+  *rty_Out1_d4 = rtb_Add_a;
 
   /* SignalConversion: '<S67>/OutportBufferForTor' */
-  *rty_Tor = rtb_Add_ct;
+  *rty_Tor = rtb_Add_a;
 }
 
 /* Output and update for function-call system: '<S56>/Starter' */
@@ -731,7 +731,7 @@ void APP_FluxWeak_GEAR2_Starter(real32_T rtu_Data, real32_T rtu_Data_c, uint16_T
   uint16_T *rty_Out1_i, uint16_T *rty_Out1_cm, real32_T *rty_Out1_p, real32_T
   *rty_Out1_e, real32_T *rty_Tor, DW_Starter_APP_FluxWeak_GEAR2_T *localDW)
 {
-  real32_T rtb_Add_hz;
+  real32_T rtb_Add_b;
   real32_T rtb_DiscreteTimeIntegrator1_g;
 
   /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
@@ -764,26 +764,26 @@ void APP_FluxWeak_GEAR2_Starter(real32_T rtu_Data, real32_T rtu_Data_c, uint16_T
    *  Sum: '<S74>/Subtract'
    */
   PI_App(0.0001F * (rtu_Data - rtu_Data_c), PMSM_Param.StarKp, PMSM_Param.StarKi,
-         0.002F, &rtb_Add_hz, &rtb_DiscreteTimeIntegrator1_g, &localDW->PI);
+         0.002F, &rtb_Add_b, &rtb_DiscreteTimeIntegrator1_g, &localDW->PI);
 
   /* End of Outputs for SubSystem: '<S130>/PI' */
 
   /* Saturate: '<S130>/Saturation' */
-  if (rtb_Add_hz > 1.0F) {
-    rtb_Add_hz = 1.0F;
+  if (rtb_Add_b > 1.0F) {
+    rtb_Add_b = 1.0F;
   } else {
-    if (rtb_Add_hz < 0.0F) {
-      rtb_Add_hz = 0.0F;
+    if (rtb_Add_b < 0.0F) {
+      rtb_Add_b = 0.0F;
     }
   }
 
   /* End of Saturate: '<S130>/Saturation' */
 
   /* SignalConversion: '<S74>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_e = rtb_Add_hz;
+  *rty_Out1_e = rtb_Add_b;
 
   /* SignalConversion: '<S74>/OutportBufferForTor' */
-  *rty_Tor = rtb_Add_hz;
+  *rty_Tor = rtb_Add_b;
 }
 
 /* System initialize for function-call system: '<S112>/Function-Call Subsystem' */
@@ -890,32 +890,22 @@ void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
 void APP_Flu_FunctionCallSubsystem_o(real32_T rtu_TorReq, real32_T rtu_Spd_loop,
   real32_T *rty_Out1)
 {
-  real32_T rtu_TorReq_0;
-
-  /* Saturate: '<S123>/Saturation' */
-  if (rtu_TorReq > 0.0F) {
-    rtu_TorReq_0 = 0.0F;
-  } else if (rtu_TorReq < -1.0F) {
-    rtu_TorReq_0 = -1.0F;
-  } else {
-    rtu_TorReq_0 = rtu_TorReq;
-  }
-
-  /* End of Saturate: '<S123>/Saturation' */
-
-  /* MinMax: '<S123>/MinMax' incorporates:
-   *  Sum: '<S123>/Add'
-   */
-  *rty_Out1 = fmaxf(rtu_TorReq, rtu_Spd_loop + rtu_TorReq_0);
+  /* MinMax: '<S123>/MinMax' */
+  *rty_Out1 = fmaxf(rtu_TorReq, rtu_Spd_loop);
 }
 
 /* Output and update for function-call system: '<S114>/Function-Call Subsystem2' */
-void APP_Flux_FunctionCallSubsystem2(real32_T rtu_TorReq, real32_T *rty_Out1,
+void APP_Flux_FunctionCallSubsystem2(real32_T *rty_Out1,
   DW_FunctionCallSubsystem2_APP_T *localDW)
 {
-  real32_T rtb_UkYk1_i;
+  real32_T tmp;
 
-  /* Sum: '<S125>/Difference Inputs1' incorporates:
+  /* Switch: '<S127>/Switch2' incorporates:
+   *  Constant: '<S125>/Constant2'
+   *  RelationalOperator: '<S127>/LowerRelop1'
+   *  RelationalOperator: '<S127>/UpperRelop'
+   *  Sum: '<S125>/Difference Inputs1'
+   *  Switch: '<S127>/Switch'
    *  UnitDelay: '<S125>/Delay Input2'
    *
    * Block description for '<S125>/Difference Inputs1':
@@ -926,20 +916,13 @@ void APP_Flux_FunctionCallSubsystem2(real32_T rtu_TorReq, real32_T *rty_Out1,
    *
    *  Store in Global RAM
    */
-  rtb_UkYk1_i = rtu_TorReq - localDW->N_state;
-
-  /* Switch: '<S127>/Switch2' incorporates:
-   *  RelationalOperator: '<S127>/LowerRelop1'
-   *  RelationalOperator: '<S127>/UpperRelop'
-   *  Switch: '<S127>/Switch'
-   */
-  if (rtb_UkYk1_i > 0.001F) {
-    rtb_UkYk1_i = 0.001F;
+  if ((real32_T)(0.0 - localDW->N_state) > 0.001F) {
+    tmp = 0.001F;
+  } else if ((real32_T)(0.0 - localDW->N_state) < -0.001F) {
+    /* Switch: '<S127>/Switch' */
+    tmp = -0.001F;
   } else {
-    if (rtb_UkYk1_i < -0.001F) {
-      /* Switch: '<S127>/Switch' */
-      rtb_UkYk1_i = -0.001F;
-    }
+    tmp = (real32_T)(0.0 - localDW->N_state);
   }
 
   /* End of Switch: '<S127>/Switch2' */
@@ -955,7 +938,7 @@ void APP_Flux_FunctionCallSubsystem2(real32_T rtu_TorReq, real32_T *rty_Out1,
    *
    *  Store in Global RAM
    */
-  localDW->N_state += rtb_UkYk1_i;
+  localDW->N_state += tmp;
 
   /* SignalConversion: '<S125>/OutportBufferForOut1' */
   *rty_Out1 = localDW->N_state;
@@ -965,23 +948,8 @@ void APP_Flux_FunctionCallSubsystem2(real32_T rtu_TorReq, real32_T *rty_Out1,
 void APP_Flux_FunctionCallSubsystem1(real32_T rtu_TorReq, real32_T rtu_Spd_loop,
   real32_T *rty_Out1)
 {
-  real32_T rtu_TorReq_0;
-
-  /* Saturate: '<S124>/Saturation' */
-  if (rtu_TorReq > 1.0F) {
-    rtu_TorReq_0 = 1.0F;
-  } else if (rtu_TorReq < 0.0F) {
-    rtu_TorReq_0 = 0.0F;
-  } else {
-    rtu_TorReq_0 = rtu_TorReq;
-  }
-
-  /* End of Saturate: '<S124>/Saturation' */
-
-  /* MinMax: '<S124>/MinMax1' incorporates:
-   *  Sum: '<S124>/Add'
-   */
-  *rty_Out1 = fminf(rtu_TorReq, rtu_TorReq_0 + rtu_Spd_loop);
+  /* MinMax: '<S124>/MinMax1' */
+  *rty_Out1 = fminf(rtu_TorReq, rtu_Spd_loop);
 }
 
 /* Output and update for function-call system: '<S114>/Initial' */
@@ -1100,8 +1068,7 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
   /* Gain: '<S117>/Gain' incorporates:
    *  Sum: '<S117>/Sum'
    */
-  rtb_Gain_g = (rtb_DiscreteTimeIntegrator1_f - rtu_Data) *
-    PMSM_Param.DamperGain;
+  rtb_Gain_g = (rtb_DiscreteTimeIntegrator1_f - rtu_Data) * 0.0F;
 
   /* Outputs for Atomic SubSystem: '<S118>/lpf' */
 
@@ -1423,8 +1390,8 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
     if (localDW->UnitDelay_DSTATE > PMSM_Param.SlopeMaxT) {
       localDW->UnitDelay_DSTATE = PMSM_Param.SlopeMaxT;
     } else {
-      if (localDW->UnitDelay_DSTATE < -1.0F) {
-        localDW->UnitDelay_DSTATE = -1.0F;
+      if (localDW->UnitDelay_DSTATE < 0.0F) {
+        localDW->UnitDelay_DSTATE = 0.0F;
       }
     }
 
@@ -1433,8 +1400,8 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
 
    default:
     /* Saturate: '<S115>/Saturation2' */
-    if (localDW->UnitDelay_DSTATE > 1.0F) {
-      localDW->UnitDelay_DSTATE = 1.0F;
+    if (localDW->UnitDelay_DSTATE > 0.0F) {
+      localDW->UnitDelay_DSTATE = 0.0F;
     } else {
       if (localDW->UnitDelay_DSTATE < -PMSM_Param.SlopeMaxT) {
         localDW->UnitDelay_DSTATE = -PMSM_Param.SlopeMaxT;
@@ -1507,7 +1474,7 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
       /* Entry 'N': '<S122>:9' */
       /* '<S122>:9:1' N_call; */
       /* Event: '<S122>:20' */
-      APP_Flux_FunctionCallSubsystem2(rtb_Gain_g, &localDW->Merge,
+      APP_Flux_FunctionCallSubsystem2(&localDW->Merge,
         &localDW->FunctionCallSubsystem2);
 
       /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem2' */
@@ -1658,7 +1625,7 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
         /* Entry 'N': '<S122>:9' */
         /* '<S122>:9:1' N_call; */
         /* Event: '<S122>:20' */
-        APP_Flux_FunctionCallSubsystem2(rtb_Gain_g, &localDW->Merge,
+        APP_Flux_FunctionCallSubsystem2(&localDW->Merge,
           &localDW->FunctionCallSubsystem2);
 
         /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem2' */
@@ -1684,7 +1651,7 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
         /* During 'N': '<S122>:9' */
         /* '<S122>:9:1' N_call; */
         /* Event: '<S122>:20' */
-        APP_Flux_FunctionCallSubsystem2(rtb_Gain_g, &localDW->Merge,
+        APP_Flux_FunctionCallSubsystem2(&localDW->Merge,
           &localDW->FunctionCallSubsystem2);
 
         /* End of Outputs for SubSystem: '<S114>/Function-Call Subsystem2' */
@@ -1731,7 +1698,7 @@ void APP_FluxWeak_GEAR2_Sync(real32_T rtu_Data, real32_T rtu_Data_e, uint16_T
   uint16_T *rty_Out1_c, uint16_T *rty_Out1_i, real32_T *rty_Out1_k, real32_T
   *rty_Out1_ed, real32_T *rty_Tor, DW_Sync_APP_FluxWeak_GEAR2_T *localDW)
 {
-  real32_T rtb_Add_j;
+  real32_T rtb_Add_n;
   real32_T rtb_DiscreteTimeIntegrator1_j;
 
   /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
@@ -1764,26 +1731,26 @@ void APP_FluxWeak_GEAR2_Sync(real32_T rtu_Data, real32_T rtu_Data_e, uint16_T
    *  Sum: '<S75>/Subtract'
    */
   PI_App(0.0001F * (rtu_Data - rtu_Data_e), PMSM_Param.SyncKp, PMSM_Param.SyncKi,
-         0.002F, &rtb_Add_j, &rtb_DiscreteTimeIntegrator1_j, &localDW->PI);
+         0.002F, &rtb_Add_n, &rtb_DiscreteTimeIntegrator1_j, &localDW->PI);
 
   /* End of Outputs for SubSystem: '<S132>/PI' */
 
   /* Saturate: '<S132>/Saturation' */
-  if (rtb_Add_j > 1.0F) {
-    rtb_Add_j = 1.0F;
+  if (rtb_Add_n > 1.0F) {
+    rtb_Add_n = 1.0F;
   } else {
-    if (rtb_Add_j < -1.0F) {
-      rtb_Add_j = -1.0F;
+    if (rtb_Add_n < -1.0F) {
+      rtb_Add_n = -1.0F;
     }
   }
 
   /* End of Saturate: '<S132>/Saturation' */
 
   /* SignalConversion: '<S75>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_ed = rtb_Add_j;
+  *rty_Out1_ed = rtb_Add_n;
 
   /* SignalConversion: '<S75>/OutportBufferForTor' */
-  *rty_Tor = rtb_Add_j;
+  *rty_Tor = rtb_Add_n;
 }
 
 /* Output and update for function-call system: '<S56>/Dischg' */
@@ -5035,7 +5002,7 @@ void APP_FluxWeak_GEAR2_step(void)
   real32_T rtb_Psi_i;
   uint16_T rtb_UVWoffline;
   int16_T rtb_LogicalOperator;
-  real32_T rtb_Add_b;
+  real32_T rtb_Add_j;
   real32_T rtb_Divide_p;
   real32_T rtb_Abs_l;
   real32_T rtb_Divide_o;
@@ -5446,7 +5413,6 @@ void APP_FluxWeak_GEAR2_step(void)
        *  Abs: '<S35>/Abs2'
        *  Constant: '<S35>/Constant'
        *  Constant: '<S35>/Constant1'
-       *  Constant: '<S35>/Constant2'
        *  Constant: '<S35>/Constant3'
        *  Constant: '<S36>/Constant'
        *  Constant: '<S37>/Constant'
@@ -5472,7 +5438,7 @@ void APP_FluxWeak_GEAR2_step(void)
         break;
 
        case 4:
-        rtb_MultiportSwitch = true;
+        rtb_MultiportSwitch = (fabsf(PMSM_Input.AppComm.TqReq) <= 0.05F);
         break;
 
        default:
@@ -6585,7 +6551,7 @@ void APP_FluxWeak_GEAR2_step(void)
      *  Abs: '<S157>/Abs'
      */
     bpIdx = plook_u32ff_evenca(rtb_Abs_l, 1000.0F, 500.0F, 7UL, &rtb_Divide_p);
-    rtb_Add_b = intrp1d_fu32fla_pw(bpIdx, rtb_Divide_p, rtCP_table_tableData_o,
+    rtb_Add_j = intrp1d_fu32fla_pw(bpIdx, rtb_Divide_p, rtCP_table_tableData_o,
       7UL);
 
     /* Saturate: '<S157>/Saturation1' incorporates:
@@ -6607,13 +6573,13 @@ void APP_FluxWeak_GEAR2_step(void)
      *  Product: '<S157>/Product'
      */
     rtb_Divide_p = DiscreteTimeIntegrator1_i4 * PMSM_Input.AppComm.DrvLimCur *
-      9.55F * rtb_Add_b / rtb_Abs_l;
+      9.55F * rtb_Add_j / rtb_Abs_l;
 
     /* FunctionCaller: '<S157>/Function Caller' */
-    APP_FluxWeak_GEAR2_n2MaxT(rtb_Psi_i, &rtb_Add_b);
+    APP_FluxWeak_GEAR2_n2MaxT(rtb_Psi_i, &rtb_Add_j);
 
     /* Product: '<S157>/Divide1' */
-    rtb_Add_b = rtb_Divide_p / rtb_Add_b;
+    rtb_Add_j = rtb_Divide_p / rtb_Add_j;
 
     /* Chart: '<S158>/Chart' incorporates:
      *  DataStoreRead: '<Root>/Data Store Read'
@@ -6624,25 +6590,25 @@ void APP_FluxWeak_GEAR2_step(void)
       &APP_FluxWeak_GEAR2_DW.sf_Chart_c);
 
     /* Saturate: '<S157>/Saturation' */
-    if (rtb_Add_b > 1.0F) {
-      rtb_Add_b = 1.0F;
+    if (rtb_Add_j > 1.0F) {
+      rtb_Add_j = 1.0F;
     } else {
-      if (rtb_Add_b < 0.0F) {
-        rtb_Add_b = 0.0F;
+      if (rtb_Add_j < 0.0F) {
+        rtb_Add_j = 0.0F;
       }
     }
 
     /* End of Saturate: '<S157>/Saturation' */
 
     /* Sum: '<S150>/Add' */
-    rtb_Add_b += rtb_Divide_p;
+    rtb_Add_j += rtb_Divide_p;
 
     /* Saturate: '<S150>/Saturation' */
-    if (rtb_Add_b > 1.0F) {
-      rtb_Add_b = 1.0F;
+    if (rtb_Add_j > 1.0F) {
+      rtb_Add_j = 1.0F;
     } else {
-      if (rtb_Add_b < 0.0F) {
-        rtb_Add_b = 0.0F;
+      if (rtb_Add_j < 0.0F) {
+        rtb_Add_j = 0.0F;
       }
     }
 
@@ -6738,10 +6704,10 @@ void APP_FluxWeak_GEAR2_step(void)
 
       /* Entry 'ZreoSpd': '<S148>:6' */
       /* '<S148>:6:1' LimTP_I = DrvLimit; */
-      rtb_Divide_p = rtb_Add_b;
+      rtb_Divide_p = rtb_Add_j;
 
       /* '<S148>:6:1' LimTN_I = -DrvLimit; */
-      rtb_Add_b = -rtb_Add_b;
+      rtb_Add_j = -rtb_Add_j;
     } else {
       switch (APP_FluxWeak_GEAR2_DW.is_c20_APP_FluxWeak_GEAR2) {
        case APP_FluxWeak_GEAR2_IN_NegSpd:
@@ -6755,16 +6721,16 @@ void APP_FluxWeak_GEAR2_step(void)
 
           /* Entry 'ZreoSpd': '<S148>:6' */
           /* '<S148>:6:1' LimTP_I = DrvLimit; */
-          rtb_Divide_p = rtb_Add_b;
+          rtb_Divide_p = rtb_Add_j;
 
           /* '<S148>:6:1' LimTN_I = -DrvLimit; */
-          rtb_Add_b = -rtb_Add_b;
+          rtb_Add_j = -rtb_Add_j;
         } else {
           /* '<S148>:20:1' LimTP_I = ChgLimit; */
           rtb_Divide_p = rtb_Abs_l;
 
           /* '<S148>:20:1' LimTN_I = -DrvLimit; */
-          rtb_Add_b = -rtb_Add_b;
+          rtb_Add_j = -rtb_Add_j;
         }
         break;
 
@@ -6779,16 +6745,16 @@ void APP_FluxWeak_GEAR2_step(void)
 
           /* Entry 'ZreoSpd': '<S148>:6' */
           /* '<S148>:6:1' LimTP_I = DrvLimit; */
-          rtb_Divide_p = rtb_Add_b;
+          rtb_Divide_p = rtb_Add_j;
 
           /* '<S148>:6:1' LimTN_I = -DrvLimit; */
-          rtb_Add_b = -rtb_Add_b;
+          rtb_Add_j = -rtb_Add_j;
         } else {
           /* '<S148>:18:1' LimTP_I = DrvLimit; */
-          rtb_Divide_p = rtb_Add_b;
+          rtb_Divide_p = rtb_Add_j;
 
           /* '<S148>:18:1' LimTN_I = -ChgLimit; */
-          rtb_Add_b = -rtb_Abs_l;
+          rtb_Add_j = -rtb_Abs_l;
         }
         break;
 
@@ -6803,10 +6769,10 @@ void APP_FluxWeak_GEAR2_step(void)
 
           /* Entry 'PosSpd': '<S148>:18' */
           /* '<S148>:18:1' LimTP_I = DrvLimit; */
-          rtb_Divide_p = rtb_Add_b;
+          rtb_Divide_p = rtb_Add_j;
 
           /* '<S148>:18:1' LimTN_I = -ChgLimit; */
-          rtb_Add_b = -rtb_Abs_l;
+          rtb_Add_j = -rtb_Abs_l;
         } else {
           /* '<S148>:21:1' sf_internal_predicateOutput = ... */
           /* '<S148>:21:1' Spd < 0; */
@@ -6820,13 +6786,13 @@ void APP_FluxWeak_GEAR2_step(void)
             rtb_Divide_p = rtb_Abs_l;
 
             /* '<S148>:20:1' LimTN_I = -DrvLimit; */
-            rtb_Add_b = -rtb_Add_b;
+            rtb_Add_j = -rtb_Add_j;
           } else {
             /* '<S148>:6:1' LimTP_I = DrvLimit; */
-            rtb_Divide_p = rtb_Add_b;
+            rtb_Divide_p = rtb_Add_j;
 
             /* '<S148>:6:1' LimTN_I = -DrvLimit; */
-            rtb_Add_b = -rtb_Add_b;
+            rtb_Add_j = -rtb_Add_j;
           }
         }
         break;
@@ -6836,7 +6802,7 @@ void APP_FluxWeak_GEAR2_step(void)
     /* End of Chart: '<S144>/Chart1' */
 
     /* MinMax: '<S143>/MinMax2' */
-    rtb_InvCoef = fmaxf(fmaxf(rtb_InvCoef, rtb_Add_b),
+    rtb_InvCoef = fmaxf(fmaxf(rtb_InvCoef, rtb_Add_j),
                         APP_FluxWeak_GEAR2_DW.OVLimTN);
 
     /* MinMax: '<S143>/MinMax1' */
@@ -7865,7 +7831,7 @@ void APP_FluxWeak_GEAR2_step(void)
     AppFun.LimTP_I = rtb_Divide_p;
 
     /* DataStoreWrite: '<S144>/Data Store Write1' */
-    AppFun.LimTN_I = rtb_Add_b;
+    AppFun.LimTN_I = rtb_Add_j;
 
     /* Gain: '<S164>/Gain1' incorporates:
      *  Abs: '<S164>/Abs'

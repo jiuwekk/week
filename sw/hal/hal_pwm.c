@@ -425,7 +425,7 @@ void HAL_setupPwms(HAL_Handle handle,const uint_least16_t numPwmTicksPerIsrTick)
       // setup the Time-Base Control Register (TBCTL)
       PWM_setCounterMode(obj->pwmHandle[cnt],PWM_CounterMode_UpDown);
       PWM_disableCounterLoad(obj->pwmHandle[cnt]);
-      PWM_setPeriodLoad(obj->pwmHandle[cnt],PWM_PeriodLoad_Immediate);
+      PWM_setPeriodLoad(obj->pwmHandle[cnt],PWM_PeriodLoad_Shadow);
       PWM_setSyncMode(obj->pwmHandle[cnt],PWM_SyncMode_EPWMxSYNC);
       PWM_setHighSpeedClkDiv(obj->pwmHandle[cnt],PWM_HspClkDiv_by_1);
       PWM_setClkDiv(obj->pwmHandle[cnt],PWM_ClkDiv_by_1);

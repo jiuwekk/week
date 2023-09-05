@@ -35,7 +35,7 @@ extern "C" {
 #define PEAKPOWER           0          //!< 输出机械功率限制 ，0.1Kw,0=不限制
 #define PEAKTORQUE          0          //!< 输出扭矩限制，  NM,0=不限制
 
-#define PWM_LOW_FREQ        6500       //!< 低频，2K
+#define PWM_LOW_FREQ        2000       //!< 低频，2K
 #define PWM_HIGH_FREQ       6500       //!< 高频，5k 高低相等不变频
 #define PWM_LOW_FREQ_HZ     2          //!< 低频，电机Hz
 #define PWM_HIGH_FREQ_HZ    10         //!< 高频，电机Hz 高低相等不变频

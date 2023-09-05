@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'APP_FluxWeak_GEAR2'.
  *
- * Model version                  : 2.11
+ * Model version                  : 2.13
  * Simulink Coder version         : 8.13 (R2017b) 24-Jul-2017
- * C/C++ source code generated on : Fri Aug 18 09:09:08 2023
+ * C/C++ source code generated on : Tue Aug 29 15:47:44 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Texas Instruments->C2000

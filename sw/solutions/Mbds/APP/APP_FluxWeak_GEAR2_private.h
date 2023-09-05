@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'APP_FluxWeak_GEAR2'.
  *
- * Model version                  : 2.11
+ * Model version                  : 2.13
  * Simulink Coder version         : 8.13 (R2017b) 24-Jul-2017
- * C/C++ source code generated on : Fri Aug 18 09:09:08 2023
+ * C/C++ source code generated on : Tue Aug 29 15:47:44 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Texas Instruments->C2000
@@ -81,8 +81,8 @@ extern void APP_FluxW_FunctionCallSubsystem(real32_T rtu_SlopeLoopOut, uint16_T
   rtu_Gear, real32_T *rty_SlopeTime, DW_FunctionCallSubsystem_APP__T *localDW);
 extern void APP_Flu_FunctionCallSubsystem_o(real32_T rtu_TorReq, real32_T
   rtu_Spd_loop, real32_T *rty_Out1);
-extern void APP_Flux_FunctionCallSubsystem2(real32_T rtu_TorReq, real32_T
-  *rty_Out1, DW_FunctionCallSubsystem2_APP_T *localDW);
+extern void APP_Flux_FunctionCallSubsystem2(real32_T *rty_Out1,
+  DW_FunctionCallSubsystem2_APP_T *localDW);
 extern void APP_Flux_FunctionCallSubsystem1(real32_T rtu_TorReq, real32_T
   rtu_Spd_loop, real32_T *rty_Out1);
 extern void APP_FluxWeak_GEAR2_Initial_e(const real32_T *rtu_out);
