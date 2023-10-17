@@ -3,5 +3,5 @@
 <projectOptions>
 	<deviceFamily value="C2000"/>
 	<isTargetManual value="true"/>
-	<origin value="D:/Program Files/ccs1031/kll/kll/M_MOT_MBD_290_1500Nm"/>
+	<origin value="D:/Program Files/CCSGIT/M_MOT_MBD_290_1500Nm_keshi"/>
 </projectOptions>
