@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'APP_FluxWeak_GEAR2'.
  *
- * Model version                  : 2.13
+ * Model version                  : 2.16
  * Simulink Coder version         : 8.13 (R2017b) 24-Jul-2017
- * C/C++ source code generated on : Tue Aug 29 15:47:44 2023
+ * C/C++ source code generated on : Fri Oct 27 14:30:17 2023
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: Texas Instruments->C2000
@@ -962,15 +962,6 @@ void APP_FluxWeak_GEAR2_Initial_e(const real32_T *rtu_out)
 /* System initialize for function-call system: '<S56>/Slope' */
 void APP_FluxWeak_GEAR2_Slope_Init(DW_Slope_APP_FluxWeak_GEAR2_T *localDW)
 {
-  /* SystemInitialize for Atomic SubSystem: '<S119>/lpf' */
-  LPF_App_Init(&localDW->lpf);
-
-  /* End of SystemInitialize for SubSystem: '<S119>/lpf' */
-
-  /* SystemInitialize for Atomic SubSystem: '<S118>/lpf' */
-  LPF_App_Init(&localDW->lpf_a);
-
-  /* End of SystemInitialize for SubSystem: '<S118>/lpf' */
   localDW->is_move = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
   localDW->is_D = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
   localDW->is_R = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
@@ -983,6 +974,16 @@ void APP_FluxWeak_GEAR2_Slope_Init(DW_Slope_APP_FluxWeak_GEAR2_T *localDW)
    *  SubSystem: '<S112>/Function-Call Subsystem'
    */
   APP__FunctionCallSubsystem_Init(&localDW->FunctionCallSubsystem);
+
+  /* SystemInitialize for Atomic SubSystem: '<S119>/lpf' */
+  LPF_App_Init(&localDW->lpf);
+
+  /* End of SystemInitialize for SubSystem: '<S119>/lpf' */
+
+  /* SystemInitialize for Atomic SubSystem: '<S118>/lpf' */
+  LPF_App_Init(&localDW->lpf_a);
+
+  /* End of SystemInitialize for SubSystem: '<S118>/lpf' */
 
   /* SystemInitialize for Chart: '<S114>/Chart' */
   localDW->is_Gear = APP_FluxWeak_IN_NO_ACTIVE_CHILD;
@@ -1033,66 +1034,6 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
   real32_T rtb_DiscreteTimeIntegrator1_f;
   real32_T rtb_Gain_g;
   uint16_T GearState_prev;
-
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1 = 0U;
-
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_a = 0.0F;
-
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_j = 0.0F;
-
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_g = 0.0F;
-
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_l = 0U;
-
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_i = 0U;
-
-  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
-  *rty_Out1_c = 0.0F;
-
-  /* Outputs for Atomic SubSystem: '<S119>/lpf' */
-
-  /* Constant: '<S119>/Constant' incorporates:
-   *  Constant: '<S119>/Constant1'
-   */
-  LPF_App(rtu_Data, 0.002F, 1000.0F / PMSM_Param.DamperTimer,
-          &rtb_DiscreteTimeIntegrator1_f, &localDW->lpf);
-
-  /* End of Outputs for SubSystem: '<S119>/lpf' */
-
-  /* Gain: '<S117>/Gain' incorporates:
-   *  Sum: '<S117>/Sum'
-   */
-  rtb_Gain_g = (rtb_DiscreteTimeIntegrator1_f - rtu_Data) * 0.0F;
-
-  /* Outputs for Atomic SubSystem: '<S118>/lpf' */
-
-  /* Constant: '<S118>/Constant' incorporates:
-   *  Constant: '<S118>/Constant1'
-   */
-  LPF_App(rtu_Data_i, 0.002F, 33.3333321F, &rtb_DiscreteTimeIntegrator1_f,
-          &localDW->lpf_a);
-
-  /* End of Outputs for SubSystem: '<S118>/lpf' */
-
-  /* Sum: '<S113>/Add' */
-  rtb_Gain_g += rtb_DiscreteTimeIntegrator1_f;
-
-  /* Saturate: '<S113>/Saturation' */
-  if (rtb_Gain_g > 1.0F) {
-    rtb_Gain_g = 1.0F;
-  } else {
-    if (rtb_Gain_g < -1.0F) {
-      rtb_Gain_g = -1.0F;
-    }
-  }
-
-  /* End of Saturate: '<S113>/Saturation' */
 
   /* Chart: '<S72>/Chart' incorporates:
    *  UnitDelay: '<S72>/Unit Delay'
@@ -1365,6 +1306,48 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
   }
 
   /* End of Chart: '<S72>/Chart' */
+
+  /* DataStoreWrite: '<S72>/Data Store Write' */
+  AppFun.LimTP_I = localDW->SpdReqPu_out;
+
+  /* Outputs for Atomic SubSystem: '<S119>/lpf' */
+
+  /* Constant: '<S119>/Constant' incorporates:
+   *  Constant: '<S119>/Constant1'
+   */
+  LPF_App(rtu_Data, 0.002F, 1000.0F / PMSM_Param.DamperTimer,
+          &rtb_DiscreteTimeIntegrator1_f, &localDW->lpf);
+
+  /* End of Outputs for SubSystem: '<S119>/lpf' */
+
+  /* Gain: '<S117>/Gain' incorporates:
+   *  Sum: '<S117>/Sum'
+   */
+  rtb_Gain_g = (rtb_DiscreteTimeIntegrator1_f - rtu_Data) * 0.0F;
+
+  /* Outputs for Atomic SubSystem: '<S118>/lpf' */
+
+  /* Constant: '<S118>/Constant' incorporates:
+   *  Constant: '<S118>/Constant1'
+   */
+  LPF_App(rtu_Data_i, 0.002F, 33.3333321F, &rtb_DiscreteTimeIntegrator1_f,
+          &localDW->lpf_a);
+
+  /* End of Outputs for SubSystem: '<S118>/lpf' */
+
+  /* Sum: '<S113>/Add' */
+  rtb_Gain_g += rtb_DiscreteTimeIntegrator1_f;
+
+  /* Saturate: '<S113>/Saturation' */
+  if (rtb_Gain_g > 1.0F) {
+    rtb_Gain_g = 1.0F;
+  } else {
+    if (rtb_Gain_g < -1.0F) {
+      rtb_Gain_g = -1.0F;
+    }
+  }
+
+  /* End of Saturate: '<S113>/Saturation' */
 
   /* Outputs for Atomic SubSystem: '<S115>/PI' */
 
@@ -1684,6 +1667,30 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
   }
 
   /* End of Switch: '<S72>/Switch' */
+
+  /* DataStoreWrite: '<S72>/Data Store Write1' */
+  AppFun.LimTN_I = rtb_DiscreteTimeIntegrator1_f;
+
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  *rty_Out1 = 0U;
+
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  *rty_Out1_a = 0.0F;
+
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  *rty_Out1_j = 0.0F;
+
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  *rty_Out1_g = 0.0F;
+
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  *rty_Out1_l = 0U;
+
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  *rty_Out1_i = 0U;
+
+  /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
+  *rty_Out1_c = 0.0F;
 
   /* SignalConversion: '<S72>/BusConversion_InsertedFor_Out1_at_inport_0' */
   *rty_Out1_o = rtb_DiscreteTimeIntegrator1_f;
@@ -4966,7 +4973,7 @@ static void APP_Flux_exit_internal_sys_mode(const real32_T
 
     /* Outputs for Function Call SubSystem: '<S56>/Initial_D' */
 
-    /* '<S65>:3:2' Initial_D  */
+    /* '<S65>:3:1' Initial_D  */
     /* Event: '<S65>:85' */
     APP_FluxWeak_GEAR2_Initial_D();
 
@@ -6676,14 +6683,14 @@ void APP_FluxWeak_GEAR2_step(void)
     /* End of Saturate: '<S151>/Saturation' */
 
     /* Sum: '<S149>/Add' */
-    rtb_Abs_l = rtb_Divide_p + rtb_Divide_o;
+    rtb_Divide_p += rtb_Divide_o;
 
     /* Saturate: '<S149>/Saturation' */
-    if (rtb_Abs_l > 1.0F) {
-      rtb_Abs_l = 1.0F;
+    if (rtb_Divide_p > 1.0F) {
+      rtb_Divide_p = 1.0F;
     } else {
-      if (rtb_Abs_l < 0.0F) {
-        rtb_Abs_l = 0.0F;
+      if (rtb_Divide_p < 0.0F) {
+        rtb_Divide_p = 0.0F;
       }
     }
 
@@ -6704,7 +6711,7 @@ void APP_FluxWeak_GEAR2_step(void)
 
       /* Entry 'ZreoSpd': '<S148>:6' */
       /* '<S148>:6:1' LimTP_I = DrvLimit; */
-      rtb_Divide_p = rtb_Add_j;
+      rtb_Switch_b = rtb_Add_j;
 
       /* '<S148>:6:1' LimTN_I = -DrvLimit; */
       rtb_Add_j = -rtb_Add_j;
@@ -6721,13 +6728,13 @@ void APP_FluxWeak_GEAR2_step(void)
 
           /* Entry 'ZreoSpd': '<S148>:6' */
           /* '<S148>:6:1' LimTP_I = DrvLimit; */
-          rtb_Divide_p = rtb_Add_j;
+          rtb_Switch_b = rtb_Add_j;
 
           /* '<S148>:6:1' LimTN_I = -DrvLimit; */
           rtb_Add_j = -rtb_Add_j;
         } else {
           /* '<S148>:20:1' LimTP_I = ChgLimit; */
-          rtb_Divide_p = rtb_Abs_l;
+          rtb_Switch_b = rtb_Divide_p;
 
           /* '<S148>:20:1' LimTN_I = -DrvLimit; */
           rtb_Add_j = -rtb_Add_j;
@@ -6745,16 +6752,16 @@ void APP_FluxWeak_GEAR2_step(void)
 
           /* Entry 'ZreoSpd': '<S148>:6' */
           /* '<S148>:6:1' LimTP_I = DrvLimit; */
-          rtb_Divide_p = rtb_Add_j;
+          rtb_Switch_b = rtb_Add_j;
 
           /* '<S148>:6:1' LimTN_I = -DrvLimit; */
           rtb_Add_j = -rtb_Add_j;
         } else {
           /* '<S148>:18:1' LimTP_I = DrvLimit; */
-          rtb_Divide_p = rtb_Add_j;
+          rtb_Switch_b = rtb_Add_j;
 
           /* '<S148>:18:1' LimTN_I = -ChgLimit; */
-          rtb_Add_j = -rtb_Abs_l;
+          rtb_Add_j = -rtb_Divide_p;
         }
         break;
 
@@ -6769,10 +6776,10 @@ void APP_FluxWeak_GEAR2_step(void)
 
           /* Entry 'PosSpd': '<S148>:18' */
           /* '<S148>:18:1' LimTP_I = DrvLimit; */
-          rtb_Divide_p = rtb_Add_j;
+          rtb_Switch_b = rtb_Add_j;
 
           /* '<S148>:18:1' LimTN_I = -ChgLimit; */
-          rtb_Add_j = -rtb_Abs_l;
+          rtb_Add_j = -rtb_Divide_p;
         } else {
           /* '<S148>:21:1' sf_internal_predicateOutput = ... */
           /* '<S148>:21:1' Spd < 0; */
@@ -6783,13 +6790,13 @@ void APP_FluxWeak_GEAR2_step(void)
 
             /* Entry 'NegSpd': '<S148>:20' */
             /* '<S148>:20:1' LimTP_I = ChgLimit; */
-            rtb_Divide_p = rtb_Abs_l;
+            rtb_Switch_b = rtb_Divide_p;
 
             /* '<S148>:20:1' LimTN_I = -DrvLimit; */
             rtb_Add_j = -rtb_Add_j;
           } else {
             /* '<S148>:6:1' LimTP_I = DrvLimit; */
-            rtb_Divide_p = rtb_Add_j;
+            rtb_Switch_b = rtb_Add_j;
 
             /* '<S148>:6:1' LimTN_I = -DrvLimit; */
             rtb_Add_j = -rtb_Add_j;
@@ -6806,7 +6813,7 @@ void APP_FluxWeak_GEAR2_step(void)
                         APP_FluxWeak_GEAR2_DW.OVLimTN);
 
     /* MinMax: '<S143>/MinMax1' */
-    rtb_Abs_l = fminf(fminf(APP_FluxWeak_GEAR2_DW.OVLimTP, rtb_Divide_p),
+    rtb_Add_j = fminf(fminf(APP_FluxWeak_GEAR2_DW.OVLimTP, rtb_Switch_b),
                       APP_FluxWeak_GEAR2_DW.LimtCoef);
 
     /* Chart: '<S56>/Chart' incorporates:
@@ -7136,8 +7143,8 @@ void APP_FluxWeak_GEAR2_step(void)
       /* During 'sys_mode': '<S65>:7' */
       /* '<S65>:7:1' IntLim; */
       /* Event: '<S65>:78' */
-      if (APP_FluxWeak_GEAR2_DW.Slope.PI.I_state > rtb_Abs_l) {
-        rtb_Switch_b = rtb_Abs_l;
+      if (APP_FluxWeak_GEAR2_DW.Slope.PI.I_state > rtb_Add_j) {
+        rtb_Switch_b = rtb_Add_j;
       } else if (APP_FluxWeak_GEAR2_DW.Slope.PI.I_state < rtb_InvCoef) {
         /* Switch: '<S108>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
@@ -7229,8 +7236,8 @@ void APP_FluxWeak_GEAR2_step(void)
        *  Switch: '<S107>/Switch'
        */
       /* Transition: '<S103>:13' */
-      if (APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state > rtb_Abs_l) {
-        rtb_Switch_b = rtb_Abs_l;
+      if (APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state > rtb_Add_j) {
+        rtb_Switch_b = rtb_Add_j;
       } else if (APP_FluxWeak_GEAR2_DW.Spd_g.Spd_state < rtb_InvCoef) {
         /* Switch: '<S107>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
@@ -7275,9 +7282,9 @@ void APP_FluxWeak_GEAR2_step(void)
        *  StateReader: '<S70>/State Reader3'
        *  Switch: '<S106>/Switch'
        */
-      if (APP_FluxWeak_GEAR2_DW.Sync.PI.I_state > rtb_Abs_l) {
+      if (APP_FluxWeak_GEAR2_DW.Sync.PI.I_state > rtb_Add_j) {
         /* StateWriter: '<S70>/State Writer3' */
-        APP_FluxWeak_GEAR2_DW.Sync.PI.I_state = rtb_Abs_l;
+        APP_FluxWeak_GEAR2_DW.Sync.PI.I_state = rtb_Add_j;
       } else {
         if (APP_FluxWeak_GEAR2_DW.Sync.PI.I_state < rtb_InvCoef) {
           /* Switch: '<S106>/Switch' incorporates:
@@ -7295,8 +7302,8 @@ void APP_FluxWeak_GEAR2_step(void)
        *  StateReader: '<S70>/State Reader4'
        *  Switch: '<S105>/Switch'
        */
-      if (APP_FluxWeak_GEAR2_DW.Starter.PI.I_state > rtb_Abs_l) {
-        rtb_Switch_b = rtb_Abs_l;
+      if (APP_FluxWeak_GEAR2_DW.Starter.PI.I_state > rtb_Add_j) {
+        rtb_Switch_b = rtb_Add_j;
       } else if (APP_FluxWeak_GEAR2_DW.Starter.PI.I_state < rtb_InvCoef) {
         /* Switch: '<S105>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
@@ -7326,9 +7333,9 @@ void APP_FluxWeak_GEAR2_step(void)
        *  StateReader: '<S70>/State Reader5'
        *  Switch: '<S104>/Switch'
        */
-      if (APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE > rtb_Abs_l) {
+      if (APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE > rtb_Add_j) {
         /* StateWriter: '<S70>/State Writer5' */
-        APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE = rtb_Abs_l;
+        APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE = rtb_Add_j;
       } else {
         if (APP_FluxWeak_GEAR2_DW.Torque.lpf.LPF_STATE < rtb_InvCoef) {
           /* Switch: '<S104>/Switch' incorporates:
@@ -7346,8 +7353,8 @@ void APP_FluxWeak_GEAR2_step(void)
        *  StateReader: '<S70>/State Reader'
        *  Switch: '<S109>/Switch'
        */
-      if (APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state > rtb_Abs_l) {
-        rtb_Switch_b = rtb_Abs_l;
+      if (APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state > rtb_Add_j) {
+        rtb_Switch_b = rtb_Add_j;
       } else if (APP_FluxWeak_GEAR2_DW.Genrate.PI.I_state < rtb_InvCoef) {
         /* Switch: '<S109>/Switch' */
         rtb_Switch_b = rtb_InvCoef;
@@ -7816,8 +7823,8 @@ void APP_FluxWeak_GEAR2_step(void)
      *  RelationalOperator: '<S110>/UpperRelop'
      *  Switch: '<S110>/Switch'
      */
-    if (rtb_Switch_b > rtb_Abs_l) {
-      rtb_Switch_b = rtb_Abs_l;
+    if (rtb_Switch_b > rtb_Add_j) {
+      rtb_Switch_b = rtb_Add_j;
     } else {
       if (rtb_Switch_b < rtb_InvCoef) {
         /* Switch: '<S110>/Switch' */
@@ -7826,12 +7833,6 @@ void APP_FluxWeak_GEAR2_step(void)
     }
 
     /* End of Switch: '<S110>/Switch2' */
-
-    /* DataStoreWrite: '<S144>/Data Store Write' */
-    AppFun.LimTP_I = rtb_Divide_p;
-
-    /* DataStoreWrite: '<S144>/Data Store Write1' */
-    AppFun.LimTN_I = rtb_Add_j;
 
     /* Gain: '<S164>/Gain1' incorporates:
      *  Abs: '<S164>/Abs'

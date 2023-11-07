@@ -90,7 +90,7 @@ extern "C" {
 #define KP_SPDM2            1000       //!< 速度模式2Kp参数*0.001
 #define KI_SPDM2            100        //!< 速度模式2Ki参数*0.0001
 
-#define PT100_1             1          //!< PT100_1 0==>没有
+#define PT100_1             0          //!< PT100_1 0==>没有
 #define PT100_2             1          //!< PT100_2 0==>没有
 
 #define TABNSTART           800        //!< 电机特性表中转速起始值rpm

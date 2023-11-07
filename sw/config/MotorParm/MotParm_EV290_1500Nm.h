@@ -54,8 +54,8 @@ extern "C" {
 #define UQMAX               1.4        //!< Q轴电压最大值
 
 #define DCOVERCUR           5000       //!< 母线过流       0.1A
-#define ACOVERCUR1          6270       //!< 相线过流1 0.1A(峰值)
-#define ACOVERCUR2          7320       //!< 相线过流2 0.1A(峰值)
+#define ACOVERCUR1          5600       //!< 相线过流1 0.1A(峰值)
+#define ACOVERCUR2          5800       //!< 相线过流2 0.1A(峰值)
 #define DCOVERVOLT3         7800       //!< 电压过压3 0.1V
 #define DCOVERVOLT2         7500       //!< 电压过压2 0.1V
 #define DCOVERVOLT1         7200       //!< 电压过压1 0.1V

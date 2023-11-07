@@ -169,7 +169,7 @@ void ParmRefresh(void)                                                      //”√
             PMSM_Param.OC1 = (float)UserParm.Var.AcOverCur1 / UserParm.Var.CurBase;
             PMSM_Param.OC2 = (float)UserParm.Var.AcOverCur2 / UserParm.Var.CurBase;
 
-            PMSM_Param.DamperTimer = (float)UserParm.Var.DamperTimer * 0.001;
+            PMSM_Param.DamperTimer = (float)UserParm.Var.DamperTimer * 0.1;
             PMSM_Param.DamperGain = (float)UserParm.Var.DamperGain * 0.00001;
             PMSM_Param.FLStartAng = (float)UserParm.Var.FLStartAng;
             break;

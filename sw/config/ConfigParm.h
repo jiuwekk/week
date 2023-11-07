@@ -251,7 +251,7 @@ extern "C" {
 {0,     PWM_LOW_FREQ,    50000  }, /* 188 FreqLow;            */\
 {0,     PWM_HIGH_FREQ,   50000  }, /* 189 FreqUp;             */\
 {0,     1200,            10000  }, /* 190 ASCSpd;             */\
-{0,     100,             1000   }, /* 191 DamperTimer;        */\
+{0,     1000,             1000   }, /* 191 DamperTimer;        */\
 {0,     100,             10000  }, /* 192 DamperGain;         */\
 {0,     0,             10000    }, /* 193 CalibMTPATheta;     */\
 {0,     0,             100    },   /* 194 FLStartAng;         */\

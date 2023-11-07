@@ -210,10 +210,10 @@ void CanOrderUpdate(void)
     else if( VCU_Comm.ID5.Bit.MotModeReq == 4 )
     {
         PMSM.Intf.Cmd.MotTqReq   = (int16_t)VCU_Comm.ID5.Bit.Parm1TqRef * (1.0/4096);
-        PMSM.Intf.Cmd.GearPos    = (int16_t)VCU_Comm.ID5.Bit.GearState;
+        PMSM.Intf.Cmd.GearPos    = (int16_t)VCU_Comm.ID5.Bit.GearState;// 1 ;//
         PMSM.Intf.Cmd.MotSpdLim = (int16_t)VCU_Comm.ID5.Bit.Parm3SpdLmt;
         PMSM.Intf.Cmd.MotSpdHold = 0;
-        PMSM.Intf.Cmd.MotSpdReq = (int16_t)VCU_Comm.ID5.Bit.Parm3SpdLmt;
+        PMSM.Intf.Cmd.MotSpdReq =  0;//
     }
     else
     {

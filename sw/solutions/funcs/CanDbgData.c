@@ -54,8 +54,8 @@ void DbgDataTx(void)
                 if(!ECanaBoxTxBsy(M1_CAN_HANDLE,0x0B))
                 {
                     DbgMsg[2].Data.D16.MD01  =(int16_t)(AppFun.Us * 1000.0);//
-                    DbgMsg[2].Data.D16.MD23  =(int16_t)(AlgoFun.PI_Id_Ui * 1000.0);//
-                    DbgMsg[2].Data.D16.MD45  =(int16_t)(AlgoFun.PI_Iq_Ui * 1000.0);//
+                    DbgMsg[2].Data.D16.MD23  =(int16_t)(AppFun.LimTP_I* 1000.0);//(AlgoFun.PI_Id_Ui );//
+                    DbgMsg[2].Data.D16.MD45  =(int16_t)(AppFun.LimTN_I* 1000.0);//(AlgoFun.PI_Iq_Ui * 1000.0);//
                     DbgMsg[2].Data.D16.MD67  =(int16_t)(AppFun.Tqreq * 1000.0);//
                     ECanaBoxTxMsg(M1_CAN_HANDLE,&DbgMsg[2],0x0B);
                     MsgCounter0++;
@@ -138,8 +138,8 @@ void DbgDataTx(void)
                 {
                     DbgMsg[9].Data.D16.MD01  = (int16_t)AppFun.StudyStep; //0;
                     DbgMsg[9].Data.D16.MD23  = (int16_t)AppFun.StudyResult; //BlcdeAAACount ;AppFun.StudyResult
-                    DbgMsg[9].Data.D16.MD45  = (int16_t)(HAL_SW1_IN(halHandle));//
-                    DbgMsg[9].Data.D16.MD67  = (int16_t)(PMSM.FauErr.M3_FAULT_OBJ.Rsvd6_6);//M1_VOLT_CAP;//
+                    DbgMsg[9].Data.D16.MD45  = (int16_t)(0);//
+                    DbgMsg[9].Data.D16.MD67  = (int16_t)(PwmsParm.Prd);//M1_VOLT_CAP;//
                     ECanaBoxTxMsg(M1_CAN_HANDLE,&DbgMsg[9],0x0A);
                     MsgCounter1++;
 //                    if ( PMSM.Intf.Cmd.DCRelayState && PMSM.Intf.Cmd.MotGateReq )
