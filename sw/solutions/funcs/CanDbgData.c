@@ -131,7 +131,7 @@ void DbgDataTx(void)
         switch(MsgCounter1)
         {
 //        static uint16_t count = 0 ;
-//        static uint16_t enable = 0 ;
+        static uint16_t enable = 0 ;
             case 0:
             {
                 if(!ECanaBoxTxBsy(M1_CAN_HANDLE,0x0A))
@@ -139,7 +139,7 @@ void DbgDataTx(void)
                     DbgMsg[9].Data.D16.MD01  = (int16_t)AppFun.StudyStep; //0;
                     DbgMsg[9].Data.D16.MD23  = (int16_t)AppFun.StudyResult; //BlcdeAAACount ;AppFun.StudyResult
                     DbgMsg[9].Data.D16.MD45  = (int16_t)(0);//
-                    DbgMsg[9].Data.D16.MD67  = (int16_t)(PwmsParm.Prd);//M1_VOLT_CAP;//
+                    DbgMsg[9].Data.D16.MD67  = (int16_t)(enable);//M1_VOLT_CAP;//
                     ECanaBoxTxMsg(M1_CAN_HANDLE,&DbgMsg[9],0x0A);
                     MsgCounter1++;
 //                    if ( PMSM.Intf.Cmd.DCRelayState && PMSM.Intf.Cmd.MotGateReq )
@@ -150,6 +150,13 @@ void DbgDataTx(void)
 //                    {
 //                        count++;
 //                    }
+                if ( PMSM.Intf.Cmd.DCRelayState && PMSM.Intf.Cmd.MotGateReq && (PMSM_Input.AppComm.ModeReq==4) &&(VCU_Comm.ID1.Bit.MotSpdReal< 20))
+                {
+                    enable = 1;
+                }else
+                {
+                    enable = 0;
+                }
 
                 }
             }
