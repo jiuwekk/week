@@ -79,10 +79,10 @@ void DbgDataTx(void)
             {
                 if(!ECanaBoxTxBsy(M1_CAN_HANDLE,0x0D))
                 {
-                    DbgMsg[4].Data.D16.MD01  =(int16_t)(PMSM_Input.AgoSample.CurUPu*100 );//(AppFun.LimTP_I*1000);//
-                    DbgMsg[4].Data.D16.MD23  =(int16_t)(PMSM_Input.AgoSample.CurVPu*100 );//(AppFun.LimTN_I*1000);//
-                    DbgMsg[4].Data.D16.MD45 = (int16_t)(PMSM_Input.AgoSample.CurWPu*100 );//(PMSM_Param.FW1Ki);//
-                    DbgMsg[4].Data.D16.MD67 = (int16_t)(PMSM_Param.FW1Kp);//
+                    DbgMsg[4].Data.D16.MD01  =(int16_t)(PMSM_Input.AgoSample.CurUPu*UserParm.Var.CurBase );//(AppFun.LimTP_I*1000);//
+                    DbgMsg[4].Data.D16.MD23  =(int16_t)(PMSM_Input.AgoSample.CurVPu*UserParm.Var.CurBase );//(AppFun.LimTN_I*1000);//
+                    DbgMsg[4].Data.D16.MD45 = (int16_t)(PMSM_Input.AgoSample.CurWPu*UserParm.Var.CurBase );//(PMSM_Param.FW1Ki);//
+                    DbgMsg[4].Data.D16.MD67 = (int16_t)(PMSM_Param.SlopeMaxT*100);//
                     ECanaBoxTxMsg(M1_CAN_HANDLE,&DbgMsg[4],0x0D);
                     MsgCounter0++;
                 }

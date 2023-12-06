@@ -1373,8 +1373,8 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
     if (localDW->UnitDelay_DSTATE > PMSM_Param.SlopeMaxT) {
       localDW->UnitDelay_DSTATE = PMSM_Param.SlopeMaxT;
     } else {
-      if (localDW->UnitDelay_DSTATE < 0.0F) {
-        localDW->UnitDelay_DSTATE = 0.0F;
+      if (localDW->UnitDelay_DSTATE < -1.0F) {
+        localDW->UnitDelay_DSTATE = -1.0F;
       }
     }
 
@@ -1383,8 +1383,8 @@ void APP_FluxWeak_GEAR2_Slope(real32_T rtu_Data, real32_T rtu_Data_a, uint16_T
 
    default:
     /* Saturate: '<S115>/Saturation2' */
-    if (localDW->UnitDelay_DSTATE > 0.0F) {
-      localDW->UnitDelay_DSTATE = 0.0F;
+    if (localDW->UnitDelay_DSTATE > 1.0F) {
+      localDW->UnitDelay_DSTATE = 1.0F;
     } else {
       if (localDW->UnitDelay_DSTATE < -PMSM_Param.SlopeMaxT) {
         localDW->UnitDelay_DSTATE = -PMSM_Param.SlopeMaxT;

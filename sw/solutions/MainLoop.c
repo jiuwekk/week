@@ -79,8 +79,8 @@ void ParmRefresh(void)                                                      //用
             PMSM_Param.VoltNorm = (float)UserParm.Var.VoltBase * 0.1;
             PMSM_Param.MaxSpd  = UserParm.Var.OverSpd1;
 
-            PMSM_Param.FW1_ref = 1;//200/310;
-            PMSM_Param.FW2_ref = 1;//200/310;
+            PMSM_Param.FW1_ref = 0.98;//200/310;
+            PMSM_Param.FW2_ref = 0.98;//200/310;
 
 
             PMSM_Param.SpdKp = (float)UserParm.Var.Kp_SpdM0*0.01;
@@ -97,10 +97,20 @@ void ParmRefresh(void)                                                      //用
 
             PMSM_Param.FW2Kp = (float)UserParm.Var.Kp_FW2*0.01; // 角度弱磁环
             PMSM_Param.FW2Ki = (float)UserParm.Var.Ki_FW2*0.01;
-
-            PMSM_Param.FW1Kp = (float)UserParm.Var.Kp_FW1*0.01; // id弱磁环
-            PMSM_Param.FW1Ki = (float)UserParm.Var.Ki_FW1*0.01;
-
+            if ((PMSM.Var.Nm > 0)&&(PMSM.Var.Nm <= 1500))
+            {
+                PMSM_Param.FW1Kp = (float)UserParm.Var.Kp_FW1*0.001; // id弱磁环
+                PMSM_Param.FW1Ki = (float)UserParm.Var.Ki_FW1*0.01;
+            }
+            else if(PMSM.Var.Nm <= 2000)
+            {
+                PMSM_Param.FW1Kp = (float)UserParm.Var.Kp_FW1*0.005; // id弱磁环
+                PMSM_Param.FW1Ki = (float)UserParm.Var.Ki_FW1*0.01;
+            }else
+            {
+                PMSM_Param.FW1Kp = (float)UserParm.Var.Kp_FW1*0.01; // id弱磁环
+                PMSM_Param.FW1Ki = (float)UserParm.Var.Ki_FW1*0.01;
+            }
             PMSM_Param.LimIKp = (float)UserParm.Var.Kp_IdcLmt*0.001; // IDC限制
             PMSM_Param.LimIKi = (float)UserParm.Var.Ki_IdcLmt*0.00001;
 

@@ -271,7 +271,7 @@ void NewMonSoft_ReadAll(MONSOFT_OBJ* M)
         VersionStr[29] = 0;
 #endif
         static uint16_t i = 0;
-        if(i < 5)
+        if(i < 10)
         {
             M->Msg.Data.D16.MD01 = VersionStr[6*i]  + (VersionStr[6*i+1] << 8);
             M->Msg.Data.D16.MD23 = VersionStr[6*i+2] + (VersionStr[6*i+3] << 8);
