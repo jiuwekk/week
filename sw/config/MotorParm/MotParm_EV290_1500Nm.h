@@ -21,11 +21,11 @@ extern "C" {
 #define BEMF                3322       //!< 1000rpm反电势对应的电压 *0.1V
 #define MOTPOLEPAIRS        5          //!< 电机极对数#
 #define ENCODERPOLEPAIRS    5          //!< 旋变极对数#
-#define SWAPENCODERDIR      0          //!< 旋变方向换向
+#define SWAPENCODERDIR      1          //!< 旋变方向换向
 #if EVCBD_ID == 0x05 || EVCBD_ID == 0x06
 #define SWAPPHASE           0          //!< 电机相线换向
 #else
-#define SWAPPHASE           0          //!< 电机相线换向
+#define SWAPPHASE           1          //!< 电机相线换向
 #endif
 //y = 0.7858x3 - 2.0287x2 + 1.866x + 0.1879
 #define MTPA_K3             0.7858     //!< MTPA拟合3次方系数#
@@ -35,15 +35,15 @@ extern "C" {
 #define PEAKPOWER           0          //!< 输出机械功率限制 ，0.1Kw,0=不限制
 #define PEAKTORQUE          0          //!< 输出扭矩限制，  NM,0=不限制
 
-#define PWM_LOW_FREQ        2000       //!< 低频，2K
-#define PWM_HIGH_FREQ       6500       //!< 高频，5k 高低相等不变频
+#define PWM_LOW_FREQ        2100       //!< 低频，2K
+#define PWM_HIGH_FREQ       6900       //!< 高频，5k 高低相等不变频
 #define PWM_LOW_FREQ_HZ     2          //!< 低频，电机Hz
 #define PWM_HIGH_FREQ_HZ    10         //!< 高频，电机Hz 高低相等不变频
 
-#define KP_ID               2700       //!< D轴Kp参数*0.001
-#define KI_ID               1000        //!< D轴Ki参数*0.0001
-#define KP_IQ               2700       //!< Q轴Kp参数*0.001
-#define KI_IQ               1000        //!< Q轴Ki参数*0.0001
+#define KP_ID               1750       //!< D轴Kp参数*0.001
+#define KI_ID               1500        //!< D轴Ki参数*0.0001
+#define KP_IQ               2150       //!< Q轴Kp参数*0.001
+#define KI_IQ               1500        //!< Q轴Ki参数*0.0001
 #define KP_FW1              100        //!< IdWeak_Kp参数*0.01
 #define KI_FW1              3000         //!< IdWeak_Ki参数*0.01
 #define KP_FW2              62         //!< AngleWeak_Kp参数*0.001
@@ -54,8 +54,8 @@ extern "C" {
 #define UQMAX               1.4        //!< Q轴电压最大值
 
 #define DCOVERCUR           5000       //!< 母线过流       0.1A
-#define ACOVERCUR1          5600       //!< 相线过流1 0.1A(峰值)
-#define ACOVERCUR2          5800       //!< 相线过流2 0.1A(峰值)
+#define ACOVERCUR1          6200       //!< 相线过流1 0.1A(峰值)
+#define ACOVERCUR2          6500       //!< 相线过流2 0.1A(峰值)
 #define DCOVERVOLT3         7800       //!< 电压过压3 0.1V
 #define DCOVERVOLT2         7500       //!< 电压过压2 0.1V
 #define DCOVERVOLT1         7200       //!< 电压过压1 0.1V
@@ -74,7 +74,7 @@ extern "C" {
 #define KI_IDCLIMIT         0        //!< 母线限流Ki参数*0.0001
 
 
-#define KP_SPDM0            600        //!< 速度模式0Kp参数*0.01
+#define KP_SPDM0            800        //!< 速度模式0Kp参数*0.01
 #define KI_SPDM0            1500       //!< 速度模式0Ki参数*0.01
 #define KP_SPDM1            1000       //!< 速度模式1Kp参数*0.001
 #define KI_SPDM1            100        //!< 速度模式1Ki参数*0.0001

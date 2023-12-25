@@ -240,33 +240,33 @@ endif
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXE_OUTPUTS += \
-M_MOT_MBD_290_1500Nm_keshi.out \
+290-1500nm.out \
 
 EXE_OUTPUTS__QUOTED += \
-"M_MOT_MBD_290_1500Nm_keshi.out" \
+"290-1500nm.out" \
 
 BIN_OUTPUTS += \
-M_MOT_MBD_290_1500Nm_keshi.hex \
+290-1500nm.hex \
 
 BIN_OUTPUTS__QUOTED += \
-"M_MOT_MBD_290_1500Nm_keshi.hex" \
+"290-1500nm.hex" \
 
 
 # All Target
-all: M_MOT_MBD_290_1500Nm_keshi.out secondary-outputs
+all: 290-1500nm.out secondary-outputs
 
 # Tool invocations
-M_MOT_MBD_290_1500Nm_keshi.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
+290-1500nm.out: $(OBJS) $(CMD_SRCS) $(LIB_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C2000 Linker'
-	"D:/Program Files/ccs1031/ccs/tools/compiler/ti-cgt-c2000_20.2.4.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -Ooff --preinclude="D:/Program Files/ccs1031/KeShi/M_MOT_MBD_290_1500Nm_keshi/sw/config/config.h" --define=_INLINE --define=FLASH --diag_warning=225 --diag_wrap=off --display_error_number -z -m"M_MOT_MBD_290_1500Nm_keshi.map" --stack_size=0x300 --warn_sections -i"D:/Program Files/ccs1031/ccs/tools/compiler/ti-cgt-c2000_20.2.4.LTS/lib" -i"D:/Program Files/ccs1031/ccs/tools/compiler/ti-cgt-c2000_20.2.4.LTS/include" -i"D:/Program Files/ccs1031/KeShi/M_MOT_MBD_290_1500Nm_keshi/sw/modules/FPUfastRTS/V100/lib" -i"D:/Program Files/ccs1031/KeShi/M_MOT_MBD_290_1500Nm_keshi/sw/modules/IQmath/v160/lib" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="M_MOT_MBD_290_1500Nm_keshi_linkInfo.xml" --rom_model -o "M_MOT_MBD_290_1500Nm_keshi.out" $(ORDERED_OBJS)
+	"D:/Program Files/ccs1031/ccs/tools/compiler/ti-cgt-c2000_20.2.4.LTS/bin/cl2000" -v28 -ml -mt --float_support=fpu32 -Ooff --preinclude="D:/Program Files/ccs1031/KeShi/290-1500nm/sw/config/config.h" --define=_INLINE --define=FLASH --diag_warning=225 --diag_wrap=off --display_error_number -z -m"290-1500nm.map" --stack_size=0x300 --warn_sections -i"D:/Program Files/ccs1031/ccs/tools/compiler/ti-cgt-c2000_20.2.4.LTS/lib" -i"D:/Program Files/ccs1031/ccs/tools/compiler/ti-cgt-c2000_20.2.4.LTS/include" -i"D:/Program Files/ccs1031/KeShi/290-1500nm/sw/modules/FPUfastRTS/V100/lib" -i"D:/Program Files/ccs1031/KeShi/290-1500nm/sw/modules/IQmath/v160/lib" --reread_libs --diag_wrap=off --display_error_number --xml_link_info="290-1500nm_linkInfo.xml" --rom_model -o "290-1500nm.out" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 
-M_MOT_MBD_290_1500Nm_keshi.hex: $(EXE_OUTPUTS)
+290-1500nm.hex: $(EXE_OUTPUTS)
 	@echo 'Building secondary target: "$@"'
 	@echo 'Invoking: C2000 Hex Utility'
-	"D:/Program Files/ccs1031/ccs/tools/compiler/ti-cgt-c2000_20.2.4.LTS/bin/hex2000" --memwidth=16 --romwidth=16 --diag_wrap=off --intel -o "M_MOT_MBD_290_1500Nm_keshi.hex" $(EXE_OUTPUTS__QUOTED)
+	"D:/Program Files/ccs1031/ccs/tools/compiler/ti-cgt-c2000_20.2.4.LTS/bin/hex2000" --memwidth=16 --romwidth=16 --diag_wrap=off --intel -o "290-1500nm.hex" $(EXE_OUTPUTS__QUOTED)
 	@echo 'Finished building secondary target: "$@"'
 	@echo ' '
 
